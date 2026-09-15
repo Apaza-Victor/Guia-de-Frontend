@@ -1,4 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const THEME_KEY = "fp-theme";
+  const themeToggle = document.getElementById("themeToggle");
+  const applyTheme = theme => {
+    document.documentElement.setAttribute("data-theme", theme);
+    try { localStorage.setItem(THEME_KEY, theme); } catch (e) { /* almacenamiento no disponible */ }
+    const icon = themeToggle && themeToggle.querySelector("i");
+    if (icon) {
+      icon.className = theme === "light" ? "bi bi-sun" : "bi bi-moon-stars";
+    }
+  };
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      const current = document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+      applyTheme(current === "light" ? "dark" : "light");
+    });
+  }
+
   const navbar = document.querySelector(".navbar-guia");
   if (navbar) {
     const onScroll = () => {

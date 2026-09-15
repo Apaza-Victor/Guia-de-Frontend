@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,6 +65,7 @@
       transform: translateY(-2px);
     }
   </style>
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
 </head>
 <body>
 
@@ -87,6 +88,8 @@
         <li class="nav-item ms-lg-2">
           <a class="btn btn-gradient px-4" href="paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
         </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
       </ul>
     </div>
   </div>
@@ -103,7 +106,7 @@
         <h1 class="display-3 fw-bold text-white mb-3">
           Domina el <span class="text-gradient">Frontend</span><br>de Cero a Experto
         </h1>
-        <p class="lead text-secondary mb-4" style="color:#94a3b8 !important;">
+        <p class="lead text-secondary mb-4" style="color:var(--text-muted);">
           Aprende HTML, CSS, JavaScript y Bootstrap con lecciones independientes,
           ejemplos interactivos y una ruta de aprendizaje clara y escalable.
         </p>
@@ -114,17 +117,17 @@
         <div class="d-flex flex-wrap gap-3 mt-5">
           <div>
             <div class="fs-3 fw-bold text-white"><span data-counter="60">0</span>+</div>
-            <small class="text-secondary" style="color:#94a3b8 !important;">Lecciones</small>
+            <small class="text-secondary" style="color:var(--text-muted);">Lecciones</small>
           </div>
           <div class="vr d-none d-sm-block" style="width:1px; height:50px;"></div>
           <div>
             <div class="fs-3 fw-bold text-white"><span data-counter="5">0</span></div>
-            <small class="text-secondary" style="color:#94a3b8 !important;">Secciones</small>
+            <small class="text-secondary" style="color:var(--text-muted);">Secciones</small>
           </div>
           <div class="vr d-none d-sm-block" style="width:1px; height:50px;"></div>
           <div>
             <div class="fs-3 fw-bold text-white"><span data-counter="4">0</span></div>
-            <small class="text-secondary" style="color:#94a3b8 !important;">Fases de ruta</small>
+            <small class="text-secondary" style="color:var(--text-muted);">Fases de ruta</small>
           </div>
         </div>
       </div>
@@ -136,7 +139,7 @@
               <span class="btn rounded-circle p-1" style="width:12px;height:12px;background:#fbbf24;font-size:0;"></span>
               <span class="btn rounded-circle p-1" style="width:12px;height:12px;background:#34d399;font-size:0;"></span>
             </div>
-            <span class="text-secondary fw-bold small" style="color:#94a3b8 !important;">tu-primera-web.html</span>
+            <span class="text-secondary fw-bold small" style="color:var(--text-muted);">tu-primera-web.html</span>
           </div>
           <pre class="code-block mb-0" style="border-left:none; background:transparent;"><code><span class="token-tag">&lt;!DOCTYPE html&gt;</span>
 <span class="token-tag">&lt;html</span> <span class="token-attr">lang</span>=<span class="token-value">"es"</span><span class="token-tag">&gt;</span>
@@ -196,7 +199,7 @@
     <div class="text-center mb-5" data-aos="fade-up">
       <span class="badge-soft-cyan mb-3 d-inline-flex align-items-center gap-2"><i class="bi bi-list-check"></i> Temario completo</span>
       <h2 class="display-6 fw-bold text-white mb-2">Un temario en 5 temas · 60 lecciones</h2>
-      <p class="text-secondary w-75 mx-auto" style="color:#94a3b8 !important;">
+      <p class="text-secondary w-75 mx-auto" style="color:var(--text-muted);">
         Cada tema está dividido en subsecciones por nivel con sus propias tarjetas.
         Explora el temario completo o entra directo al tema que quieras.
       </p>
@@ -213,7 +216,7 @@
             </div>
           </div>
           <div class="theme-body">
-            <p class="small mb-3" style="color:#94a3b8 !important;">Fundamentos de HTML: texto, listas, enlaces, imágenes, tablas, formularios, multimedia y accesibilidad.</p>
+            <p class="small mb-3" style="color:var(--text-muted);">Fundamentos de HTML: texto, listas, enlaces, imágenes, tablas, formularios, multimedia y accesibilidad.</p>
             <span class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ver subsección</span>
           </div>
         </a>
@@ -228,7 +231,7 @@
             </div>
           </div>
           <div class="theme-body">
-            <p class="small mb-3" style="color:#94a3b8 !important;">Básico, intermedio y avanzado: selectores, Flexbox, Grid, variables, animaciones y efectos modernos.</p>
+            <p class="small mb-3" style="color:var(--text-muted);">Básico, intermedio y avanzado: selectores, Flexbox, Grid, variables, animaciones y efectos modernos.</p>
             <span class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ver subsecciones</span>
           </div>
         </a>
@@ -243,7 +246,7 @@
             </div>
           </div>
           <div class="theme-body">
-            <p class="small mb-3" style="color:#94a3b8 !important;">Básico, intermedio y avanzado: variables, DOM, eventos, fetch, promesas y patrones de diseño.</p>
+            <p class="small mb-3" style="color:var(--text-muted);">Básico, intermedio y avanzado: variables, DOM, eventos, fetch, promesas y patrones de diseño.</p>
             <span class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ver subsecciones</span>
           </div>
         </a>
@@ -258,7 +261,7 @@
             </div>
           </div>
           <div class="theme-body">
-            <p class="small mb-3" style="color:#94a3b8 !important;">Grid system, componentes, utilidades, personalización y una landing de práctica con AOS y GSAP.</p>
+            <p class="small mb-3" style="color:var(--text-muted);">Grid system, componentes, utilidades, personalización y una landing de práctica con AOS y GSAP.</p>
             <span class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ver lecciones</span>
           </div>
         </a>
@@ -273,7 +276,7 @@
             </div>
           </div>
           <div class="theme-body">
-            <p class="small mb-3" style="color:#94a3b8 !important;">Git, npm, Sass, React y Vue: del editor al despliegue con herramientas de producción reales.</p>
+            <p class="small mb-3" style="color:var(--text-muted);">Git, npm, Sass, React y Vue: del editor al despliegue con herramientas de producción reales.</p>
             <span class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ver lecciones</span>
           </div>
         </a>
@@ -291,26 +294,26 @@
     <div class="text-center mb-5" data-aos="fade-up">
       <span class="badge-soft-cyan mb-3 d-inline-flex align-items-center gap-2"><i class="bi bi-signpost-split"></i> Roadmap</span>
       <h2 class="display-6 fw-bold text-white mb-2">Ruta de aprendizaje</h2>
-      <p class="text-secondary w-75 mx-auto" style="color:#94a3b8 !important;">Cuatro fases progresivas: de novato absoluto a frontend profesional listo para el mercado laboral.</p>
+      <p class="text-secondary w-75 mx-auto" style="color:var(--text-muted);">Cuatro fases progresivas: de novato absoluto a frontend profesional listo para el mercado laboral.</p>
     </div>
     <div class="row justify-content-center">
       <div class="col-lg-9">
         <div class="timeline" data-aos="fade-up">
           <div class="phase-item pb-4">
             <h5 class="text-white fw-bold mb-1">Fase 1 — Fundamentos <span class="badge-soft ms-2">Semanas 1-4</span></h5>
-            <p class="mb-0" style="color:#94a3b8 !important;">HTML semántico, CSS básico e intermedio con Flexbox y Grid. Al final sabrás maquetar cualquier layout responsive.</p>
+            <p class="mb-0" style="color:var(--text-muted);">HTML semántico, CSS básico e intermedio con Flexbox y Grid. Al final sabrás maquetar cualquier layout responsive.</p>
           </div>
           <div class="phase-item pb-4">
             <h5 class="text-white fw-bold mb-1">Fase 2 — JavaScript <span class="badge-soft-cyan ms-2">Semanas 5-10</span></h5>
-            <p class="mb-0" style="color:#94a3b8 !important;">JS de cero a avanzado: variables, DOM, eventos, fetch, promesas y ES6+. La base de todo framework moderno.</p>
+            <p class="mb-0" style="color:var(--text-muted);">JS de cero a avanzado: variables, DOM, eventos, fetch, promesas y ES6+. La base de todo framework moderno.</p>
           </div>
           <div class="phase-item pb-4">
             <h5 class="text-white fw-bold mb-1">Fase 3 — Producción <span class="badge-soft-sky ms-2">Semanas 11-14</span></h5>
-            <p class="mb-0" style="color:#94a3b8 !important;">Bootstrap 5 a nivel experto, Git/GitHub, npm, Sass y animaciones profesionales (AOS, GSAP).</p>
+            <p class="mb-0" style="color:var(--text-muted);">Bootstrap 5 a nivel experto, Git/GitHub, npm, Sass y animaciones profesionales (AOS, GSAP).</p>
           </div>
           <div class="phase-item">
             <h5 class="text-white fw-bold mb-1">Fase 4 — Frameworks <span class="badge-soft ms-2">Semanas 15-20</span></h5>
-            <p class="mb-0" style="color:#94a3b8 !important;">React y Vue con fundamentos sólidos, listo para tu portafolio y el mercado laboral.</p>
+            <p class="mb-0" style="color:var(--text-muted);">React y Vue con fundamentos sólidos, listo para tu portafolio y el mercado laboral.</p>
           </div>
         </div>
         <div class="text-center mt-4" data-aos="fade-up">
@@ -327,7 +330,7 @@
     <div class="text-center mb-5" data-aos="fade-up">
       <span class="badge-soft-cyan mb-3 d-inline-flex align-items-center gap-2"><i class="bi bi-palette-fill"></i> Tecnologías</span>
       <h2 class="display-6 fw-bold text-white mb-2">Librerías y recursos integrados</h2>
-      <p class="text-secondary w-75 mx-auto" style="color:#94a3b8 !important;">Toda esta guía usa librerías reales cargadas por CDN — aprenderás usando exactamente lo que se usa en producción.</p>
+      <p class="text-secondary w-75 mx-auto" style="color:var(--text-muted);">Toda esta guía usa librerías reales cargadas por CDN — aprenderás usando exactamente lo que se usa en producción.</p>
     </div>
     <div class="row g-4">
       <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="0">
@@ -335,7 +338,7 @@
           <div class="card-body text-center">
             <div class="icon-badge mx-auto"><i class="bi bi-bootstrap-fill"></i></div>
             <h6 class="text-white fw-bold">Bootstrap 5.3</h6>
-            <p class="small mb-0" style="color:#94a3b8 !important;">Grid, componentes y utilidades. Personalizado con variables CSS.</p>
+            <p class="small mb-0" style="color:var(--text-muted);">Grid, componentes y utilidades. Personalizado con variables CSS.</p>
           </div>
         </div>
       </div>
@@ -344,7 +347,7 @@
           <div class="card-body text-center">
             <div class="icon-badge cyan mx-auto"><i class="bi bi-bootstrap-icons"></i></div>
             <h6 class="text-white fw-bold">Bootstrap Icons</h6>
-            <p class="small mb-0" style="color:#94a3b8 !important;">Iconos vectoriales listos para usar en toda la guía.</p>
+            <p class="small mb-0" style="color:var(--text-muted);">Iconos vectoriales listos para usar en toda la guía.</p>
           </div>
         </div>
       </div>
@@ -353,7 +356,7 @@
           <div class="card-body text-center">
             <div class="icon-badge warm mx-auto"><i class="bi bi-award"></i></div>
             <h6 class="text-white fw-bold">AOS</h6>
-            <p class="small mb-0" style="color:#94a3b8 !important;">Animaciones al scroll con la librería Animate On Scroll.</p>
+            <p class="small mb-0" style="color:var(--text-muted);">Animaciones al scroll con la librería Animate On Scroll.</p>
           </div>
         </div>
       </div>
@@ -362,7 +365,7 @@
           <div class="card-body text-center">
             <div class="icon-badge mx-auto"><i class="bi bi-magic"></i></div>
             <h6 class="text-white fw-bold">GSAP</h6>
-            <p class="small mb-0" style="color:#94a3b8 !important;">Animación profesional de alto rendimiento (GreenSock).</p>
+            <p class="small mb-0" style="color:var(--text-muted);">Animación profesional de alto rendimiento (GreenSock).</p>
           </div>
         </div>
       </div>

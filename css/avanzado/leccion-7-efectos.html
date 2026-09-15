@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -88,6 +88,7 @@
       box-shadow: inset 9px 9px 22px rgba(174, 181, 199, 0.7), inset -9px -9px 22px rgba(255, 255, 255, 0.95);
     }
   </style>
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
 </head>
 <body class="pt-0">
 
@@ -109,6 +110,8 @@
         <li class="nav-item ms-lg-2">
           <a class="btn btn-gradient px-4" href="../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
         </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
       </ul>
     </div>
   </div>
@@ -129,7 +132,7 @@
       <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>35 min</span>
     </div>
     <h1 class="display-5 fw-bold text-white mb-2">Efectos modernos: glassmorphism y neumorphism</h1>
-    <p class="lead mb-3" style="color:#94a3b8 !important;">Vidrio esmerilado, botones blandos y gradientes vivos: el repertorio estético de las interfaces actuales.</p>
+    <p class="lead mb-3" style="color:var(--text-muted);">Vidrio esmerilado, botones blandos y gradientes vivos: el repertorio estético de las interfaces actuales.</p>
     <div class="progress-tracker">
       <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
     </div>
@@ -282,7 +285,7 @@
           <button class="btn btn-gradient btn-sm" onclick="window.interactuaDemo()"><i class="bi bi-wind me-1"></i>Revolotear con GSAP</button>
           <button class="demo-neumo px-4 py-3 fw-bold" onclick="window.demoHundir(this)"><i class="bi bi-hand-index-thumb me-2"></i>Botón neumórfico</button>
         </div>
-        <p class="small mt-3 mb-0" style="color:#94a3b8 !important;">Las tarjetas difuminan el fondo con <code>backdrop-filter: blur(14px) saturate(160%)</code>. El botón beige usa sombras exterior/interior del neumorphism.</p>
+        <p class="small mt-3 mb-0" style="color:var(--text-muted);">Las tarjetas difuminan el fondo con <code>backdrop-filter: blur(14px) saturate(160%)</code>. El botón beige usa sombras exterior/interior del neumorphism.</p>
       </div>
     </section>
 

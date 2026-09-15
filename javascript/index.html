@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +10,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
 </head>
 <body class="pt-0">
 
@@ -31,6 +32,8 @@
         <li class="nav-item ms-lg-2">
           <a class="btn btn-gradient px-4" href="../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
         </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
       </ul>
     </div>
   </div>
@@ -50,7 +53,7 @@
       <span class="badge-soft-cyan"><i class="bi bi-journal-bookmark me-1"></i>19 lecciones</span>
     </div>
     <h1 class="display-5 fw-bold text-white mb-2">JavaScript: de cero a experto</h1>
-    <p class="lead mb-3" style="color:#94a3b8 !important;">El lenguaje que da vida a la web: desde variables y tipos hasta closures y patrones de diseño, con demos interactivas en cada lección.</p>
+    <p class="lead mb-3" style="color:var(--text-muted);">El lenguaje que da vida a la web: desde variables y tipos hasta closures y patrones de diseño, con demos interactivas en cada lección.</p>
     <div class="progress-tracker">
       <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span>
     </div>
@@ -68,7 +71,7 @@
             <div class="card-body text-center">
               <div class="icon-badge mx-auto"><i class="bi bi-journal-bookmark"></i></div>
               <h6 class="text-white fw-bold">Qué aprenderás</h6>
-              <p class="small mb-0" style="color:#94a3b8 !important;">Variables, tipos, condicionales, bucles, funciones, strings, arrays y objetos. Luego DOM, eventos, fetch, promesas, ES6+, clases y patrones de diseño.</p>
+              <p class="small mb-0" style="color:var(--text-muted);">Variables, tipos, condicionales, bucles, funciones, strings, arrays y objetos. Luego DOM, eventos, fetch, promesas, ES6+, clases y patrones de diseño.</p>
             </div>
           </div>
         </div>
@@ -77,7 +80,7 @@
             <div class="card-body text-center">
               <div class="icon-badge cyan mx-auto"><i class="bi bi-bar-chart"></i></div>
               <h6 class="text-white fw-bold">Nivel</h6>
-              <p class="small mb-0" style="color:#94a3b8 !important;">Progresivo: empieza en <strong>Básico</strong> sin conocimientos previos, consolida en <strong>Intermedio</strong> y profesionaliza en <strong>Avanzado</strong>.</p>
+              <p class="small mb-0" style="color:var(--text-muted);">Progresivo: empieza en <strong>Básico</strong> sin conocimientos previos, consolida en <strong>Intermedio</strong> y profesionaliza en <strong>Avanzado</strong>.</p>
             </div>
           </div>
         </div>
@@ -86,7 +89,7 @@
             <div class="card-body text-center">
               <div class="icon-badge warm mx-auto"><i class="bi bi-hourglass-split"></i></div>
               <h6 class="text-white fw-bold">Duración estimada</h6>
-              <p class="small mb-0" style="color:#94a3b8 !important;"><strong>≈ 19</strong> lecciones · <strong>≈ 13-16 horas</strong> con demos interactivas y práctica real. Cada lección es autónoma y navegable.</p>
+              <p class="small mb-0" style="color:var(--text-muted);"><strong>≈ 19</strong> lecciones · <strong>≈ 13-16 horas</strong> con demos interactivas y práctica real. Cada lección es autónoma y navegable.</p>
             </div>
           </div>
         </div>
@@ -104,7 +107,7 @@
             <div class="flex-grow-1">
               <span class="badge-soft-cyan mb-1 d-inline-block"><i class="bi bi-1-circle me-1"></i>Subsección · 9 lecciones</span>
               <h3 class="text-white fw-bold mb-1">JavaScript Básico</h3>
-              <p class="small mb-0" style="color:#94a3b8 !important;">Los cimientos: introducción, variables, tipos, operadores, condicionales, bucles, funciones, strings, arrays y objetos.</p>
+              <p class="small mb-0" style="color:var(--text-muted);">Los cimientos: introducción, variables, tipos, operadores, condicionales, bucles, funciones, strings, arrays y objetos.</p>
             </div>
             <a href="basico/index.html" class="btn btn-gradient btn-sm flex-shrink-0"><i class="bi bi-arrow-right me-1"></i>Ver todas las lecciones</a>
           </div>
@@ -134,7 +137,7 @@
             <div class="flex-grow-1">
               <span class="badge-soft-cyan mb-1 d-inline-block"><i class="bi bi-2-circle me-1"></i>Subsección · 5 lecciones</span>
               <h3 class="text-white fw-bold mb-1">JavaScript Intermedio</h3>
-              <p class="small mb-0" style="color:#94a3b8 !important;">Colecciones y web en vivo: métodos de arrays, objetos y JSON, el DOM, eventos y la Fetch API.</p>
+              <p class="small mb-0" style="color:var(--text-muted);">Colecciones y web en vivo: métodos de arrays, objetos y JSON, el DOM, eventos y la Fetch API.</p>
             </div>
             <a href="intermedio/index.html" class="btn btn-gradient btn-sm flex-shrink-0"><i class="bi bi-arrow-right me-1"></i>Ver todas las lecciones</a>
           </div>
@@ -160,7 +163,7 @@
             <div class="flex-grow-1">
               <span class="badge-soft-cyan mb-1 d-inline-block"><i class="bi bi-3-circle me-1"></i>Subsección · 5 lecciones</span>
               <h3 class="text-white fw-bold mb-1">JavaScript Avanzado</h3>
-              <p class="small mb-0" style="color:#94a3b8 !important;">El siguiente nivel: ES6+, promesas y async/await, clases, módulos y patrones de diseño.</p>
+              <p class="small mb-0" style="color:var(--text-muted);">El siguiente nivel: ES6+, promesas y async/await, clases, módulos y patrones de diseño.</p>
             </div>
             <a href="avanzado/index.html" class="btn btn-gradient btn-sm flex-shrink-0"><i class="bi bi-arrow-right me-1"></i>Ver todas las lecciones</a>
           </div>

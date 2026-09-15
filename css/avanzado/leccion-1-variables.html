@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,6 +53,7 @@
     }
     .demo-tablero .mini-muted { color: var(--demo-muted); }
   </style>
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
 </head>
 <body class="pt-0">
 
@@ -74,6 +75,8 @@
         <li class="nav-item ms-lg-2">
           <a class="btn btn-gradient px-4" href="../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
         </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
       </ul>
     </div>
   </div>
@@ -94,7 +97,7 @@
       <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>25 min</span>
     </div>
     <h1 class="display-5 fw-bold text-white mb-2">Variables y custom properties</h1>
-    <p class="lead mb-3" style="color:#94a3b8 !important;">Centraliza tus valores, crea temas dinámicos y personaliza Bootstrap con variables CSS nativas.</p>
+    <p class="lead mb-3" style="color:var(--text-muted);">Centraliza tus valores, crea temas dinámicos y personaliza Bootstrap con variables CSS nativas.</p>
     <div class="progress-tracker">
       <span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
     </div>
@@ -246,7 +249,7 @@
             </div>
           </div>
         </div>
-        <p class="small mt-2 mb-0" style="color:#94a3b8 !important;">Cada tarjeta lee <code>var(--demo-card)</code>, <code>var(--demo-text)</code> y <code>var(--demo-accent)</code>. Ningún color está repetido en el HTML.</p>
+        <p class="small mt-2 mb-0" style="color:var(--text-muted);">Cada tarjeta lee <code>var(--demo-card)</code>, <code>var(--demo-text)</code> y <code>var(--demo-accent)</code>. Ningún color está repetido en el HTML.</p>
       </div>
     </section>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +10,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
 </head>
 <body class="pt-0">
 
@@ -31,6 +32,8 @@
         <li class="nav-item ms-lg-2">
           <a class="btn btn-gradient px-4" href="temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
         </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
       </ul>
     </div>
   </div>
@@ -50,7 +53,7 @@
       <span class="badge-soft-sky"><i class="bi bi-collection me-1"></i>5 temas</span>
     </div>
     <h1 class="display-5 fw-bold text-white mb-2">Temario de la guía</h1>
-    <p class="lead mb-3" style="color:#94a3b8 !important;">60 lecciones organizadas en 5 temas progresivos: cada bloque construye sobre el anterior. Entra en cualquier tema desde cero y avanza a tu ritmo.</p>
+    <p class="lead mb-3" style="color:var(--text-muted);">60 lecciones organizadas en 5 temas progresivos: cada bloque construye sobre el anterior. Entra en cualquier tema desde cero y avanza a tu ritmo.</p>
     <div class="progress-tracker">
       <span class="step done"></span><span class="step done"></span><span class="step current"></span>
       <span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
@@ -72,7 +75,7 @@
               <span class="badge-soft-cyan"><i class="bi bi-book me-1"></i>10 lecciones</span>
             </div>
           </div>
-          <p style="color:#94a3b8 !important;">La estructura de todo sitio web: etiquetas, semántica, formularios, multimedia y accesibilidad.</p>
+          <p style="color:var(--text-muted);">La estructura de todo sitio web: etiquetas, semántica, formularios, multimedia y accesibilidad.</p>
           <a href="../html/index.html" class="btn btn-gradient"><i class="bi bi-arrow-right me-1"></i>Explorar tema HTML</a>
         </div>
         <div class="col-lg-7" data-aos="fade-left" data-aos-delay="100">
@@ -87,7 +90,7 @@
                   </div>
                 </div>
                 <div class="theme-body">
-                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                  <p class="small mb-3" style="color:var(--text-muted);">
                     Texto, listas, enlaces, imágenes, tablas, formularios, multimedia y accesibilidad: toda la base del lenguaje.
                   </p>
                   <a href="../html/fundamentos/index.html" class="btn btn-gradient btn-sm"><i class="bi bi-arrow-right me-1"></i>Ir a la subsección</a>
@@ -110,7 +113,7 @@
               <span class="badge-soft-cyan"><i class="bi bi-book me-1"></i>21 lecciones · 3 niveles</span>
             </div>
           </div>
-          <p style="color:#94a3b8 !important;">Del primer selector al layout profesional: modelo de caja, Flexbox, Grid, variables, animaciones y efectos modernos.</p>
+          <p style="color:var(--text-muted);">Del primer selector al layout profesional: modelo de caja, Flexbox, Grid, variables, animaciones y efectos modernos.</p>
           <a href="../css/index.html" class="btn btn-gradient"><i class="bi bi-arrow-right me-1"></i>Explorar tema CSS</a>
         </div>
         <div class="col-lg-7" data-aos="fade-left" data-aos-delay="100">
@@ -125,7 +128,7 @@
                   </div>
                 </div>
                 <div class="theme-body">
-                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                  <p class="small mb-3" style="color:var(--text-muted);">
                     Selectores, cascada, modelo de caja, tipografía, colores y unidades: los cimientos del estilo.
                   </p>
                   <a href="../css/basico/index.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la subsección</a>
@@ -142,7 +145,7 @@
                   </div>
                 </div>
                 <div class="theme-body">
-                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                  <p class="small mb-3" style="color:var(--text-muted);">
                     Flexbox, Grid, posicionamiento, display y flujo, pseudo-clases y diseño responsive profesional.
                   </p>
                   <a href="../css/intermedio/index.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la subsección</a>
@@ -159,7 +162,7 @@
                   </div>
                 </div>
                 <div class="theme-body">
-                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                  <p class="small mb-3" style="color:var(--text-muted);">
                     Variables, transformaciones 3D, keyframes, funciones modernas, BEM y efectos como glassmorphism.
                   </p>
                   <a href="../css/avanzado/index.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la subsección</a>
@@ -182,7 +185,7 @@
               <span class="badge-soft-cyan"><i class="bi bi-book me-1"></i>19 lecciones · 3 niveles</span>
             </div>
           </div>
-          <p style="color:#94a3b8 !important;">El lenguaje de la web: variables, funciones, DOM, eventos, fetch, promesas, ES6+ y patrones de diseño.</p>
+          <p style="color:var(--text-muted);">El lenguaje de la web: variables, funciones, DOM, eventos, fetch, promesas, ES6+ y patrones de diseño.</p>
           <a href="../javascript/index.html" class="btn btn-gradient"><i class="bi bi-arrow-right me-1"></i>Explorar tema JavaScript</a>
         </div>
         <div class="col-lg-7" data-aos="fade-left" data-aos-delay="100">
@@ -197,7 +200,7 @@
                   </div>
                 </div>
                 <div class="theme-body">
-                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                  <p class="small mb-3" style="color:var(--text-muted);">
                     Variables, tipos, operadores, condiciones, bucles, funciones, objetos, arrays y práctica con la consola.
                   </p>
                   <a href="../javascript/basico/index.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la subsección</a>
@@ -214,7 +217,7 @@
                   </div>
                 </div>
                 <div class="theme-body">
-                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                  <p class="small mb-3" style="color:var(--text-muted);">
                     DOM, eventos, fetch y consumo de APIs: la interacción real con la página web.
                   </p>
                   <a href="../javascript/intermedio/index.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la subsección</a>
@@ -231,7 +234,7 @@
                   </div>
                 </div>
                 <div class="theme-body">
-                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                  <p class="small mb-3" style="color:var(--text-muted);">
                     ES6+, promesas, async/await, clases, módulos y patrones para código profesional.
                   </p>
                   <a href="../javascript/avanzado/index.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la subsección</a>
@@ -254,7 +257,7 @@
               <span class="badge-soft-cyan"><i class="bi bi-book me-1"></i>5 lecciones</span>
             </div>
           </div>
-          <p style="color:#94a3b8 !important;">El framework CSS más popular: grid system, componentes, utilidades, personalización y una landing de práctica.</p>
+          <p style="color:var(--text-muted);">El framework CSS más popular: grid system, componentes, utilidades, personalización y una landing de práctica.</p>
           <a href="../bootstrap/index.html" class="btn btn-gradient"><i class="bi bi-arrow-right me-1"></i>Explorar tema Bootstrap</a>
         </div>
         <div class="col-lg-7" data-aos="fade-left" data-aos-delay="100">
@@ -269,7 +272,7 @@
                   </div>
                 </div>
                 <div class="theme-body">
-                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                  <p class="small mb-3" style="color:var(--text-muted);">
                     Layout responsive por columnas y la librería de componentes lista para usar.
                   </p>
                   <a href="../bootstrap/leccion-1-introduccion.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la lección</a>
@@ -286,7 +289,7 @@
                   </div>
                 </div>
                 <div class="theme-body">
-                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                  <p class="small mb-3" style="color:var(--text-muted);">
                     Clases utilitarias, variables CSS de marca, temas y estilos propios.
                   </p>
                   <a href="../bootstrap/leccion-3-utilidades.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la lección</a>
@@ -303,7 +306,7 @@
                   </div>
                 </div>
                 <div class="theme-body">
-                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                  <p class="small mb-3" style="color:var(--text-muted);">
                     Proyecto guiado paso a paso combinando Bootstrap con AOS y GSAP.
                   </p>
                   <a href="../bootstrap/leccion-5-landing.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la lección</a>
@@ -326,7 +329,7 @@
               <span class="badge-soft-cyan"><i class="bi bi-book me-1"></i>5 lecciones</span>
             </div>
           </div>
-          <p style="color:#94a3b8 !important;">Del editor al despliegue: Git, npm, Sass y los frameworks modernos React y Vue con demos en vivo.</p>
+          <p style="color:var(--text-muted);">Del editor al despliegue: Git, npm, Sass y los frameworks modernos React y Vue con demos en vivo.</p>
           <a href="../herramientas/index.html" class="btn btn-gradient"><i class="bi bi-arrow-right me-1"></i>Explorar tema Herramientas</a>
         </div>
         <div class="col-lg-7" data-aos="fade-left" data-aos-delay="100">
@@ -341,7 +344,7 @@
                   </div>
                 </div>
                 <div class="theme-body">
-                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                  <p class="small mb-3" style="color:var(--text-muted);">
                     Control de versiones con Git y GitHub, y gestión de paquetes con npm.
                   </p>
                   <a href="../herramientas/leccion-1-git.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la lección</a>
@@ -358,7 +361,7 @@
                   </div>
                 </div>
                 <div class="theme-body">
-                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                  <p class="small mb-3" style="color:var(--text-muted);">
                     Variables, mixins, anidación y funciones del preprocesador CSS por excelencia.
                   </p>
                   <a href="../herramientas/leccion-3-sass.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la lección</a>
@@ -375,7 +378,7 @@
                   </div>
                 </div>
                 <div class="theme-body">
-                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                  <p class="small mb-3" style="color:var(--text-muted);">
                     Los frameworks modernos con componentes, props, estado y demos en vivo.
                   </p>
                   <a href="../herramientas/leccion-4-react.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la lección</a>

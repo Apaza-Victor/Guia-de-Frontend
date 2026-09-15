@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,6 +27,7 @@
       font-weight: 600;
     }
   </style>
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
 </head>
 <body>
 
@@ -48,6 +49,8 @@
         <li class="nav-item ms-lg-2">
           <a class="btn btn-gradient px-4" href="temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
         </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
       </ul>
     </div>
   </div>
@@ -67,7 +70,7 @@
       <span class="badge-soft-sky"><i class="bi bi-layers me-1"></i>4 fases</span>
     </div>
     <h1 class="display-5 fw-bold text-white mb-2">Ruta de aprendizaje</h1>
-    <p class="lead mb-3" style="color:#94a3b8 !important;">Un plan paso a paso de 20 semanas: de novato absoluto a frontend profesional, integrando toda la guía de Frontend Pro.</p>
+    <p class="lead mb-3" style="color:var(--text-muted);">Un plan paso a paso de 20 semanas: de novato absoluto a frontend profesional, integrando toda la guía de Frontend Pro.</p>
     <div class="progress-tracker">
       <span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span>
     </div>
@@ -79,7 +82,7 @@
 
     <section class="mb-5" data-aos="fade-up">
       <h2 class="h3 text-white fw-bold mb-4"><i class="bi bi-diagram-3 text-gradient me-2"></i>Las 4 fases del roadmap</h2>
-      <p style="color:#94a3b8 !important;">Cada fase agrupa varios temas de la guía y termina con un hito concreto. Estable 💪: no saltes fases: cada una construye sobre la anterior.</p>
+      <p style="color:var(--text-muted);">Cada fase agrupa varios temas de la guía y termina con un hito concreto. Estable 💪: no saltes fases: cada una construye sobre la anterior.</p>
     </section>
 
     <div class="row g-4">
@@ -91,7 +94,7 @@
               <span class="badge-soft-cyan week-pill">Semanas 1-4</span>
             </div>
             <h3 class="h5 text-white fw-bold mb-2">Fundamentos</h3>
-            <p class="small mb-3" style="color:#94a3b8 !important;">HTML semántico + CSS básico e intermedio. Entiendes la caja, los selectores, Flexbox y Grid para maquetar cualquier interfaz.</p>
+            <p class="small mb-3" style="color:var(--text-muted);">HTML semántico + CSS básico e intermedio. Entiendes la caja, los selectores, Flexbox y Grid para maquetar cualquier interfaz.</p>
             <div class="d-flex flex-wrap gap-2 mb-3">
               <a href="../html/index.html" class="badge-soft text-decoration-none">HTML · 10 lecciones</a>
               <a href="../css/index.html" class="badge-soft text-decoration-none">CSS Básico · 7 lecciones</a>
@@ -112,7 +115,7 @@
               <span class="badge-soft-cyan week-pill">Semanas 5-10</span>
             </div>
             <h3 class="h5 text-white fw-bold mb-2">JavaScript</h3>
-            <p class="small mb-3" style="color:#94a3b8 !important;">Dominas el lenguaje de la web: variables, funciones, arrays, DOM, eventos, fetch, promesas y ES6+. La base de todo framework.</p>
+            <p class="small mb-3" style="color:var(--text-muted);">Dominas el lenguaje de la web: variables, funciones, arrays, DOM, eventos, fetch, promesas y ES6+. La base de todo framework.</p>
             <div class="d-flex flex-wrap gap-2 mb-3">
               <a href="../javascript/index.html" class="badge-soft text-decoration-none">JS Básico · 9 lecciones</a>
               <a href="../javascript/index.html" class="badge-soft text-decoration-none">JS Intermedio · 5 lecciones</a>
@@ -133,7 +136,7 @@
               <span class="badge-soft-cyan week-pill">Semanas 11-14</span>
             </div>
             <h3 class="h5 text-white fw-bold mb-2">Producción</h3>
-            <p class="small mb-3" style="color:#94a3b8 !important;">Bootstrap 5 a nivel experto, versionado con Git, dependencias con npm, preprocesado con Sass y animaciones AOS + GSAP.</p>
+            <p class="small mb-3" style="color:var(--text-muted);">Bootstrap 5 a nivel experto, versionado con Git, dependencias con npm, preprocesado con Sass y animaciones AOS + GSAP.</p>
             <div class="d-flex flex-wrap gap-2 mb-3">
               <a href="../bootstrap/index.html" class="badge-soft text-decoration-none">Bootstrap 5 · 5 lecciones</a>
               <a href="../herramientas/index.html" class="badge-soft text-decoration-none">Git y npm · 2 lecciones</a>
@@ -154,7 +157,7 @@
               <span class="badge-soft-cyan week-pill">Semanas 15-20</span>
             </div>
             <h3 class="h5 text-white fw-bold mb-2">Frameworks</h3>
-            <p class="small mb-3" style="color:#94a3b8 !important;">React y Vue con fundamentos sólidos: componentes, estado y reactividad desde cero, listo para el trabajo profesional.</p>
+            <p class="small mb-3" style="color:var(--text-muted);">React y Vue con fundamentos sólidos: componentes, estado y reactividad desde cero, listo para el trabajo profesional.</p>
             <div class="d-flex flex-wrap gap-2 mb-3">
               <a href="../herramientas/index.html" class="badge-soft text-decoration-none">React · 1 lección</a>
               <a href="../herramientas/index.html" class="badge-soft text-decoration-none">Vue 3 · 1 lección</a>
@@ -177,28 +180,28 @@
           <div class="demo-box h-100">
             <i class="bi bi-clock-history fs-3 d-block mb-2" style="color:#2563eb;"></i>
             <strong class="text-white">Estudia a diario, aunque sea 30 minutos</strong>
-            <p class="small mb-0 mt-1" style="color:#94a3b8 !important;">La constancia gana a los maratones. Haz de una lección tu rutina del día.</p>
+            <p class="small mb-0 mt-1" style="color:var(--text-muted);">La constancia gana a los maratones. Haz de una lección tu rutina del día.</p>
           </div>
         </div>
         <div class="col-md-6">
           <div class="demo-box h-100">
             <i class="bi bi-code-slash fs-3 d-block mb-2" style="color:#0ea5e9;"></i>
             <strong class="text-white">Escribe TODO el código a mano</strong>
-            <p class="small mb-0 mt-1" style="color:#94a3b8 !important;">Copiar pega no entrena músculo mental. Teclear cada ejemplo consolida el aprendizaje.</p>
+            <p class="small mb-0 mt-1" style="color:var(--text-muted);">Copiar pega no entrena músculo mental. Teclear cada ejemplo consolida el aprendizaje.</p>
           </div>
         </div>
         <div class="col-md-6">
           <div class="demo-box h-100">
             <i class="bi bi-question-circle fs-3 d-block mb-2" style="color:#06b6d4;"></i>
             <strong class="text-white">Prueba romper las demos</strong>
-            <p class="small mb-0 mt-1" style="color:#94a3b8 !important;">Cambia valores, colores y unidades. Entender el error es medio camino al experto.</p>
+            <p class="small mb-0 mt-1" style="color:var(--text-muted);">Cambia valores, colores y unidades. Entender el error es medio camino al experto.</p>
           </div>
         </div>
         <div class="col-md-6">
           <div class="demo-box h-100">
             <i class="bi bi-people fs-3 d-block mb-2" style="color:#f59e0b;"></i>
             <strong class="text-white">Construye y comparte</strong>
-            <p class="small mb-0 mt-1" style="color:#94a3b8 !important;">Pública tus hitos en GitHub o redes. El feedback acelera tu curva de aprendizaje.</p>
+            <p class="small mb-0 mt-1" style="color:var(--text-muted);">Pública tus hitos en GitHub o redes. El feedback acelera tu curva de aprendizaje.</p>
           </div>
         </div>
       </div>

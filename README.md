@@ -41,7 +41,7 @@ El proyecto está hecho **100% con HTML, CSS y JavaScript puro** (más Bootstrap
 | 🎓 **60 lecciones** | Organizadas por dificultad en Básico, Intermedio y Avanzado |
 | 🗺️ **Roadmap de 4 fases** | 20 semanas de ruta de aprendizaje con hitos concretos |
 | 💡 **Ejemplos prácticos** | Código de ejemplo editable en casi todas las lecciones |
-| 🎨 **Tema oscuro** | Diseño moderno con gradientes, glassmorphism, malla de fondo y animaciones |
+| 🎨 **Temas claro/oscuro** | Toggle en el navbar con persistencia en `localStorage`; header, navbar y footer se mantienen oscuros en ambos temas |
 | 🧭 **Navegación unificada** | Navbar, breadcrumbs, footer y botón "volver arriba" en las 87 páginas |
 | 🔝 **Botón flotante** | Fixed en la parte inferior derecha para volver al inicio en todas las páginas |
 | 📱 **Responsive** | Grid de Bootstrap 5 adaptado a móvil, tablet y escritorio |
@@ -115,7 +115,7 @@ Guia-de-Frontend/
 ├── bootstrap/                 # Tema Bootstrap 5 (5 lecciones)
 ├── herramientas/              # Git, npm, Sass, React, Vue (5 lecciones)
 └── assets/
-    ├── css/style.css          # Design system (tema oscuro, gradientes)
+    ├── css/style.css          # Design system (temas claro/oscuro con tokens CSS)
     └── js/main.js             # Animaciones, contadores, marquee y botón "volver arriba"
 ```
 
@@ -160,7 +160,7 @@ El archivo `.nojekyll` en la raíz evita que GitHub Pages procese el sitio con J
 ## 🛠️ Tecnologías
 
 - **HTML5** semántico y accesible
-- **CSS3** con variables, Flexbox, Grid, BEM y tema oscuro custom
+- **CSS3** con variables (tokens de tema claro/oscuro), Flexbox, Grid, BEM, glassmorphism y gradientes
 - **JavaScript** vainilla (DOM, eventos, fetch, ES6+)
 - **Bootstrap 5.3.3** + Bootstrap Icons 1.11
 - **Sass** (preprocesado), **AOS** (scroll animations) y **GSAP 3.12** (animaciones)
