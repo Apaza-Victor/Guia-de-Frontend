@@ -1,2 +1,129 @@
-# Guia-de-Frontend
-Guia de Frontend
+<p align="center">
+  <img src="https://img.shields.io/badge/Frontend%20Pro-Gu%C3%ADa%20de%20Cero%20a%20Experto-6366f1?style=for-the-badge&labelColor=0f172a" alt="Frontend Pro">
+  <img src="https://img.shields.io/badge/60%20Lecciones-completas-22c55e?style=for-the-badge&labelColor=0f172a" alt="60 lecciones">
+  <img src="https://img.shields.io/badge/5%20Temas-M%C3%B3dulos%20organizados-f59e0b?style=for-the-badge&labelColor=0f172a" alt="5 temas">
+  <img src="https://img.shields.io/badge/4%20Fases-Roadmap%20de%2020%20semanas-06b6d4?style=for-the-badge&labelColor=0f172a" alt="4 fases">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white" alt="HTML5">
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white" alt="CSS3">
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black" alt="JavaScript">
+  <img src="https://img.shields.io/badge/Bootstrap%205.3-7952B3?style=flat-square&logo=bootstrap&logoColor=white" alt="Bootstrap">
+  <img src="https://img.shields.io/badge/Sass-CC6699?style=flat-square&logo=sass&logoColor=white" alt="Sass">
+  <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" alt="Git">
+  <img src="https://img.shields.io/badge/npm-CB3837?style=flat-square&logo=npm&logoColor=white" alt="npm">
+  <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React">
+  <img src="https://img.shields.io/badge/Vue.js-4FC08D?style=flat-square&logo=vuedotjs&logoColor=white" alt="Vue">
+  <img src="https://img.shields.io/badge/GSAP-88CE02?style=flat-square&logo=greensock&logoColor=black" alt="GSAP">
+  <img src="https://img.shields.io/badge/AOS-Animate%20On%20Scroll-6366f1?style=flat-square" alt="AOS">
+</p>
+
+---
+
+## 🚀 ¿Qué es esto?
+
+**Frontend Pro** es una guía web completa e interactiva para ir **de cero a experto en desarrollo frontend**. Más de **60 lecciones** organizadas en **5 temas** y un **roadmap de 4 fases** con 20 semanas de ruta, incluyendo teoría, ejemplos de código, glosario, recursos y una **ruta de aprendizaje** paso a paso.
+
+El proyecto está hecho **100% con HTML, CSS y JavaScript puro** (más Bootstrap 5 y animaciones AOS/GSAP), sin ninguna dependencia de build — clona y abre `index.html`.
+
+## ✨ Características
+
+| | |
+|---|---|
+| 🎓 **60 lecciones** | Organizadas por dificultad en Básico, Intermedio y Avanzado |
+| 🗺️ **Roadmap de 4 fases** | 20 semanas de ruta de aprendizaje con hitos concretos |
+| 💡 **Ejemplos prácticos** | Código de ejemplo editable en casi todas las lecciones |
+| 🎨 **Tema oscuro** | Diseño moderno con gradientes, glassmorphism y animaciones |
+| 🧭 **Navegación unificada** | Navbar, breadcrumbs y footer consistentes en las 76 páginas |
+| 📱 **Responsive** | Grid de Bootstrap 5 adaptado a móvil, tablet y escritorio |
+| 🔤 **Sin frameworks JS** | JavaScript vainilla, ideal para aprender los fundamentos |
+
+## 📚 Los 5 temas
+
+| Tema | Lecciones | Nivel | Descripción |
+|------|:---------:|-------|-------------|
+| [**HTML**](html/index.html) | 10 | Básico | Estructura, semántica, formularios, multimedia y accesibilidad |
+| [**CSS**](css/index.html) | 21 | Básico → Avanzado | Selectores, Flexbox, Grid, animaciones, BEM y efectos |
+| [**JavaScript**](javascript/index.html) | 19 | Básico → Avanzado | Variables, DOM, eventos, fetch, promesas y ES6+ |
+| [**Bootstrap 5**](bootstrap/index.html) | 5 | Intermedio | Grid, componentes, utilidades, personalización y práctica con AOS/GSAP |
+| [**Herramientas**](herramientas/index.html) | 5 | Avanzado | Git, npm, Sass, React y Vue 3 |
+
+> ⭐ **Total: 60 lecciones** entre los 5 temas.
+
+## 🗺️ Roadmap: 20 semanas en 4 fases
+
+| Fase | Semanas | Contenido | Hito |
+|:----:|:-------:|-----------|------|
+| **1 · Fundamentos** | 1–4 | HTML semántico, CSS básico e intermedio (Flexbox y Grid) | Landing responsive solo con HTML y CSS |
+| **2 · JavaScript** | 5–10 | Variables, funciones, DOM, eventos, fetch, promesas y ES6+ | App que consume una API real con fetch |
+| **3 · Producción** | 11–14 | Bootstrap 5 avanzado, Git, npm, Sass, AOS y GSAP | Sitio versionado en GitHub con scripts npm |
+| **4 · Frameworks** | 15–20 | React y Vue 3 desde cero | Portafolio con tu propia SPA |
+
+## 📂 Estructura del proyecto
+
+```
+Guia-de-Frontend/
+├── index.html                 # Página de inicio
+├── temario.html               # Temario completo con las 60 lecciones
+├── ruta-aprendizaje.html      # Roadmap de 4 fases / 20 semanas
+├── recursos.html              # Recursos y enlaces útiles
+├── html/                      # Tema HTML (10 lecciones)
+│   └── fundamentos/
+├── css/                       # Tema CSS (21 lecciones)
+│   ├── basico/
+│   ├── intermedio/
+│   └── avanzado/
+├── javascript/                # Tema JavaScript (19 lecciones)
+│   ├── basico/
+│   ├── intermedio/
+│   └── avanzado/
+├── bootstrap/                 # Tema Bootstrap 5 (5 lecciones)
+├── herramientas/              # Git, npm, Sass, React, Vue (5 lecciones)
+└── assets/
+    ├── css/style.css          # Design system (tema oscuro, gradientes)
+    └── js/main.js             # Animaciones, contadores y marquee
+```
+
+## 🧭 Navegación rápida
+
+- [🏠 Inicio](index.html) — Landing con teaser de los 5 temas
+- [📖 Temario](temario.html) — Las 60 lecciones en tarjetas
+- [🗺️ Ruta de aprendizaje](ruta-aprendizaje.html) — El roadmap completo
+- [🔗 Recursos](recursos.html) — Enlaces y herramientas recomendadas
+
+## 🚀 Cómo usarlo
+
+No requiere instalación ni servidor. **Abre lo siguiente en tu navegador:**
+
+```bash
+# Opción A: doble clic en index.html
+```
+
+```bash
+# Opción B: servidor local
+python -m http.server 8080
+# o
+npx serve .
+```
+
+> Recomendado: usa un servidor local para servir los archivos correctamente.
+
+## 🛠️ Tecnologías
+
+- **HTML5** semántico y accesible
+- **CSS3** con variables, Flexbox, Grid, BEM y tema oscuro custom
+- **JavaScript** vainilla (DOM, eventos, fetch, ES6+)
+- **Bootstrap 5.3.3** + Bootstrap Icons 1.11
+- **Sass** (preprocesado), **AOS** (scroll animations) y **GSAP 3.12** (animaciones)
+- **Git / GitHub** como base del flujo de trabajo y **npm** para scripts
+
+## 📄 Licencia
+
+Este proyecto es una guía educativa. Siéntete libre de clonarlo, estudiarlo y usarlo como referencia para tu aprendizaje.
+
+---
+
+<p align="center">
+  Hecho con 💜 · HTML, CSS y JavaScript puro · © 2026 Frontend Pro
+</p>
