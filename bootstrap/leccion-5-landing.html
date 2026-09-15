@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 5 de Bootstrap 5: práctica completa construyendo una landing con navbar, hero, cards y CTA usando componentes Bootstrap, animaciones AOS al scroll y micro-animaciones GSAP.">
+  <title>Lección 5 — Práctica: landing con AOS + GSAP | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Bootstrap</a></li>
+        <li class="breadcrumb-item active text-light">Lección 5</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-bootstrap-fill me-1"></i>Bootstrap · Lección 5</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>60 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Práctica: landing con AOS + GSAP</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">Construye una mini landing real: navbar, hero, cards y CTA con componentes Bootstrap, animaciones AOS al scroll y micro-animaciones GSAP.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-4" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold"><i class="bi bi-award text-gradient me-2"></i>Fundamentos de la lección</h2>
+      <p>
+        Vamos a ensamblar todo lo aprendido en una <strong>mini landing</strong> con tres bloques de construcción:
+        componentes <strong>Bootstrap</strong> para la estructura (navbar, hero, cards, CTA), <strong>AOS</strong> para las
+        animaciones que se disparan al hacer scroll y <strong>GSAP</strong> para las micro-animaciones de entrada y de interacción.
+        La demo de abajo es esa landing: revísala con F12 y copia los fragmentos que necesites.
+      </p>
+      <div class="d-flex flex-wrap gap-2 mt-3">
+        <span class="badge-soft"><i class="bi bi-bootstrap-fill me-1"></i>Componentes</span>
+        <span class="badge-soft-cyan"><i class="bi bi-arrows-move me-1"></i>AOS scroll</span>
+        <span class="badge-soft-pink"><i class="bi bi-stars me-1"></i>GSAP micro-animaciones</span>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-window-sidebar text-gradient me-2"></i>Estructura: navbar + hero</h2>
+      <p>
+        Toda landing empieza por una <strong>navbar fija</strong> con anclas a las secciones y un <strong>hero</strong> que captura
+        la atención en el primer segundo. Con Bootstrap esto es solo markup:
+      </p>
+      <pre class="code-block"><code><span class="token-tag">&lt;nav</span> <span class="token-attr">class</span>=<span class="token-value">"navbar navbar-expand-lg fixed-top navbar-dark bg-dark"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-value">"container"</span><span class="token-tag">&gt;</span>
+    <span class="token-tag">&lt;a</span> <span class="token-attr">class</span>=<span class="token-value">"navbar-brand fw-bold"</span> <span class="token-attr">href</span>=<span class="token-value">"#"</span><span class="token-tag">&gt;</span>
+      <span class="token-tag">&lt;i</span> <span class="token-attr">class</span>=<span class="token-value">"bi bi-rocket-takeoff me-2"</span><span class="token-tag">&gt;&lt;/i&gt;</span>Nova<span class="token-tag">&lt;/a&gt;</span>
+    <span class="token-tag">&lt;button</span> <span class="token-attr">class</span>=<span class="token-value">"navbar-toggler"</span> <span class="token-attr">data-bs-toggle</span>=<span class="token-value">"collapse"</span>
+            <span class="token-attr">data-bs-target</span>=<span class="token-value">"#navDemo"</span><span class="token-tag">&gt;</span>
+      <span class="token-tag">&lt;span</span> <span class="token-attr">class</span>=<span class="token-value">"navbar-toggler-icon"</span><span class="token-tag">&gt;&lt;/span&gt;</span>
+    <span class="token-tag">&lt;/button&gt;</span>
+    <span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-value">"collapse navbar-collapse"</span> <span class="token-attr">id</span>=<span class="token-value">"navDemo"</span><span class="token-tag">&gt;</span>
+      <span class="token-tag">&lt;ul</span> <span class="token-attr">class</span>=<span class="token-value">"navbar-nav ms-auto mb-2 mb-lg-0 gap-lg-2"</span><span class="token-tag">&gt;</span>
+        <span class="token-tag">&lt;li</span> <span class="token-attr">class</span>=<span class="token-value">"nav-item"</span><span class="token-tag">&gt;&lt;a</span> <span class="token-attr">class</span>=<span class="token-value">"nav-link active"</span> <span class="token-attr">href</span>=<span class="token-value">"#inicio"</span><span class="token-tag">&gt;</span>Inicio<span class="token-tag">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="token-tag">&lt;li</span> <span class="token-attr">class</span>=<span class="token-value">"nav-item"</span><span class="token-tag">&gt;&lt;a</span> <span class="token-attr">class</span>=<span class="token-value">"nav-link"</span> <span class="token-attr">href</span>=<span class="token-value">"#ventajas"</span><span class="token-tag">&gt;</span>Ventajas<span class="token-tag">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="token-tag">&lt;li</span> <span class="token-attr">class</span>=<span class="token-value">"nav-item"</span><span class="token-tag">&gt;&lt;a</span> <span class="token-attr">class</span>=<span class="token-value">"nav-link"</span> <span class="token-attr">href</span>=<span class="token-value">"#cta"</span><span class="token-tag">&gt;</span>Empezar<span class="token-tag">&lt;/a&gt;&lt;/li&gt;</span>
+      <span class="token-tag">&lt;/ul&gt;</span>
+    <span class="token-tag">&lt;/div&gt;</span>
+  <span class="token-tag">&lt;/div&gt;</span>
+<span class="token-tag">&lt;/nav&gt;</span>
+
+<span class="token-tag">&lt;header</span> <span class="token-attr">class</span>=<span class="token-value">"px-4 py-5 text-center"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;h1</span> <span class="token-attr">class</span>=<span class="token-value">"display-5 fw-bold"</span><span class="token-tag">&gt;</span>Construye tu <span class="token-tag">span</span> <span class="token-attr">class</span>=<span class="token-value">"text-gradient"</span>:con estilo<span class="token-tag">/span&gt;</span>
+  <span class="token-tag">&lt;p</span> <span class="token-attr">class</span>=<span class="token-value">"lead mx-auto"</span><span class="token-tag">&gt;</span>Rápido, responsivo y con personalidad.<span class="token-tag">&lt;/p&gt;</span>
+  <span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-value">"d-flex gap-3 justify-content-center flex-wrap"</span><span class="token-tag">&gt;</span>
+    <span class="token-tag">&lt;a</span> <span class="token-attr">class</span>=<span class="token-value">"btn btn-gradient"</span> <span class="token-attr">href</span>=<span class="token-value">"#cta"</span><span class="token-tag">&gt;</span>Empezar gratis<span class="token-tag">&lt;/a&gt;</span>
+    <span class="token-tag">&lt;a</span> <span class="token-attr">class</span>=<span class="token-value">"btn btn-outline-light"</span> <span class="token-attr">href</span>=<span class="token-value">"#ventajas"</span><span class="token-tag">&gt;</span>Ver ventajas<span class="token-tag">&lt;/a&gt;</span>
+  <span class="token-tag">&lt;/div&gt;</span>
+<span class="token-tag">&lt;/header&gt;</span></code></pre>
+      <div class="tip-box mt-4">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Usa <code>scroll-margin-top</code> en las secciones objetivo (<code>#ventajas</code>, <code>#cta</code>) para que la navbar fija
+        no tape el título al saltar con el ancla: <code>section { scroll-margin-top: 4.5rem; }</code>.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-collection text-gradient me-2"></i>Cards con animaciones AOS</h2>
+      <p>
+        Las secciones de contenido suelen ser una <code>row</code> de <code>card</code>. Añade el atributo
+        <code>data-aos</code> a cada card y <strong>AOS</strong> las animará conforme entran al viewport. Puedes combinar
+        <code>data-aos</code>, <code>data-aos-delay</code> y <code>data-aos-duration</code> para escalonar la entrada:
+      </p>
+      <pre class="code-block"><code><span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-value">"row g-4"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-value">"col-md-4"</span> <span class="token-attr">data-aos</span>=<span class="token-value">"fade-up"</span><span class="token-tag">&gt;</span>
+    <span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-value">"card h-100"</span><span class="token-tag">&gt;</span>
+      <span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-value">"card-body text-center"</span><span class="token-tag">&gt;</span>
+        <span class="token-tag">&lt;i</span> <span class="token-attr">class</span>=<span class="token-value">"bi bi-lightning-charge-fill fs-3"</span><span class="token-tag">&gt;&lt;/i&gt;</span>
+        <span class="token-tag">&lt;h5</span> <span class="token-attr">class</span>=<span class="token-value">"mt-3"</span><span class="token-tag">&gt;</span>Rapidez<span class="token-tag">&lt;/h5&gt;</span>
+        <span class="token-tag">&lt;p</span> <span class="token-attr">class</span>=<span class="token-value">"card-text"</span><span class="token-tag">&gt;</span>Carga en milisegundos.<span class="token-tag">&lt;/p&gt;</span>
+      <span class="token-tag">&lt;/div&gt;</span>
+    <span class="token-tag">&lt;/div&gt;</span>
+  <span class="token-tag">&lt;/div&gt;</span>
+  <span class="token-comment">&lt;!-- repite con data-aos-delay="100" y "200" --&gt;</span>
+<span class="token-tag">&lt;/div&gt;</span></code></pre>
+      <p>
+        Recuerda inicializar AOS una sola vez en tu script (esta guía ya lo hace en <code>assets/js/main.js</code>):
+      </p>
+      <pre class="code-block"><code><span class="token-prop">AOS</span>.<span class="token-prop">init</span>({
+  <span class="token-prop">duration</span>: <span class="token-num">800</span>,
+  <span class="token-prop">easing</span>: <span class="token-value">"ease-out-cubic"</span>,
+  <span class="token-prop">once</span>: <span class="token-value">true</span>,
+  <span class="token-prop">offset</span>: <span class="token-num">80</span>
+});</code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Atributo</th><th scope="col">Efecto</th><th scope="col">Valores típicos</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>data-aos</code></td><td>Animación al entrar al viewport</td><td><code>fade-up</code>, <code>zoom-in</code>, <code>flip-left</code></td></tr>
+          <tr><td><code>data-aos-delay</code></td><td>Espera en ms antes de animar</td><td><code>100</code>, <code>200</code></td></tr>
+          <tr><td><code>data-aos-duration</code></td><td>Duración de la transición</td><td><code>600</code>–<code>1200</code></td></tr>
+          <tr><td><code>data-aos-once</code></td><td>Animar solo la primera vez</td><td><code>true</code> / <code>false</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-stars text-gradient me-2"></i>CTA y micro-animaciones GSAP</h2>
+      <p>
+        El <strong>CTA</strong> (call to action) es la franja que empuja al clic. Los badges, iconos y botones se benefician de
+        micro-animaciones <strong>GSAP</strong>: entradas con <code>gsap.from</code>, rebotes con <code>gsap.fromTo</code> y
+        reacciones al hover con <code>gsap.to</code>.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">// Entrada escalonada del hero</span>
+<span class="token-prop">gsap</span>.<span class="token-prop">from</span>(<span class="token-value">'#heroTitulo'</span>, { <span class="token-prop">y</span>: <span class="token-num">30</span>, <span class="token-prop">opacity</span>: <span class="token-num">0</span>, <span class="token-prop">duration</span>: <span class="token-num">0.8</span> });
+<span class="token-prop">gsap</span>.<span class="token-prop">from</span>(<span class="token-value">'.hero-cta'</span>,    { <span class="token-prop">y</span>: <span class="token-num">16</span>, <span class="token-prop">opacity</span>: <span class="token-num">0</span>, <span class="token-prop">stagger</span>: <span class="token-num">0.15</span>, <span class="token-prop">delay</span>: <span class="token-num">0.3</span> });
+
+<span class="token-comment">// Micro-interacción hover sobre botones</span>
+<span class="token-prop">document</span>.<span class="token-prop">querySelectorAll</span>(<span class="token-value">'.btn-cta'</span>).<span class="token-prop">forEach</span>(btn =&gt; {
+  btn.<span class="token-prop">addEventListener</span>(<span class="token-value">'mouseenter'</span>, () =&gt;
+    <span class="token-prop">gsap</span>.<span class="token-prop">to</span>(btn, { <span class="token-prop">scale</span>: <span class="token-num">1.06</span>, <span class="token-prop">duration</span>: <span class="token-num">0.25</span> }));
+  btn.<span class="token-prop">addEventListener</span>(<span class="token-value">'mouseleave'</span>, () =&gt;
+    <span class="token-prop">gsap</span>.<span class="token-prop">to</span>(btn, { <span class="token-prop">scale</span>: <span class="token-num">1</span>, <span class="token-prop">duration</span>: <span class="token-num">0.25</span> }));
+});</code></pre>
+      <div class="warning-box mt-4">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#fbbf24;"></i>Aviso:</strong>
+        GSAP anima <em>propiedades</em>, no estados. No dejes opacidad 0 permanente: si tu selector no existe al cargar,
+        <code>gsap.from</code> falla silenciosamente. Usa siempre selectores que existan en el documento.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-lightbulb text-gradient me-2"></i>Demo interactiva: tu mini landing</h2>
+      <p>
+        Aquí tienes la landing completa construida con <strong>solo componentes Bootstrap</strong>: navbar con collapse,
+        hero con botones, tres cards con <code>data-aos</code> y una franja CTA. Las animaciones de entrada son GSAP y las de
+        scroll, AOS. Redimensiona la ventana y comprueba el collapse en móvil.
+      </p>
+
+      <div class="demo-box">
+        <div class="d-flex flex-wrap gap-2 mb-3 justify-content-between align-items-center">
+          <span class="badge-soft"><i class="bi bi-rocket-takeoff me-1"></i>Landing demo · Bootstrap + AOS + GSAP</span>
+          <button class="btn btn-gradient btn-sm" onclick="gsap.fromTo('#miniCards .col',{y:40,opacity:0,stagger:0},{y:0,opacity:1,stagger:0.12,duration:0.6})">
+            <i class="bi bi-arrow-repeat me-1"></i>Re-animar cards
+          </button>
+        </div>
+
+        <div id="miniLanding" class="mini-landing bg-body text-body rounded-4 overflow-hidden border" data-bs-theme="dark">
+          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid px-4">
+              <a class="navbar-brand fw-bold" href="#miniHero"><i class="bi bi-rocket-takeoff text-gradient me-2"></i>Nova</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMini">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navMini">
+                <ul class="navbar-nav ms-auto gap-lg-2">
+                  <li class="nav-item"><a class="nav-link active" href="#miniHero">Inicio</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#miniCards">Ventajas</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#miniCta">Empezar</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+
+          <header id="miniHero" class="px-4 py-5 text-center bg-body-tertiary">
+            <h1 class="display-6 fw-bold mb-2" id="demoHeroTitulo">Tu producto, brillando en la web</h1>
+            <p class="lead mx-auto mb-4" style="max-width:560px;" id="demoHeroSub">Una landing hecha solo con componentes Bootstrap, animada al scroll con AOS y con micro-interacciones GSAP.</p>
+            <div class="d-flex gap-3 justify-content-center flex-wrap">
+              <a href="#miniCta" class="btn btn-gradient hero-cta">Empezar gratis <i class="bi bi-arrow-right ms-1"></i></a>
+              <a href="#miniCards" class="btn btn-outline-light hero-cta">Ver ventajas</a>
+            </div>
+          </header>
+
+          <section id="miniCards" class="px-4 py-5">
+            <h2 class="h4 fw-bold text-center mb-4"><span class="text-gradient">Tres razones para elegir Nova</span></h2>
+            <div class="row g-3" id="miniCards">
+              <div class="col-md-4" data-aos="fade-up">
+                <div class="card h-100 bg-body-tertiary">
+                  <div class="card-body text-center">
+                    <div class="icon-badge mx-auto mb-2"><i class="bi bi-lightning-charge-fill"></i></div>
+                    <h5 class="card-title">Rapidez</h5>
+                    <p class="card-text small">Compilado a Bootstrap puro: sin librerías extra y con carga ligera.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="card h-100 bg-body-tertiary">
+                  <div class="card-body text-center">
+                    <div class="icon-badge cyan mx-auto mb-2"><i class="bi bi-phone"></i></div>
+                    <h5 class="card-title">Responsiva</h5>
+                    <p class="card-text small">Grid de 12 columnas y navbar colapsable listos en cualquier pantalla.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="card h-100 bg-body-tertiary">
+                  <div class="card-body text-center">
+                    <div class="icon-badge warm mx-auto mb-2"><i class="bi bi-stars"></i></div>
+                    <h5 class="card-title">Con estilo</h5>
+                    <p class="card-text small">Personalizada con variables CSS y animaciones AOS + GSAP de nivel pro.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="miniCta" class="px-4 py-5 text-center">
+            <div class="card bg-body-tertiary border-0 shadow p-4 p-lg-5">
+              <h2 class="h3 fw-bold mb-2">¿Listo para lanzar?</h2>
+              <p class="small opacity-75 mb-4" style="max-width:480px;margin-inline:auto;">Únete hoy y ten tu landing escrita con Bootstrap viva en menos de una hora.</p>
+              <div class="d-flex gap-3 justify-content-center flex-wrap">
+                <a href="#miniHero" class="btn btn-gradient"><i class="bi bi-rocket-takeoff me-2"></i>Comienza ahora</a>
+                <button class="btn btn-ghost-glass text-white" onclick="gsap.fromTo('#miniCta .card',{scale:0.92,y:12},{scale:1,y:0,duration:0.6,ease:'power2.out'});"><i class="bi bi-magic me-1"></i>Rebotar CTA</button>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Haz clic en <em>Re-animar cards</em> y en <em>Rebotar CTA</em>: son las mismas líneas de GSAP que usarías en tu proyecto real.
+        Prueba también el botón hamburguesa de la mini-navbar para ver el collapse en acción.
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>La estructura base de una landing son <strong>navbar + hero + cards + CTA</strong>, todos componentes Bootstrap.</li>
+        <li>Añade <code>data-aos</code> (+ <code>delay</code>/<code>duration</code>) para animar las secciones al hacer scroll.</li>
+        <li>GSAP da micro-animaciones: <code>gsap.from</code> para entradas escalonadas y <code>gsap.to</code> para hover y rebotes.</li>
+        <li>Combina lo mejor de cada herramienta: Bootstrap de estructura, AOS de scroll, GSAP de interacción.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Inicio</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+      </div>
+      <a href="index.html" class="btn btn-gradient"><i class="bi bi-journal-bookmark me-2"></i>Índice del tema</a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— Bootstrap · Lección 5</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="index.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .mini-landing { scroll-margin-top: 4.5rem; }
+  .mini-landing .card-body { min-height: 100%; }
+  .mini-landing .nav-link { color: rgba(226,232,240,.75); }
+  .mini-landing .nav-link.active { color: #fff; }
+  #miniCards .col { scroll-margin-top: 4.5rem; }
+</style>
+
+<script>
+  (function () {
+    const hero = document.getElementById('demoHeroTitulo');
+    if (hero) {
+      gsap.from('#demoHeroTitulo', { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out' });
+      gsap.from('#demoHeroSub', { y: 20, opacity: 0, duration: 0.8, delay: 0.2, ease: 'power3.out' });
+      gsap.from('.hero-cta', { y: 16, opacity: 0, duration: 0.6, stagger: 0.15, delay: 0.4, ease: 'power2.out' });
+    }
+  })();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

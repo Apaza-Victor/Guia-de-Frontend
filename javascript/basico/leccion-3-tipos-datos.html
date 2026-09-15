@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 3 de JavaScript Básico: Tipos de datos. Primitivos, tipos por referencia, NaN, Infinity, typeof e instanceof.">
+  <title>Lección 3 — Tipos de datos | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">JavaScript</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Básico</a></li>
+        <li class="breadcrumb-item active text-light">Lección 3</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-filetype-js me-1"></i>JavaScript Básico · Lección 3</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>35 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Tipos de datos</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">Conoce los 7 tipos primitivos, los valores por referencia, casos especiales como NaN e Infinity y cómo inspeccionarlos con typeof e instanceof.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-puzzle text-gradient me-2"></i>Primitivos y tipos por referencia</h2>
+      <p>Toda la información que maneja JavaScript se clasifica en dos grandes grupos: los <strong>tipos primitivos</strong> (valores simples e inmutables) y los <strong>tipos por referencia</strong> (objetos y colecciones). Conocer esta distinción explica muchos comportamientos aparentemente extraños.</p>
+      <pre class="code-block"><code><span class="token-comment">// Primitivos: se copian por VALOR</span>
+<span class="token-tag">let</span> a = <span class="token-num">10</span>;
+<span class="token-tag">let</span> b = a;         <span class="token-comment">// b recibe una copia del valor</span>
+b = <span class="token-num">99</span>;
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(a);   <span class="token-comment">// 10 ← a no cambió</span>
+
+<span class="token-comment">// Por referencia: se copia la REFERENCIA (ambos apuntan al mismo objeto)</span>
+<span class="token-tag">const</span> obj1 = { <span class="token-prop">nombre</span>: <span class="token-value">"Ana"</span> };
+<span class="token-tag">const</span> obj2 = obj1;
+obj2.nombre = <span class="token-value">"Luis"</span>;
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(obj1.nombre); <span class="token-comment">// "Luis" ← ambos señalan el mismo objeto</span></code></pre>
+      <div class="table-responsive mt-3">
+        <table class="table">
+          <thead>
+            <tr><th scope="col">Grupo</th><th scope="col">Tipos</th><th scope="col">Característica clave</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Primitivos</td><td>string, number, boolean, null, undefined, symbol, bigint</td><td>Inmutables, se copian por valor</td></tr>
+            <tr><td>Por referencia</td><td>object, array, function, Date, Map, Set…</td><td>Se copian por referencia; sus propiedades sí cambian</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-1-square text-gradient me-2"></i>Los 7 tipos primitivos</h2>
+      <p>JavaScript tiene <strong>7 tipos primitivos</strong>. Todos se escriben directamente en el código y son valores simples.</p>
+      <pre class="code-block"><code><span class="token-tag">let</span> texto = <span class="token-value">"Hola"</span>;        <span class="token-comment">// string: texto</span>
+<span class="token-tag">let</span> numero = <span class="token-num">42</span>;          <span class="token-comment">// number: enteros y decimales</span>
+<span class="token-tag">let</span> activo = <span class="token-num">true</span>;        <span class="token-comment">// boolean: true o false</span>
+<span class="token-tag">let</span> vacio = <span class="token-num">null</span>;          <span class="token-comment">// null: ausencia intencional de valor</span>
+<span class="token-tag">let</span> indefinido;            <span class="token-comment">// undefined: sin valor asignado</span>
+<span class="token-tag">let</span> grande = <span class="token-num">123n</span>;       <span class="token-comment">// bigint: enteros de precisión arbitraria</span>
+<span class="token-tag">let</span> unico = <span class="token-prop">Symbol</span>(<span class="token-value">"id"</span>); <span class="token-comment">// symbol: identificador único</span></code></pre>
+      <div class="table-responsive mt-3">
+        <table class="table">
+          <thead>
+            <tr><th scope="col">Tipo</th><th scope="col">Ejemplo</th><th scope="col">typeof</th><th scope="col">Descripción</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>string</code></td><td><code>"hola"</code>, <code>'mundo'</code></td><td><code>"string"</code></td><td>Secuencia de caracteres, entre comillas</td></tr>
+            <tr><td><code>number</code></td><td><code>42</code>, <code>3.14</code></td><td><code>"number"</code></td><td>Enteros y decimales (incluye NaN e Infinity)</td></tr>
+            <tr><td><code>boolean</code></td><td><code>true</code>, <code>false</code></td><td><code>"boolean"</code></td><td>Verdadero o falso</td></tr>
+            <tr><td><code>null</code></td><td><code>null</code></td><td><code>"object"</code>*</td><td>Ausencia intencional de valor</td></tr>
+            <tr><td><code>undefined</code></td><td><code>let x;</code></td><td><code>"undefined"</code></td><td>Variable declarada sin valor</td></tr>
+            <tr><td><code>bigint</code></td><td><code>123n</code></td><td><code>"bigint"</code></td><td>Enteros muy grandes, con sufijo <code>n</code></td></tr>
+            <tr><td><code>symbol</code></td><td><code>Symbol("id")</code></td><td><code>"symbol"</code></td><td>Identificador único e inmutable</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small" style="color:#64748b !important;">* Esto es un bug histórico de JavaScript que nunca se corrigió por razones de compatibilidad.</p>
+      <div class="tip-box mt-3">
+        <i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>
+        <strong class="text-white">Tip:</strong> para comprobar un <code>null</code> real usa <code>valor === null</code>, no <code>typeof</code>.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-infinity text-gradient me-2"></i>NaN e Infinity</h2>
+      <p>El tipo <code>number</code> incluye tres "valores especiales" que debes reconocer: <code>NaN</code> (Not a Number), <code>Infinity</code> y <code>-Infinity</code>.</p>
+      <pre class="code-block"><code><span class="token-comment">// NaN aparece cuando una operación numérica falla</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(<span class="token-num">0</span> / <span class="token-num">0</span>);              <span class="token-comment">// NaN</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(<span class="token-value">"abc"</span> * <span class="token-num">2</span>);      <span class="token-comment">// NaN</span>
+
+<span class="token-comment">// Infinity aparece al desbordar o dividir entre valores límite</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(<span class="token-num">1</span> / <span class="token-num">0</span>);              <span class="token-comment">// Infinity</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(<span class="token-num">-1</span> / <span class="token-num">0</span>);             <span class="token-comment">// -Infinity</span>
+
+<span class="token-comment">// Cuidado: NaN NO es igual a sí mismo</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(<span class="token-prop">NaN</span> === <span class="token-prop">NaN</span>);     <span class="token-comment">// false ← único valor que no se compara a sí mismo</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(<span class="token-prop">Number</span>.<span class="token-prop">isNaN</span>(<span class="token-prop">NaN</span>)); <span class="token-comment">// true  ← así se comprueba de forma segura</span></code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Importante:</strong>
+        No confundas <code>isNaN()</code> global (fuerza conversión a número) con <code>Number.isNaN()</code> (solo detecta NaN de verdad). Para comprobar valores numéricos reales usa <code>Number.isNaN()</code> y <code>Number.isFinite()</code>.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-search text-gradient me-2"></i>typeof: ¿qué tipo es este valor?</h2>
+      <p>El operador <code>typeof</code> devuelve una cadena con el tipo de un valor, útil para depurar y validar datos.</p>
+      <pre class="code-block"><code><span class="token-prop">console</span>.<span class="token-prop">log</span>(<span class="token-prop">typeof</span> <span class="token-num">42</span>);            <span class="token-comment">// "number"</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(<span class="token-prop">typeof</span> <span class="token-value">"Hola"</span>);      <span class="token-comment">// "string"</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(<span class="token-prop">typeof</span> <span class="token-num">true</span>);        <span class="token-comment">// "boolean"</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(<span class="token-prop">typeof</span> <span class="token-num">null</span>);        <span class="token-comment">// "object" ← bug histórico</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(<span class="token-prop">typeof</span> undefined);    <span class="token-comment">// "undefined"</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(<span class="token-prop">typeof</span> <span class="token-prop">Symbol</span>(<span class="token-value">"x"</span>)); <span class="token-comment">// "symbol"</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(<span class="token-prop">typeof</span> <span class="token-num">123n</span>);        <span class="token-comment">// "bigint"</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(<span class="token-prop">typeof</span> [<span class="token-num">1</span>, <span class="token-num">2</span>]);     <span class="token-comment">// "object" ← los arrays son objetos</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(<span class="token-prop">typeof</span> <span class="token-keyword">function</span> () {}); <span class="token-comment">// "function"</span></code></pre>
+      <div class="table-responsive mt-3">
+        <table class="table">
+          <thead>
+            <tr><th scope="col">Expresión</th><th scope="col">Resultado</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>typeof "texto"</code></td><td><code>"string"</code></td></tr>
+            <tr><td><code>typeof 25</code></td><td><code>"number"</code></td></tr>
+            <tr><td><code>typeof true</code></td><td><code>"boolean"</code></td></tr>
+            <tr><td><code>typeof {} / []</code></td><td><code>"object"</code></td></tr>
+            <tr><td><code>typeof null</code></td><td><code>"object"</code>*</td></tr>
+            <tr><td><code>typeof function(){}</code></td><td><code>"function"</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-intersect text-gradient me-2"></i>instanceof: comprobar un tipo por referencia</h2>
+      <p>Si <code>typeof</code> te dice "object" pero quieres saber si es un array, una fecha o una clase concreta, usa el operador <code>instanceof</code>.</p>
+      <pre class="code-block"><code><span class="token-tag">const</span> lista = [<span class="token-num">1</span>, <span class="token-num">2</span>, <span class="token-num">3</span>];
+<span class="token-tag">const</span> fecha = <span class="token-tag">new</span> <span class="token-prop">Date</span>();
+
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(lista <span class="token-tag">instanceof</span> <span class="token-prop">Array</span>);   <span class="token-comment">// true</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(lista <span class="token-tag">instanceof</span> <span class="token-prop">Object</span>);   <span class="token-comment">// true ← todo objeto es Object</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(fecha <span class="token-tag">instanceof</span> <span class="token-prop">Date</span>);    <span class="token-comment">// true</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(<span class="token-prop">Array</span>.<span class="token-prop">isArray</span>(lista));     <span class="token-comment">// true ← alternativa específica para arrays</span></code></pre>
+      <div class="tip-box mt-3">
+        <i class="bi bi-star me-2" style="color:#f59e0b;"></i>
+        <strong class="text-white">Regla rápida:</strong> primitivos → <code>typeof</code>; arrays/objetos/instancias → <code>instanceof</code> (o <code>Array.isArray()</code> para arrays).
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-lightbulb text-gradient me-2"></i>Demo interactiva: inspector de tipos</h2>
+      <p>Haz clic en un valor y mira en tiempo real qué devuelven <code>typeof</code> e <code>instanceof</code> para cada uno.</p>
+      <div class="demo-box p-4">
+        <div class="d-flex flex-wrap gap-2 mb-3" id="tipoBotones"></div>
+        <div id="tipoResultado" class="p-3 rounded" style="background:rgba(99,102,241,0.1); min-height:90px;">
+          <p class="text-secondary mb-0">Selecciona un valor para inspeccionarlo…</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>Los <strong>7 primitivos</strong> son: string, number, boolean, null, undefined, symbol y bigint.</li>
+        <li>Los <strong>objetos y arrays</strong> se copian por referencia; los primitivos, por valor.</li>
+        <li><code>NaN</code> e <code>Infinity</code> son valores numéricos especiales; compruébalos con <code>Number.isNaN()</code> y <code>Number.isFinite()</code>.</li>
+        <li><code>typeof</code> dice el tipo de un valor; <code>instanceof</code> distingue qué tipo de objeto es.</li>
+        <li>El <code>typeof null</code> devuelve <code>"object"</code>: es un bug histórico conocido.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-2-variables.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-4-operadores.html" class="btn btn-gradient">Siguiente: Operadores <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— JavaScript Básico · Lección 3</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-4-operadores.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+
+<script>
+(function () {
+  const muestras = [
+    { etiqueta: '42', valor: 42 },
+    { etiqueta: '"Hola"', valor: 'Hola' },
+    { etiqueta: 'true', valor: true },
+    { etiqueta: 'null', valor: null },
+    { etiqueta: 'undefined', valor: undefined },
+    { etiqueta: 'NaN', valor: NaN },
+    { etiqueta: 'Infinity', valor: Infinity },
+    { etiqueta: '10n (bigint)', valor: 10n },
+    { etiqueta: 'Symbol("id")', valor: Symbol('id') },
+    { etiqueta: '{ nombre: "Ana" }', valor: { nombre: 'Ana' } },
+    { etiqueta: '[1, 2, 3]', valor: [1, 2, 3] },
+    { etiqueta: 'new Date()', valor: new Date() }
+  ];
+
+  const contenedor = document.getElementById('tipoBotones');
+  const resultado = document.getElementById('tipoResultado');
+
+  muestras.forEach(function (muestra) {
+    const boton = document.createElement('button');
+    boton.className = 'btn btn-sm btn-outline-info';
+    boton.textContent = muestra.etiqueta;
+    boton.addEventListener('click', function () {
+      const v = muestra.valor;
+      const tipo = typeof v;
+      const instancias = [];
+      if (v instanceof Array) instancias.push('Array');
+      if (v instanceof Date) instancias.push('Date');
+      if (v !== null && typeof v === 'object') instancias.push('Object');
+
+      let html = '<div class="mb-1"><span class="badge-soft-cyan">typeof</span> <code>' + tipo + '</code></div>';
+      if (instancias.length > 0) {
+        html += '<div class="mb-1"><span class="badge-soft-pink">instanceof</span> <code>' + instancias.join(', ') + '</code></div>';
+      }
+      html += '<div class="small mb-1" style="color:#94a3b8 !important;">Valor: <code>' + String(v) + '</code></div>';
+      if (Number.isNaN(v)) {
+        html += '<div class="small" style="color:#f59e0b !important;">⚠️ Number.isNaN() → true</div>';
+      }
+      resultado.innerHTML = html;
+      console.log(muestra.etiqueta, '→ typeof:', tipo, v instanceof Array ? '| instanceof Array' : '');
+    });
+    contenedor.appendChild(boton);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 1 de Herramientas: Git y GitHub desde cero. Aprende control de versiones, comandos esenciales, ramas, merge y flujo de trabajo diario.">
+  <title>Lección 1 — Git y GitHub desde cero | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Herramientas</a></li>
+        <li class="breadcrumb-item active text-light">Lección 1</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-tools me-1"></i>Herramientas · Lección 1</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>45 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Git y GitHub desde cero</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">Qué es el control de versiones, los comandos esenciales de Git y cómo colaborar con GitHub.</p>
+    <div class="progress-tracker">
+      <span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-clock-history text-gradient me-2"></i>¿Qué es el control de versiones?</h2>
+      <p>
+        El <strong>control de versiones</strong> es un sistema que registra los cambios realizados en archivos a lo largo del tiempo,
+        para poder recuperar versiones anteriores, comparar differencias y trabajar en equipo sin pisarse los cambios.
+      </p>
+      <p>Imagina escribir un ensayo. Sin control de versiones:</p>
+      <div class="row g-3 my-2">
+        <div class="col-md-4">
+          <div class="demo-box h-100 text-center">
+            <i class="bi bi-file-earmark-text fs-2 d-block mb-2" style="color:#ef4444;"></i>
+            <strong class="text-white">Ensayo_final.doc</strong>
+            <p class="small mb-0">final_v2_real.docx ... ¿cuál es la buena?</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="demo-box h-100 text-center">
+            <i class="bi bi-git fs-2 d-block mb-2" style="color:#6366f1;"></i>
+            <strong class="text-white">Con Git</strong>
+            <p class="small mb-0">Historial limpio, cada cambio tiene autor y fecha</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="demo-box h-100 text-center">
+            <i class="bi bi-github fs-2 d-block mb-2" style="color:#06b6d4;"></i>
+            <strong class="text-white">Con GitHub</strong>
+            <p class="small mb-0">Todo en la nube, el equipo colabora en paralelo</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-terminal text-gradient me-2"></i>Configuración inicial</h2>
+      <p>Antes de empezar, configura tu identidad en Git (esto firma cada commit que hagas):</p>
+      <pre class="code-block"><code><span class="token-comment"># Configurar nombre y correo (una sola vez)</span>
+<span class="token-tag">git</span> <span class="token-value">config --global user.name "Tu Nombre"</span>
+<span class="token-tag">git</span> <span class="token-value">config --global user.email "tu@email.com"</span>
+
+<span class="token-comment"># Verificar configuración</span>
+<span class="token-tag">git</span> <span class="token-value">config --list</span></code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        El flag <code>--global</code> aplica la configuración a todos los repositorios de tu máquina. Si lo omites, solo aplica al repositorio actual.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-lightning-charge text-gradient me-2"></i>Comandos fundamentales</h2>
+      <p>Estos son los comandos que usarás todos los días:</p>
+      <pre class="code-block"><code><span class="token-comment"># Crear un repositorio nuevo</span>
+<span class="token-tag">git</span> init
+
+<span class="token-comment"># Agregar archivos al área de preparación (staging)</span>
+<span class="token-tag">git</span> add <span class="token-value">.</span>                <span class="token-comment"># todos los archivos</span>
+<span class="token-tag">git</span> add <span class="token-value">index.html</span>      <span class="token-comment"># un archivo específico</span>
+
+<span class="token-comment"># Confirmar cambios con un mensaje</span>
+<span class="token-tag">git</span> commit -m <span class="token-value">"Mensaje descriptivo"</span>
+
+<span class="token-comment"># Ver el estado del repositorio</span>
+<span class="token-tag">git</span> status
+
+<span class="token-comment"># Ver el historial de commits</span>
+<span class="token-tag">git</span> log --oneline</code></pre>
+      <table class="table mt-4">
+        <thead>
+          <tr><th scope="col">Comando</th><th scope="col">¿Qué hace?</th><th scope="col">Cuándo usarlo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>git init</code></td><td>Crea un repositorio vacío en la carpeta actual</td><td>Una vez, al empezar un proyecto</td></tr>
+          <tr><td><code>git add .</code></td><td>Mueve todos los cambios a la zona de preparación</td><td>Antes de cada commit</td></tr>
+          <tr><td><code>git commit -m "..."</code></td><td>Guarda un snapshot con mensaje descriptivo</td><td>Cada vez que completes una tarea lógica</td></tr>
+          <tr><td><code>git status</code></td><td>Muestra qué archivos están modificados, staged o sin rastrear</td><td>Constantemente, para verificar estado</td></tr>
+          <tr><td><code>git log --oneline</code></td><td>Muestra historial comprimido (un commit por línea)</td><td>Para revisar qué se ha hecho</td></tr>
+        </tbody>
+      </table>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Importante:</strong>
+        Un commit debe representar una <strong>tarea completa y coherente</strong>. No hagas commits con mensajes como "fix" o "cambios" — sé descriptivo: "Agrego validación del formulario de contacto".
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-diagram-2 text-gradient me-2"></i>Ramas (branches) y merge</h2>
+      <p>
+        Las <strong>ramas</strong> te permiten trabajar en una funcionalidad nueva sin afectar el código principal (<code>main</code>).
+        Cuando terminas, <strong>fusionas</strong> (merge) la rama en <code>main</code>.
+      </p>
+      <pre class="code-block"><code><span class="token-comment"># Crear y cambiar a una rama nueva</span>
+<span class="token-tag">git</span> checkout <span class="token-value">-b feature-login</span>
+
+<span class="token-comment"># (hacer cambios y commits en la rama)</span>
+<span class="token-tag">git</span> add .
+<span class="token-tag">git</span> commit -m <span class="token-value">"Implemento formulario de login"</span>
+
+<span class="token-comment"># Volver a main y fusionar</span>
+<span class="token-tag">git</span> checkout main
+<span class="token-tag">git</span> merge feature-login
+
+<span class="token-comment"># Ver todas las ramas</span>
+<span class="token-tag">git</span> branch <span class="token-value">-a</span></code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Si surge un conflicto durante <code>merge</code>, Git te marcará las líneas en conflicto. Edita el archivo, elige qué mantener y haz un nuevo commit.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-cloud-arrow-up text-gradient me-2"></i>Push, Pull y Clone</h2>
+      <p>Estos comandos conectan tu repositorio local con <strong>GitHub</strong> (o cualquier servidor remoto):</p>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Comando</th><th scope="col">¿Qué hace?</th><th scope="col">Ejemplo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>git clone</code></td><td>Crea una copia local de un repositorio remoto</td><td><code>git clone https://github.com/user/repo.git</code></td></tr>
+          <tr><td><code>git remote add origin</code></td><td>Conecta un repositorio local con uno remoto</td><td><code>git remote add origin https://github.com/user/repo.git</code></td></tr>
+          <tr><td><code>git push</code></td><td>Envía commits locales al servidor remoto</td><td><code>git push -u origin main</code></td></tr>
+          <tr><td><code>git pull</code></td><td>Descarga e integra cambios del remoto</td><td><code>git pull origin main</code></td></tr>
+        </tbody>
+      </table>
+      <pre class="code-block mt-3"><code><span class="token-comment"># Primer push: subir proyecto existente a GitHub</span>
+<span class="token-tag">git</span> remote add origin <span class="token-value">https://github.com/tu-usuario/mi-proyecto.git</span>
+<span class="token-tag">git</span> branch <span class="token-value">-M main</span>
+<span class="token-tag">git</span> push <span class="token-value">-u origin main</span></code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-eye-slash text-gradient me-2"></i>.gitignore</h2>
+      <p>
+        El archivo <code>.gitignore</code> le dice a Git qué archivos o carpetas <strong>no debe rastrear</strong>. Esto es esencial para no subir archivos pesados, datos sensibles o generados automáticamente.
+      </p>
+      <pre class="code-block"><code><span class="token-comment"># .gitignore</span>
+<span class="token-value">node_modules/</span>         <span class="token-comment"># dependencias de npm</span>
+<span class="token-value">dist/</span>                 <span class="token-comment"># archivos compilados</span>
+<span class="token-value">.env</span>                  <span class="token-comment"># variables de entorno (API keys)</span>
+<span class="token-value">*.log</span>                 <span class="token-comment"># archivos de log</span>
+<span class="token-value">.DS_Store</span>             <span class="token-comment"># macOS system files</span></code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Nunca subas:</strong>
+        <code>.env</code>, <code>node_modules/</code>, o cualquier archivo con contraseñas, tokens o API keys a un repositorio público.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-arrow-repeat text-gradient me-2"></i>Flujo típico de un día con Git</h2>
+      <pre class="code-block"><code><span class="token-comment">1. Clonar el repositorio (primera vez)</span>
+<span class="token-tag">git</span> clone <span class="token-value">https://github.com/equipo/proyecto.git</span>
+
+<span class="token-comment">2. Crear rama para tu tarea</span>
+<span class="token-tag">git</span> checkout <span class="token-value">-b feature-header-responsive</span>
+
+<span class="token-comment">3. Hacer cambios, guardarlos</span>
+<span class="token-tag">git</span> add .
+<span class="token-tag">git</span> commit -m <span class="token-value">"Agrego diseño responsive al header"</span>
+
+<span class="token-comment">4. Subir tu rama a GitHub</span>
+<span class="token-tag">git</span> push <span class="token-value">-u origin feature-header-responsive</span>
+
+<span class="token-comment">5. Crear Pull Request en GitHub y pedir review</span>
+
+<span class="token-comment">6. Después del merge, volver a main y actualizar</span>
+<span class="token-tag">git</span> checkout main
+<span class="token-tag">git</span> pull origin main</code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-play-circle text-gradient me-2"></i>Demo: Línea de tiempo visual de Git</h2>
+      <p>Haz clic en los botones para agregar commits y crear ramas. Observa cómo se construye el historial visualmente.</p>
+      <div class="demo-box p-4" id="gitDemo">
+        <div class="d-flex flex-wrap gap-2 mb-4">
+          <button class="btn btn-sm btn-gradient" id="btnGitCommit"><i class="bi bi-plus-circle me-1"></i>Agregar commit</button>
+          <button class="btn btn-sm btn-outline-info" id="btnGitBranch"><i class="bi bi-diagram-2 me-1"></i>Crear rama</button>
+          <button class="btn btn-sm btn-outline-success" id="btnGitMerge"><i class="bi bi-arrow-down-left me-1"></i>Merge</button>
+          <button class="btn btn-sm btn-outline-secondary" id="btnGitReset"><i class="bi bi-arrow-counterclockwise me-1"></i>Reset</button>
+        </div>
+        <div style="overflow-x:auto;">
+          <svg id="gitTimeline" width="100%" height="260" viewBox="0 0 800 260" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="gradMain" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <p class="small text-secondary mb-0 mt-2" id="gitLog">Commits: 0 · Ramas: 1 (main)</p>
+      </div>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Concepto clave:</strong>
+        Cada nodo es un <strong>commit</strong> (snapshot del código). Las ramas son líneas paralelas que divergen y se fusionan.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>Git es un sistema de <strong>control de versiones distribuido</strong>: cada desarrollador tiene una copia completa.</li>
+        <li>El ciclo básico es: <code>add → commit → push</code>.</li>
+        <li>Las <strong>ramas</strong> permiten desarrollar features aisladas y fusionarlas después.</li>
+        <li>GitHub es la plataforma remota donde se almacenan y colabora en repositorios.</li>
+        <li>El archivo <code>.gitignore</code> evita subir archivos no deseados.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Inicio</a>
+      <div class="progress-tracker">
+        <span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-2-npm.html" class="btn btn-gradient">Siguiente: npm y automatización <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— Herramientas · Lección 1</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-2-npm.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>
+(function(){
+  const svg = document.getElementById('gitTimeline');
+  const logEl = document.getElementById('gitLog');
+  let commits = [];
+  let branches = [{ name: 'main', y: 120, commits: [] }];
+  let activeBranch = 0;
+  let commitCount = 0;
+  const spacing = 90;
+  const startX = 60;
+
+  function render(){
+    while(svg.children.length > 1) svg.removeChild(svg.lastChild);
+
+    branches.forEach((branch, bi) => {
+      const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+      line.setAttribute('x1', startX - 30);
+      line.setAttribute('y1', branch.y);
+      line.setAttribute('x2', startX + (branch.commits.length) * spacing);
+      line.setAttribute('y2', branch.y);
+      line.setAttribute('stroke', bi === activeBranch ? 'url(#gradMain)' : '#475569');
+      line.setAttribute('stroke-width','3');
+      line.setAttribute('stroke-linecap','round');
+      svg.appendChild(line);
+
+      branch.commits.forEach((msg, ci) => {
+        const cx = startX + ci * spacing;
+        const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+        circle.setAttribute('cx', cx);
+        circle.setAttribute('cy', branch.y);
+        circle.setAttribute('r','12');
+        circle.setAttribute('fill', bi === activeBranch ? '#6366f1' : '#0ea5e9');
+        circle.setAttribute('stroke','#0f172a');
+        circle.setAttribute('stroke-width','3');
+        circle.style.cursor = 'pointer';
+        gsap.from(circle, {scale:0, duration:0.4, ease:'back.out(2)'});
+        svg.appendChild(circle);
+
+        const txt = document.createElementNS('http://www.w3.org/2000/svg','text');
+        txt.setAttribute('x', cx);
+        txt.setAttribute('y', branch.y - 22);
+        txt.setAttribute('text-anchor','middle');
+        txt.setAttribute('fill','#e2e8f0');
+        txt.setAttribute('font-size','10');
+        txt.setAttribute('font-family','Fira Code, monospace');
+        txt.textContent = msg;
+        svg.appendChild(txt);
+
+        const num = document.createElementNS('http://www.w3.org/2000/svg','text');
+        num.setAttribute('x', cx);
+        num.setAttribute('y', branch.y + 5);
+        num.setAttribute('text-anchor','middle');
+        num.setAttribute('fill','#fff');
+        num.setAttribute('font-size','10');
+        num.setAttribute('font-weight','bold');
+        num.textContent = commitCount - branch.commits.length + ci + 1;
+        svg.appendChild(num);
+      });
+    });
+
+    logEl.textContent = `Commits: ${commitCount} · Ramas: ${branches.length} (${branches.map(b=>b.name).join(', ')})`;
+  }
+
+  document.getElementById('btnGitCommit').addEventListener('click', () => {
+    commitCount++;
+    const msg = `c${commitCount}`;
+    branches[activeBranch].commits.push(msg);
+    render();
+  });
+
+  document.getElementById('btnGitBranch').addEventListener('click', () => {
+    const newY = branches.length % 2 === 0 ? 120 - branches.length * 30 : 120 + branches.length * 30;
+    if(newY < 30 || newY > 230) return;
+    const name = `feature-${branches.length}`;
+    branches.push({ name, y: newY, commits: [] });
+    activeBranch = branches.length - 1;
+    render();
+  });
+
+  document.getElementById('btnGitMerge').addEventListener('click', () => {
+    if(activeBranch === 0 || branches[0].commits.length >= branches[activeBranch].commits.length + branches[0].commits.length) return;
+    branches[activeBranch].commits.forEach(c => branches[0].commits.push(c));
+    activeBranch = 0;
+    render();
+  });
+
+  document.getElementById('btnGitReset').addEventListener('click', () => {
+    commits = [];
+    branches = [{ name: 'main', y: 120, commits: [] }];
+    activeBranch = 0;
+    commitCount = 0;
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

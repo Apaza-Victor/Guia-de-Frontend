@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 4 de CSS Básico: el modelo de caja (content, padding, border y margin), box-sizing, border-radius, outline y la diferencia entre display block e inline.">
+  <title>Lección 4 — Modelo de caja | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">CSS</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Básico</a></li>
+        <li class="breadcrumb-item active text-light">Lección 4</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-4-circle me-1"></i>CSS Básico · Lección 4</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>35 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Modelo de caja</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">Todo en CSS es una caja: aprende a controlar su contenido, relleno, borde y margen.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-box text-gradient me-2"></i>¿De qué está hecha una caja?</h2>
+      <p>
+        Cada elemento en una página web se representa como una <strong>caja rectangular</strong>. El modelo de caja
+        describe sus cuatro capas desde dentro hacia fuera:
+      </p>
+      <ol class="mt-2">
+        <li><strong>Content (contenido):</strong> el texto o imagen real del elemento.</li>
+        <li><strong>Padding (relleno):</strong> espacio interno entre el contenido y el borde. Afecta al fondo visible.</li>
+        <li><strong>Border (borde):</strong> línea que rodea al padding.</li>
+        <li><strong>Margin (margen):</strong> espacio externo que separa la caja de sus vecinos. Es transparente.</li>
+      </ol>
+
+      <div class="demo-box p-4">
+        <h3 class="h5 text-white fw-bold mb-3"><i class="bi bi-box me-2"></i>La caja en vivo</h3>
+        <p style="color:#cbd5e1 !important;">Mueve los controles y observa cómo cambia la visualización de la caja.</p>
+        <div class="row g-3 align-items-center mb-3">
+          <div class="col-md-4">
+            <label class="small text-light d-flex justify-content-between">
+              <span>Padding</span><span id="valPad">20px</span>
+            </label>
+            <input type="range" class="form-range" id="rngPad" min="0" max="60" value="20">
+          </div>
+          <div class="col-md-4">
+            <label class="small text-light d-flex justify-content-between">
+              <span>Border</span><span id="valBor">4px</span>
+            </label>
+            <input type="range" class="form-range" id="rngBor" min="0" max="20" value="4">
+          </div>
+          <div class="col-md-4">
+            <label class="small text-light d-flex justify-content-between">
+              <span>Border-radius</span><span id="valRad">0px</span>
+            </label>
+            <input type="range" class="form-range" id="rngRad" min="0" max="40" value="0">
+          </div>
+        </div>
+        <div class="text-center">
+          <span class="d-inline-block" style="background:#f8fafc; padding:6px;">
+            <span id="cajaMargin" class="d-inline-block" style="background:#1f2937; border:1px dashed #64748b; padding:10px;">
+              <span id="cajaDemo" class="d-inline-block" style="background:#6366f1; color:#fff; padding:20px; border:4px solid #ec4899; display:inline-block;">
+                Contenido
+              </span>
+            </span>
+          </span>
+        </div>
+        <div class="row g-2 mt-3 small">
+          <div class="col-auto"><span class="badge-soft">Morado = content</span></div>
+          <div class="col-auto"><span class="badge-soft-cyan">Rosa = border</span></div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-rulers text-gradient me-2"></i>Padding, border y margin</h2>
+      <p>Cada una de estas propiedades acepta de 1 a 4 valores, siempre en el orden <strong>arriba, derecha, abajo, izquierda</strong> (sentido horario).</p>
+      <pre class="code-block"><code><span class="token-prop">.caja</span> {
+  <span class="token-attr">padding</span>: <span class="token-value">10px 20px 30px 40px</span>; <span class="token-comment">/* arriba | derecha | abajo | izquierda */</span>
+  <span class="token-attr">border</span>: <span class="token-value">3px solid #6366f1</span>;       <span class="token-comment">/* ancho estilo color */</span>
+  <span class="token-attr">margin</span>: <span class="token-value">0 auto 1.5rem</span>;          <span class="token-comment">/* arriba | lados | abajo */</span>
+}</code></pre>
+      <pre class="code-block mt-3"><code><span class="token-comment">/* Cada lado por separado */</span>
+<span class="token-prop">.caja</span> {
+  <span class="token-attr">padding-top</span>: <span class="token-value">10px</span>;
+  <span class="token-attr">margin-bottom</span>: <span class="token-value">1.5rem</span>;
+  <span class="token-attr">border-left</span>: <span class="token-value">4px solid #06b6d4</span>;
+}
+
+<span class="token-comment">/* Los dos márgenes verticales colapsan: gana el mayor — usa margin: 0 auto para centrar */</span>
+<span class="token-prop">.centrado</span> {
+  <span class="token-attr">width</span>: <span class="token-value">300px</span>;
+  <span class="token-attr">margin</span>: <span class="token-value">0 auto</span>;
+}</code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Propiedad</th><th scope="col">Qué controla</th><th scope="col">¿Pintado con fondo?</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>padding</code></td><td>Espacio interno</td><td>Sí</td></tr>
+          <tr><td><code>border</code></td><td>Línea exterior</td><td>Sí (el color del borde)</td></tr>
+          <tr><td><code>margin</code></td><td>Espacio externo</td><td>No (transparente)</td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Los márgenes verticales de elementos adyacentes <strong>colapsan</strong>: en lugar de sumarse, se usa el mayor de los dos.
+        Los padding y border, por el contrario, siempre se suman.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-ui-checks text-gradient me-2"></i>box-sizing: border-box vs content-box</h2>
+      <p>
+        La propiedad <code>box-sizing</code> decide cómo se calcula el ancho/alto total del elemento.
+      </p>
+      <ul class="mt-2">
+        <li><strong>content-box</strong> (valor por defecto): el <code>width</code> se aplica solo al contenido; padding y border <em>se añaden</em> al tamaño total.</li>
+        <li><strong>border-box</strong>: el <code>width</code> ya incluye content + padding + border. El tamaño declarado es el tamaño final.</li>
+      </ul>
+      <pre class="code-block"><code><span class="token-comment">/* Reseteo global: casi todos los frameworks lo usan */</span>
+<span class="token-prop">*, *::before, *::after</span> {
+  <span class="token-attr">box-sizing</span>: <span class="token-value">border-box</span>;
+}
+
+<span class="token-prop">.ejemplo</span> {
+  <span class="token-attr">width</span>: <span class="token-value">200px</span>;
+  <span class="token-attr">padding</span>: <span class="token-value">25px</span>;
+  <span class="token-attr">border</span>: <span class="token-value">5px solid #6366f1</span>;
+}</code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">box-sizing</th><th scope="col">Ancho total del ejemplo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>content-box</code></td><td>200 + 25 + 25 + 5 + 5 = <strong>260px</strong></td></tr>
+          <tr><td><code>border-box</code></td><td>Fijo en <strong>200px</strong> (el contenido se comprime a 140px)</td></tr>
+        </tbody>
+      </table>
+      <div class="demo-box p-4 mt-3">
+        <h3 class="h5 text-white fw-bold mb-3"><i class="bi bi-view-stacked me-2"></i>Compara visualmente</h3>
+        <p style="color:#cbd5e1 !important;">Ambas cajas tienen <code>width: 250px</code> más el mismo padding y border. ¿Cuál es más ancha?</p>
+        <div class="row g-3">
+          <div class="col-md-6 text-center">
+            <div style="background:#334155; padding:6px;">
+              <div style="width:250px; padding:25px; border:5px solid #ec4899; background:#6366f1; color:#fff; box-sizing:content-box; margin:0 auto;">
+                content-box
+              </div>
+            </div>
+            <p class="small mt-2 text-light">content-box: total ~320px</p>
+          </div>
+          <div class="col-md-6 text-center">
+            <div style="background:#334155; padding:6px;">
+              <div style="width:250px; padding:25px; border:5px solid #06b6d4; background:#6366f1; color:#fff; box-sizing:border-box; margin:0 auto;">
+                border-box
+              </div>
+            </div>
+            <p class="small mt-2 text-light">border-box: total 250px</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-asterisk text-gradient me-2"></i>border-radius y outline</h2>
+      <pre class="code-block"><code><span class="token-comment">/* Esquinas redondeadas */</span>
+<span class="token-prop">.pill</span> {
+  <span class="token-attr">border-radius</span>: <span class="token-value">999px</span>;  <span class="token-comment">/* cápsula perfecta */</span>
+}
+
+<span class="token-prop">.circulo</span> {
+  <span class="token-attr">width</span>: <span class="token-value">80px</span>;
+  <span class="token-attr">height</span>: <span class="token-value">80px</span>;
+  <span class="token-attr">border-radius</span>: <span class="token-value">50%</span>; <span class="token-comment">/* círculo */</span>
+}
+
+<span class="token-comment">/* Outline: contorno FUERA del borde, no ocupa espacio y no afecta al layout */</span>
+<span class="token-prop">.focus-ring</span><span class="token-tag">:focus</span> {
+  <span class="token-attr">outline</span>: <span class="token-value">3px solid #06b6d4</span>;
+  <span class="token-attr">outline-offset</span>: <span class="token-value">2px</span>;
+}</code></pre>
+      <div class="tip-box">
+        <strong class="text-white"><i class="bi bi-star me-2" style="color:#f59e0b;"></i>Diferencia clave:</strong>
+        <code>outline</code> no está dentro del modelo de caja: no suma tamaño ni puede redondearse con
+        <code>border-radius</code>. Se usa sobre todo para indicar el foco de teclado sin deformar el layout.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-distribute-vertical text-gradient me-2"></i>Cajas en línea vs bloque</h2>
+      <p>La propiedad <code>display</code> cambia el comportamiento básico de una caja:</p>
+      <table class="table">
+        <thead>
+          <tr><th scope="col">display</th><th scope="col">Comportamiento</th><th scope="col">Ejemplos</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>block</code></td><td>Ocupa todo el ancho disponible y fuerza un salto de línea</td><td><code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code></td></tr>
+          <tr><td><code>inline</code></td><td>Fluye junto al texto, ignoran width/height y margin vertical</td><td><code>&lt;span&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;strong&gt;</code></td></tr>
+          <tr><td><code>inline-block</code></td><td>Mezcla: fluye en línea pero respeta width, height y márgenes</td><td>Botones, etiquetas</td></tr>
+        </tbody>
+      </table>
+      <pre class="code-block"><code><span class="token-prop">.nav a</span> {
+  <span class="token-attr">display</span>: <span class="token-value">inline-block</span>;
+  <span class="token-attr">padding</span>: <span class="token-value">8px 16px</span>;
+  <span class="token-attr">margin</span>: <span class="token-value">0 4px</span>;
+}</code></pre>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>La caja se compone de <strong>content → padding → border → margin</strong>.</li>
+        <li>Con <code>box-sizing: border-box</code>, el <code>width</code> declarado es el tamaño final (recomendado).</li>
+        <li><code>border-radius</code> redondea esquinas; <code>outline</code> es un contorno externo que no ocupa espacio.</li>
+        <li><code>block</code> ocupa la línea completa; <code>inline</code> fluye con el texto; <code>inline-block</code> combina ambos.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-3-especificidad.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-5-tipografia.html" class="btn btn-gradient">Siguiente: Tipografía y colores <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— CSS Básico · Lección 4</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-5-tipografia.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var caja = document.getElementById('cajaDemo');
+  var valPad = document.getElementById('valPad');
+  var valBor = document.getElementById('valBor');
+  var valRad = document.getElementById('valRad');
+
+  function apply() {
+    caja.style.padding = valPad.textContent;
+    caja.style.border = valBor.textContent + ' solid #ec4899';
+    caja.style.borderRadius = valRad.textContent;
+  }
+
+  document.getElementById('rngPad').addEventListener('input', function(e) {
+    valPad.textContent = e.target.value + 'px';
+    apply();
+  });
+  document.getElementById('rngBor').addEventListener('input', function(e) {
+    valBor.textContent = e.target.value + 'px';
+    apply();
+  });
+  document.getElementById('rngRad').addEventListener('input', function(e) {
+    valRad.textContent = e.target.value + 'px';
+    apply();
+  });
+
+  gsap.from('#cajaDemo', {scale: 0.5, opacity: 0, duration: 0.6, ease: 'back.out(1.7)', delay: 0.3});
+});
+</script>
+</body>
+</html>

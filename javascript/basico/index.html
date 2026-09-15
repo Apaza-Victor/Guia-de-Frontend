@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Subsección JavaScript Básico de la guía Frontend Pro: 9 lecciones sobre introducción, variables, tipos de datos, operadores, condicionales, bucles, funciones, strings, arrays y objetos.">
+  <title>JavaScript Básico — 9 lecciones | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">JavaScript</a></li>
+        <li class="breadcrumb-item active text-light">Básico</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-1-circle me-1"></i>Subsección · 9 lecciones</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>≈ 6 h 05 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">JavaScript Básico</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">Los cimientos del lenguaje de la web: variables, tipos, operadores, condicionales, bucles, funciones, strings, arrays y objetos, con demos interactivas en cada lección.</p>
+    <div class="progress-tracker">
+      <span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-4"><i class="bi bi-list-check text-gradient me-2"></i>Lecciones</h2>
+      <div class="card-learning">
+        <div class="card-body p-4">
+          <div class="row row-cols-1 row-cols-md-2 g-3">
+            <div class="col">
+              <a class="lesson-card" href="leccion-1-introduccion.html">
+                <span class="lc-num">1</span>
+                <span class="flex-grow-1">
+                  <span class="lc-title d-block">Introducción a JavaScript</span>
+                  <span class="lc-meta">35 min · Qué es JS y el primer script</span>
+                </span>
+                <i class="bi bi-chevron-right" style="color:#64748b;"></i>
+              </a>
+            </div>
+            <div class="col">
+              <a class="lesson-card" href="leccion-2-variables.html">
+                <span class="lc-num">2</span>
+                <span class="flex-grow-1">
+                  <span class="lc-title d-block">Variables: let, const y var</span>
+                  <span class="lc-meta">40 min · Declaración, scope y template literals</span>
+                </span>
+                <i class="bi bi-chevron-right" style="color:#64748b;"></i>
+              </a>
+            </div>
+            <div class="col">
+              <a class="lesson-card" href="leccion-3-tipos-datos.html">
+                <span class="lc-num">3</span>
+                <span class="flex-grow-1">
+                  <span class="lc-title d-block">Tipos de datos</span>
+                  <span class="lc-meta">35 min · Primitivos, NaN, Infinity y typeof</span>
+                </span>
+                <i class="bi bi-chevron-right" style="color:#64748b;"></i>
+              </a>
+            </div>
+            <div class="col">
+              <a class="lesson-card" href="leccion-4-operadores.html">
+                <span class="lc-num">4</span>
+                <span class="flex-grow-1">
+                  <span class="lc-title d-block">Operadores</span>
+                  <span class="lc-meta">45 min · Aritméticos, comparación y lógicos</span>
+                </span>
+                <i class="bi bi-chevron-right" style="color:#64748b;"></i>
+              </a>
+            </div>
+            <div class="col">
+              <a class="lesson-card" href="leccion-5-condicionales.html">
+                <span class="lc-num">5</span>
+                <span class="flex-grow-1">
+                  <span class="lc-title d-block">Condicionales</span>
+                  <span class="lc-meta">40 min · if/else, switch, ternario y truthy/falsy</span>
+                </span>
+                <i class="bi bi-chevron-right" style="color:#64748b;"></i>
+              </a>
+            </div>
+            <div class="col">
+              <a class="lesson-card" href="leccion-6-bucles.html">
+                <span class="lc-num">6</span>
+                <span class="flex-grow-1">
+                  <span class="lc-title d-block">Bucles y iteración</span>
+                  <span class="lc-meta">40 min · for, while, do...while y for...of</span>
+                </span>
+                <i class="bi bi-chevron-right" style="color:#64748b;"></i>
+              </a>
+            </div>
+            <div class="col">
+              <a class="lesson-card" href="leccion-7-funciones.html">
+                <span class="lc-num">7</span>
+                <span class="flex-grow-1">
+                  <span class="lc-title d-block">Funciones</span>
+                  <span class="lc-meta">45 min · Declaraciones, flechas y scope</span>
+                </span>
+                <i class="bi bi-chevron-right" style="color:#64748b;"></i>
+              </a>
+            </div>
+            <div class="col">
+              <a class="lesson-card" href="leccion-8-strings-metodos.html">
+                <span class="lc-num">8</span>
+                <span class="flex-grow-1">
+                  <span class="lc-title d-block">Strings y métodos</span>
+                  <span class="lc-meta">40 min · Métodos de string y de number</span>
+                </span>
+                <i class="bi bi-chevron-right" style="color:#64748b;"></i>
+              </a>
+            </div>
+            <div class="col">
+              <a class="lesson-card" href="leccion-9-arrays-objetos.html">
+                <span class="lc-num">9</span>
+                <span class="flex-grow-1">
+                  <span class="lc-title d-block">Arrays y objetos</span>
+                  <span class="lc-meta">45 min · Colecciones, clave:valor y mini agenda</span>
+                </span>
+                <i class="bi bi-chevron-right" style="color:#64748b;"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="../../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Inicio</a>
+      <div class="progress-tracker">
+        <span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-1-introduccion.html" class="btn btn-gradient">Empezar por Introducción a JavaScript <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— JavaScript Básico</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="../index.html" class="text-secondary"><i class="bi bi-filetype-js fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Subsección 01: Fundamentos de HTML. 10 lecciones para dominar la estructura, semántica, texto, listas, enlaces, imágenes, tablas, formularios, multimedia y accesibilidad.">
+  <title>Fundamentos de HTML — Subsección 01 | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">HTML</a></li>
+        <li class="breadcrumb-item active text-light">Fundamentos</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft">Subsección 01</span>
+      <span class="badge-soft-cyan"><i class="bi bi-book me-1"></i>10 lecciones</span>
+      <span class="badge-soft-pink"><i class="bi bi-hourglass-split me-1"></i>~5 h</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Fundamentos de HTML</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">La base completa del lenguaje de marcado: estructura, semántica, contenido enriquecido y accesibilidad.</p>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <div class="d-flex align-items-center gap-2 mb-4">
+        <i class="bi bi-list-ul fs-3 text-gradient"></i>
+        <h2 class="h3 text-white fw-bold mb-0">Las 10 lecciones</h2>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge-soft"><i class="bi bi-signpost-split me-1"></i>Lección 1</span>
+                <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>30 min</span>
+              </div>
+              <a href="leccion-1-introduccion.html" class="lesson-card d-flex mb-3"><span class="lc-num">1</span><span class="lc-title">Introducción a HTML</span></a>
+              <p class="small mb-3" style="color:#94a3b8 !important;">Qué es HTML, cómo funcionan las etiquetas y tu primera página web.</p>
+              <a class="btn btn-gradient w-100" href="leccion-1-introduccion.html">Quiero esta lección <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge-soft"><i class="bi bi-signpost-split me-1"></i>Lección 2</span>
+                <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>25 min</span>
+              </div>
+              <a href="leccion-2-estructura.html" class="lesson-card d-flex mb-3"><span class="lc-num">2</span><span class="lc-title">Estructura Base del Documento</span></a>
+              <p class="small mb-3" style="color:#94a3b8 !important;">El head profesional, metas SEO, encoding y orden de carga.</p>
+              <a class="btn btn-gradient w-100" href="leccion-2-estructura.html">Quiero esta lección <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge-soft"><i class="bi bi-signpost-split me-1"></i>Lección 3</span>
+                <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>25 min</span>
+                <span class="badge-soft-pink"><i class="bi bi-sparkle me-1"></i>Nuevo</span>
+              </div>
+              <a href="leccion-3-texto-formatos.html" class="lesson-card d-flex mb-3"><span class="lc-num">3</span><span class="lc-title">Texto y Formatos</span></a>
+              <p class="small mb-3" style="color:#94a3b8 !important;">Encabezados, párrafos, énfasis, citas, código y entidades HTML.</p>
+              <a class="btn btn-gradient w-100" href="leccion-3-texto-formatos.html">Quiero esta lección <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge-soft"><i class="bi bi-signpost-split me-1"></i>Lección 4</span>
+                <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>40 min</span>
+              </div>
+              <a href="leccion-4-semantica.html" class="lesson-card d-flex mb-3"><span class="lc-num">4</span><span class="lc-title">Etiquetas Semánticas HTML5</span></a>
+              <p class="small mb-3" style="color:#94a3b8 !important;">header, nav, main, section, article, aside y su impacto en SEO.</p>
+              <a class="btn btn-gradient w-100" href="leccion-4-semantica.html">Quiero esta lección <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge-soft"><i class="bi bi-signpost-split me-1"></i>Lección 5</span>
+                <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>30 min</span>
+                <span class="badge-soft-pink"><i class="bi bi-sparkle me-1"></i>Nuevo</span>
+              </div>
+              <a href="leccion-5-listas-y-enlaces.html" class="lesson-card d-flex mb-3"><span class="lc-num">5</span><span class="lc-title">Listas y Enlaces</span></a>
+              <p class="small mb-3" style="color:#94a3b8 !important;">ul, ol, dl, anidamiento, atributos type, anclas, mailto y descargas.</p>
+              <a class="btn btn-gradient w-100" href="leccion-5-listas-y-enlaces.html">Quiero esta lección <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge-soft"><i class="bi bi-signpost-split me-1"></i>Lección 6</span>
+                <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>30 min</span>
+                <span class="badge-soft-pink"><i class="bi bi-sparkle me-1"></i>Nuevo</span>
+              </div>
+              <a href="leccion-6-imagenes.html" class="lesson-card d-flex mb-3"><span class="lc-num">6</span><span class="lc-title">Imágenes</span></a>
+              <p class="small mb-3" style="color:#94a3b8 !important;">img, alt, lazy loading, srcset, picture y figure con caption.</p>
+              <a class="btn btn-gradient w-100" href="leccion-6-imagenes.html">Quiero esta lección <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge-soft"><i class="bi bi-signpost-split me-1"></i>Lección 7</span>
+                <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>35 min</span>
+                <span class="badge-soft-pink"><i class="bi bi-sparkle me-1"></i>Nuevo</span>
+              </div>
+              <a href="leccion-7-tablas.html" class="lesson-card d-flex mb-3"><span class="lc-num">7</span><span class="lc-title">Tablas</span></a>
+              <p class="small mb-3" style="color:#94a3b8 !important;">thead, tbody, tfoot, colspan, rowspan, caption y tablas accesibles.</p>
+              <a class="btn btn-gradient w-100" href="leccion-7-tablas.html">Quiero esta lección <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge-soft"><i class="bi bi-signpost-split me-1"></i>Lección 8</span>
+                <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>45 min</span>
+              </div>
+              <a href="leccion-8-formularios.html" class="lesson-card d-flex mb-3"><span class="lc-num">8</span><span class="lc-title">Formularios y Validación</span></a>
+              <p class="small mb-3" style="color:#94a3b8 !important;">inputs, select, textarea, labels accesibles y validación nativa.</p>
+              <a class="btn btn-gradient w-100" href="leccion-8-formularios.html">Quiero esta lección <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge-soft"><i class="bi bi-signpost-split me-1"></i>Lección 9</span>
+                <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>35 min</span>
+              </div>
+              <a href="leccion-9-multimedia.html" class="lesson-card d-flex mb-3"><span class="lc-num">9</span><span class="lc-title">Multimedia y Contenido Embebido</span></a>
+              <p class="small mb-3" style="color:#94a3b8 !important;">audio, video, iframe, figure, figcaption y tablas responsivas.</p>
+              <a class="btn btn-gradient w-100" href="leccion-9-multimedia.html">Quiero esta lección <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge-soft"><i class="bi bi-signpost-split me-1"></i>Lección 10</span>
+                <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>40 min</span>
+                <span class="badge-soft-pink"><i class="bi bi-sparkle me-1"></i>Nuevo</span>
+              </div>
+              <a href="leccion-10-accesibilidad.html" class="lesson-card d-flex mb-3"><span class="lc-num">10</span><span class="lc-title">Accesibilidad e Inclusión</span></a>
+              <p class="small mb-3" style="color:#94a3b8 !important;">ARIA, foco, contraste, lectores de pantalla y Open Graph.</p>
+              <a class="btn btn-gradient w-100" href="leccion-10-accesibilidad.html">Quiero esta lección <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="../index.html" class="text-secondary"><i class="bi bi-file-code fs-5"></i></a>
+      <a href="leccion-1-introduccion.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+</body>
+</html>

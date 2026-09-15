@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 3 de CSS Intermedio: Posicionamiento y z-index. Aprende static, relative, absolute, fixed, sticky, z-index y overflow con demo de tooltip interactivo.">
+  <title>Lección 3 — Posicionamiento y z-index | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <style>
+    /* ---------- DEMO POSICIONAMIENTO ---------- */
+    .pos-demo-wrapper {
+      position: relative;
+      background: #1e1e2e;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 20px;
+      min-height: 320px;
+      overflow: hidden;
+    }
+    .pos-anchor {
+      position: relative;
+      width: 180px;
+      height: 120px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 600;
+      margin: 0 auto;
+    }
+    .pos-absolute-child {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: #f43f5e;
+      color: #fff;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      box-shadow: 0 4px 12px rgba(244,63,94,0.4);
+      transition: transform 0.3s ease;
+    }
+    .pos-absolute-child:hover {
+      transform: scale(1.2);
+    }
+    /* ---------- TOOLTIP DEMO ---------- */
+    .tooltip-trigger {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #06b6d4, #0ea5e9);
+      color: #fff;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+    .tooltip-trigger .tooltip-box {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      background: #1e1e2e;
+      border: 1px solid #6366f1;
+      color: #cbd5e1;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 400;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      z-index: 10;
+    }
+    .tooltip-trigger .tooltip-box::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: #6366f1;
+    }
+    .tooltip-trigger:hover .tooltip-box {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    /* ---------- STICKY BADGE ---------- */
+    .sticky-demo-area {
+      height: 260px;
+      overflow-y: auto;
+      background: #1e1e2e;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 16px;
+      position: relative;
+    }
+    .sticky-badge {
+      position: sticky;
+      top: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #f59e0b, #f97316);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      z-index: 5;
+      box-shadow: 0 4px 12px rgba(245,158,11,0.4);
+    }
+    .sticky-content {
+      padding: 12px 0;
+      border-bottom: 1px solid #333;
+      color: #cbd5e1;
+    }
+    .sticky-content:last-child { border-bottom: none; }
+    .z-layers-demo {
+      position: relative;
+      height: 220px;
+      background: #1e1e2e;
+      border: 1px solid #333;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .z-layer {
+      position: absolute;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .z-layer:hover { transform: scale(1.05); }
+    .z-layer-1 { width: 200px; height: 140px; top: 40px; left: 30px; background: rgba(99,102,241,0.85); z-index: 1; }
+    .z-layer-2 { width: 200px; height: 140px; top: 55px; left: 90px; background: rgba(236,72,153,0.85); z-index: 2; }
+    .z-layer-3 { width: 200px; height: 140px; top: 70px; left: 150px; background: rgba(6,182,212,0.85); z-index: 3; }
+  </style>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">CSS</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Intermedio</a></li>
+        <li class="breadcrumb-item active text-light">Lección 3</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-2-circle me-1"></i>CSS Intermedio · Lección 3</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>40 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Posicionamiento y z-index</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">Domina cómo se sitúan los elementos en la página: relative, absolute, fixed, sticky y la superposición de capas.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <!-- ========== VALORES DE POSITION ========== -->
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-geo-alt text-gradient me-2"></i>Los 5 valores de position</h2>
+      <p>La propiedad <code>position</code> determina <strong>cómo se sitúa</strong> un elemento respecto a su entorno:</p>
+      <table class="table">
+        <thead>
+          <tr><th scope="col">Valor</th><th scope="col">Comportamiento</th><th scope="col">Se desplaza con…</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>static</code></td><td>Flujo normal del documento (valor por defecto)</td><td>No se desplaza</td></tr>
+          <tr><td><code>relative</code></td><td>Se desplaza desde su posición original, pero el espacio que ocupaba se reserva</td><td><code>top / right / bottom / left</code></td></tr>
+          <tr><td><code>absolute</code></td><td>Se extrae del flujo normal y se posiciona respecto a su <strong>ancestro posicionado más cercano</strong></td><td><code>top / right / bottom / left</code></td></tr>
+          <tr><td><code>fixed</code></td><td>Se extrae del flujo y se fija a la <strong>ventana del navegador</strong></td><td><code>top / right / bottom / left</code> + scroll</td></tr>
+          <tr><td><code>sticky</code></td><td>Se comporta como <code>relative</code> hasta que cruza un umbral; luego se vuelve <code>fixed</code></td><td><code>top / bottom</code> + scroll</td></tr>
+        </tbody>
+      </table>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Concepto clave:</strong>
+        Un hijo <code>absolute</code> se posiciona respecto al ancestro más cercano que tenga <code>position: relative | absolute | fixed | sticky</code>. Si no existe ningún ancestro posicionado, se posiciona respecto al <code>&lt;html&gt;</code>.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ========== CONTEXTO DE POSICIÓN ========== -->
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-diagram-3 text-gradient me-2"></i>Contextos de posición: ancla de hijos absolute</h2>
+      <p>Para que un hijo <code>absolute</code> se posicione dentro de su contenedor, el contenedor debe tener <code>position: relative</code>:</p>
+      <pre class="code-block"><code><span class="token-comment">/* El padre es el "ancla" del hijo absolute */</span>
+<span class="token-tag">.card</span> {
+  <span class="token-prop">position</span>: <span class="token-value">relative</span>;  <span class="token-comment">/* ancla */</span>
+}
+<span class="token-tag">.card__badge</span> {
+  <span class="token-prop">position</span>: <span class="token-value">absolute</span>;
+  <span class="token-prop">top</span>: <span class="token-value">-8px</span>;
+  <span class="token-prop">right</span>: <span class="token-value">-8px</span>;
+}</code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        <code>position: relative</code> sin <code>top/right/bottom/left</code> no mueve el elemento — solo establece el contexto de posicionamiento para sus hijos.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ========== Z-INDEX ========== -->
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-stack text-gradient me-2"></i>z-index y stacking context</h2>
+      <p><code>z-index</code> controla la <strong>superposición</strong> de elementos posicionados. Un valor mayor significa que el elemento está "más arriba":</p>
+      <pre class="code-block"><code><span class="token-tag">.layer-1</span> { <span class="token-prop">z-index</span>: <span class="token-value">1</span>;  }  <span class="token-comment">/* detrás */</span>
+<span class="token-tag">.layer-2</span> { <span class="token-prop">z-index</span>: <span class="token-value">2</span>;  }  <span class="token-comment">/* encima de layer-1 */</span>
+<span class="token-tag">.layer-3</span> { <span class="token-prop">z-index</span>: <span class="token-value">3</span>;  }  <span class="token-comment">/* la más arriba */</span></code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Advertencia:</strong>
+        <code>z-index</code> solo funciona en elementos con <code>position</code> distinto de <code>static</code>. Además, puede ser "atrapado" por un <strong>stacking context</strong> padre: si el padre tiene <code>z-index</code> o ciertas propiedades como <code>opacity &lt; 1</code>, los hijos no pueden salirse de ese contexto.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ========== OVERFLOW ========== -->
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-window-stack text-gradient me-2"></i>overflow</h2>
+      <p><code>overflow</code> controla qué sucede cuando el contenido de un elemento <strong>excede sus límites</strong>:</p>
+      <pre class="code-block"><code><span class="token-prop">overflow</span>: <span class="token-value">visible</span>;  <span class="token-comment">/* se desborda (default) */</span>
+<span class="token-prop">overflow</span>: <span class="token-value">hidden</span>;   <span class="token-comment">/* se recorta */</span>
+<span class="token-prop">overflow</span>: <span class="token-value">auto</span>;     <span class="token-comment">/* scrollbar solo si es necesario */</span>
+<span class="token-prop">overflow</span>: <span class="token-value">scroll</span>;   <span class="token-comment">/* siempre muestra scrollbar */</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Valor</th><th scope="col">Uso típico</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>visible</code></td><td>El contenido se desborda fuera del contenedor</td></tr>
+          <tr><td><code>hidden</code></td><td>Recorta el contenido que se sale</td></tr>
+          <tr><td><code>auto</code></td><td>Añade scroll solo cuando hace falta (el más usado)</td></tr>
+          <tr><td><code>scroll</code></td><td>Siempre muestra barra de scroll, aunque no haga falta</td></tr>
+          <tr><td><code>clip</code></td><td>Similar a <code>hidden</code> pero más estricto (no permite scroll programático)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ========== DEMO ANCLA + BADGE ========== -->
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-play-circle text-gradient me-2"></i>Demo: Badge absoluto y tooltip</h2>
+      <p>Observa cómo el badge se posiciona con <code>absolute</code> dentro del padre <code>relative</code>, y cómo el tooltip aparece al pasar el cursor:</p>
+      <div class="demo-box">
+        <div class="pos-demo-wrapper">
+          <div class="pos-anchor" id="posAnchor">
+            <span>relative padre</span>
+            <div class="pos-absolute-child" id="badgeDemo">3</div>
+          </div>
+          <p class="text-secondary text-center mt-3 mb-0 small">El badge <code>absolute</code> se posiciona respecto al padre <code>relative</code></p>
+        </div>
+
+        <div class="text-center mt-4">
+          <div class="tooltip-trigger" id="tooltipTrigger">
+            <i class="bi bi-info-circle me-1"></i>Pasa el cursor aquí
+            <div class="tooltip-box">¡Soy un tooltip con position: absolute!</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ========== DEMO STICKY ========== -->
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-play-circle text-gradient me-2"></i>Demo: Badge sticky</h2>
+      <p>El badge amarillo usa <code>position: sticky</code>: se queda fijo en la parte superior mientras desplazas el contenido debajo:</p>
+      <div class="demo-box">
+        <div class="sticky-demo-area" id="stickyArea">
+          <div class="sticky-badge" id="stickyBadge">
+            <i class="bi bi-bookmark-star"></i>Fijo mientras scrolleas
+          </div>
+          <div class="sticky-content">Contenido 1 — El badge permanece visible al desplazar.</div>
+          <div class="sticky-content">Contenido 2 — <code>sticky</code> se comporta como <code>relative</code> hasta cruzar el umbral.</div>
+          <div class="sticky-content">Contenido 3 — Luego se "pega" al borde superior del contenedor padre.</div>
+          <div class="sticky-content">Contenido 4 — Observa cómo el badge siempre está arriba.</div>
+          <div class="sticky-content">Contenido 5 — Esto es ideal para tablas con encabezado fijo o índices.</div>
+          <div class="sticky-content">Contenido 6 — El contenedor padre tiene <code>overflow-y: auto</code>.</div>
+          <div class="sticky-content">Contenido 7 — <code>sticky</code> requiere un contenedor padre con scroll o viewport.</div>
+          <div class="sticky-content">Contenido 8 — ¡Fin del demo! Vuelve arriba para verlo de nuevo.</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ========== DEMO Z-INDEX ========== -->
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-play-circle text-gradient me-2"></i>Demo: Superposición con z-index</h2>
+      <p>Haz clic en cada capa para elevar su <code>z-index</code> y llevarla al frente:</p>
+      <div class="demo-box">
+        <div class="z-layers-demo" id="zLayersDemo">
+          <div class="z-layer z-layer-1" onclick="bringToFront(this, 1)">z-index: 1</div>
+          <div class="z-layer z-layer-2" onclick="bringToFront(this, 2)">z-index: 2</div>
+          <div class="z-layer z-layer-3" onclick="bringToFront(this, 3)">z-index: 3</div>
+        </div>
+        <div class="text-center mt-3">
+          <small class="text-secondary">Haz clic en una capa para elevarla al frente</small>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ========== REPASO ========== -->
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li><code>static</code> es el valor por defecto; no se desplaza.</li>
+        <li><code>relative</code> desplaza el elemento y establece contexto de posición para hijos.</li>
+        <li><code>absolute</code> se posiciona respecto al ancestro posicionado más cercano.</li>
+        <li><code>fixed</code> se fija a la ventana del navegador (no se mueve con el scroll).</li>
+        <li><code>sticky</code> combina relative + fixed: se pega cuando cruza un umbral.</li>
+        <li><code>z-index</code> solo funciona en elementos posicionados (no <code>static</code>).</li>
+        <li><code>overflow</code> controla el desbordamiento del contenido (usa <code>auto</code> para scroll).</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-2-grid.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior: CSS Grid</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-4-display-flow.html" class="btn btn-gradient">Siguiente: Display y flujo <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— CSS Intermedio · Lección 3</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-4-display-flow.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script>
+  /* Badge bounce on load */
+  gsap.from('#badgeDemo', { scale: 0, rotation: 360, duration: 0.8, ease: 'elastic.out(1, 0.5)', delay: 0.5 });
+
+  /* z-index demo */
+  let zCounter = 3;
+  function bringToFront(el, currentZ) {
+    zCounter++;
+    el.style.zIndex = zCounter;
+    el.textContent = `z-index: ${zCounter}`;
+    gsap.from(el, { scale: 1.15, duration: 0.3, ease: 'back.out(2)' });
+  }
+
+  /* Sticky badge pulse on enter */
+  const stickyArea = document.getElementById('stickyArea');
+  const stickyBadge = document.getElementById('stickyBadge');
+  if (stickyArea) {
+    stickyArea.addEventListener('scroll', () => {
+      if (stickyArea.scrollTop > 10) {
+        gsap.to(stickyBadge, { scale: 1.05, duration: 0.2 });
+      } else {
+        gsap.to(stickyBadge, { scale: 1, duration: 0.2 });
+      }
+    });
+  }
+</script>
+</body>
+</html>

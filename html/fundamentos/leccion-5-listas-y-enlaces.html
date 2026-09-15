@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 5: Listas y enlaces en HTML. ul, ol, dl, anidamiento, atributos type y start, anclas, mailto, tel y descargas.">
+  <title>Lección 5 — Listas y Enlaces | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">HTML</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Fundamentos</a></li>
+        <li class="breadcrumb-item active text-light">Lección 5</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft">Sección: HTML · Lección 5</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>30 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Listas y Enlaces</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">Domina los tres tipos de listas y convierte tu página en una red navegable con enlaces internos, llamadas, correos y descargas.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-compass text-gradient me-2"></i>Fundamentos de la lección</h2>
+      <p>Las listas organizan pasos, menús y definiciones; los enlaces <code>&lt;a&gt;</code> son el corazón de la web: unen páginas, permiten navegar dentro de un mismo documento y abren correos, llamadas o descargas. Aquí verás cuándo usar cada lista y cómo apuntar un enlace a cualquier destino.</p>
+      <div class="d-flex flex-wrap gap-2 mt-3">
+        <span class="badge-soft">ul / ol / dl</span>
+        <span class="badge-soft-cyan">Anclas #id</span>
+        <span class="badge-soft-pink">mailto / tel / download</span>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-list-ul text-gradient me-2"></i>Listas: ul, ol y dl</h2>
+      <p>Cada tipo tiene un propósito claro: <code>&lt;ul&gt;</code> para conjuntos sin orden, <code>&lt;ol&gt;</code> para secuencias y <code>&lt;dl&gt;</code> para términos con su definición.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;ul&gt;</span>
+  <span class="token-tag">&lt;li&gt;</span>Leche<span class="token-tag">&lt;/li&gt;</span>
+  <span class="token-tag">&lt;li&gt;</span>Pan<span class="token-tag">&lt;/li&gt;</span>
+<span class="token-tag">&lt;/ul&gt;</span>
+
+<span class="token-tag">&lt;ol&gt;</span>
+  <span class="token-tag">&lt;li&gt;</span>Instala el editor<span class="token-tag">&lt;/li&gt;</span>
+  <span class="token-tag">&lt;li&gt;</span>Crea tu primer archivo<span class="token-tag">&lt;/li&gt;</span>
+<span class="token-tag">&lt;/ol&gt;</span>
+
+<span class="token-tag">&lt;dl&gt;</span>
+  <span class="token-tag">&lt;dt&gt;</span>HTML<span class="token-tag">&lt;/dt&gt;</span>
+  <span class="token-tag">&lt;dd&gt;</span>Lenguaje de marcado de la web<span class="token-tag">&lt;/dd&gt;</span>
+<span class="token-tag">&lt;/dl&gt;</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Elemento</th><th scope="col">Cuándo usarlo</th><th scope="col">Apariencia</th><th scope="col">Hijo directo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>&lt;ul&gt;</code></td><td>Varios elementos sin orden</td><td>Víñetas</td><td><code>&lt;li&gt;</code></td></tr>
+          <tr><td><code>&lt;ol&gt;</code></td><td>Pasos o ranking ordenado</td><td>1., 2., 3.</td><td><code>&lt;li&gt;</code></td></tr>
+          <tr><td><code>&lt;dl&gt;</code></td><td>Término + definición</td><td>Lista de definición</td><td><code>&lt;dt&gt;</code> y <code>&lt;dd&gt;</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-diagram-2 text-gradient me-2"></i>Anidamiento y atributos de número</h2>
+      <p>Las listas pueden <strong>anidarse</strong> para crear subniveles, y <code>&lt;ol&gt;</code> acepta <code>type</code>, <code>start</code> y <code>reversed</code>.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;ul&gt;</span>
+  <span class="token-tag">&lt;li&gt;</span>Frontend
+    <span class="token-tag">&lt;ul&gt;</span>
+      <span class="token-tag">&lt;li&gt;</span>HTML<span class="token-tag">&lt;/li&gt;</span>
+      <span class="token-tag">&lt;li&gt;</span>CSS<span class="token-tag">&lt;/li&gt;</span>
+    <span class="token-tag">&lt;/ul&gt;</span>
+  <span class="token-tag">&lt;/li&gt;</span>
+<span class="token-tag">&lt;/ul&gt;</span>
+
+<span class="token-tag">&lt;ol</span> <span class="token-attr">type</span>=<span class="token-value">"a"</span> <span class="token-attr">start</span>=<span class="token-value">"3"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;li&gt;</span>c. Tercer punto<span class="token-tag">&lt;/li&gt;</span>
+<span class="token-tag">&lt;/ol&gt;</span></code></pre>
+      <table class="table">
+        <thead>
+          <tr><th scope="col">Atributo</th><th scope="col">Valores</th><th scope="col">Efecto</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>type</code></td><td><code>1</code>, <code>a</code>, <code>A</code>, <code>i</code>, <code>I</code></td><td>Cambia numeración: decimal, letras o romanas</td></tr>
+          <tr><td><code>start</code></td><td>Número entero</td><td>Desde qué valor empieza el conteo</td></tr>
+          <tr><td><code>reversed</code></td><td>Booleano</td><td>Cuenta hacia atrás</td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box mt-3">
+        <i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>
+        <strong class="text-white">Tip:</strong> si una lista solo sirve para "pintar puntos", reconsidera su uso. La lista debe aportar <em>significado real</em> al contenido.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-link-45deg text-gradient me-2"></i>El enlace básico y las anclas internas</h2>
+      <p>La etiqueta <code>&lt;a&gt;</code> crea enlaces con <code>href</code>. Un href que empieza por <code>#</code> apunta a un elemento con ese <code>id</code> dentro de la página.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;a</span> <span class="token-attr">href</span>=<span class="token-value">"../index.html"</span><span class="token-tag">&gt;</span>Volver al tema HTML<span class="token-tag">&lt;/a&gt;</span>
+
+<span class="token-tag">&lt;a</span> <span class="token-attr">href</span>=<span class="token-value">"#seccion-2"</span><span class="token-tag">&gt;</span>Ir a la sección 2<span class="token-tag">&lt;/a&gt;</span>
+<span class="token-tag">&lt;h2</span> <span class="token-attr">id</span>=<span class="token-value">"seccion-2"</span><span class="token-tag">&gt;</span>Sección 2<span class="token-tag">&lt;/h2&gt;</span></code></pre>
+      <div class="tip-box mt-3">
+        <i class="bi bi-lightbulb me-2" style="color:#f59e0b;"></i>
+        <strong class="text-white">Buen hábito:</strong> usa siempre texto descriptivo en el enlace ("Ver precios de los planes") en lugar de "clic aquí". Ayuda al SEO y a los lectores de pantalla.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-envelope-at text-gradient me-2"></i>mailto, tel, download y target</h2>
+      <p>Los protocolos <code>mailto:</code> y <code>tel:</code> abren el cliente de correo o el marcador del móvil. Con <code>download</code> el navegador baja el archivo en lugar de abrirlo, y <code>target="_blank"</code> abre en una pestaña nueva.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;a</span> <span class="token-attr">href</span>=<span class="token-value">"mailto:hola@misitio.com"</span><span class="token-tag">&gt;</span>Escríbenos<span class="token-tag">&lt;/a&gt;</span>
+
+<span class="token-tag">&lt;a</span> <span class="token-attr">href</span>=<span class="token-value">"tel:+34910000000"</span><span class="token-tag">&gt;</span>Llamar ahora<span class="token-tag">&lt;/a&gt;</span>
+
+<span class="token-tag">&lt;a</span> <span class="token-attr">href</span>=<span class="token-value">"cv-final.pdf"</span> <span class="token-attr">download</span><span class="token-tag">&gt;</span>Descargar CV<span class="token-tag">&lt;/a&gt;</span>
+
+<span class="token-tag">&lt;a</span> <span class="token-attr">href</span>=<span class="token-value">"https://developer.mozilla.org"</span>
+   <span class="token-attr">target</span>=<span class="token-value">"_blank"</span> <span class="token-attr">rel</span>=<span class="token-value">"noopener"</span><span class="token-tag">&gt;</span>MDN<span class="token-tag">&lt;/a&gt;</span></code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#fbbf24;"></i>Seguridad:</strong>
+        cuando uses <code>target="_blank"</code>, añade siempre <code>rel="noopener"</code> para que la pestaña nueva no acceda a la página original.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-magic text-gradient me-2"></i>Demo: constructor de listas</h2>
+      <p>Simula un menú de navegación real: añade y elimina elementos y observa cómo cambia tanto la lista como el contador de pasos.</p>
+      <div class="demo-box">
+        <div class="d-flex flex-wrap gap-2 mb-3">
+          <button class="btn btn-gradient btn-sm" id="btnAgregar"><i class="bi bi-plus-lg me-1"></i>Añadir ítem</button>
+          <button class="btn btn-sm btn-outline-danger" id="btnQuitar"><i class="bi bi-dash-lg me-1"></i>Quitar ítem</button>
+          <span class="badge-soft align-self-center" id="contadorLista"><i class="bi bi-hash me-1"></i>0 ítems</span>
+        </div>
+        <ol class="mb-0 ps-3" id="listaDemo" style="color:#cbd5e1 !important;">
+        </ol>
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li><code>&lt;ul&gt;</code> sin orden, <code>&lt;ol&gt;</code> ordenada (con <code>type</code>/<code>start</code>), <code>&lt;dl&gt;</code> para definiciones.</li>
+        <li>Anida listas escribiendo un <code>&lt;ul&gt;</code>/<code>&lt;ol&gt;</code> dentro de un <code>&lt;li&gt;</code>.</li>
+        <li>Las anclas usan <code>href="#id"</code> y el destino debe tener ese <code>id</code>.</li>
+        <li><code>mailto:</code> y <code>tel:</code> abren correo/teléfono; <code>download</code> obliga a descargar el archivo.</li>
+        <li>Con <code>target="_blank"</code> añade <code>rel="noopener"</code>.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-4-semantica.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-6-imagenes.html" class="btn btn-gradient">Siguiente: Imágenes <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-6-imagenes.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var lista = document.getElementById('listaDemo');
+  var contador = document.getElementById('contadorLista');
+  var num = 0;
+
+  function actualizarContador() {
+    contador.innerHTML = '<i class="bi bi-hash me-1"></i>' + lista.children.length + ' ítems';
+  }
+
+  document.getElementById('btnAgregar').addEventListener('click', function() {
+    num++;
+    var li = document.createElement('li');
+    li.textContent = 'Item de ejemplo número ' + num;
+    lista.appendChild(li);
+    gsap.from(li, {opacity: 0, x: -20, duration: 0.4, ease: 'power2.out'});
+    actualizarContador();
+  });
+
+  document.getElementById('btnQuitar').addEventListener('click', function() {
+    if (lista.children.length > 0) {
+      gsap.to(lista.lastElementChild, {opacity: 0, x: 20, duration: 0.3, ease: 'power2.in', onComplete: function() {
+        lista.removeChild(lista.lastElementChild);
+        actualizarContador();
+      }});
+    }
+  });
+});
+</script>
+</body>
+</html>

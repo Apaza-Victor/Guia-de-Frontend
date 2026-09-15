@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 3 de Bootstrap 5: utilidades de espaciado (m, p), texto, display responsive (d-flex), fondos (bg-), rounded, shadow, Bootstrap Icons y tipografía con gradientes.">
+  <title>Lección 3 — Utilidades, iconos y tipografía | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Bootstrap</a></li>
+        <li class="breadcrumb-item active text-light">Lección 3</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-bootstrap-fill me-1"></i>Bootstrap · Lección 3</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>35 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Utilidades, iconos y tipografía</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">Espaciado, flexbox, color, redondeado y sombras: el arsenal de clases que acelera tu CSS.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-rulers text-gradient me-2"></i>Espaciado: m y p</h2>
+      <p>
+        Las utilidades <strong><code>m</code></strong> (margin) y <strong><code>p</code></strong> (padding) siguen una escala del 1 al 5
+        en que cada número equivale a <code>0.25rem</code> × n (<code>p-3</code> = <code>1rem</code>). Puedes dirigirlas a un lado
+        con <code>mt / mb / ms / me</code> (arriba, abajo, inicio, fin) o <code>py</code> y <code>px</code> para los ejes.
+      </p>
+      <pre class="code-block"><code><span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-value">"p-4 mt-3 gy-2"</span><span class="token-tag">&gt;</span>            <span class="token-comment">&lt;!-- padding 1.5rem, margen arriba .75rem --&gt;</span>
+  <span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-value">"p-2 mb-4"</span><span class="token-tag">&gt;</span>             <span class="token-comment">&lt;!-- padding .5rem, margen abajo 1.5rem --&gt;</span>
+  <span class="token-tag">&lt;/div&gt;</span>
+  <span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-value">"mx-auto"</span> <span class="token-attr">style</span>=<span class="token-value">"max-width:60%;"</span><span class="token-tag">&gt;</span> <span class="token-comment">&lt;!-- centrado horizontal --&gt;</span>
+  <span class="token-tag">&lt;/div&gt;</span>
+<span class="token-tag">&lt;/div&gt;</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Clase</th><th scope="col">Valor</th><th scope="col">Uso típico</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>p-3</code></td><td><code>1rem</code></td><td>Padding general de una card</td></tr>
+          <tr><td><code>mt-5</code></td><td><code>3rem</code></td><td>Separación grande entre secciones</td></tr>
+          <tr><td><code>mb-0</code></td><td><code>0</code></td><td>Eliminar el margen de un párrafo</td></tr>
+          <tr><td><code>mx-auto</code></td><td>—</td><td>Centrar horizontalmente un bloque</td></tr>
+          <tr><td><code>py-4 / px-2</code></td><td>—</td><td>Padding solo vertical / solo horizontal</td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box mt-4">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Usa siempre <code>me</code>/<code>ms</code> (margin end/start) en vez de <code>mr</code>/<code>ml</code>: así respetas textos RTL sin cambiarlos.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-text-left text-gradient me-2"></i>text-*, d-* y flexbox responsive</h2>
+      <p>Las utilidades <strong><code>text-*</code></strong> controlan alineación, color y estilo; las de <strong><code>display</code></strong> activan o esconden elementos según el breakpoint.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;p</span> <span class="token-attr">class</span>=<span class="token-value">"text-center text-md-start"</span><span class="token-tag">&gt;</span>Céntrame solo en móvil<span class="token-tag">&lt;/p&gt;</span>
+
+<span class="token-comment">&lt;!-- fila flex solo desde md --&gt;</span>
+<span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-value">"d-md-flex gap-3 align-items-center"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;span</span> <span class="token-attr">class</span>=<span class="token-value">"d-none d-md-inline"</span><span class="token-tag">&gt;</span>Solo se ve en pantallas grandes<span class="token-tag">&lt;/span&gt;</span>
+  <span class="token-tag">&lt;button</span> <span class="token-attr">class</span>=<span class="token-value">"btn btn-primary d-block d-md-inline-block"</span><span class="token-tag">&gt;</span>Guardar<span class="token-tag">&lt;/button&gt;</span>
+<span class="token-tag">&lt;/div&gt;</span></code></pre>
+      <p>Interpretación:</p>
+      <ul class="mt-2 mb-3">
+        <li><strong><code>d-none</code></strong> — oculta el elemento siempre.</li>
+        <li><strong><code>d-md-flex</code></strong> — lo muestra como flex solo desde <code>md</code>.</li>
+        <li><strong><code>text-center</code></strong> sobre escrito con <code>text-md-start</code> — el último gana desde su breakpoint.</li>
+      </ul>
+      <table class="table mt-2">
+        <thead>
+          <tr><th scope="col">Clase</th><th scope="col">Qué hace</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>d-block / d-none / d-inline</code></td><td>Cambia el display: bloque, oculto o en línea</td></tr>
+          <tr><td><code>d-md-flex / d-lg-grid</code></td><td>Activa flex/grid solo desde ese breakpoint</td></tr>
+          <tr><td><code>justify-content-center</code></td><td>Centra los hijos en el eje principal</td></tr>
+          <tr><td><code>align-items-center</code></td><td>Centra los hijos en el eje cruzado</td></tr>
+          <tr><td><code>text-white / text-muted</code></td><td>Color del texto</td></tr>
+          <tr><td><code>fw-bold / fst-italic / text-uppercase</code></td><td>Peso, estilo y capitalización</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-palette text-gradient me-2"></i>bg-*, rounded, shadow y Bootstrap Icons</h2>
+      <p>
+        <strong><code>bg-primary</code></strong> aplica el color de fondo de la paleta, <strong><code>rounded</code></strong> redondea esquinas
+        (con <code>rounded-3</code> a más escala y <code>rounded-circle</code>), <strong><code>shadow</code></strong> añade elevación y los
+        <strong>Bootstrap Icons</strong> aportan iconos escalables con solo una clase.
+      </p>
+      <pre class="code-block"><code><span class="token-tag">&lt;span</span> <span class="token-attr">class</span>=<span class="token-value">"bg-primary text-white rounded-3 p-2 shadow-sm"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;i</span> <span class="token-attr">class</span>=<span class="token-value">"bi bi-star-fill me-1"</span><span class="token-tag">&gt;&lt;/i&gt;</span>Favorito
+<span class="token-tag">&lt;/span&gt;</span></code></pre>
+      <p>Colores de fondo disponibles con <code>bg-*</code>: <code>primary</code>, <code>secondary</code>, <code>success</code>, <code>danger</code>, <code>warning</code>, <code>info</code>, <code>light</code>, <code>dark</code> y variantes con transparencia como <code>bg-opacity-25</code>.</p>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Utilidad</th><th scope="col">Clases</th><th scope="col">Efecto</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Fondo</td><td><code>bg-primary</code>, <code>bg-opacity-25</code></td><td>Color y transparencia</td></tr>
+          <tr><td>Redondeado</td><td><code>rounded</code>, <code>rounded-3</code>, <code>rounded-circle</code></td><td>Esquinas redondeadas</td></tr>
+          <tr><td>Sombra</td><td><code>shadow</code>, <code>shadow-sm</code>, <code>shadow-lg</code></td><td>Elevación según profundidad</td></tr>
+          <tr><td>Iconos</td><td><code>bi bi-*</code></td><td>Icono mediante fuente (escalable y coloreable)</td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box mt-4">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Para los iconos necesitas el CDN de <code>bootstrap-icons</code> en el head. Pruébalos en la demo: son etiquetas <code>&lt;i&gt;</code> con dos clases.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-type text-gradient me-2"></i>Tipografía</h2>
+      <p>
+        Bootstrap define una jerarquía tipográfica completa: <code>h1</code>–<code>h6</code>, <code>display-1</code>–<code>display-6</code>,
+        clases como <code>lead</code> (párrafo destacado) y <code>small</code>. Combinándolas con <code>text-gradient</code> de tus estilos
+        propios consigues titulares con gradiente.
+      </p>
+      <pre class="code-block"><code><span class="token-tag">&lt;h1</span> <span class="token-attr">class</span>=<span class="token-value">"display-4 text-gradient fw-bold"</span><span class="token-tag">&gt;</span>Marca con glamour<span class="token-tag">&lt;/h1&gt;</span>
+<span class="token-tag">&lt;p</span> <span class="token-attr">class</span>=<span class="token-value">"lead text-muted"</span><span class="token-tag">&gt;</span>Subtítulo con <span class="token-tag">&lt;code&gt;</span>.lead<span class="token-tag">&lt;/code&gt;</span><span class="token-tag">&lt;/p&gt;</span>
+<span class="token-tag">&lt;span</span> <span class="token-attr">class</span>=<span class="token-value">"text-uppercase fw-semibold small"</span><span class="token-tag">&gt;</span>etiqueta en mayúsculas<span class="token-tag">&lt;/span&gt;</span></code></pre>
+      <p><strong><code>.text-gradient</code></strong> no es de Bootstrap: es una clase personalizada de esta guía que aplica un gradiente al texto. Esa es la filosofía: Bootstrap te da la base y tú la extiendes.</p>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-lightbulb text-gradient me-2"></i>Demo interactiva: panel de utilidades</h2>
+      <p>Un panel real para <strong>mostrar/ocultar</strong> bloques y <strong>cambiar el color</strong> de fondo y texto con utilidades <code>bg-*</code>, <code>d-*</code> y <code>text-*</code>:</p>
+
+      <div class="demo-box">
+        <div class="d-flex flex-wrap gap-2 mb-3">
+          <button class="btn btn-outline-light btn-sm" data-bs-toggle="collapse" data-bs-target="#bloqueSecreto">
+            <i class="bi bi-eye me-1"></i>Ver bloque oculto
+          </button>
+          <button class="btn btn-outline-light btn-sm" onclick="gsap.fromTo('#panelUtil',{rotation:0,scale:0.9},{rotation:360,scale:1,duration:0.7})">
+            <i class="bi bi-arrow-repeat me-1"></i>Rotar con GSAP
+          </button>
+        </div>
+
+        <div class="d-flex flex-wrap gap-2 mb-3">
+          <button class="btn btn-icon-pill" style="background:#6366f1;color:#fff;" data-color-pick="bg-primary text-white">Primario</button>
+          <button class="btn btn-icon-pill" style="background:#0ea5e9;color:#fff;" data-color-pick="bg-info text-dark">Info</button>
+          <button class="btn btn-icon-pill" style="background:#22c55e;color:#fff;" data-color-pick="bg-success text-white">Éxito</button>
+          <button class="btn btn-icon-pill" style="background:#ef4444;color:#fff;" data-color-pick="bg-danger text-white">Peligro</button>
+          <button class="btn btn-icon-pill" style="background:#0b1220;color:#e2e8f0;" data-color-pick="bg-dark text-light">Oscuro</button>
+        </div>
+
+        <div id="panelUtil" class="rounded-4 p-4 shadow-lg d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 transition-brand bg-primary text-white">
+          <div>
+            <h4 class="mb-1 fw-bold"><i class="bi bi-palette me-2"></i>Panel de utilidades</h4>
+            <p class="mb-0 small opacity-75">Pulsa los botones de arriba y cambia <code>bg-*</code> y <code>text-*</code> en tiempo real.</p>
+          </div>
+          <span class="badge text-bg-light rounded-pill px-3 py-2"><i class="bi bi-magic me-1"></i>demo-bg-primary</span>
+        </div>
+
+        <div id="bloqueSecreto" class="collapse mt-3">
+          <div class="alert alert-dark border border-white border-opacity-10 mb-0">
+            <i class="bi bi-secret me-2"></i>Bloque oculto con <code>data-bs-toggle="collapse"</code>. Estaba escondido con la clase <code>collapse</code> y aquí está.
+          </div>
+        </div>
+      </div>
+
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#fbbf24;"></i>Aviso:</strong>
+        La clase <code>text-bg-light</code> usa la variable de contraste automático de Bootstrap, perfecta para badges sobre cualquier fondo.
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li><code>m-*</code> y <code>p-*</code> gestionan todo el espaciado con una escala de <code>0.25rem</code>.</li>
+        <li><code>d-none</code> / <code>d-md-flex</code> alternan la visibilidad según breakpoint sin tocar CSS.</li>
+        <li><code>bg-*</code>, <code>rounded</code> y <code>shadow</code> dan color, forma y profundidad.</li>
+        <li>Los Bootstrap Icons se insertan con <code>&lt;i class="bi bi-nombre"&gt;</code>.</li>
+        <li>La tipografía real de marca sale de combinar jerarquía Bootstrap + clases propias como <code>text-gradient</code>.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Inicio</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-4-personalizar.html" class="btn btn-gradient">Siguiente: Personalización <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— Bootstrap · Lección 3</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-4-personalizar.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .transition-brand { transition: background-color .4s ease, color .4s ease; }
+  .btn-icon-pill { border-radius: 50rem; font-size: .85rem; }
+</style>
+
+<script>
+  (function () {
+    const panel = document.getElementById('panelUtil');
+    document.querySelectorAll('[data-color-pick]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (!panel) return;
+        const combo = btn.getAttribute('data-color-pick') + '';
+        const [bg, txt] = combo.split(' ');
+        panel.className = 'rounded-4 p-4 shadow-lg d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 transition-brand ' + bg + ' ' + txt;
+      });
+    });
+  })();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

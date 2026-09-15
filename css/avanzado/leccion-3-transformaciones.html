@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 3 de CSS Avanzado: transform con translate, rotate, scale y skew, transform-origin, perspective y perspective-origin, transform-style preserve-3d y un cubo 3D completo.">
+  <title>Lección 3 — Transformaciones y cubos 3D | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">CSS</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Avanzado</a></li>
+        <li class="breadcrumb-item active text-light">Lección 3</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-3-circle me-1"></i>CSS Avanzado · Lección 3</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>40 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Transformaciones y cubos 3D</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">Mueve, gira, escala e inclina elementos con transform y dales profundidad real con perspectiva y cubos en CSS 3D.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-4" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-bounding-box text-gradient me-2"></i>Fundamentos de la lección</h2>
+      <p>La propiedad <code>transform</code> es la herramienta de movimiento del CSS: permite desplazar, rotar, escalar e inclinar cualquier elemento <em>sin sacarlo del flujo</em> del documento. En CSS Avanzado la llevamos al límite combinándola con <strong>perspectiva</strong> y <code>preserve-3d</code> para construir escenas tridimensionales reales — como el cubo de la demo.</p>
+      <div class="d-flex flex-wrap gap-2 mt-3">
+        <span class="badge-soft"><i class="bi bi-bounding-box me-1"></i>transform</span>
+        <span class="badge-soft-cyan"><i class="bi bi-cube me-1"></i>preserve-3d</span>
+        <span class="badge-soft-pink"><i class="bi bi-eye me-1"></i>perspectiva</span>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-box-arrow-in-down-left text-gradient me-2"></i>La propiedad transform</h2>
+      <p>
+        <code>transform</code> modifica el <em>sistema de coordenadas</em> del elemento donde se aplica. A diferencia de
+        <code>margin</code> o <code>top</code>, no ocupa espacio nuevo ni provoca recálculos de layout: el elemento se
+        transforma visualmente y el resto de la página ni se entera. Se pueden combinar varias funciones separadas por
+        espacios y se aplican de <strong>derecha a izquierda</strong>.
+      </p>
+      <pre class="code-block"><code><span class="token-prop">transform</span>: <span class="token-value">translate</span>(<span class="token-num">24px</span>, <span class="token-num">-8px</span>)   <span class="token-comment">/* mover en X e Y */</span>
+           <span class="token-value">scale</span>(<span class="token-num">1.1</span>)            <span class="token-comment">/* agrandar o encoger */</span>
+           <span class="token-value">rotate</span>(<span class="token-num">45deg</span>)          <span class="token-comment">/* girar en grados */</span>
+           <span class="token-value">skew</span>(<span class="token-num">10deg</span>, <span class="token-num">5deg</span>);    <span class="token-comment">/* inclinar oblicuamente */</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Función</th><th scope="col">Sintaxis</th><th scope="col">Ejemplo de uso</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>translate()</code></td><td><code>translate(x, y)</code></td><td>Desplazar una tarjeta al hacer hover</td></tr>
+          <tr><td><code>scale()</code></td><td><code>scale(factor)</code></td><td>Zoom de imágenes o botones</td></tr>
+          <tr><td><code>rotate()</code></td><td><code>rotate(deg)</code></td><td>Girar iconos o badges</td></tr>
+          <tr><td><code>skew()</code></td><td><code>skew(x, y)</code></td><td>Efectos "distorsionados" o de flecha</td></tr>
+        </tbody>
+      </table>
+      <p class="mt-3">
+        También existen versiones por eje: <code>translateX()</code>, <code>translateY()</code>, <code>scaleX()</code>,
+        <code>scaleY()</code>, <code>rotateX()</code>, <code>rotateY()</code> o <code>rotateZ()</code>. Las funciones de
+        rotación 3D como <code>rotateX()</code> y <code>rotateY()</code> solo lucen tridimensionales si su contenedor tiene
+        <strong>perspectiva</strong> (lo verás en la sección 5).
+      </p>
+      <div class="tip-box mt-3">
+        <i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>
+        <strong class="text-white">Tip:</strong> <code>transform</code> se anima por GPU. Si vas a animar algo, "<code>transform + opacity</code>" es la combinación más barata y suave que existe en CSS.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-diagram-3 text-gradient me-2"></i>translate, rotate, scale y skew en detalle</h2>
+      <p>
+        Cada función tiene sus particularidades. En <code>translate()</code> puedes usar cualquier unidad (px, rem, %); el
+        porcentaje se calcula sobre el <strong>tamaño del propio elemento</strong>. En <code>scale()</code> un factor
+        menor que 1 encoge y mayor que 1 agranda. <code>rotate()</code> acepta grados (<code>deg</code>) o vueltas
+        (<code>turn</code>), y <code>skew()</code> inclina los ejes sobre los que se dibuja el elemento.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">/* translate: los % son sobre el propio elemento */</span>
+<span class="token-tag">.avatar</span> { <span class="token-prop">transform</span>: <span class="token-value">translate</span>(<span class="token-num">-50%</span>, <span class="token-num">-50%</span>); } <span class="token-comment">/* centra un absoluto */</span>
+
+<span class="token-comment">/* scale + rotate combinados sobre un icono */</span>
+<span class="token-tag">.icono:hover</span> {
+  <span class="token-prop">transform</span>: <span class="token-value">scale</span>(<span class="token-num">1.25</span>) <span class="token-value">rotate</span>(<span class="token-num">8deg</span>);
+}
+
+<span class="token-comment">/* skew: inclina la geometría, no el texto si lo compensas */</span>
+<span class="token-tag">.etiqueta</span> { <span class="token-prop">transform</span>: <span class="token-value">skew</span>(-<span class="token-num">8deg</span>); }
+<span class="token-tag">.etiqueta</span> <span class="token-prop">span</span> { <span class="token-prop">display</span>: <span class="token-value">inline-block</span>; <span class="token-prop">transform</span>: <span class="token-value">skew</span>(<span class="token-num">8deg</span>); } <span class="token-comment">/* contrainclina el texto */</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Función</th><th scope="col">Qué hace</th><th scope="col">Valor típico</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>translate(x, y)</code></td><td>Desplaza sobre el eje X e Y</td><td><code>translate(2rem, -1rem)</code></td></tr>
+          <tr><td><code>scale(n)</code></td><td>Cambia el tamaño relativo</td><td><code>scale(1.4)</code></td></tr>
+          <tr><td><code>rotate(deg)</code></td><td>Gira alrededor del origen</td><td><code>rotate(-90deg)</code></td></tr>
+          <tr><td><code>skew(x, y)</code></td><td>Inclina vertical/horizontalmente</td><td><code>skew(10deg, 0)</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-geo-alt text-gradient me-2"></i>transform-origin: el punto pivote</h2>
+      <p>
+        Por defecto toda transformación se produce desde el <strong>centro</strong> del elemento. La propiedad
+        <code>transform-origin</code> cambia ese punto pivote: puedes hacer que una puerta gire por su bisagra (lateral),
+        que una carta gire desde una esquina o que un zoom crezca desde la parte superior.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">/* Valores por palabras clave, porcentajes o medidas */</span>
+<span class="token-tag">.puerta</span>   { <span class="token-prop">transform-origin</span>: <span class="token-value">left center</span>; }     <span class="token-comment">/* bisagra a la izquierda */</span>
+<span class="token-tag">.carta</span>   { <span class="token-prop">transform-origin</span>: <span class="token-value">bottom right</span>; }  <span class="token-comment">/* gira por la esquina */</span>
+<span class="token-tag">.card</span>    { <span class="token-prop">transform-origin</span>: <span class="token-num">50% 0%</span>; }       <span class="token-comment">/* todo en números */</span>
+
+<span class="token-comment">/* Útil: reverse de un elemento que "sale" desde arriba */</span>
+<span class="token-tag">.desplegable</span> { <span class="token-prop">transform-origin</span>: <span class="token-value">top center</span>; <span class="token-prop">transform</span>: <span class="token-value">scaleY</span>(<span class="token-num">0</span>); }
+<span class="token-tag">.desplegable.abierto</span> { <span class="token-prop">transform</span>: <span class="token-value">scaleY</span>(<span class="token-num">1</span>); }</code></pre>
+      <div class="tip-box mt-3">
+        <i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>
+        <strong class="text-white">Tip:</strong> en 3D, <code>transform-origin</code> puede recibir un tercer valor Z
+        (p. ej. <code>center center 40px</code>): mueve el punto pivote hacia ti o hacia el fondo de la escena.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-eye text-gradient me-2"></i>Perspectiva: el tercer eje</h2>
+      <p>
+        Para que <code>rotateY()</code>, <code>rotateX()</code> o <code>translateZ()</code> luzcan tridimensionales,
+        el <strong>contenedor padre</strong> necesita una <strong>perspectiva</strong>: <code>perspective: valor</code>
+        simula la distancia entre el observador y la escena. Cuanto menor el número, más dramático y "de cerca" se ve
+        el efecto; valores entre <code>600px</code> y <code>1200px</code> son los más naturales.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">/* Contenedor padre: da profundidad a la escena */</span>
+<span class="token-tag">.escena</span> {
+  <span class="token-prop">perspective</span>: <span class="token-num">800px</span>;
+  <span class="token-prop">perspective-origin</span>: <span class="token-value">50% 50%</span>;
+}
+
+<span class="token-comment">/* Hijo: rota en el eje Y con transición suave */</span>
+<span class="token-tag">.carta</span> {
+  <span class="token-prop">transform</span>: <span class="token-value">rotateY(0deg)</span>;
+  <span class="token-prop">transition</span>: <span class="token-prop">transform</span> <span class="token-num">0.8s</span> <span class="token-value">ease</span>;
+}
+<span class="token-tag">.carta:hover</span> { <span class="token-prop">transform</span>: <span class="token-value">rotateY(45deg)</span>; }</code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Propiedad</th><th scope="col">Se declara en</th><th scope="col">Qué controla</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>perspective</code></td><td>El padre</td><td>La "distancia al ojo" de toda la escena</td></tr>
+          <tr><td><code>perspective-origin</code></td><td>El padre</td><td>Desde dónde se mira (como la cámara)</td></tr>
+          <tr><td><code>perspective()</code></td><td>El propio hijo</td><td>Perspectiva individual dentro de <code>transform</code></td></tr>
+        </tbody>
+      </table>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        <code>perspective</code> sobre el padre aplica a <strong>todos los hijos directos</strong> con su propia escena
+        compartida. Si quieres que cada hijo tenga su propio punto de fuga, usa la función <code>perspective()</code>
+        dentro del <code>transform</code> de cada uno.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-cube text-gradient me-2"></i>transform-style: preserve-3d y backface-visibility</h2>
+      <p>
+        Por defecto, el CSS "aplana" las transformaciones 3D de los hijos (<code>transform-style: flat</code>). Para
+        construir objetos con caras — como un cubo — el padre debe conservar el espacio 3D con
+        <code>transform-style: preserve-3d</code>. Y con <code>backface-visibility: hidden</code> ocultas la cara trasera
+        de cada plano, evitando que se vean las caras "de dentro hacia fuera".
+      </p>
+      <pre class="code-block"><code><span class="token-tag">.cubo-wrap</span> { <span class="token-prop">transform-style</span>: <span class="token-value">preserve-3d</span>; }
+
+<span class="token-tag">.cara</span> {
+  <span class="token-prop">backface-visibility</span>: <span class="token-value">hidden</span>;
+  <span class="token-prop">-webkit-backface-visibility</span>: <span class="token-value">hidden</span>; <span class="token-comment">/* Safari / Chrome antiguos */</span>
+}
+
+<span class="token-comment">/* Cara "trasera" de un flip (ver lección 2) */</span>
+<span class="token-tag">.cara-trasera</span> { <span class="token-prop">transform</span>: <span class="token-value">rotateY</span>(<span class="token-num">180deg</span>); }</code></pre>
+      <div class="tip-box mt-3">
+        <i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>
+        <strong class="text-white">Tip:</strong> <code>preserve-3d</code> se rompe si el padre (o cualquier ancestro
+        intermedio) usa <code>overflow</code> distinto de <code>visible</code>, <code>filter</code> u <code>opacity</code>
+        con valor medio. Mantén esos ancestros "puros" para que la profundidad se conserve.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-box-seam text-gradient me-2"></i>Ejemplo completo: un cubo en CSS puro</h2>
+      <p>
+        Un cubo son 6 planos (<code>.cara</code>) girados y desplazados 80px sobre un cubo de 160px
+        (<code>width / height / 2 = 80px</code> de <code>translateZ</code>). La escena aporta la perspectiva y
+        <code>preserve-3d</code> mantiene unidas las caras en el espacio.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">/* Contenedor con perspectiva y espacio 3D conservado */</span>
+<span class="token-tag">.escena</span> {
+  <span class="token-prop">perspective</span>: <span class="token-num">700px</span>;
+  <span class="token-prop">perspective-origin</span>: <span class="token-value">50% 50%</span>;
+}
+<span class="token-tag">.cubo</span> {
+  <span class="token-prop">position</span>: <span class="token-value">relative</span>;
+  <span class="token-prop">width</span>: <span class="token-num">160px</span>; <span class="token-prop">height</span>: <span class="token-num">160px</span>;
+  <span class="token-prop">transform-style</span>: <span class="token-value">preserve-3d</span>;
+}
+<span class="token-tag">.cubo .cara</span> {
+  <span class="token-prop">position</span>: <span class="token-value">absolute</span>;
+  <span class="token-prop">inset</span>: <span class="token-num">0</span>;
+  <span class="token-prop">backface-visibility</span>: <span class="token-value">hidden</span>;
+}
+
+<span class="token-comment">/* 6 caras: siempre se "empujan" 80px hacia su lado */</span>
+<span class="token-tag">.cubo .frontal</span>    { <span class="token-prop">transform</span>: <span class="token-value">translateZ</span>(<span class="token-num">80px</span>); }
+<span class="token-tag">.cubo .trasera</span>    { <span class="token-prop">transform</span>: <span class="token-value">rotateY</span>(<span class="token-num">180deg</span>) <span class="token-value">translateZ</span>(<span class="token-num">80px</span>); }
+<span class="token-tag">.cubo .derecha</span>    { <span class="token-prop">transform</span>: <span class="token-value">rotateY</span>(<span class="token-num">90deg</span>) <span class="token-value">translateZ</span>(<span class="token-num">80px</span>); }
+<span class="token-tag">.cubo .izquierda</span>  { <span class="token-prop">transform</span>: <span class="token-value">rotateY</span>(-<span class="token-num">90deg</span>) <span class="token-value">translateZ</span>(<span class="token-num">80px</span>); }
+<span class="token-tag">.cubo .superior</span>   { <span class="token-prop">transform</span>: <span class="token-value">rotateX</span>(<span class="token-num">90deg</span>) <span class="token-value">translateZ</span>(<span class="token-num">80px</span>); }
+<span class="token-tag">.cubo .inferior</span>   { <span class="token-prop">transform</span>: <span class="token-value">rotateX</span>(-<span class="token-num">90deg</span>) <span class="token-value">translateZ</span>(<span class="token-num">80px</span>); }</code></pre>
+      <p class="mt-3">
+        Leyendo la cara trasera: primero <code>rotateY(180deg)</code> voltea el plano y luego
+        <code>translateZ(80px)</code> lo empuja —recordando que las transformaciones se aplican de <strong>derecha a
+        izquierda</strong>, el empuje ocurre en el sistema ya girado, saliendo por la parte de atrás. Así se ensamblan
+        todas las caras sin solaparse.
+      </p>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-magic text-gradient me-2"></i>Demo interactiva: cubo 3D en acción</h2>
+      <p>
+        El cubo de abajo está montado <strong>exactamente como en el ejemplo</strong>. Actívalo con la animación CSS de
+        giro continuo (toggle) o lánzale una rotación con GSAP. Arrastra mentalmente el efecto: la perspectiva es la que
+        hace que el giro parezca de verdad tridimensional.
+      </p>
+      <style>
+        .demo-cubo-escena { perspective: 750px; perspective-origin: 50% 50%; padding: 1rem 0; }
+        .demo-cubo { position: relative; width: 160px; height: 160px; margin: 0 auto; transform-style: preserve-3d; transform: rotateX(-14deg) rotateY(-24deg); transition: transform 0.6s ease; }
+        .demo-cara { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-family: "Poppins", sans-serif; font-weight: 700; font-size: 0.8rem; color: #fff; border: 1px solid rgba(255,255,255,0.35); backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+        .demo-cara-frontal   { background: rgba(99,102,241,0.9);  transform: translateZ(80px); }
+        .demo-cara-trasera   { background: rgba(236,72,153,0.9);  transform: rotateY(180deg) translateZ(80px); }
+        .demo-cara-derecha   { background: rgba(6,182,212,0.9);   transform: rotateY(90deg) translateZ(80px); }
+        .demo-cara-izquierda { background: rgba(34,211,238,0.9);  transform: rotateY(-90deg) translateZ(80px); }
+        .demo-cara-superior  { background: rgba(245,158,11,0.9);  transform: rotateX(90deg) translateZ(80px); }
+        .demo-cara-inferior  { background: rgba(16,185,129,0.9);  transform: rotateX(-90deg) translateZ(80px); }
+        @keyframes cubo360 { 0%, 100% { transform: rotateX(-14deg) rotateY(-24deg); } 50% { transform: rotateX(-14deg) rotateY(336deg); } }
+        .demo-cubo.girando { animation: cubo360 9s linear infinite; }
+      </style>
+      <div class="demo-box text-center">
+        <div class="demo-cubo-escena">
+          <div class="demo-cubo" id="demoCubo">
+            <div class="demo-cara demo-cara-frontal"><i class="bi bi-house-door fs-4"></i>Frontal</div>
+            <div class="demo-cara demo-cara-trasera"><i class="bi bi-arrow-left-right fs-4"></i>Trasera</div>
+            <div class="demo-cara demo-cara-derecha"><i class="bi bi-arrow-right fs-4"></i>Derecha</div>
+            <div class="demo-cara demo-cara-izquierda"><i class="bi bi-arrow-left fs-4"></i>Izquierda</div>
+            <div class="demo-cara demo-cara-superior"><i class="bi bi-arrow-up fs-4"></i>Superior</div>
+            <div class="demo-cara demo-cara-inferior"><i class="bi bi-arrow-down fs-4"></i>Inferior</div>
+          </div>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center gap-2 mt-3">
+          <button class="btn btn-gradient btn-sm" id="btnGirarCubo" onclick="demoAlternar()"><i class="bi bi-play-fill me-1"></i>Girar (CSS keyframes)</button>
+          <button class="btn btn-ghost-glass btn-sm" onclick="demoSpinGSAP()"><i class="bi bi-stars me-1"></i>Spin con GSAP</button>
+          <button class="btn btn-ghost-glass btn-sm" onclick="demoResetCubo()"><i class="bi bi-arrow-counterclockwise me-1"></i>Reset</button>
+        </div>
+        <p class="small mt-3 mb-0" style="color:#94a3b8 !important;">Las 6 caras usan <code>transform</code> con <code>translateZ(80px)</code> y el cubo mantiene <code>preserve-3d</code>. El giro continuo es un <code>@keyframes</code>; GSAP añade su propia rotación.</p>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li><code>transform</code> acepta <code>translate</code>, <code>rotate</code>, <code>scale</code> y <code>skew</code>, combinables y aplicados de derecha a izquierda.</li>
+        <li><code>transform-origin</code> cambia el punto pivote de la transformación (bisagras, esquinas, centrado).</li>
+        <li>La <strong>perspectiva</strong> se declara en el padre (<code>perspective</code>, <code>perspective-origin</code>) y es la que da profundidad a las rotaciones 3D.</li>
+        <li><code>transform-style: preserve-3d</code> + <code>backface-visibility: hidden</code> son la clave para construir cubos y escenas 3D reales.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-2-transiciones.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-4-animaciones.html" class="btn btn-gradient">Siguiente: Keyframes y animaciones <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— CSS Avanzado · Lección 3</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="leccion-2-transiciones.html" class="text-secondary"><i class="bi bi-arrow-left-circle fs-5"></i></a>
+      <a href="leccion-4-animaciones.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script>
+  function demoAlternar() {
+    var cubo = document.getElementById('demoCubo');
+    var btn = document.getElementById('btnGirarCubo');
+    cubo.classList.toggle('girando');
+    if (cubo.classList.contains('girando')) {
+      btn.innerHTML = '<i class="bi bi-pause-fill me-1"></i>Pausar (CSS)';
+    } else {
+      btn.innerHTML = '<i class="bi bi-play-fill me-1"></i>Girar (CSS keyframes)';
+    }
+  }
+  window.demoSpinGSAP = function () {
+    var cubo = document.getElementById('demoCubo');
+    cubo.classList.remove('girando');
+    document.getElementById('btnGirarCubo').innerHTML = '<i class="bi bi-play-fill me-1"></i>Girar (CSS keyframes)';
+    gsap.fromTo('#demoCubo',
+      { rotationX: -14, rotationY: -24 },
+      { rotationX: 346, rotationY: 336, duration: 1.6, ease: 'power2.inOut', clearProps: 'transform' });
+  };
+  window.demoResetCubo = function () {
+    document.getElementById('demoCubo').classList.remove('girando');
+    document.getElementById('btnGirarCubo').innerHTML = '<i class="bi bi-play-fill me-1"></i>Girar (CSS keyframes)';
+    gsap.set('#demoCubo', { clearProps: 'transform' });
+  };
+</script>
+</body>
+</html>

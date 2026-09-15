@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 4 de JavaScript Intermedio: eventos y delegación. addEventListener, tipos de eventos, preventDefault, stopPropagation y delegación con e.target.closest en JavaScript.">
+  <title>Lección 4 — Eventos y delegación | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">JavaScript</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Intermedio</a></li>
+        <li class="breadcrumb-item active text-light">Lección 4</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-hdd-network me-1"></i>JavaScript Intermedio · Lección 4</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>40 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Eventos y delegación</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">Reacciona a clicks, teclas y formularios sin duplicar código.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-lightning text-gradient me-2"></i>addEventListener y tipos de eventos</h2>
+      <p>
+        Un <strong>evento</strong> es una señal del navegador: un click, una tecla, un envío de formulario.
+        <code>addEventListener</code> registra una función que se ejecutará cuando esa señal llegue.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">// Estructura básica</span>
+boton.<span class="token-prop">addEventListener</span>(<span class="token-value">'click'</span>, (e) =&gt; {
+  <span class="token-prop">console</span>.log(<span class="token-value">'¡Click!'</span>);
+});
+
+<span class="token-comment">// Varios tipos de eventos</span>
+input.<span class="token-prop">addEventListener</span>(<span class="token-value">'input'</span>, (e) =&gt; { ... });    <span class="token-comment">// al escribir</span>
+form.<span class="token-prop">addEventListener</span>(<span class="token-value">'submit'</span>, (e) =&gt; { ... });     <span class="token-comment">// al enviar</span>
+document.<span class="token-prop">addEventListener</span>(<span class="token-value">'keydown'</span>, (e) =&gt; { ... }); <span class="token-comment">// teclas</span>
+card.<span class="token-prop">addEventListener</span>(<span class="token-value">'mouseenter'</span>, (e) =&gt; { ... }); <span class="token-comment">// hover</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Evento</th><th scope="col">Se dispara cuando…</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>click</code></td><td>el usuario hace clic en el elemento</td></tr>
+          <tr><td><code>input</code></td><td>el valor de un campo cambia (cada tecla)</td></tr>
+          <tr><td><code>submit</code></td><td>se envía un formulario</td></tr>
+          <tr><td><code>keydown</code></td><td>se pulsa una tecla</td></tr>
+          <tr><td><code>mouseenter / mouseleave</code></td><td>el cursor entra / sale del elemento</td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        El parámetro <code>e</code> es el <strong>event object</strong>. Aporta datos útiles: <code>e.target</code>
+        (elemento que recibió el evento), <code>e.key</code> (tecla pulsada) o <code>e.clientX</code> (posición del ratón).
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-stop-circle text-gradient me-2"></i>preventDefault y stopPropagation</h2>
+      <p>
+        <code>preventDefault()</code> cancela la acción por defecto del navegador (que un <code>&lt;a&gt;</code> navegue
+        o que un <code>&lt;form&gt;</code> refresque la página). <code>stopPropagation()</code> detiene que el evento
+        "burbujee" hacia los elementos padres.
+      </p>
+      <pre class="code-block"><code>form.<span class="token-prop">addEventListener</span>(<span class="token-value">'submit'</span>, (e) =&gt; {
+  e.<span class="token-prop">preventDefault</span>();   <span class="token-comment">// no refrescar la página</span>
+  <span class="token-prop">console</span>.log(<span class="token-value">'Enviado sin recargar'</span>);
+});
+
+<button> .<span class="token-prop">addEventListener</span>(<span class="token-value">'click'</span>, (e) =&gt; {
+  e.<span class="token-prop">stopPropagation</span>();  <span class="token-comment">// no disparar el click del padre</span>
+});</code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        Sin <code>preventDefault()</code>, cada <code>submit</code> recarga la página y tu JavaScript "se pierde".
+        Es el primer reflejo que debes adquirir al manejar formularios.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-diagram-2 text-gradient me-2"></i>Delegación de eventos con closest</h2>
+      <p>
+        Los eventos <strong>burbujean</strong>: un click en un botón interno sube por sus padres hasta el documento.
+        Aprovechamos esto poniendo UN solo <code>addEventListener</code> en el contenedor y averiguando quién
+        fue <code>e.target</code> con <code>e.target.closest('.selector')</code>. Perfecto para listas con elementos que se añaden dinámicamente.
+      </p>
+      <pre class="code-block"><code>lista.<span class="token-prop">addEventListener</span>(<span class="token-value">'click',</span> (e) =&gt; {
+  <span class="token-tag">const</span> boton = e.target.<span class="token-prop">closest</span>(<span class="token-value">'.btn-eliminar'</span>);
+  <span class="token-tag">if</span> (!boton) <span class="token-tag">return</span>;   <span class="token-comment">// no era un botón eliminar</span>
+  boton.parentElement.<span class="token-prop">remove</span>();
+});</code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Patrón</th><th scope="col">Ventaja</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1 listener por botón</td><td>simple, pero se descuadra con elementos dinámicos</td></tr>
+          <tr><td>Delegación (1 listener en el padre)</td><td>funciona con elementos creados después; menos memoria</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-trash3 text-gradient me-2"></i>Demo: lista con delegación</h2>
+      <p>
+        Añade tareas y elimínalas. Fíjate: solo hay <strong>un</strong> <code>addEventListener('click')</code> en la lista,
+        y usa <code>e.target.closest('.btn-eliminar')</code>. Los elementos nuevos funcionan sin registrar ningún listener extra.
+      </p>
+      <div class="demo-box p-4">
+        <form id="formTareaEv" class="d-flex gap-2 mb-3">
+          <input type="text" id="inputTareaEv" class="form-control demo-input" placeholder="Escribe algo y añade…" autocomplete="off">
+          <button type="submit" class="btn btn-gradient"><i class="bi bi-plus-lg me-1"></i>Añadir</button>
+        </form>
+        <p class="small mb-2" style="color:#94a3b8;">Consejo: haz clic con precisión en el texto del elemento y en su botón para ver quién es <code>e.target</code>:</p>
+        <ul id="listaDelegada" class="list-group list-group-flush demo-list">
+          <li class="list-group-item demo-list-item d-flex align-items-center justify-content-between">
+            <span>Estudiar delegación de eventos</span>
+            <button type="button" class="btn btn-sm btn-ghost-glass btn-eliminar"><i class="bi bi-trash3 me-1"></i>Eliminar</button>
+          </li>
+          <li class="list-group-item demo-list-item d-flex align-items-center justify-content-between">
+            <span>Un solo listener para toda la lista</span>
+            <button type="button" class="btn btn-sm btn-ghost-glass btn-eliminar"><i class="bi bi-trash3 me-1"></i>Eliminar</button>
+          </li>
+        </ul>
+        <div class="small mt-3" style="color:#94a3b8;"><i class="bi bi-cursor me-1"></i>Último objetivo: <code id="objetivo">ninguno</code></div>
+      </div>
+      <div class="tip-box mt-4">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Si el objetivo de tu click pudiera ser un hijo del botón (como el <code>&lt;i&gt;</code> del icono),
+        <code>closest</code> sube automáticamente hasta el ancestro que tiene la clase <code>btn-eliminar</code>.
+        Sin <code>closest</code>, delegar con <code>e.target === algo</code> se rompería.
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li><code>addEventListener('evento', fn)</code> es la forma estándar de escuchar.</li>
+        <li><code>e.preventDefault()</code> frena la acción por defecto; <code>e.stopPropagation()</code> corta la burbuja.</li>
+        <li>En listas, <strong>delega</strong>: un solo listener en el padre + <code>e.target.closest()</code>.</li>
+        <li>La delegación funciona incluso con elementos creados después (como en esta demo).</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <div class="d-flex gap-2">
+        <a href="../../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Inicio</a>
+        <a href="leccion-3-dom.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      </div>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span>
+      </div>
+      <a href="leccion-5-fetch.html" class="btn btn-gradient">Siguiente: Fetch API y AJAX <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— JavaScript Intermedio · Lección 4</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-5-fetch.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+
+<script>
+(function () {
+  const lista = document.getElementById('listaDelegada');
+  const form = document.getElementById('formTareaEv');
+  const input = document.getElementById('inputTareaEv');
+  const objetivo = document.getElementById('objetivo');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const texto = input.value.trim();
+    if (!texto) return;
+
+    const li = document.createElement('li');
+    li.className = 'list-group-item demo-list-item d-flex align-items-center justify-content-between';
+    const span = document.createElement('span');
+    span.textContent = texto;
+    const boton = document.createElement('button');
+    boton.type = 'button';
+    boton.className = 'btn btn-sm btn-ghost-glass btn-eliminar';
+    boton.innerHTML = '<i class="bi bi-trash3 me-1"></i>Eliminar';
+    li.append(span, boton);
+    lista.appendChild(li);
+    input.value = '';
+
+    gsap.fromTo(li, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.35 });
+  });
+
+  lista.addEventListener('click', (e) => {
+    objetivo.textContent = e.target.tagName.toLowerCase() + (e.target.className && typeof e.target.className === 'string' ? '.' + e.target.className.split(' ')[0] : '');
+    const boton = e.target.closest('.btn-eliminar');
+    if (!boton) return;
+    const li = boton.closest('li');
+    if (!li) return;
+    gsap.to(li, {
+      opacity: 0, x: 30, duration: 0.3,
+      onComplete: () => li.remove()
+    });
+  });
+})();
+</script>
+</body>
+</html>

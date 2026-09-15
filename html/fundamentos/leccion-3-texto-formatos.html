@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 3: Texto y formatos en HTML. Encabezados, párrafos, énfasis, citas, código, entidades y saltos de línea.">
+  <title>Lección 3 — Texto y Formatos | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">HTML</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Fundamentos</a></li>
+        <li class="breadcrumb-item active text-light">Lección 3</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft">Sección: HTML · Lección 3</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>25 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Texto y Formatos</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">Aprende a escribir contenido claro y bien estructurado: jerarquía de encabezados, énfasis, citas, código y entidades HTML.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-compass text-gradient me-2"></i>Fundamentos de la lección</h2>
+      <p>El 80% del contenido de internet es texto, y HTML tiene una etiqueta para cada intención: títulos, párrafos, negritas semánticas, citas o fragmentos de código. Usar la etiqueta correcta no solo mejora la lectura, también le da <strong>significado</strong> a los buscadores y a los lectores de pantalla.</p>
+      <div class="d-flex flex-wrap gap-2 mt-3">
+        <span class="badge-soft">Jerarquía de títulos</span>
+        <span class="badge-soft-cyan">&lt;strong&gt; vs &lt;b&gt;</span>
+        <span class="badge-soft-pink">Entidades HTML</span>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-type-h1 text-gradient me-2"></i>Encabezados y párrafos</h2>
+      <p>Los encabezados <code>&lt;h1&gt;</code> a <code>&lt;h6&gt;</code> organizan el contenido por importancia y los párrafos <code>&lt;p&gt;</code> agrupan ideas. Solo debe existir un <code>&lt;h1&gt;</code> por página.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;h1&gt;</span>El título principal<span class="token-tag">&lt;/h1&gt;</span>
+<span class="token-tag">&lt;p&gt;</span>Primer párrafo de introducción al tema.<span class="token-tag">&lt;/p&gt;</span>
+
+<span class="token-tag">&lt;h2&gt;</span>Una sección<span class="token-tag">&lt;/h2&gt;</span>
+<span class="token-tag">&lt;p&gt;</span>Contenido de la sección...<span class="token-tag">&lt;/p&gt;</span>
+
+<span class="token-tag">&lt;h3&gt;</span>Un subapartado<span class="token-tag">&lt;/h3&gt;</span>
+<span class="token-tag">&lt;p&gt;</span>Detalle más específico.<span class="token-tag">&lt;/p&gt;</span></code></pre>
+      <div class="tip-box mt-3">
+        <i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>
+        <strong class="text-white">Tip:</strong> no elijas el número del encabezado por su tamaño visual sino por su jerarquía. Si quieres texto grande sin jerarquía, usa CSS, no <code>&lt;h1&gt;</code>.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-bold text-gradient me-2"></i>Énfasis semántico: strong y em</h2>
+      <p><code>&lt;strong&gt;</code> marca <strong>importancia</strong> (por defecto se ve en negrita) y <code>&lt;em&gt;</code> marca <strong>énfasis</strong> en la pronunciación (se ve en cursiva). Los lectores de pantalla cambian su entonación con ellos.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;p&gt;</span>Siempre haz una <span class="token-tag">&lt;strong&gt;</span>copia de seguridad<span class="token-tag">&lt;/strong&gt;</span>
+antes de actualizar y <span class="token-tag">&lt;em&gt;</span>nunca<span class="token-tag">&lt;/em&gt;</span> trabajes en producción.<span class="token-tag">&lt;/p&gt;</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Elemento</th><th scope="col">Significado</th><th scope="col">Uso correcto</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>&lt;strong&gt;</code></td><td>Importancia fuerte</td><td>"Lee esto primero" / alertas</td></tr>
+          <tr><td><code>&lt;em&gt;</code></td><td>Énfasis prosódico</td><td>"<em>Ahora</em>, no mañana"</td></tr>
+          <tr><td><code>&lt;b&gt;</code> / <code>&lt;i&gt;</code></td><td>Solo estilo visual</td><td>Palabras clave, nombres técnicos</td></tr>
+        </tbody>
+      </table>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#fbbf24;"></i>Cuidado:</strong>
+        no marques texto solo para que "salga en negrita". Si no hay importancia real, usa <code>&lt;b&gt;</code> o CSS.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-quote text-gradient me-2"></i>Citas: blockquote y q</h2>
+      <p><code>&lt;blockquote&gt;</code> para citas en bloque (con un cita como <code>&lt;footer&gt;</code> opcional) y <code>&lt;q&gt;</code> para citas cortas dentro de una línea.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;blockquote&gt;</span>
+  <span class="token-tag">&lt;p&gt;</span>La simplicidad es la sofisticación máxima.<span class="token-tag">&lt;/p&gt;</span>
+  <span class="token-tag">&lt;footer&gt;</span>— Leonardo da Vinci<span class="token-tag">&lt;/footer&gt;</span>
+<span class="token-tag">&lt;/blockquote&gt;</span>
+
+<span class="token-tag">&lt;p&gt;</span>Como dijo Ada: <span class="token-tag">&lt;q&gt;</span>la creatividad es felicidad.<span class="token-tag">&lt;/q&gt;</span><span class="token-tag">&lt;/p&gt;</span></code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-terminal text-gradient me-2"></i>Código en línea: code, kbd y pre</h2>
+      <ul class="mb-3">
+        <li><code>&lt;code&gt;</code> — fragmentos de código dentro de una línea.</li>
+        <li><code>&lt;kbd&gt;</code> — teclas que el usuario debe pulsar (p. ej. <kbd>Ctrl</kbd> + <kbd>C</kbd>).</li>
+        <li><code>&lt;pre&gt;</code> — bloque de código conservando espacios y saltos de línea.</li>
+      </ul>
+      <pre class="code-block"><code><span class="token-tag">&lt;p&gt;</span>Para copiar usa <span class="token-tag">&lt;kbd&gt;</span>Ctrl<span class="token-tag">&lt;/kbd&gt;</span> + <span class="token-tag">&lt;kbd&gt;</span>C<span class="token-tag">&lt;/kbd&gt;</span>.<span class="token-tag">&lt;/p&gt;</span>
+<span class="token-tag">&lt;pre&gt;&lt;code&gt;</span>
+<span class="token-tag">&lt;h1&gt;</span>Hola<span class="token-tag">&lt;/h1&gt;</span>
+<span class="token-tag">&lt;/code&gt;&lt;/pre&gt;</span></code></pre>
+      <div class="tip-box mt-3">
+        <i class="bi bi-star me-2" style="color:#f59e0b;"></i>
+        <strong class="text-white">La combinación ganadora:</strong> usa <code>&lt;pre&gt;&lt;code&gt;</code> juntos para bloques de código. El <code>&lt;pre&gt;</code> respeta el formato y el <code>&lt;code&gt;</code> añade el significado técnico.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-ampersand text-gradient me-2"></i>Entidades HTML</h2>
+      <p>Para mostrar caracteres que el navegador interpreta como código (como <code>&lt;</code> o <code>&amp;</code>) se usan las <strong>entidades</strong>: empiezan con <code>&amp;</code> y terminan con <code>;</code>.</p>
+      <table class="table">
+        <thead>
+          <tr><th scope="col">Resultado</th><th scope="col">Entidad</th><th scope="col">Descripción</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>&lt;</td><td><code>&amp;lt;</code></td><td>Menor que (etiqueta de apertura)</td></tr>
+          <tr><td>&gt;</td><td><code>&amp;gt;</code></td><td>Mayor que (etiqueta de cierre)</td></tr>
+          <tr><td>&amp;</td><td><code>&amp;amp;</code></td><td>E comercial / Ampersand</td></tr>
+          <tr><td>&nbsp;</td><td><code>&amp;nbsp;</code></td><td>Espacio sin salto de línea</td></tr>
+          <tr><td>&copy;</td><td><code>&amp;copy;</code></td><td>Símbolo de copyright</td></tr>
+        </tbody>
+      </table>
+      <pre class="code-block"><code><span class="token-tag">&lt;p&gt;</span>Aprende <span class="token-tag">&lt;strong&gt;</span><span class="token-attr">&amp;amp;lt;</span>h1<span class="token-attr">&amp;amp;gt;</span><span class="token-tag">&lt;/strong&gt;</span> y usa <span class="token-attr">&amp;amp;amp;</span> con cuidado.<span class="token-tag">&lt;/p&gt;</span>
+<span class="token-comment">&lt;!-- Renderiza: Aprende &lt;h1&gt; y usa &amp; con cuidado. --&gt;</span></code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-scissors text-gradient me-2"></i>Saltos y separadores: br y hr</h2>
+      <p><code>&lt;br&gt;</code> fuerza un salto de línea dentro de un párrafo (direcciones o poemas) y <code>&lt;hr&gt;</code> dibuja una línea separadora temática entre bloques. Este mismo contenido usa <code>&lt;hr&gt;</code> entre secciones.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;p&gt;</span>Calle Mayor 10,<span class="token-tag">&lt;br&gt;</span>
+28013 Madrid<span class="token-tag">&lt;/p&gt;</span>
+
+<span class="token-tag">&lt;hr&gt;</span>
+
+<span class="token-tag">&lt;p&gt;</span>Nueva sección del artículo.<span class="token-tag">&lt;/p&gt;</span></code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#fbbf24;"></i>No abuses:</strong>
+        no uses <code>&lt;br&gt;</code> para maquetar espaciados verticales. Para eso existen <code>margin</code> y <code>padding</code> en CSS.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-magic text-gradient me-2"></i>Demo: convertidor de entidades</h2>
+      <p>Escribe caracteres como <code>&lt;</code>, <code>&gt;</code> o <code>&amp;</code> y mira cómo deben codificarse para no romper el HTML.</p>
+      <div class="demo-box">
+        <label for="entradaEnt" class="form-label text-white fw-bold">Tu texto (prueba con &lt;&gt;&amp;)</label>
+        <input type="text" id="entradaEnt" class="form-control form-control-sm bg-dark text-light border-secondary mb-2" placeholder="Ej. a > b y c < d & e">
+        <div class="d-flex flex-wrap gap-2">
+          <button class="btn btn-gradient btn-sm" id="btnConvertir"><i class="bi bi-arrow-repeat me-1"></i>Convertir</button>
+          <button class="btn btn-sm btn-outline-info" id="btnLimpiar"><i class="bi bi-eraser me-1"></i>Limpiar</button>
+        </div>
+        <pre class="code-block mb-0 mt-3" id="salidaEnt"><code>&amp;nbsp;</code></pre>
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>Jerarquía de títulos <code>&lt;h1&gt;</code> a <code>&lt;h6&gt;</code>: un solo <code>&lt;h1&gt;</code> por página.</li>
+        <li><code>&lt;strong&gt;</code> = importancia; <code>&lt;em&gt;</code> = énfasis. Elige la etiqueta por significado, no por apariencia.</li>
+        <li><code>&lt;blockquote&gt;</code> para citas largas, <code>&lt;q&gt;</code> para citas en línea.</li>
+        <li><code>&lt;pre&gt;</code> + <code>&lt;code&gt;</code> para bloques de código y <code>&lt;kbd&gt;</code> para teclas.</li>
+        <li>Caracteres reservados se escriben con entidades: <code>&amp;lt;</code>, <code>&amp;gt;</code>, <code>&amp;amp;</code>.</li>
+        <li><code>&lt;br&gt;</code> para saltos puntuales y <code>&lt;hr&gt;</code> para separar temas.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-2-estructura.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-4-semantica.html" class="btn btn-gradient">Siguiente: Etiquetas semánticas <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-4-semantica.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var salida = document.getElementById('salidaEnt');
+
+  document.getElementById('btnConvertir').addEventListener('click', function() {
+    var texto = document.getElementById('entradaEnt').value;
+    var codigo = texto.replace(/&/g, '&amp;amp;').replace(/</g, '&amp;lt;').replace(/>/g, '&amp;gt;');
+    salida.innerHTML = '<code>' + codigo + '</code>';
+    gsap.fromTo(salida, {opacity: 0, y: 8}, {opacity: 1, y: 0, duration: 0.4, ease: 'power2.out'});
+  });
+
+  document.getElementById('btnLimpiar').addEventListener('click', function() {
+    document.getElementById('entradaEnt').value = '';
+    salida.innerHTML = '<code>&amp;nbsp;</code>';
+  });
+
+  gsap.from('#salidaEnt', {opacity: 0, y: 20, duration: 0.6, ease: 'power2.out'});
+});
+</script>
+</body>
+</html>

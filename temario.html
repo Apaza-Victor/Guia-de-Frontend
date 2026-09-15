@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Temario completo de Frontend Pro: HTML, CSS, JavaScript, Bootstrap y Herramientas con 60 lecciones organizadas en subsecciones por niveles.">
+  <title>Temario — Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+        <li class="breadcrumb-item active text-light">Temario</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-list-check me-1"></i>Temario completo</span>
+      <span class="badge-soft-cyan"><i class="bi bi-book me-1"></i>60 lecciones</span>
+      <span class="badge-soft-pink"><i class="bi bi-collection me-1"></i>5 temas</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Temario de la guía</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">60 lecciones organizadas en 5 temas progresivos: cada bloque construye sobre el anterior. Entra en cualquier tema desde cero y avanza a tu ritmo.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step current"></span>
+      <span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <!-- HTML -->
+    <div class="section-apartado" id="html">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-5" data-aos="fade-right">
+          <div class="theme-head mb-3 d-flex align-items-start gap-3">
+            <div class="icon-badge"><i class="bi bi-filetype-html"></i></div>
+            <div>
+              <h3 class="text-white fw-bold mb-1">HTML</h3>
+              <span class="badge-soft-cyan"><i class="bi bi-book me-1"></i>10 lecciones</span>
+            </div>
+          </div>
+          <p style="color:#94a3b8 !important;">La estructura de todo sitio web: etiquetas, semántica, formularios, multimedia y accesibilidad.</p>
+          <a href="html/index.html" class="btn btn-gradient"><i class="bi bi-arrow-right me-1"></i>Explorar tema HTML</a>
+        </div>
+        <div class="col-lg-7" data-aos="fade-left" data-aos-delay="100">
+          <div class="row g-3">
+            <div class="col-12">
+              <div class="theme-card">
+                <div class="theme-head">
+                  <div class="icon-badge cyan"><i class="bi bi-code-slash"></i></div>
+                  <div>
+                    <h5 class="fw-bold text-white mb-1">Fundamentos de HTML</h5>
+                    <span class="badge-soft"><i class="bi bi-book me-1"></i>10 lecciones</span>
+                  </div>
+                </div>
+                <div class="theme-body">
+                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                    Texto, listas, enlaces, imágenes, tablas, formularios, multimedia y accesibilidad: toda la base del lenguaje.
+                  </p>
+                  <a href="html/fundamentos/index.html" class="btn btn-gradient btn-sm"><i class="bi bi-arrow-right me-1"></i>Ir a la subsección</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CSS -->
+    <div class="section-apartado" id="css">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-5" data-aos="fade-right">
+          <div class="theme-head mb-3 d-flex align-items-start gap-3">
+            <div class="icon-badge cyan"><i class="bi bi-filetype-css"></i></div>
+            <div>
+              <h3 class="text-white fw-bold mb-1">CSS</h3>
+              <span class="badge-soft-cyan"><i class="bi bi-book me-1"></i>21 lecciones · 3 niveles</span>
+            </div>
+          </div>
+          <p style="color:#94a3b8 !important;">Del primer selector al layout profesional: modelo de caja, Flexbox, Grid, variables, animaciones y efectos modernos.</p>
+          <a href="css/index.html" class="btn btn-gradient"><i class="bi bi-arrow-right me-1"></i>Explorar tema CSS</a>
+        </div>
+        <div class="col-lg-7" data-aos="fade-left" data-aos-delay="100">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="theme-card">
+                <div class="theme-head">
+                  <div class="icon-badge"><i class="bi bi-1-circle"></i></div>
+                  <div>
+                    <h5 class="fw-bold text-white mb-1">CSS Básico</h5>
+                    <span class="badge-soft"><i class="bi bi-book me-1"></i>7 lecciones</span>
+                  </div>
+                </div>
+                <div class="theme-body">
+                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                    Selectores, cascada, modelo de caja, tipografía, colores y unidades: los cimientos del estilo.
+                  </p>
+                  <a href="css/basico/index.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la subsección</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="theme-card">
+                <div class="theme-head">
+                  <div class="icon-badge cyan"><i class="bi bi-2-circle"></i></div>
+                  <div>
+                    <h5 class="fw-bold text-white mb-1">CSS Intermedio</h5>
+                    <span class="badge-soft"><i class="bi bi-book me-1"></i>7 lecciones</span>
+                  </div>
+                </div>
+                <div class="theme-body">
+                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                    Flexbox, Grid, posicionamiento, display y flujo, pseudo-clases y diseño responsive profesional.
+                  </p>
+                  <a href="css/intermedio/index.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la subsección</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="theme-card">
+                <div class="theme-head">
+                  <div class="icon-badge warm"><i class="bi bi-3-circle"></i></div>
+                  <div>
+                    <h5 class="fw-bold text-white mb-1">CSS Avanzado</h5>
+                    <span class="badge-soft"><i class="bi bi-book me-1"></i>7 lecciones</span>
+                  </div>
+                </div>
+                <div class="theme-body">
+                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                    Variables, transformaciones 3D, keyframes, funciones modernas, BEM y efectos como glassmorphism.
+                  </p>
+                  <a href="css/avanzado/index.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la subsección</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <div class="section-apartado" id="javascript">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-5" data-aos="fade-right">
+          <div class="theme-head mb-3 d-flex align-items-start gap-3">
+            <div class="icon-badge"><i class="bi bi-filetype-js"></i></div>
+            <div>
+              <h3 class="text-white fw-bold mb-1">JavaScript</h3>
+              <span class="badge-soft-cyan"><i class="bi bi-book me-1"></i>19 lecciones · 3 niveles</span>
+            </div>
+          </div>
+          <p style="color:#94a3b8 !important;">El lenguaje de la web: variables, funciones, DOM, eventos, fetch, promesas, ES6+ y patrones de diseño.</p>
+          <a href="javascript/index.html" class="btn btn-gradient"><i class="bi bi-arrow-right me-1"></i>Explorar tema JavaScript</a>
+        </div>
+        <div class="col-lg-7" data-aos="fade-left" data-aos-delay="100">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="theme-card">
+                <div class="theme-head">
+                  <div class="icon-badge"><i class="bi bi-1-circle"></i></div>
+                  <div>
+                    <h5 class="fw-bold text-white mb-1">JavaScript Básico</h5>
+                    <span class="badge-soft"><i class="bi bi-book me-1"></i>9 lecciones</span>
+                  </div>
+                </div>
+                <div class="theme-body">
+                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                    Variables, tipos, operadores, condiciones, bucles, funciones, objetos, arrays y práctica con la consola.
+                  </p>
+                  <a href="javascript/basico/index.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la subsección</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="theme-card">
+                <div class="theme-head">
+                  <div class="icon-badge cyan"><i class="bi bi-2-circle"></i></div>
+                  <div>
+                    <h5 class="fw-bold text-white mb-1">JavaScript Intermedio</h5>
+                    <span class="badge-soft"><i class="bi bi-book me-1"></i>5 lecciones</span>
+                  </div>
+                </div>
+                <div class="theme-body">
+                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                    DOM, eventos, fetch y consumo de APIs: la interacción real con la página web.
+                  </p>
+                  <a href="javascript/intermedio/index.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la subsección</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="theme-card">
+                <div class="theme-head">
+                  <div class="icon-badge warm"><i class="bi bi-3-circle"></i></div>
+                  <div>
+                    <h5 class="fw-bold text-white mb-1">JavaScript Avanzado</h5>
+                    <span class="badge-soft"><i class="bi bi-book me-1"></i>5 lecciones</span>
+                  </div>
+                </div>
+                <div class="theme-body">
+                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                    ES6+, promesas, async/await, clases, módulos y patrones para código profesional.
+                  </p>
+                  <a href="javascript/avanzado/index.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la subsección</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOTSTRAP -->
+    <div class="section-apartado" id="bootstrap">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-5" data-aos="fade-right">
+          <div class="theme-head mb-3 d-flex align-items-start gap-3">
+            <div class="icon-badge warm"><i class="bi bi-bootstrap-fill"></i></div>
+            <div>
+              <h3 class="text-white fw-bold mb-1">Bootstrap 5</h3>
+              <span class="badge-soft-cyan"><i class="bi bi-book me-1"></i>5 lecciones</span>
+            </div>
+          </div>
+          <p style="color:#94a3b8 !important;">El framework CSS más popular: grid system, componentes, utilidades, personalización y una landing de práctica.</p>
+          <a href="bootstrap/index.html" class="btn btn-gradient"><i class="bi bi-arrow-right me-1"></i>Explorar tema Bootstrap</a>
+        </div>
+        <div class="col-lg-7" data-aos="fade-left" data-aos-delay="100">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="theme-card">
+                <div class="theme-head">
+                  <div class="icon-badge"><i class="bi bi-grid-1x2"></i></div>
+                  <div>
+                    <h5 class="fw-bold text-white mb-1">Grid system y componentes</h5>
+                    <span class="badge-soft"><i class="bi bi-book me-1"></i>2 lecciones</span>
+                  </div>
+                </div>
+                <div class="theme-body">
+                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                    Layout responsive por columnas y la librería de componentes lista para usar.
+                  </p>
+                  <a href="bootstrap/leccion-1-introduccion.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la lección</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="theme-card">
+                <div class="theme-head">
+                  <div class="icon-badge cyan"><i class="bi bi-sliders"></i></div>
+                  <div>
+                    <h5 class="fw-bold text-white mb-1">Utilidades y personalización</h5>
+                    <span class="badge-soft"><i class="bi bi-book me-1"></i>2 lecciones</span>
+                  </div>
+                </div>
+                <div class="theme-body">
+                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                    Clases utilitarias, variables CSS de marca, temas y estilos propios.
+                  </p>
+                  <a href="bootstrap/leccion-3-utilidades.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la lección</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="theme-card">
+                <div class="theme-head">
+                  <div class="icon-badge warm"><i class="bi bi-rocket-takeoff"></i></div>
+                  <div>
+                    <h5 class="fw-bold text-white mb-1">Práctica: landing</h5>
+                    <span class="badge-soft"><i class="bi bi-book me-1"></i>1 lección</span>
+                  </div>
+                </div>
+                <div class="theme-body">
+                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                    Proyecto guiado paso a paso combinando Bootstrap con AOS y GSAP.
+                  </p>
+                  <a href="bootstrap/leccion-5-landing.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la lección</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERRAMIENTAS -->
+    <div class="section-apartado" id="herramientas">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-5" data-aos="fade-right">
+          <div class="theme-head mb-3 d-flex align-items-start gap-3">
+            <div class="icon-badge cyan"><i class="bi bi-tools"></i></div>
+            <div>
+              <h3 class="text-white fw-bold mb-1">Herramientas y Frameworks</h3>
+              <span class="badge-soft-cyan"><i class="bi bi-book me-1"></i>5 lecciones</span>
+            </div>
+          </div>
+          <p style="color:#94a3b8 !important;">Del editor al despliegue: Git, npm, Sass y los frameworks modernos React y Vue con demos en vivo.</p>
+          <a href="herramientas/index.html" class="btn btn-gradient"><i class="bi bi-arrow-right me-1"></i>Explorar tema Herramientas</a>
+        </div>
+        <div class="col-lg-7" data-aos="fade-left" data-aos-delay="100">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="theme-card">
+                <div class="theme-head">
+                  <div class="icon-badge"><i class="bi bi-git"></i></div>
+                  <div>
+                    <h5 class="fw-bold text-white mb-1">Git y npm</h5>
+                    <span class="badge-soft"><i class="bi bi-book me-1"></i>2 lecciones</span>
+                  </div>
+                </div>
+                <div class="theme-body">
+                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                    Control de versiones con Git y GitHub, y gestión de paquetes con npm.
+                  </p>
+                  <a href="herramientas/leccion-1-git.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la lección</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="theme-card">
+                <div class="theme-head">
+                  <div class="icon-badge cyan"><i class="bi bi-filetype-scss"></i></div>
+                  <div>
+                    <h5 class="fw-bold text-white mb-1">Sass</h5>
+                    <span class="badge-soft"><i class="bi bi-book me-1"></i>1 lección</span>
+                  </div>
+                </div>
+                <div class="theme-body">
+                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                    Variables, mixins, anidación y funciones del preprocesador CSS por excelencia.
+                  </p>
+                  <a href="herramientas/leccion-3-sass.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la lección</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="theme-card">
+                <div class="theme-head">
+                  <div class="icon-badge warm"><i class="bi bi-hexagon-fill"></i></div>
+                  <div>
+                    <h5 class="fw-bold text-white mb-1">React y Vue</h5>
+                    <span class="badge-soft"><i class="bi bi-book me-1"></i>2 lecciones</span>
+                  </div>
+                </div>
+                <div class="theme-body">
+                  <p class="small mb-3" style="color:#94a3b8 !important;">
+                    Los frameworks modernos con componentes, props, estado y demos en vivo.
+                  </p>
+                  <a href="herramientas/leccion-4-react.html" class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ir a la lección</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Volver al inicio</a>
+      <a href="html/index.html" class="btn btn-gradient">Empezar por HTML <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— Temario</span>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+      <a href="index.html" class="text-secondary">Inicio</a>
+      <a href="ruta-aprendizaje.html" class="text-secondary">Ruta de aprendizaje</a>
+      <a href="recursos.html" class="text-secondary">Recursos</a>
+      <a href="index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 2 de JavaScript Intermedio: objetos y JSON. Objetos literales, métodos, this, JSON.parse, JSON.stringify y claves dinámicas en JavaScript.">
+  <title>Lección 2 — Objetos y JSON | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">JavaScript</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Intermedio</a></li>
+        <li class="breadcrumb-item active text-light">Lección 2</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-hdd-network me-1"></i>JavaScript Intermedio · Lección 2</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>35 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Objetos y JSON</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">Modela datos con objetos, dales comportamiento con métodos y transpórtalos con JSON.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-box text-gradient me-2"></i>Objetos literales</h2>
+      <p>
+        Un <strong>objeto</strong> agrupa <em>propiedades</em> (datos) y <em>métodos</em> (funciones) bajo un mismo nombre.
+        Se declara con llaves <code>{}</code> y sus propiedades van separadas por comas, en formato <code>clave: valor</code>.
+      </p>
+      <pre class="code-block"><code><span class="token-tag">const</span> usuario = {
+  nombre: <span class="token-value">'Lucía'</span>,          <span class="token-comment">// propiedad</span>
+  edad: <span class="token-num">28</span>,
+  activo: <span class="token-tag">true</span>,
+  <span class="token-prop">saludar</span>() {              <span class="token-comment">// método (shorthand)</span>
+    <span class="token-prop">console</span>.log(<span class="token-value">`Hola, soy ${this.nombre}`</span>);
+  }
+};
+
+usuario.<span class="token-prop">saludar</span>();   <span class="token-comment">// "Hola, soy Lucía"</span>
+usuario.nombre = <span class="token-value">'Marta'</span>; <span class="token-comment">// modificar propiedad</span>
+<span class="token-prop">console</span>.log(usuario.nombre); <span class="token-comment">// "Marta"</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Sintaxis</th><th scope="col">Acceso</th><th scope="col">Ejemplo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Punto</td><td><code>obj.propiedad</code></td><td><code>usuario.nombre</code></td></tr>
+          <tr><td>Corchetes</td><td><code>obj['propiedad']</code></td><td><code>usuario['nombre']</code></td></tr>
+          <tr><td>Dinámica</td><td><code>obj[variable]</code></td><td><code>usuario[key]</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-target text-gradient me-2"></i>this: el objeto actual</h2>
+      <p>
+        Dentro de un método, <code>this</code> apunta al <strong>objeto que lo contiene</strong>. Nos permite leer y
+        modificar las demás propiedades desde dentro del propio objeto.
+      </p>
+      <pre class="code-block"><code><span class="token-tag">const</span> contador = {
+  valor: <span class="token-num">0</span>,
+  <span class="token-prop">incrementar</span>() {
+    <span class="token-tag">this</span>.valor++;   <span class="token-comment">// this = contador</span>
+  },
+  <span class="token-prop">obtener</span>() {
+    <span class="token-tag">return</span> <span class="token-tag">this</span>.valor;
+  }
+};
+contador.<span class="token-prop">incrementar</span>();
+<span class="token-prop">console</span>.log(contador.<span class="token-prop">obtener</span>());  <span class="token-comment">// 1</span></code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        En las <strong>funciones flecha</strong> <code>this</code> no se ata al objeto: hereda el contexto donde se definió.
+        Si usas flechas para métodos, perderás el acceso a <code>this.propiedad</code>.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-filetype-json text-gradient me-2"></i>JSON: el idioma de la web</h2>
+      <p>
+        <strong>JSON</strong> (<em>JavaScript Object Notation</em>) es un formato de texto ligero para intercambiar datos
+        entre el navegador y el servidor. Se parece a un objeto JS pero es <em>solo texto</em>: las claves van entre
+        comillas dobles y no admite funciones ni comentarios.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">// Objeto → texto (para enviar al servidor)</span>
+<span class="token-tag">const</span> json = JSON.<span class="token-prop">stringify</span>(usuario);
+<span class="token-prop">console</span>.log(json);  <span class="token-comment">// {"nombre":"Marta","edad":28,"activo":true}</span>
+
+<span class="token-comment">// Texto → objeto (para usar en el código)</span>
+<span class="token-tag">const</span> texto = <span class="token-value">'{"nombre":"Iván","edad":30}'</span>;
+<span class="token-tag">const</span> obj = JSON.<span class="token-prop">parse</span>(texto);
+<span class="token-prop">console</span>.log(obj.nombre);  <span class="token-comment">// "Iván"</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Método</th><th scope="col">Dirección</th><th scope="col">Resultado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>JSON.stringify(obj)</code></td><td>Objeto → JSON string</td><td>texto listo para enviar</td></tr>
+          <tr><td><code>JSON.parse(str)</code></td><td>JSON string → Objeto</td><td>objeto JS usable</td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        <code>JSON.stringify(obj, null, 2)</code> añade 2 espacios de indentación: perfecto para mostrar JSON "bonito"
+        y para depurar (justo lo que hace la demo de abajo).
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-key text-gradient me-2"></i>Claves dinámicas y Object.keys/values</h2>
+      <p>Puedes crear propiedades cuyo nombre viene de una variable usando corchetes. Y puedes recorrer las claves o valores de un objeto con <code>Object.keys</code> y <code>Object.values</code>.</p>
+      <pre class="code-block"><code><span class="token-tag">const</span> campo = <span class="token-value">'email'</span>;
+<span class="token-tag">const</span> dato = { [campo]: <span class="token-value">'a@b.com'</span> };   <span class="token-comment">// { email: 'a@b.com' }</span>
+
+<span class="token-prop">console</span>.log(Object.<span class="token-prop">keys</span>(usuario));    <span class="token-comment">// ["nombre", "edad", "activo"]</span>
+<span class="token-prop">console</span>.log(Object.<span class="token-prop">values</span>(usuario));  <span class="token-comment">// ["Marta", 28, true]</span>
+
+Object.<span class="token-prop">entries</span>(usuario).<span class="token-prop">forEach</span>(([k, v]) =&gt; {
+  <span class="token-prop">console</span>.log(`${k}: ${v}`);   <span class="token-comment">// recorre todo el objeto</span>
+});</code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-ui-checks text-gradient me-2"></i>Demo: formulario → objeto → JSON</h2>
+      <p>
+        Rellena el formulario y pulsa "Convertir". El valor de cada campo se agrupa en un <strong>objeto</strong> (con
+        <code>Object.fromEntries</code>) y se muestra como <strong>JSON bonito</strong> con <code>JSON.stringify(obj, null, 2)</code>.
+      </p>
+      <div class="demo-box p-4">
+        <form id="formPerfil" class="row g-3 mb-3">
+          <div class="col-md-6">
+            <label class="form-label small text-light">Nombre</label>
+            <input type="text" id="fNombre" class="form-control demo-input" placeholder="Ada Lovelace">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label small text-light">Rol</label>
+            <input type="text" id="fRol" class="form-control demo-input" placeholder="Desarrolladora">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label small text-light">Email</label>
+            <input type="email" id="fEmail" class="form-control demo-input" placeholder="ada@example.com">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label small text-light">Años de experiencia</label>
+            <input type="number" id="fAnios" class="form-control demo-input" value="0">
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-gradient"><i class="bi bi-arrow-repeat me-2"></i>Convertir a JSON</button>
+          </div>
+        </form>
+        <pre class="code-block mb-0" id="salidaJson"><code><span class="token-comment">// El JSON aparecerá aquí…</span></code></pre>
+      </div>
+      <div class="tip-box mt-4">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Los números llegan del formulario como texto. En la demo usamos el operador <code>+</code>
+        (<code>+valor</code>) para convertirlos a número antes de guardarlos en el objeto.
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>Los objetos agrupan <strong>propiedades</strong> (datos) y <strong>métodos</strong> (funciones).</li>
+        <li>Dentro de un método, <code>this</code> es el objeto que lo contiene.</li>
+        <li><code>JSON.stringify</code> serializa a texto; <code>JSON.parse</code> lo reconstruye.</li>
+        <li>Usa corchetes para claves dinámicas y <code>Object.keys/values/entries</code> para recorrer.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <div class="d-flex gap-2">
+        <a href="../../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Inicio</a>
+        <a href="leccion-1-metodos-arrays.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      </div>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-3-dom.html" class="btn btn-gradient">Siguiente: Manipulación del DOM <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— JavaScript Intermedio · Lección 2</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-3-dom.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+
+<script>
+(function () {
+  const form = document.getElementById('formPerfil');
+  const salida = document.getElementById('salidaJson');
+
+  function pintarJSON(obj) {
+    salida.innerHTML = '';
+    const code = document.createElement('code');
+    code.innerHTML = jsonAHTML(JSON.stringify(obj, null, 2));
+    salida.appendChild(code);
+  }
+
+  function jsonAHTML(texto) {
+    return texto.replace(/("(?:\\u[a-fA-F0-9]{4}|\\[^u]|[^\\"])*")(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?/g,
+      (match) => {
+        let cls = 'token-num';
+        if (/^"/.test(match)) {
+          cls = /:$/.test(match.replace(/^\s*/, '')) ? 'token-prop' : 'token-value';
+        } else if (/true|false|null/.test(match)) {
+          cls = 'token-tag';
+        }
+        return '<span class="' + cls + '">' + match + '</span>';
+      });
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const datos = new FormData(form);
+    const objeto = Object.fromEntries(datos.entries());
+    objeto.experiencia = Number(datos.get('fAnios')) || 0;
+    objeto.activo = true;
+    objeto['fecha_registro'] = new Date().toISOString().slice(0, 10);
+    pintarJSON(objeto);
+    gsap.fromTo(salida, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5 });
+  });
+})();
+</script>
+</body>
+</html>

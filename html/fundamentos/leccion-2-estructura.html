@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 2: Estructura base del documento HTML. Head, body, metas, favicon, encoding, viewport y SEO básico.">
+  <title>Lección 2 — Estructura Base del Documento | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">HTML</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Fundamentos</a></li>
+        <li class="breadcrumb-item active text-light">Lección 2</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft">Sección HTML · Lección 2</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>25 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Estructura Base del Documento</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">Domina el <code>&lt;head&gt;</code>, las metas SEO, encoding y cómo los navegadores leen tu HTML.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-compass text-gradient me-2"></i>Fundamentos de la lección</h2>
+      <p>Todo documento HTML real tiene dos grandes bloques: el <code>&lt;head&gt;</code>, que guarda información invisible pero crítica (metadatos, estilos, SEO y configuración), y el <code>&lt;body&gt;</code>, donde vive todo el contenido visible. Entender esta anatomía te permite diagnosticar desde el primer día problemas de carga lenta, posicionamiento en Google o páginas "rotas" en móviles.</p>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-grid-3x3-gap text-gradient me-2"></i>Conceptos clave</h2>
+      <div class="d-flex flex-wrap gap-2">
+        <span class="badge-soft">&lt;head&gt; vs &lt;body&gt;</span>
+        <span class="badge-soft-cyan">meta charset y viewport</span>
+        <span class="badge-soft-pink">defer en los scripts</span>
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-diagram-2 text-gradient me-2"></i>Anatómía del documento</h2>
+      <p>Un documento HTML de producción real tiene más de lo que viste en la lección 1. Esta es la versión profesional:</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;!DOCTYPE html&gt;</span>
+<span class="token-tag">&lt;html</span> <span class="token-attr">lang</span>=<span class="token-value">"es"</span><span class="token-tag">&gt;</span>
+
+  <span class="token-tag">&lt;head&gt;</span>
+    <span class="token-tag">&lt;meta</span> <span class="token-attr">charset</span>=<span class="token-value">"UTF-8"</span><span class="token-tag">&gt;</span>
+    <span class="token-tag">&lt;meta</span> <span class="token-attr">name</span>=<span class="token-value">"viewport"</span>
+          <span class="token-attr">content</span>=<span class="token-value">"width=device-width, initial-scale=1.0"</span><span class="token-tag">&gt;</span>
+    <span class="token-tag">&lt;meta</span> <span class="token-attr">name</span>=<span class="token-value">"description"</span>
+          <span class="token-attr">content</span>=<span class="token-value">"Descripción corta y atractiva para SEO"</span><span class="token-tag">&gt;</span>
+    <span class="token-tag">&lt;title&gt;</span>Mi sitio profesional<span class="token-tag">&lt;/title&gt;</span>
+    <span class="token-tag">&lt;link</span> <span class="token-attr">rel</span>=<span class="token-value">"stylesheet"</span> <span class="token-attr">href</span>=<span class="token-value">"css/style.css"</span><span class="token-tag">&gt;</span>
+    <span class="token-tag">&lt;link</span> <span class="token-attr">rel</span>=<span class="token-value">"icon"</span> <span class="token-attr">href</span>=<span class="token-value">"favicon.ico"</span><span class="token-tag">&gt;</span>
+    <span class="token-comment">&lt;!-- Open Graph: cómo se ve al compartir en redes --&gt;</span>
+    <span class="token-tag">&lt;meta</span> <span class="token-attr">property</span>=<span class="token-value">"og:title"</span> <span class="token-attr">content</span>=<span class="token-value">"Mi sitio"</span><span class="token-tag">&gt;</span>
+    <span class="token-tag">&lt;meta</span> <span class="token-attr">property</span>=<span class="token-value">"og:image"</span> <span class="token-attr">content</span>=<span class="token-value">"img/portada.png"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;/head&gt;</span>
+
+  <span class="token-tag">&lt;body&gt;</span>
+    <span class="token-comment">&lt;!-- Contenido visible --&gt;</span>
+  <span class="token-tag">&lt;/body&gt;</span>
+
+  <span class="token-tag">&lt;script</span> <span class="token-attr">src</span>=<span class="token-value">"js/app.js"</span> <span class="token-attr">defer</span><span class="token-tag">&gt;&lt;/script&gt;</span>
+<span class="token-tag">&lt;/html&gt;</span></code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-gear text-gradient me-2"></i>Dentro del &lt;head&gt; en detalle</h2>
+      <table class="table">
+        <thead>
+          <tr><th scope="col">Meta / Elemento</th><th scope="col">Propósito</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>&lt;meta charset="UTF-8"&gt;</code></td><td>Soporta todos los caracteres, acentos y emojis</td></tr>
+          <tr><td><code>&lt;meta name="viewport"&gt;</code></td><td>Diseño responsive en móviles (imprescindible)</td></tr>
+          <tr><td><code>&lt;meta name="description"&gt;</code></td><td>Resumen mostrado por Google en los resultados</td></tr>
+          <tr><td><code>&lt;title&gt;</code></td><td>Título de la pestaña y encabezado SEO</td></tr>
+          <tr><td><code>&lt;link rel="stylesheet"&gt;</code></td><td>Carga un archivo CSS externo</td></tr>
+          <tr><td><code>&lt;link rel="icon"&gt;</code></td><td>Favicon (icono de la pestaña)</td></tr>
+          <tr><td>Open Graph (<code>og:*</code>)</td><td>Preview atractivo al compartir en redes</td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box mt-4">
+        <strong class="text-white"><i class="bi bi-key me-2" style="color:#06b6d4;"></i>Clave:</strong>
+        sin la etiqueta <code>&lt;meta name="viewport"&gt;</code> tu página se verá "engordada" y rota en celulares. Siempre inclúyela.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-eye text-gradient me-2"></i>&lt;body&gt; y orden de carga del contenido</h2>
+      <p>Los navegadores leen el HTML de arriba a abajo (streaming). El orden importa para el rendimiento:</p>
+      <ul>
+        <li><strong>Primero</strong> el <code>&lt;head&gt;</code> (metadatos + CSS para no saltar estilos).</li>
+        <li><strong>Después</strong> el <code>&lt;body&gt;</code> (contenido visible).</li>
+        <li><strong>Al final</strong> los <code>&lt;script&gt;</code> con el atributo <code>defer</code> para no bloquear la pintura de la página.</li>
+      </ul>
+      <pre class="code-block"><code><span class="token-tag">&lt;script</span> <span class="token-attr">src</span>=<span class="token-value">"app.js"</span> <span class="token-attr">defer</span><span class="token-tag">&gt;&lt;/script&gt;</span>
+<span class="token-tag">&lt;script</span> <span class="token-attr">src</span>=<span class="token-value">"app.js"</span> <span class="token-attr">async</span><span class="token-tag">&gt;&lt;/script&gt;</span></code></pre>
+      <div class="row g-3 mt-2">
+        <div class="col-md-6">
+          <div class="demo-box">
+            <i class="bi bi-check-circle-fill mb-2 d-block" style="color:#34d399;"></i>
+            <strong class="text-white">defer</strong>
+            <p class="small mb-0">Descarga en paralelo y se ejecuta al final. Mantiene el orden de los scripts. <strong>Opción recomendada</strong>.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="demo-box">
+            <i class="bi bi-x-circle-fill mb-2 d-block" style="color:#f87171;"></i>
+            <strong class="text-white">async</strong>
+            <p class="small mb-0">Descarga en paralelo y se ejecuta apenas llega. Útil solo cuando el orden no importa.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-globe2 text-gradient me-2"></i>Demo: mira esta misma página</h2>
+      <p class="mb-4">Cada lección de esta guía sigue la estructura profesional. Abre <kbd>F12</kbd> → <em>Elements</em> y explora el head de esta página: verás el viewport, description, fuentes de Google y CDNs reales.</p>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <h6 class="text-white fw-bold"><i class="bi bi-motherboard me-2" style="color:#6366f1;"></i>CDNs usados aquí</h6>
+              <ul class="small mb-0">
+                <li>Bootstrap 5.3.3 (CSS + JS)</li>
+                <li>Bootstrap Icons</li>
+                <li>Google Fonts (Inter, Poppins, Fira Code)</li>
+                <li>AOS + GSAP (animaciones)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <h6 class="text-white fw-bold"><i class="bi bi-magic me-2" style="color:#ec4899;"></i>Abre la consola</h6>
+              <p class="small mb-3">Ejecuta esto desde la consola (F12 → Console):</p>
+              <pre class="code-block mb-0"><code><span class="token-prop">console</span>.log(<span class="token-value">document.title</span>);</code></pre>
+              <button class="btn btn-gradient btn-sm mt-2" onclick="console.log(document.title)">
+                <i class="bi bi-terminal me-1"></i>Probar ahora
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>El <code>&lt;head&gt;</code> nunca se ve; contiene metadatos, CSS y config de SEO.</li>
+        <li><code>viewport</code> es obligatorio para móviles; <code>description</code> para SEO.</li>
+        <li>Coloca los scripts al final con <code>defer</code> para no bloquear la página.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-1-introduccion.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-3-texto-formatos.html" class="btn btn-gradient">Siguiente: Texto y Formatos <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-3-texto-formatos.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+</body>
+</html>

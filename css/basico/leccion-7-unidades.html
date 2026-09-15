@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 7 de CSS Básico: unidades de medida en CSS. px, em, rem, por ciento, vw, vh, vmin, vmax y la función fluid clamp().">
+  <title>Lección 7 — Unidades de medida | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">CSS</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Básico</a></li>
+        <li class="breadcrumb-item active text-light">Lección 7</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-7-circle me-1"></i>CSS Básico · Lección 7</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>30 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Unidades de medida</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">Domina px, em, rem, %, vw/vh, vmin/vmax y la función clamp() para crear diseños fluidos que respiran en cualquier pantalla.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-4" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold"><i class="bi bi-award text-gradient me-2"></i>Fundamentos de la lección</h2>
+      <p>Las unidades se dividen en <strong>absolutas</strong> (tamaño fijo) y <strong>relativas</strong> (calculadas respecto a otra medida). Un diseño fluido mezcla ambas: tamaños relativos para lo que debe crecer y px para detalles finos.</p>
+      <div class="d-flex flex-wrap gap-2 mt-3">
+        <span class="badge-soft"><i class="bi bi-rulers me-1"></i>px</span>
+        <span class="badge-soft-cyan"><i class="bi bi-type me-1"></i>rem</span>
+        <span class="badge-soft-pink"><i class="bi bi-display me-1"></i>vw / vh</span>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-bounding-box text-gradient me-2"></i>px y %: fijo vs proporcional</h2>
+      <p>
+        El píxel (<code>px</code>) es la única unidad <strong>absoluta</strong> de uso común: 1px no cambia según el contexto.
+        El porcentaje (<code>%</code>) se calcula contra el <strong>contenedor padre</strong>: para <code>width</code>, contra el ancho del padre; para <code>font-size</code>, contra su tamaño de fuente.
+      </p>
+      <pre class="code-block"><code><span class="token-prop">.tarjeta</span> {
+  <span class="token-attr">width</span>: <span class="token-value">400px</span>;      <span class="token-comment">/* fija: no escala en pantallas pequeñas */</span>
+  <span class="token-attr">border-radius</span>: <span class="token-value">8px</span>;
+}
+
+<span class="token-prop">.lateral</span> {
+  <span class="token-attr">width</span>: <span class="token-value">50%</span>;       <span class="token-comment">/* la mitad del contenedor, siempre */</span>
+  <span class="token-attr">padding</span>: <span class="token-value">2%</span>;      <span class="token-comment">/* proporcional, nunca parte del ancho total */</span>
+}</code></pre>
+      <div class="tip-box">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Para elementos que deben adaptarse, empieza por <code>%</code> o <code>em</code>/<code>rem</code>. Reserva el <code>px</code> para bordes, sombras y dimensiones de detalles que no deberían cambiar.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-type text-gradient me-2"></i>em vs rem: la diferencia exacta</h2>
+      <p>
+        El <code>em</code> se calcula respecto a la fuente <strong>del padre más cercano</strong>, así que su valor
+        <em>se multiplica</em> con cada nivel de anidamiento. El <code>rem</code> ignora a los padres y siempre se
+        calcula respecto a la raíz <code>&lt;html&gt;</code>. Ejemplo con fuente raíz de 16px:
+      </p>
+      <pre class="code-block"><code><span class="token-comment">/* html { font-size: 16px; } */</span>
+<span class="token-tag">&lt;div</span> <span class="token-attr">style</span>=<span class="token-value">"font-size: 20px;"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;p&gt;</span>Con em<span class="token-tag">&lt;/p&gt;</span>   <span class="token-comment">&lt;!-- 1em = 20px (padre) --&gt;</span>
+  <span class="token-tag">&lt;p&gt;</span>Con rem<span class="token-tag">&lt;/p&gt;</span>  <span class="token-comment">&lt;!-- 1rem = 16px (raíz) --&gt;</span>
+<span class="token-tag">&lt;/div&gt;</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Contexto</th><th scope="col">em → resultado</th><th scope="col">rem → resultado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Fuente raíz 16px, padre 20px</td><td><code>1em = 20px</code></td><td><code>1rem = 16px</code></td></tr>
+          <tr><td>Doble anidamiento (padre 20px, luego +25px)</td><td><code>1em se multiplica</code></td><td><code>1rem siempre 16px</code></td></tr>
+        </tbody>
+      </table>
+      <div class="warning-box">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Consejo práctico:</strong>
+        Usa <code>rem</code> para tipografía y márgenes globales (predecible y fácil de escalar cambiando <code>html</code>).
+        Reserva el <code>em</code> para lo que debe crecer junto a su propio texto, como el <code>padding</code> de un botón.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-display text-gradient me-2"></i>Unidades de viewport: vw, vh, vmin, vmax</h2>
+      <p>
+        El <strong>viewport</strong> es el área visible de la ventana. Estas unidades se calculan contra él y nunca contra un padre:
+      </p>
+      <table class="table">
+        <thead>
+          <tr><th scope="col">Unidad</th><th scope="col">Relativa a</th><th scope="col">Uso típico</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>vw</code></td><td>1% del ancho del viewport</td><td>Tipografía fluida, secciones a lo ancho</td></tr>
+          <tr><td><code>vh</code></td><td>1% del alto del viewport</td><td>Hero a pantalla completa: <code>min-height: 100vh</code></td></tr>
+          <tr><td><code>vmin</code></td><td>1% de la dimensión <em>más pequeña</em></td><td>Elementos cuadrados que no se desbordan</td></tr>
+          <tr><td><code>vmax</code></td><td>1% de la dimensión <em>más grande</em></td><td>Detalles que deben destacar en el modo horizontal</td></tr>
+        </tbody>
+      </table>
+      <pre class="code-block mt-3"><code><span class="token-prop">.hero</span> {
+  <span class="token-attr">min-height</span>: <span class="token-value">100vh</span>;          <span class="token-comment">/* ocupa toda la pantalla */</span>
+  <span class="token-attr">font-size</span>: <span class="token-value">6vw</span>;             <span class="token-comment">/* crece y decrece con la ventana */</span>
+}
+
+<span class="token-prop">.cuadro</span> {
+  <span class="token-attr">width</span>: <span class="token-value">90vmin</span>;              <span class="token-comment">/* nunca mayor que el lado corto */</span>
+  <span class="token-attr">height</span>: <span class="token-value">90vmin</span>;
+}</code></pre>
+      <div class="warning-box">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Cuidado:</strong>
+        Un <code>font-size</code> únicamente en <code>vw</code> puede volverse ilegible en móviles o desbordarse en pantallas gigantes. La solución es <code>clamp()</code>, que verás a continuación.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-sliders2 text-gradient me-2"></i>clamp(): tipografía fluida con límites</h2>
+      <p>
+        <code>clamp()</code> recibe tres valores —<em>mínimo, preferido, máximo</em>— y elige el del medio cuando el preferido sale de rango.
+        Es perfecto para tamaños fluidos: crecen con el viewport pero se congelan entre dos extremos.
+      </p>
+      <pre class="code-block"><code><span class="token-prop">.titulo-hero</span> {
+  <span class="token-attr">font-size</span>: <span class="token-value">clamp(1.5rem, 4vw + 1rem, 4rem)</span>;
+  <span class="token-comment">/* nunca menor que 1.5rem ni mayor que 4rem */</span>
+}
+
+<span class="token-prop">.contenedor</span> {
+  <span class="token-attr">width</span>: <span class="token-value">clamp(280px, 100% - 2rem, 1200px)</span>;
+}</code></pre>
+      <div class="tip-box">
+        <strong class="text-white"><i class="bi bi-star me-2" style="color:#f59e0b;"></i>Dato:</strong>
+        Combina <code>vw</code> con un valor fijo dentro del cálculo (como <code>4vw + 1rem</code>) para que el texto nunca se petrifique: en pantallas pequeñas el <code>1rem</code> garantiza legibilidad mínima.
+      </div>
+
+      <div class="demo-box p-4 mt-3">
+        <h3 class="h5 text-white fw-bold mb-3"><i class="bi bi-sliders2 me-2"></i>Demo: clamp() en acción</h3>
+        <p style="color:#cbd5e1 !important;">Ajusta el ancho simulado de la "ventana" y observa cómo el título fluye entre su mínimo y su máximo.</p>
+        <label class="small text-light d-flex justify-content-between">
+          <span>Ancho de ventana (simula vw)</span><span id="valViewport">640px</span>
+        </label>
+        <input type="range" class="form-range mb-3" id="rngViewport" min="320" max="1600" step="10" value="640">
+        <div class="text-center">
+          <div id="clampWindow" class="rounded py-4 px-3 mx-auto" style="background:#1e293b; border:1px dashed #475569;">
+            <h3 id="clampTitle" class="text-white fw-bold mb-1" style="font-size:clamp(1.25rem, 3vw + 0.5rem, 3rem); margin:0;">
+              Frontend<span class="text-gradient">Pro</span>
+            </h3>
+            <p class="small mb-0" style="color:#94a3b8 !important;">clamp(1.25rem, 3vw + 0.5rem, 3rem)</p>
+          </div>
+        </div>
+        <button class="btn btn-sm btn-outline-info mt-3" id="btnClampReset">
+          <i class="bi bi-arrow-counterclockwise me-1"></i>Restablecer
+        </button>
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li><code>px</code> es absoluta; <code>%</code>, <code>em</code>, <code>rem</code> y las de viewport son relativas.</li>
+        <li><code>em</code> depende del padre; <code>rem</code> depende de la raíz: para tipografía global usa <code>rem</code>.</li>
+        <li><code>vw</code>/<code>vh</code> responden al viewport; <code>vmin</code>/<code>vmax</code> al lado corto/largo.</li>
+        <li><code>%</code> se calcula contra el contenedor padre (ancho para <code>width</code>, fuente para <code>font-size</code>).</li>
+        <li><code>clamp(mín, preferido, máx)</code> crea tamaños fluidos con límites seguros.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-6-colores-fondos.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+      </div>
+      <a href="index.html" class="btn btn-gradient">Completar: CSS Básico <i class="bi bi-check2 ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— CSS Básico · Lección 7</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="index.html" class="text-secondary"><i class="bi bi-list-check fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var valViewport = document.getElementById('valViewport');
+  var clampTitle = document.getElementById('clampTitle');
+  var clampWindow = document.getElementById('clampWindow');
+  var btnReset = document.getElementById('btnClampReset');
+
+  function apply(vw) {
+    clampWindow.style.width = 'min(' + vw + 'px, 100%)';
+    clampTitle.style.fontSize = 'clamp(1.25rem, ' + (vw / 100 * 3) + 'px + 0.5rem, 3rem)';
+  }
+
+  document.getElementById('rngViewport').addEventListener('input', function(e) {
+    var vw = parseInt(e.target.value, 10);
+    valViewport.textContent = vw + 'px';
+    apply(vw);
+    gsap.from(clampTitle, {scale: 0.98, opacity: 0.7, duration: 0.2, ease: 'power1.out'});
+  });
+
+  btnReset.addEventListener('click', function() {
+    document.getElementById('rngViewport').value = 640;
+    valViewport.textContent = '640px';
+    apply(640);
+    gsap.to(clampTitle, {scale: 1, opacity: 1, duration: 0.4, ease: 'power2.out'});
+  });
+
+  gsap.from('#clampTitle', {y: 16, opacity: 0, duration: 0.6, ease: 'power2.out'});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 7: Tablas en HTML. table, thead, tbody, tfoot, th con scope, colspan, rowspan, caption y tablas responsivas.">
+  <title>Lección 7 — Tablas | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">HTML</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Fundamentos</a></li>
+        <li class="breadcrumb-item active text-light">Lección 7</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft">Sección: HTML · Lección 7</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>35 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Tablas</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">Presenta datos comparativos con tablas semánticas, accesibles y que no se rompan en el móvil.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-compass text-gradient me-2"></i>Fundamentos de la lección</h2>
+      <p>Las tablas organizan información tabular: precios, horarios, comparativas, resultados. Un buen uso de <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code> y <code>scope</code> hace que esa información sea <strong>legible para lectores de pantalla</strong> y entendible para buscadores.</p>
+      <div class="d-flex flex-wrap gap-2 mt-3">
+        <span class="badge-soft">thead / tbody / tfoot</span>
+        <span class="badge-soft-cyan">th con scope</span>
+        <span class="badge-soft-pink">colspan / rowspan</span>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-table text-gradient me-2"></i>Estructura base: table, tr, th, td</h2>
+      <p>Una tabla se compone de <strong>filas</strong> (<code>&lt;tr&gt;</code>) con <strong>celdas</strong>: <code>&lt;th&gt;</code> para encabezados y <code>&lt;td&gt;</code> para datos.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;table&gt;</span>
+  <span class="token-tag">&lt;tr&gt;</span>
+    <span class="token-tag">&lt;th</span> <span class="token-attr">scope</span>=<span class="token-value">"col"</span><span class="token-tag">&gt;</span>Nombre<span class="token-tag">&lt;/th&gt;</span>
+    <span class="token-tag">&lt;th</span> <span class="token-attr">scope</span>=<span class="token-value">"col"</span><span class="token-tag">&gt;</span>Edad<span class="token-tag">&lt;/th&gt;</span>
+  <span class="token-tag">&lt;/tr&gt;</span>
+  <span class="token-tag">&lt;tr&gt;</span>
+    <span class="token-tag">&lt;td&gt;</span>Mario<span class="token-tag">&lt;/td&gt;</span>
+    <span class="token-tag">&lt;td&gt;</span>32<span class="token-tag">&lt;/td&gt;</span>
+  <span class="token-tag">&lt;/tr&gt;</span>
+<span class="token-tag">&lt;/table&gt;</span></code></pre>
+      <div class="tip-box mt-3">
+        <i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>
+        <strong class="text-white">Tip:</strong> el atributo <code>scope</code> en los <code>&lt;th&gt;</code> indica si encabezan columnas (<code>col</code>) o filas (<code>row</code>). Es invisible en pantalla pero crucial para lectores de pantalla.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-columns-gap text-gradient me-2"></i>thead, tbody y tfoot</h2>
+      <p>Dividir la tabla en cabecera, cuerpo y pie le da estructura al navegador: el <code>tfoot</code> puede mostrarse aunque la tabla sea muy larga.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;table&gt;</span>
+  <span class="token-tag">&lt;caption&gt;</span>Ventas 2025<span class="token-tag">&lt;/caption&gt;</span>
+  <span class="token-tag">&lt;thead&gt;</span>
+    <span class="token-tag">&lt;tr&gt;</span>
+      <span class="token-tag">&lt;th</span> <span class="token-attr">scope</span>=<span class="token-value">"col"</span><span class="token-tag">&gt;</span>Trimestre<span class="token-tag">&lt;/th&gt;</span>
+      <span class="token-tag">&lt;th</span> <span class="token-attr">scope</span>=<span class="token-value">"col"</span><span class="token-tag">&gt;</span>Importe<span class="token-tag">&lt;/th&gt;</span>
+    <span class="token-tag">&lt;/tr&gt;</span>
+  <span class="token-tag">&lt;/thead&gt;</span>
+  <span class="token-tag">&lt;tbody&gt;</span>
+    <span class="token-tag">&lt;tr&gt;</span><span class="token-tag">&lt;td&gt;</span>Q1<span class="token-tag">&lt;/td&gt;</span><span class="token-tag">&lt;td&gt;</span>12.400 €<span class="token-tag">&lt;/td&gt;</span><span class="token-tag">&lt;/tr&gt;</span>
+    <span class="token-tag">&lt;tr&gt;</span><span class="token-tag">&lt;td&gt;</span>Q2<span class="token-tag">&lt;/td&gt;</span><span class="token-tag">&lt;td&gt;</span>15.200 €<span class="token-tag">&lt;/td&gt;</span><span class="token-tag">&lt;/tr&gt;</span>
+  <span class="token-tag">&lt;/tbody&gt;</span>
+  <span class="token-tag">&lt;tfoot&gt;</span>
+    <span class="token-tag">&lt;tr&gt;</span><span class="token-tag">&lt;th</span> <span class="token-attr">scope</span>=<span class="token-value">"row"</span><span class="token-tag">&gt;</span>Total<span class="token-tag">&lt;/th&gt;</span>
+        <span class="token-tag">&lt;td&gt;</span>27.600 €<span class="token-tag">&lt;/td&gt;</span><span class="token-tag">&lt;/tr&gt;</span>
+  <span class="token-tag">&lt;/tfoot&gt;</span>
+<span class="token-tag">&lt;/table&gt;</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Sección</th><th scope="col">Contenido</th><th scope="col">Semántica</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>&lt;thead&gt;</code></td><td>Filas de encabezado</td><td>Se repite al imprimir en varias páginas</td></tr>
+          <tr><td><code>&lt;tbody&gt;</code></td><td>Los datos</td><td>Puede haber varios bloques lógicos</td></tr>
+          <tr><td><code>&lt;tfoot&gt;</code></td><td>Totales o resumen</td><td>Se repite o queda visible al final</td></tr>
+          <tr><td><code>&lt;caption&gt;</code></td><td>Título de la tabla</td><td>Equivalente al <code>alt</code> de una imagen</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-grid-3x3 text-gradient me-2"></i>Combinar celdas: colspan y rowspan</h2>
+      <p><code>colspan</code> hace que una celda ocupe varias columnas; <code>rowspan</code>, varias filas. Perfecto para celdas de total y paneles de opciones.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;table&gt;</span>
+  <span class="token-tag">&lt;tr&gt;</span>
+    <span class="token-tag">&lt;th</span> <span class="token-attr">scope</span>=<span class="token-value">"col"</span> <span class="token-attr">colspan</span>=<span class="token-value">"2"</span><span class="token-tag">&gt;</span>Plan Pro<span class="token-tag">&lt;/th&gt;</span>
+  <span class="token-tag">&lt;/tr&gt;</span>
+  <span class="token-tag">&lt;tr&gt;</span>
+    <span class="token-tag">&lt;th</span> <span class="token-attr">scope</span>=<span class="token-value">"row"</span> <span class="token-attr">rowspan</span>=<span class="token-value">"2"</span><span class="token-tag">&gt;</span>Incluye<span class="token-tag">&lt;/th&gt;</span>
+    <span class="token-tag">&lt;td&gt;</span>Dominio propio<span class="token-tag">&lt;/td&gt;</span>
+  <span class="token-tag">&lt;/tr&gt;</span>
+  <span class="token-tag">&lt;tr&gt;</span>
+    <span class="token-tag">&lt;td&gt;</span>Certificado SSL<span class="token-tag">&lt;/td&gt;</span>
+  <span class="token-tag">&lt;/tr&gt;</span>
+<span class="token-tag">&lt;/table&gt;</span></code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#fbbf24;"></i>Cuidado:</strong>
+        con <code>colspan</code>/<code>rowspan</code> es fácil desequilibrar el número de celdas por fila. Verifica siempre que cada fila "sume" el mismo total de columnas.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-phone text-gradient me-2"></i>Tablas responsivas: scroll horizontal</h2>
+      <p>En pantallas pequeñas una tabla ancha puede desbordar el layout. La solución estándar de Bootstrap es envolverla en <code>.table-responsive</code>, que activa el scroll horizontal sin romper el diseño.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-value">"table-responsive"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;table</span> <span class="token-attr">class</span>=<span class="token-value">"table"</span><span class="token-tag">&gt;</span>…<span class="token-tag">&lt;/table&gt;</span>
+<span class="token-tag">&lt;/div&gt;</span></code></pre>
+      <div class="demo-box mt-4">
+        <h3 class="h5 text-white fw-bold mb-3"><i class="bi bi-arrow-left-right me-2"></i>Demo: tabla con scroll</h3>
+        <p class="small" style="color:#cbd5e1 !important;">Reduce la ventana del navegador y arrastra la tabla hacia los lados. Así se comporta en móviles.</p>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr><th scope="col">Producto</th><th scope="col">Enero</th><th scope="col">Febrero</th><th scope="col">Marzo</th><th scope="col">Abril</th><th scope="col">Mayo</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Curso HTML</th><td>12</td><td>18</td><td>9</td><td>21</td><td>27</td></tr>
+              <tr><th scope="row">Curso CSS</th><td>8</td><td>14</td><td>11</td><td>16</td><td>30</td></tr>
+              <tr><th scope="row">Curso JS</th><td>5</td><td>9</td><td>13</td><td>19</td><td>33</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-plus-slash-minus text-gradient me-2"></i>Demo: editor de filas</h2>
+      <p>Añade y elimina filas de datos y mira cómo se actualiza automáticamente el total del <code>tfoot</code>.</p>
+      <div class="demo-box">
+        <div class="d-flex flex-wrap gap-2 mb-3">
+          <button class="btn btn-gradient btn-sm" id="btnFila"><i class="bi bi-plus-lg me-1"></i>Añadir venta</button>
+          <button class="btn btn-sm btn-outline-danger" id="btnBorraFila"><i class="bi bi-trash me-1"></i>Borrar última</button>
+          <span class="badge-soft-pink align-self-center" id="lblTotal"><i class="bi bi-calculator me-1"></i>Total: 0 €</span>
+        </div>
+        <div class="table-responsive">
+          <table class="table mb-0 table-demo" id="tablaDemo">
+            <thead>
+              <tr><th scope="col">#</th><th scope="col">Concepto</th><th scope="col">Importe</th></tr>
+            </thead>
+            <tbody id="tablaDemoBody"></tbody>
+            <tfoot>
+              <tr><th scope="row" colspan="2">Total</th><td id="celdaTotal">0 €</td></tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>Estructura semántica: <code>&lt;table&gt;</code> con <code>thead</code>, <code>tbody</code>, <code>tfoot</code> y <code>caption</code>.</li>
+        <li><code>&lt;th scope="col"&gt;</code> / <code>scope="row"</code> declaran encabezados accesibles.</li>
+        <li><code>colspan</code> unifica columnas; <code>rowspan</code> unifica filas.</li>
+        <li>Envuelve las tablas anchas en <code>.table-responsive</code> para scroll horizontal en móvil.</li>
+        <li>No uses tablas para maquetar el layout: usa CSS Grid o Flexbox.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-6-imagenes.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-8-formularios.html" class="btn btn-gradient">Siguiente: Formularios <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-8-formularios.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var cuerpo = document.getElementById('tablaDemoBody');
+  var celdaTotal = document.getElementById('celdaTotal');
+  var num = 0;
+
+  function recalcular() {
+    var total = 0;
+    Array.prototype.forEach.call(cuerpo.querySelectorAll('td.importe'), function(td) {
+      total += parseInt(td.textContent.replace(/[^0-9]/g, ''), 10);
+    });
+    celdaTotal.textContent = total + ' €';
+    document.getElementById('lblTotal').innerHTML = '<i class="bi bi-calculator me-1"></i>Total: ' + total + ' €';
+  }
+
+  document.getElementById('btnFila').addEventListener('click', function() {
+    num++;
+    var random = Math.floor(Math.random() * 400) + 50;
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<th scope="row">' + num + '</th><td>Venta de ejemplo</td><td class="importe">' + random + ' €</td>';
+    cuerpo.appendChild(tr);
+    gsap.from(tr, {opacity: 0, y: -10, duration: 0.4, ease: 'power2.out'});
+    recalcular();
+  });
+
+  document.getElementById('btnBorraFila').addEventListener('click', function() {
+    if (cuerpo.children.length > 0) {
+      gsap.to(cuerpo.lastElementChild, {opacity: 0, x: 20, duration: 0.3, ease: 'power2.in', onComplete: function() {
+        cuerpo.removeChild(cuerpo.lastElementChild);
+        recalcular();
+      }});
+    }
+  });
+});
+</script>
+</body>
+</html>

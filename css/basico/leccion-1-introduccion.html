@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 1 de CSS Básico: qué es CSS, la anatomía de una regla, las tres formas de aplicarlo y cómo la cascada resuelve los conflictos.">
+  <title>Lección 1 — Introducción a CSS | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">CSS</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Básico</a></li>
+        <li class="breadcrumb-item active text-light">Lección 1</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-1-circle me-1"></i>CSS Básico · Lección 1</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>35 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Introducción a CSS</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">Qué es CSS, cómo se construye una regla, las tres formas de aplicarlo a tu HTML y cómo la cascada decide qué estilo gana.</p>
+    <div class="progress-tracker">
+      <span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-4" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold"><i class="bi bi-award text-gradient me-2"></i>Fundamentos de la lección</h2>
+      <p>CSS (<em>Cascading Style Sheets</em>, Hojas de Estilo en Cascada) es el lenguaje encargado de la <strong>presentación</strong> de una web. Junto con HTML y JavaScript forma la tríada del frontend: HTML estructura el contenido, CSS lo hace atractivo y JavaScript lo hace interactivo. Aquí entenderás cómo CSS se conecta con tu HTML y por qué la palabra "cascada" describe con precisión cómo se resuelven los estilos.</p>
+      <div class="d-flex flex-wrap gap-2 mt-3">
+        <span class="badge-soft"><i class="bi bi-braces me-1"></i>Regla CSS</span>
+        <span class="badge-soft-cyan"><i class="bi bi-file-earmark-code me-1"></i>CSS externo</span>
+        <span class="badge-soft-pink"><i class="bi bi-layers me-1"></i>Cascada</span>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-palette text-gradient me-2"></i>¿Qué es CSS?</h2>
+      <p>
+        <strong>CSS</strong> es el lenguaje que se usa para <strong>presentar y decorar</strong> documentos HTML.
+        Mientras HTML define la estructura, CSS controla colores, tipografías, espaciados, layout y animaciones.
+      </p>
+      <p>
+        Una analogía: si HTML son los cimientos y paredes de una casa, CSS es la pintura, los muebles y la decoración.
+        Separar contenido de presentación permite cambiar el aspecto visual de un sitio completo editando un solo archivo.
+      </p>
+      <div class="tip-box mt-3">
+        <i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>
+        <strong class="text-white">Tip:</strong> CSS no es un lenguaje de programación, sino un lenguaje de <em>declaración de estilos</em>. No tiene bucles ni condicionales: solo reglas.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-three-quarters text-gradient me-2"></i>Las 3 formas de aplicar CSS</h2>
+      <p>Existen tres métodos para vincular estilos CSS con tu HTML, cada uno con ventajas y desventajas distintas.</p>
+
+      <h3 class="h5 text-white fw-bold mt-4 mb-2"><i class="bi bi-1-circle text-gradient me-2"></i>1. CSS Inline (en línea)</h3>
+      <p>Se escribe directamente en el atributo <code>style</code> de una etiqueta HTML.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;h1</span> <span class="token-attr">style</span>=<span class="token-value">"color: #6366f1; font-size: 2rem;"</span><span class="token-tag">&gt;</span>
+  Título con estilo inline
+<span class="token-tag">&lt;/h1&gt;</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Ventajas</th><th scope="col">Desventajas</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Útil para pruebas rápidas</td><td>Mezcla contenido con presentación</td></tr>
+          <tr><td>Sobreescribe cualquier otra regla</td><td>No es reutilizable</td></tr>
+          <tr><td>No requiere archivos externos</td><td>Difícil de mantener a escala</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="h5 text-white fw-bold mt-4 mb-2"><i class="bi bi-2-circle text-gradient me-2"></i>2. CSS Interno (en el &lt;head&gt;)</h3>
+      <p>Se define dentro de una etiqueta <code>&lt;style&gt;</code> en el <code>&lt;head&gt;</code> del documento.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;head&gt;</span>
+  <span class="token-tag">&lt;style&gt;</span>
+    <span class="token-prop">h1</span> {
+      <span class="token-prop">color</span>: <span class="token-value">#6366f1</span>;
+      <span class="token-prop">font-size</span>: <span class="token-value">2rem</span>;
+    }
+  <span class="token-tag">&lt;/style&gt;</span>
+<span class="token-tag">&lt;/head&gt;</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Ventajas</th><th scope="col">Desventajas</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Agrupa reglas para toda la página</td><td>Solo aplica a un solo archivo HTML</td></tr>
+          <tr><td>No necesita archivos externos</td><td>No es reutilizable entre páginas</td></tr>
+          <tr><td>Fácil de empezar en proyectos pequeños</td><td>El HTML crece y se vuelve desordenado</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="h5 text-white fw-bold mt-4 mb-2"><i class="bi bi-3-circle text-gradient me-2"></i>3. CSS Externo (el recomendado)</h3>
+      <p>Se escribe en un archivo <code>.css</code> separado y se vincula con <code>&lt;link&gt;</code>.</p>
+      <pre class="code-block"><code><span class="token-comment">&lt;!-- En el &lt;head&gt; del HTML --&gt;</span>
+<span class="token-tag">&lt;link</span> <span class="token-attr">rel</span>=<span class="token-value">"stylesheet"</span> <span class="token-attr">href</span>=<span class="token-value">"estilos.css"</span><span class="token-tag">&gt;</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Ventajas</th><th scope="col">Desventajas</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Reutilizable en múltiples páginas</td><td>Requiere crear un archivo extra</td></tr>
+          <tr><td>Separación limpia de responsabilidades</td><td>Necesita una petición HTTP adicional (mitigable con caché)</td></tr>
+          <tr><td>El navegador almacena el archivo en caché</td><td>—</td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box mt-3">
+        <i class="bi bi-star me-2" style="color:#f59e0b;"></i>
+        <strong class="text-white">Recomendación:</strong> usa siempre CSS externo en proyectos reales. Es el estándar de la industria.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-layers text-gradient me-2"></i>Anatomía de una regla</h2>
+      <p>Toda regla CSS tiene dos partes: un <strong>selector</strong> que elige los elementos y un <strong>bloque de declaraciones</strong> que describe el estilo. Cada declaración es una pareja <code>propiedad: valor;</code>.</p>
+      <pre class="code-block"><code><span class="token-prop">h1</span> {                     <span class="token-comment">/* selector */</span>
+  <span class="token-prop">color</span>: <span class="token-value">#6366f1</span>;      <span class="token-comment">/* propiedad: valor */</span>
+  <span class="token-prop">font-size</span>: <span class="token-num">2.5rem</span>;
+  <span class="token-prop">letter-spacing</span>: <span class="token-num">1px</span>;
+}</code></pre>
+      <div class="table-responsive mt-3">
+        <table class="table">
+          <thead>
+            <tr><th scope="col">Parte</th><th scope="col">Descripción</th><th scope="col">Ejemplo</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>selector</code></td><td>Indica a qué elementos se aplica</td><td><code>h1</code>, <code>.boton</code>, <code>#logo</code></td></tr>
+            <tr><td>bloque</td><td>Abre y cierra las declaraciones</td><td><code>{ … }</code></td></tr>
+            <tr><td>propiedad</td><td>El aspecto que queremos cambiar</td><td><code>color</code>, <code>margin</code></td></tr>
+            <tr><td>valor</td><td>El nuevo estado de la propiedad</td><td><code>#6366f1</code>, <code>1rem</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-stack text-gradient me-2"></i>La cascada en acción</h2>
+      <p>
+        El nombre "Cascading Style Sheets" no es casual: las reglas se resuelven mediante un sistema de
+        <strong>prioridad</strong>. Cuando dos reglas aplican al mismo elemento, el navegador sigue este orden:
+      </p>
+      <ol class="mt-2">
+        <li><strong>Inline</strong> → mayor prioridad (excepto <code>!important</code>).</li>
+        <li><strong>Interno / Externo</strong> → mismo nivel; gana el que aparezca <em>después</em> en el código.</li>
+        <li><strong>Estilos del navegador</strong> → menor prioridad (defaults).</li>
+      </ol>
+      <p class="mt-3">En la lección 3 profundizaremos en la <strong>especificidad</strong>, el mecanismo exacto que CSS usa para resolver conflictos.</p>
+
+      <div class="demo-box mt-4">
+        <h3 class="h5 text-white fw-bold mb-3"><i class="bi bi-stack me-2"></i>Demo: prueba la cascada</h3>
+        <p style="color:#cbd5e1 !important;">Haz clic para ver cómo cambian las prioridades de estilo sobre el texto.</p>
+        <div class="d-flex flex-wrap gap-2 mb-3">
+          <button class="btn btn-sm btn-outline-info" id="btnInline"><i class="bi bi-type me-1"></i>Inline</button>
+          <button class="btn btn-sm btn-outline-warning" id="btnInternal"><i class="bi bi-file-earmark-code me-1"></i>Interno</button>
+          <button class="btn btn-sm btn-outline-success" id="btnExternal"><i class="bi bi-link-45deg me-1"></i>Clase externa</button>
+          <button class="btn btn-sm btn-outline-danger" id="btnReset"><i class="bi bi-arrow-counterclockwise me-1"></i>Reset</button>
+        </div>
+        <div id="cascadaDemo" class="p-3 rounded text-center fw-bold" style="background:#1e293b; color:#e2e8f0; transition: all 0.3s ease;">
+          Texto de demostración — observa cómo cambia el color
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>CSS es el lenguaje de <strong>presentación</strong> de la web: colores, layout, tipografía y más.</li>
+        <li>Hay 3 formas de aplicarlo: <strong>inline</strong>, <strong>interno</strong> y <strong>externo</strong> (recomendado).</li>
+        <li>Una regla = <code>selector { propiedad: valor; }</code>.</li>
+        <li>La <strong>cascada</strong> resuelve conflictos: inline gana sobre interno/externo; entre estos, gana el último en el código.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="../../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Inicio</a>
+      <div class="progress-tracker">
+        <span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-2-selectores.html" class="btn btn-gradient">Siguiente: Selectores y especificidad <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— CSS Básico · Lección 1</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-2-selectores.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var demo = document.getElementById('cascadaDemo');
+
+  document.getElementById('btnInline').addEventListener('click', function() {
+    demo.setAttribute('style', 'background:#1e293b; color:#6366f1; font-size:1.5rem; transition: all 0.3s ease;');
+  });
+
+  document.getElementById('btnInternal').addEventListener('click', function() {
+    demo.setAttribute('style', 'background:#1e293b; transition: all 0.3s ease;');
+    demo.style.color = '#f59e0b';
+  });
+
+  document.getElementById('btnExternal').addEventListener('click', function() {
+    demo.setAttribute('style', 'background:#1e293b; transition: all 0.3s ease;');
+    demo.style.color = '';
+    demo.className = 'p-3 rounded text-center fw-bold text-success';
+  });
+
+  document.getElementById('btnReset').addEventListener('click', function() {
+    demo.setAttribute('style', 'background:#1e293b; color:#e2e8f0; transition: all 0.3s ease;');
+    demo.className = 'p-3 rounded text-center fw-bold';
+  });
+
+  gsap.from('#cascadaDemo', {opacity: 0, y: 20, duration: 0.6, ease: 'power2.out'});
+});
+</script>
+</body>
+</html>

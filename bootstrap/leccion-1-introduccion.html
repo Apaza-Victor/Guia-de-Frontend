@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 1 de Bootstrap 5: qué es Bootstrap, historia breve, instalación por CDN o npm y el grid system de 12 columnas con breakpoints, offset, order y gutters.">
+  <title>Lección 1 — Introducción y grid system | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Bootstrap</a></li>
+        <li class="breadcrumb-item active text-light">Lección 1</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-bootstrap-fill me-1"></i>Bootstrap · Lección 1</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>40 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Introducción y grid system</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">Qué es Bootstrap, su historia, cómo instalarlo y el sistema de grid de 12 columnas.</p>
+    <div class="progress-tracker">
+      <span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-bootstrap-fill text-gradient me-2"></i>¿Qué es Bootstrap?</h2>
+      <p>
+        <strong>Bootstrap</strong> es el framework CSS más usado del mundo: un conjunto de <strong>HTML, CSS y JavaScript</strong>
+        listo para usar con el que construyes interfaces responsivas de forma rápida y consistente.
+        En vez de escribir media queries a mano, defines clases como <code>col-md-6</code> y Bootstrap se encarga del resto.
+      </p>
+      <p>Historia breve:</p>
+      <table class="table mt-2">
+        <thead>
+          <tr><th scope="col">Año</th><th scope="col">Hito</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2011</td><td>Nace como <strong>Twitter Blueprint</strong>, la guía de estilos interna de Twitter.</td></tr>
+          <tr><td>2013</td><td><strong>Bootstrap 3</strong> se vuelve mobile-first y adopta el grid fluido por defecto.</td></tr>
+          <tr><td>2018</td><td><strong>Bootstrap 4</strong> abandona Less por Sass y añade Flexbox.</td></tr>
+          <tr><td>2021</td><td><strong>Bootstrap 5</strong> elimina jQuery, usa variables CSS e incluye iconos y utilidades flexbox completas.</td></tr>
+        </tbody>
+      </table>
+      <div class="warning-box mt-4">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#fbbf24;"></i>Aviso:</strong>
+        Bootstrap <em>estiliza</em> rápido, pero si dependes solo de él tus páginas se parecerán entre sí.
+        Úsalo como base y personalízalo con tus propias variables (lo verás en la lección 4).
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-download text-gradient me-2"></i>Instalación: CDN vs npm</h2>
+      <p>Tienes dos caminos principales para incluir Bootstrap en un proyecto.</p>
+      <p><strong>Opción 1 — CDN (recomendada para practicar):</strong> solo añades el <code>link</code> de CSS en el <code>&lt;head&gt;</code> y el script del bundle al final del body.</p>
+      <pre class="code-block"><code><span class="token-comment">&lt;!-- CSS en el head --&gt;</span>
+<span class="token-tag">&lt;link</span> <span class="token-attr">href</span>=<span class="token-value">"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"</span> <span class="token-attr">rel</span>=<span class="token-value">"stylesheet"</span><span class="token-tag">&gt;</span>
+
+<span class="token-comment">&lt;!-- JS (bundle) antes de cerrar el body --&gt;</span>
+<span class="token-tag">&lt;script</span> <span class="token-attr">src</span>=<span class="token-value">"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"</span><span class="token-tag">&gt;&lt;/script&gt;</span></code></pre>
+      <p><strong>Opción 2 — npm (proyectos reales):</strong> instalas el paquete y lo compilas con tu bundler favorito (Vite, Webpack…).</p>
+      <pre class="code-block"><code><span class="token-tag">npm</span> <span class="token-attr">install</span> bootstrap<span class="token-tag">&nbsp;</span>
+<span class="token-comment"># luego importas el Sass:  @import "bootstrap/scss/bootstrap";</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Criterio</th><th scope="col">CDN</th><th scope="col">npm</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Velocidad de setup</td><td>Segundos, sin instalación</td><td>Requiere Node y build</td></tr>
+          <tr><td>Personalización</td><td>Limitada a variables CSS</td><td>Fuente Sass completa</td></tr>
+          <tr><td>Uso ideal</td><td>Prototipos y lecciones</td><td>Aplicaciones en producción</td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box mt-4">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        El <code>bootstrap.bundle.min.js</code> ya incluye Popper, que necesita el tooltip, las dropdowns y los popovers. Cárgalo siempre al final del body.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-grid text-gradient me-2"></i>El grid: container, row y col</h2>
+      <p>El grid de Bootstrap tiene tres capas que siempre se anidan en este orden:</p>
+      <ul class="mt-2">
+        <li><strong><code>.container</code></strong> — centra el contenido y aplica un ancho máximo según el breakpoint.</li>
+        <li><strong><code>.row</code></strong> — crea una fila horizontal y activa los <em>gutters</em> (márgenes entre columnas).</li>
+        <li><strong><code>.col-*</code></strong> — cada columna. La fila se divide siempre en <strong>12 unidades</strong>.</li>
+      </ul>
+      <pre class="code-block"><code><span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-value">"container"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-value">"row"</span><span class="token-tag">&gt;</span>
+    <span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-value">"col-6 col-md-4"</span><span class="token-tag">&gt;&lt;/div&gt;</span> <span class="token-comment">&lt;!-- 6 col. en móvil, 4 en md --&gt;</span>
+    <span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-value">"col-6 col-md-4"</span><span class="token-tag">&gt;&lt;/div&gt;</span>
+    <span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-value">"col-12 col-md-4"</span><span class="token-tag">&gt;&lt;/div&gt;</span>
+  <span class="token-tag">&lt;/div&gt;</span>
+<span class="token-tag">&lt;/div&gt;</span></code></pre>
+      <p>La lógica: la columna coge el ancho equivalente a su número de unidades <em>sobre 12</em>. <code>col-md-6</code> = la mitad de la fila desde el breakpoint <code>md</code> en adelante.</p>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Clase</th><th scope="col">Breakpoint</th><th scope="col">Ancho mínimo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>col-*</code></td><td>Sin prefijo</td><td>Siempre (móvil)</td></tr>
+          <tr><td><code>col-sm-*</code></td><td>≥ <code>sm</code></td><td>576px</td></tr>
+          <tr><td><code>col-md-*</code></td><td>≥ <code>md</code></td><td>768px</td></tr>
+          <tr><td><code>col-lg-*</code></td><td>≥ <code>lg</code></td><td>992px</td></tr>
+          <tr><td><code>col-xl-*</code></td><td>≥ <code>xl</code></td><td>1200px</td></tr>
+          <tr><td><code>col-xxl-*</code></td><td>≥ <code>xxl</code></td><td>1400px</td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box mt-4">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Reduce el ancho de la ventana del navegador mientras miras la demo. Verás la misma fila reorganizarse sola: eso es la responsividad del grid.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-arrows-expand text-gradient me-2"></i>Offset, order y gutters</h2>
+      <p>Tres utilidades que refinan el grid:</p>
+      <ul class="mt-2">
+        <li><strong><code>offset-md-2</code></strong> — empuja la columna <em>n</em> unidades hacia la derecha (crea espacios en blanco).</li>
+        <li><strong><code>order-first / order-last / order-2</code></strong> — reordena visualmente las columnas sin tocar el HTML.</li>
+        <li><strong><code>g-3 / gx-4 / gy-2</code></strong> — controla los gutters: la distancia entre columnas (<code>g</code> total, <code>gx</code> horizontal, <code>gy</code> vertical).</li>
+      </ul>
+      <pre class="code-block"><code><span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-value">"row g-4"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-value">"col-md-4 order-md-2"</span><span class="token-tag">&gt;</span>Contenido B<span class="token-tag">&lt;/div&gt;</span>
+  <span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-value">"col-md-4 offset-md-2 order-md-1"</span><span class="token-tag">&gt;</span>Contenido A<span class="token-tag">&lt;/div&gt;</span>
+<span class="token-tag">&lt;/div&gt;</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Clase</th><th scope="col">Qué hace</th><th scope="col">Ejemplo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>offset-*</code></td><td>Desplaza la columna hacia la derecha</td><td><code>offset-lg-3</code></td></tr>
+          <tr><td><code>order-*</code></td><td>Cambia el orden visual</td><td><code>order-first</code></td></tr>
+          <tr><td><code>g-*</code></td><td>Gutter en ambos ejes</td><td><code>g-3</code></td></tr>
+          <tr><td><code>gx-* / gy-*</code></td><td>Gutter solo horizontal / solo vertical</td><td><code>gx-4 gy-2</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-lightbulb text-gradient me-2"></i>Demo interactiva: grid en vivo</h2>
+      <p>Arrastra el control para <strong>elegir cuántas columnas</strong> ocupa cada bloque y mira cómo cambia la clase aplicada.</p>
+
+      <div class="demo-box">
+        <div class="card bg-white bg-opacity-10 border border-white border-opacity-10 mb-4">
+          <div class="card-body d-flex flex-wrap align-items-end gap-3">
+            <div class="flex-grow-1" style="min-width:180px;">
+              <label for="rangoCol" class="form-label small mb-1" style="color:#cbd5e1 !important;">Columnas ocupadas</label>
+              <input type="range" class="form-range" id="rangoCol" min="1" max="12" value="4">
+              <div id="lblClase" class="small monospace mt-1" style="color:#06b6d4 !important;">.col-4</div>
+            </div>
+            <div class="d-flex gap-2">
+              <button class="btn btn-outline-light btn-sm" data-bs-toggle="collapse" data-bs-target="#printGrid"><i class="bi bi-card-text me-1"></i>Ver código</button>
+              <button class="btn btn-gradient btn-sm" onclick="gsap.from('#celdaGrid',{scale:0.85,opacity:0,duration:0.6})">Animar</button>
+            </div>
+          </div>
+        </div>
+        <div class="row g-2 text-center" id="areaGrid">
+          <div class="col" id="celdaGrid"><div class="demo-pill">col</div></div>
+        </div>
+        <div id="printGrid" class="collapse mt-3">
+          <pre class="code-block mb-0"><code><span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-value">"row"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;div</span> <span class="token-attr">class</span>=<span class="token-value">'<span id="codigoClase">col-4</span>'</span><span class="token-tag">&gt;</span>...<span class="token-tag">&lt;/div&gt;</span>
+<span class="token-tag">&lt;/div&gt;</span></code></pre>
+        </div>
+      </div>
+
+      <div class="row g-3 my-2 text-center">
+        <div class="col-6 col-md-3"><div class="demo-pill demo-pill-alt">col-6 · col-md-3</div></div>
+        <div class="col-6 col-md-3"><div class="demo-pill demo-pill-alt">col-6 · col-md-3</div></div>
+        <div class="col-6 col-md-3"><div class="demo-pill demo-pill-alt">col-6 · col-md-3</div></div>
+        <div class="col-6 col-md-3"><div class="demo-pill demo-pill-alt">col-6 · col-md-3</div></div>
+      </div>
+
+      <div class="row g-2 my-3">
+        <div class="col-4"><div class="demo-pill demo-pill-alt d-flex justify-content-center align-items-center h-100">col-4</div></div>
+        <div class="col-4 offset-4"><div class="demo-pill demo-pill-alt d-flex justify-content-center align-items-center h-100">col-4<br>offset-4</div></div>
+      </div>
+      <div class="row g-2 my-3">
+        <div class="col-4 order-2"><div class="demo-pill demo-pill-alt d-flex justify-content-center align-items-center h-100">order-2</div></div>
+        <div class="col-8 order-1"><div class="demo-pill demo-pill-alt d-flex justify-content-center align-items-center h-100">order-1 (aparece antes)</div></div>
+      </div>
+
+      <div class="tip-box mt-4">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Prueba en modo responsive (F12 → icono de dispositivo) mientras mueves el rango: las clases <code>col-md-*</code> e <code>col-lg-*</code> solo aplican desde su breakpoint.
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>Bootstrap se instala por <strong>CDN</strong> (rápido) o <strong>npm</strong> (personalizable).</li>
+        <li>El grid se compone de <code>container</code> → <code>row</code> → <code>col</code> y suma <strong>12 columnas</strong>.</li>
+        <li>Los prefijos <code>sm / md / lg / xl / xxl</code> activan el ancho solo desde ese breakpoint.</li>
+        <li><code>offset</code> empuja, <code>order</code> reordena y <code>g-*</code> controla los gutters.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Inicio</a>
+      <div class="progress-tracker">
+        <span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-2-componentes.html" class="btn btn-gradient">Siguiente: Componentes <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— Bootstrap · Lección 1</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-2-componentes.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  #areaGrid .col { min-height: 44px; }
+  #areaGrid .demo-pill { margin-bottom: .25rem; }
+  .demo-pill {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border-radius: .5rem;
+    color: #fff;
+    font-family: "Fira Code", monospace;
+    font-size: .8rem;
+    padding: .6rem .75rem;
+    text-align: center;
+    box-shadow: 0 .25rem .75rem rgba(99,102,241,.25);
+  }
+  .demo-pill-alt { background: rgba(99,102,241,.18); border: 1px solid rgba(99,102,241,.4); }
+</style>
+
+<script>
+  (function () {
+    const rango = document.getElementById('rangoCol');
+    const celda = document.getElementById('celdaGrid');
+    const lblClase = document.getElementById('lblClase');
+    const area = document.getElementById('areaGrid');
+    const codigoClase = document.getElementById('codigoClase');
+    if (rango && area) {
+      function pintar() {
+        const n = parseInt(rango.value, 10);
+        area.className = 'row g-2 text-center';
+        area.innerHTML = '';
+        for (let i = 1; i <= n; i++) {
+          const col = document.createElement('div');
+          col.className = 'col p-1';
+          col.innerHTML = '<div class="demo-pill">' + i + '</div>';
+          area.appendChild(col);
+        }
+        if (lblClase) lblClase.textContent = '.col-* × ' + n + ' → columna de ' + Math.round(12 / n * 10) / 10 + ' unidades';
+        if (codigoClase) codigoClase.textContent = 'col-' + (12 % n === 0 ? 12 / n : 'auto');
+      }
+      rango.addEventListener('input', pintar);
+      pintar();
+    }
+  })();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

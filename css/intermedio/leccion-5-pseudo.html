@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 5 de CSS Intermedio: Pseudo-clases y pseudo-elementos. Aprende :hover, :focus, :active, :nth-child, :not, :is, ::before, ::after, content y :has() con demo interactiva.">
+  <title>Lección 5 — Pseudo-clases y pseudo-elementos | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <style>
+    /* ---------- DEMO PSEUDO ---------- */
+    .pseudo-demo-list {
+      background: #1e1e2e;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 16px;
+      list-style: none;
+      margin: 0;
+    }
+    .pseudo-demo-list li {
+      background: linear-gradient(135deg, #1e1e2e, #2a2a3e);
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 8px;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    .pseudo-demo-list li.highlighted {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 1px #6366f1 inset;
+    }
+    .pseudo-demo-list li:last-child { margin-bottom: 0; }
+    .pseudo-toolbar .btn { font-size: 0.8rem; }
+    .pseudo-toolbar .btn.active-btn {
+      background: #6366f1;
+      color: #fff;
+      border-color: #6366f1;
+    }
+    /* ---------- DEMO ::AFTER ---------- */
+    .badge-pill-empty {
+      display: inline-block;
+      background: rgba(6,182,212,0.12);
+      border: 1px solid #06b6d4;
+      color: #06b6d4;
+      border-radius: 20px;
+      padding: 12px 24px;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    .badge-pill-empty::after {
+      content: " · relleno generado";
+    }
+  </style>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">CSS</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Intermedio</a></li>
+        <li class="breadcrumb-item active text-light">Lección 5</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-2-circle me-1"></i>CSS Intermedio · Lección 5</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>40 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Pseudo-clases y pseudo-elementos</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">Estiliza estados (:hover, :focus), posiciones (:nth-child, :not, :is), elementos generados (::before, ::after) y hasta al padre con :has().</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <!-- ========== QUÉ SON ========== -->
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-magic text-gradient me-2"></i>¿Qué son las pseudo-clases?</h2>
+      <p>
+        Una <strong>pseudo-clase</strong> selecciona elementos según un <strong>estado o posición</strong> que no se refleja en el HTML:
+        ¿está el cursor encima? ¿es el primer hijo? Se escriben con <strong>un solo dos puntos</strong> y se pegan al selector:
+      </p>
+      <pre class="code-block"><code><span class="token-tag">selector</span>:<span class="token-value">pseudo-clase</span> {
+  <span class="token-prop">propiedad</span>: <span class="token-value">valor</span>;
+}
+
+<span class="token-comment">/* Ejemplos reales */</span>
+<span class="token-tag">a</span>:<span class="token-value">hover</span>   { <span class="token-prop">color</span>: <span class="token-value">#6366f1</span>; }
+<span class="token-tag">button</span>:<span class="token-value">focus</span> { <span class="token-prop">outline</span>: <span class="token-value">2px solid #06b6d4</span>; }
+<span class="token-tag">li</span>:<span class="token-value">first-child</span> { <span class="token-prop">font-weight</span>: <span class="token-value">700</span>; }</code></pre>
+      <div class="tip-box mt-3">
+        <i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>
+        <strong class="text-white">Tip:</strong> No confundas los <strong>dos puntos</strong>: las pseudo-<em>clases</em> usan <code>:</code> (estados), los pseudo-<em>elementos</em> usan <code>::</code> (partes). CSS acepta <code>:</code> en ambos por compatibilidad, pero el estándar usa <code>::</code> para pseudo-elementos.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ========== ESTADOS ========== -->
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-cursor text-gradient me-2"></i>Estados: :hover, :focus y :active</h2>
+      <p>Son las pseudo-clases de <strong>interacción</strong>: el navegador las activa según las acciones de la persona usuaria:</p>
+      <table class="table">
+        <thead>
+          <tr><th scope="col">Pseudo-clase</th><th scope="col">Cuándo aplica</th><th scope="col">Uso típico</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>:hover</code></td><td>El cursor está sobre el elemento</td><td>Cambiar color de enlaces, elevar tarjetas</td></tr>
+          <tr><td><code>:focus</code></td><td>El elemento recibe el teclado (Tab, clic)</td><td>Resaltar inputs y botones accesibles</td></tr>
+          <tr><td><code>:active</code></td><td>El elemento se está pulsando (clic presionado)</td><td>Feedback táctil de botones</td></tr>
+          <tr><td><code>:focus-within</code></td><td>El elemento <em>o un descendiente</em> recibe el foco</td><td>Resaltar todo el formulario al enfocar un campo</td></tr>
+          <tr><td><code>:visited</code></td><td>El enlace ya fue visitado</td><td>Diferenciar historial (usa solo <code>color</code>)</td></tr>
+        </tbody>
+      </table>
+      <pre class="code-block mt-3"><code><span class="token-tag">.btn</span> {
+  <span class="token-prop">transition</span>: <span class="token-value">transform 0.2s ease</span>;
+}
+<span class="token-tag">.btn</span>:<span class="token-value">hover</span>   { <span class="token-prop">transform</span>: <span class="token-value">translateY(-2px)</span>; }
+<span class="token-tag">.btn</span>:<span class="token-value">active</span>  { <span class="token-prop">transform</span>: <span class="token-value">scale(0.96)</span>; }
+<span class="token-tag">.btn</span>:<span class="token-value">focus-visible</span> {
+  <span class="token-prop">outline</span>: <span class="token-value">3px solid rgba(6,182,212,0.5)</span>;
+  <span class="token-prop">outline-offset</span>: <span class="token-value">2px</span>;
+}</code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Accesibilidad:</strong>
+        No elimines el <code>outline</code> del foco (<code>outline: none</code>): deja al menos un borde visible alternativo. El teclado necesita saber dónde está el cursor. Si quieres ocultarlo solo con ratón, usa <code>:focus-visible</code>.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ========== NTH-CHILD ========== -->
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-list-ol text-gradient me-2"></i>:nth-child y sus variantes</h2>
+      <p>Seleccionan elementos por su <strong>posición</strong> dentro del padre, con la fórmula <code>an + b</code>:</p>
+      <pre class="code-block"><code><span class="token-tag">li</span>:<span class="token-value">nth-child(2)</span>      <span class="token-comment">/* el segundo hijo */</span>
+<span class="token-tag">li</span>:<span class="token-value">nth-child(odd)</span>    <span class="token-comment">/* los impares (1, 3, 5…) */</span>
+<span class="token-tag">li</span>:<span class="token-value">nth-child(even)</span>   <span class="token-comment">/* los pares (2, 4, 6…) */</span>
+<span class="token-tag">li</span>:<span class="token-value">nth-child(3n)</span>     <span class="token-comment">/* cada 3 elementos (3, 6, 9…) */</span>
+<span class="token-tag">li</span>:<span class="token-value">nth-child(3n + 1)</span> <span class="token-comment">/* el primero de cada grupo de 3 */</span>
+<span class="token-tag">li</span>:<span class="token-value">nth-last-child(1)</span> <span class="token-comment">/* el último hijo */</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Selector</th><th scope="col">Matemática</th><th scope="col">Resultado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>:nth-child(odd)</code></td><td><code>2n + 1</code></td><td>Filas alternas de una tabla (sombrear)</td></tr>
+          <tr><td><code>:nth-child(3n)</code></td><td><code>3n</code></td><td>Cada 3 elementos en un grid</td></tr>
+          <tr><td><code>:nth-last-child(2)</code></td><td>Desde el final</td><td>Penúltimo elemento de una lista</td></tr>
+          <tr><td><code>:first-child / :last-child</code></td><td>Fijos</td><td>Quitar el margen del primer/último item</td></tr>
+          <tr><td><code>:nth-of-type(2)</code></td><td>Por tipo</td><td>2º <code>&lt;p&gt;</code> ignorando los <code>&lt;div&gt;</code> intercalados</td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box mt-3">
+        <i class="bi bi-star me-2" style="color:#f59e0b;"></i>
+        <strong class="text-white">Truco:</strong> para <strong>1 de cada X</strong>, escribe <code>:nth-child(Xn + 1)</code>. De ahí salen los grids del "primer item pegado a la izquierda".
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ========== NOT E IS ========== -->
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-sign-intersection text-gradient me-2"></i>:not() y :is()</h2>
+      <p><code>:not()</code> <strong>excluye</strong> elementos y <code>:is()</code> <strong>agrupa selectores</strong> para no repetirlos:</p>
+      <pre class="code-block"><code><span class="token-comment">/* Todo excepto el último item */</span>
+<span class="token-tag">li</span>:<span class="token-value">not</span>(<span class="token-tag">:last-child</span>) {
+  <span class="token-prop">margin-bottom</span>: <span class="token-value">12px</span>;
+}
+
+<span class="token-comment">/* Sin :is() — repetición larga */</span>
+<span class="token-tag">.card</span> :<span class="token-value">hover</span> .titulo,   <span class="token-tag">.card</span> :<span class="token-value">focus</span> .titulo,
+<span class="token-tag">.banner</span> :<span class="token-value">hover</span> .titulo, <span class="token-tag">.banner</span> :<span class="token-value">focus</span> .titulo { … }
+
+<span class="token-comment">/* Con :is() — agrupa y reduce */</span>
+<span class="token-tag">:is</span>(<span class="token-tag">.card</span>, <span class="token-tag">.banner</span>)<span class="token-value">:hover</span> <span class="token-tag">.titulo</span>,
+<span class="token-tag">:is</span>(<span class="token-tag">.card</span>, <span class="token-tag">.banner</span>)<span class="token-value">:focus</span> <span class="token-tag">.titulo</span> {
+  <span class="token-prop">color</span>: <span class="token-value">#6366f1</span>;
+}
+
+<span class="token-comment">/* Combinable: todo menos uno */</span>
+<span class="token-tag">.form</span> :<span class="token-value">not</span>(<span class="token-tag">[</span><span class="token-attr">type</span>=<span class="token-value">"hidden"</span><span class="token-tag">]</span>) {
+  <span class="token-prop">margin-bottom</span>: <span class="token-value">16px</span>;
+}</code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ========== BEFORE/AFTER ========== -->
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-bezier2 text-gradient me-2"></i>Pseudo-elementos: ::before y ::after</h2>
+      <p>Un pseudo-elemento genera una <strong>caja extra</strong> dentro de un elemento, sin tocarlo en el HTML. Va siempre acompañado de <code>content</code>:</p>
+      <pre class="code-block"><code><span class="token-tag">.titulo-seccion</span>::<span class="token-value">before</span> {
+  <span class="token-prop">content</span>: <span class="token-value">"› "</span>;                   <span class="token-comment">/* texto (o "" para solo estilo) */</span>
+  <span class="token-prop">color</span>: <span class="token-value">#06b6d4</span>;
+}
+
+<span class="token-tag">.card</span>::<span class="token-value">after</span> {
+  <span class="token-prop">content</span>: <span class="token-value">""</span>;                    <span class="token-comment">/* vacío: solo decoración */</span>
+  <span class="token-prop">display</span>: <span class="token-value">block</span>;
+  <span class="token-prop">width</span>: <span class="token-value">40px</span>;
+  <span class="token-prop">height</span>: <span class="token-value">3px</span>;
+  <span class="token-prop">background</span>: <span class="token-value">#6366f1</span>;
+  <span class="token-prop">border-radius</span>: <span class="token-value">2px</span>;
+}
+
+<span class="token-comment">/* content también acepta attr() desde el HTML */</span>
+<span class="token-tag">.badge</span>::<span class="token-value">after</span> {
+  <span class="token-prop">content</span>: <span class="token-value">attr(data-estado)</span>;
+}</code></pre>
+      <div class="demo-box mt-3">
+        <h3 class="h5 text-white fw-bold mb-3"><i class="bi bi-bezier2 me-2"></i>Demo: ::after generando contenido</h3>
+        <div class="text-center">
+          <span class="badge-pill-empty"><i class="bi bi-magic me-1"></i>Solo HTML</span>
+        </div>
+        <p class="text-secondary small mt-2 mb-0 text-center">El texto "· relleno generado" en naranja lo añade el CSS con <code>::after</code>, no está en el HTML.</p>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ========== HAS ========== -->
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-diagram-2 text-gradient me-2"></i>:has() — el "selector padre"</h2>
+      <p><code>:has()</code> estiliza un elemento <strong>según sus descendientes</strong>. Es el truco que permite "seleccionar al padre" sin JavaScript:</p>
+      <pre class="code-block"><code><span class="token-comment">/* Resalta la card que contiene una imagen */</span>
+<span class="token-tag">.card</span>:<span class="token-value">has</span>(<span class="token-tag">img</span>) {
+  <span class="token-prop">border-color</span>: <span class="token-value">#6366f1</span>;
+}
+
+<span class="token-comment">/* Cambia el padding del form si hay error visible */</span>
+<span class="token-tag">.form-group</span>:<span class="token-value">has</span>(<span class="token-tag">.error</span>) <span class="token-tag">input</span> {
+  <span class="token-prop">border-color</span>: <span class="token-value">#f43f5e</span>;
+}
+
+<span class="token-comment">/* Contadores de navegación del tipo "dropdown" */</span>
+<span class="token-tag">nav</span> <span class="token-tag">li</span>:<span class="token-value">has</span>(<span class="token-tag">ul</span>) {
+  <span class="token-prop">position</span>: <span class="token-value">relative</span>;   <span class="token-comment">/* el <li> que contiene un submenu */</span>
+}</code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Rendimiento:</strong>
+        <code>:has()</code> es potente pero costoso de evaluar. Úsalo moderado: está bien para tarjetas y formularios, evítalo en selectores muy anidados o con muchos elementos.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ========== DEMO INTERACTIVA ========== -->
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-play-circle text-gradient me-2"></i>Demo interactiva: :nth-child en acción</h2>
+      <p>Elige qué patrón de <code>:nth-child</code> quieres resaltar y GSAP anima los items que coinciden:</p>
+      <div class="demo-box">
+        <div class="pseudo-toolbar d-flex flex-wrap gap-2 mb-3">
+          <button class="btn btn-sm btn-outline-light active-btn" onclick="setNth('odd', this)">:nth-child(odd)</button>
+          <button class="btn btn-sm btn-outline-light" onclick="setNth('even', this)">:nth-child(even)</button>
+          <button class="btn btn-sm btn-outline-light" onclick="setNth('3n', this)">:nth-child(3n)</button>
+          <button class="btn btn-sm btn-outline-light" onclick="setNth('none', this)">limpiar</button>
+        </div>
+        <ul class="pseudo-demo-list" id="pseudoList">
+          <li>Item 1 — producto A</li>
+          <li>Item 2 — producto B</li>
+          <li>Item 3 — producto C</li>
+          <li>Item 4 — producto D</li>
+          <li>Item 5 — producto E</li>
+          <li>Item 6 — producto F</li>
+        </ul>
+        <div class="text-center mt-3">
+          <small class="text-secondary" id="pseudoStatusLabel">Patrón actual: :nth-child(odd)</small>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ========== REPASO ========== -->
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>Las <strong>pseudo-clases</strong> (<code>:</code>) aplican por estado o posición: <code>:hover</code>, <code>:focus</code>, <code>:active</code>, <code>:nth-child</code>.</li>
+        <li>Los <strong>pseudo-elementos</strong> (<code>::</code>) generan cajas extra: <code>::before</code> y <code>::after</code> siempre usan <code>content</code>.</li>
+        <li><code>:nth-child(an + b)</code> selecciona posiciones con matemática: <code>odd</code>, <code>even</code>, <code>3n</code>…</li>
+        <li><code>:not()</code> excluye y <code>:is()</code> agrupa selectores para reducir repetición.</li>
+        <li><code>:has()</code> estiliza el padre según sus hijos — guárdalo para casos moderados por rendimiento.</li>
+        <li>No borres el <code>outline</code> de foco sin ofrecer una alternativa visible.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-4-display-flow.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior: Display y flujo</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-6-responsive.html" class="btn btn-gradient">Siguiente: Responsive <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— CSS Intermedio · Lección 5</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-6-responsive.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script>
+  const pseudoList = document.getElementById('pseudoList');
+  const pseudoItems = Array.from(pseudoList.querySelectorAll('li'));
+  const pseudoStatus = document.getElementById('pseudoStatusLabel');
+
+  function setNth(pattern, btn) {
+    btn.parentElement.querySelectorAll('.btn').forEach(b => b.classList.remove('active-btn'));
+    btn.classList.add('active-btn');
+
+    pseudoItems.forEach(li => li.classList.remove('highlighted'));
+
+    const selected = pseudoItems.filter((li, i) => {
+      if (pattern === 'odd') return i % 2 === 0;
+      if (pattern === 'even') return i % 2 === 1;
+      if (pattern === '3n') return (i + 1) % 3 === 0;
+      return false;
+    });
+
+    selected.forEach(li => li.classList.add('highlighted'));
+    gsap.from(selected, { opacity: 0, x: -10, scale: 0.97, stagger: 0.07, duration: 0.35, ease: 'power2.out' });
+
+    pseudoStatus.textContent = pattern === 'none'
+      ? 'Patrón limpio — ningún item resaltado'
+      : `Patrón actual: :nth-child(${pattern})`;
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Guía completa de Frontend de cero a experto: HTML, CSS, JavaScript, Bootstrap, herramientas y frameworks. 60 lecciones prácticas y navegables.">
+  <title>Frontend Pro — Guía de Cero a Experto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 6rem 0 4rem;
+    }
+    .hero-section::before {
+      content: "";
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99,102,241,0.35), transparent 70%);
+      top: -150px;
+      right: -100px;
+      animation: floatBlob 8s ease-in-out infinite;
+    }
+    .hero-section::after {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(236,72,153,0.3), transparent 70%);
+      bottom: -120px;
+      left: -80px;
+      animation: floatBlob 10s ease-in-out infinite reverse;
+    }
+    @keyframes floatBlob {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.05); }
+    }
+    .skill-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50rem;
+      padding: 0.45rem 1.1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin: 0.25rem;
+      transition: all 0.3s ease;
+    }
+    .skill-chip:hover {
+      background: rgba(99,102,241,0.2);
+      border-color: rgba(99,102,241,0.5);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link active" href="#inicio">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-section" id="inicio">
+  <div class="container position-relative" style="z-index: 2;">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-7" data-aos="fade-right">
+        <span class="badge-soft mb-3 d-inline-flex gap-2 align-items-center">
+          <i class="bi bi-stars"></i> Guía completa · 5 temas · 60 lecciones
+        </span>
+        <h1 class="display-3 fw-bold text-white mb-3">
+          Domina el <span class="text-gradient">Frontend</span><br>de Cero a Experto
+        </h1>
+        <p class="lead text-secondary mb-4" style="color:#94a3b8 !important;">
+          Aprende HTML, CSS, JavaScript y Bootstrap con lecciones independientes,
+          ejemplos interactivos y una ruta de aprendizaje clara y escalable.
+        </p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="temario.html" class="btn btn-gradient btn-lg px-5"><i class="bi bi-mortarboard me-2"></i>Empezar a aprender</a>
+          <a href="ruta-aprendizaje.html" class="btn btn-ghost-glass btn-lg px-4"><i class="bi bi-map me-2"></i>Ver la ruta</a>
+        </div>
+        <div class="d-flex flex-wrap gap-3 mt-5">
+          <div>
+            <div class="fs-3 fw-bold text-white"><span data-counter="60">0</span>+</div>
+            <small class="text-secondary" style="color:#94a3b8 !important;">Lecciones</small>
+          </div>
+          <div class="vr d-none d-sm-block" style="width:1px; height:50px;"></div>
+          <div>
+            <div class="fs-3 fw-bold text-white"><span data-counter="5">0</span></div>
+            <small class="text-secondary" style="color:#94a3b8 !important;">Secciones</small>
+          </div>
+          <div class="vr d-none d-sm-block" style="width:1px; height:50px;"></div>
+          <div>
+            <div class="fs-3 fw-bold text-white"><span data-counter="4">0</span></div>
+            <small class="text-secondary" style="color:#94a3b8 !important;">Fases de ruta</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5" data-aos="fade-left" data-aos-delay="200">
+        <div class="glass glass-strong rounded-4 p-4">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <div class="d-flex gap-1">
+              <span class="btn rounded-circle p-1" style="width:12px;height:12px;background:#f87171;font-size:0;"></span>
+              <span class="btn rounded-circle p-1" style="width:12px;height:12px;background:#fbbf24;font-size:0;"></span>
+              <span class="btn rounded-circle p-1" style="width:12px;height:12px;background:#34d399;font-size:0;"></span>
+            </div>
+            <span class="text-secondary fw-bold small" style="color:#94a3b8 !important;">tu-primera-web.html</span>
+          </div>
+          <pre class="code-block mb-0" style="border-left:none; background:transparent;"><code><span class="token-tag">&lt;!DOCTYPE html&gt;</span>
+<span class="token-tag">&lt;html</span> <span class="token-attr">lang</span>=<span class="token-value">"es"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;head&gt;</span>
+    <span class="token-tag">&lt;link</span> <span class="token-attr">rel</span>=<span class="token-value">"stylesheet"</span> <span class="token-attr">href</span>=<span class="token-value">"estilos.css"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;/head&gt;</span>
+  <span class="token-tag">&lt;body&gt;</span>
+    <span class="token-tag">&lt;header&gt;</span>
+      <span class="token-tag">&lt;h1</span> <span class="token-attr">class</span>=<span class="token-value">"titulo"</span><span class="token-tag">&gt;</span>Hola Frontend<span class="token-tag">&lt;/h1&gt;</span>
+    <span class="token-tag">&lt;/header&gt;</span>
+    <span class="token-tag">&lt;script&gt;</span>
+      <span class="token-comment">// JavaScript moderno aquí</span>
+      <span class="token-tag">document</span>.<span class="token-prop">querySelector</span>(<span class="token-value">'.titulo'</span>)
+      <span class="token-prop">.animate</span>(<span class="token-value">[{opacity: 0},{opacity: 1}]</span>,
+        <span class="token-value">{duration: 800}</span>);
+    <span class="token-tag">&lt;/script&gt;</span>
+  <span class="token-tag">&lt;/body&gt;</span>
+<span class="token-tag">&lt;/html&gt;</span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE: carrusel infinito de tecnologías -->
+<div class="marquee py-4" data-aos="fade-up">
+  <div class="marquee-track">
+    <span class="marquee-item"><i class="bi bi-filetype-html text-danger"></i>HTML5</span>
+    <span class="marquee-item"><i class="bi bi-filetype-css text-info"></i>CSS3</span>
+    <span class="marquee-item"><i class="bi bi-filetype-js text-warning"></i>JavaScript ES6+</span>
+    <span class="marquee-item"><i class="bi bi-bootstrap-fill text-primary"></i>Bootstrap 5</span>
+    <span class="marquee-item"><i class="bi bi-git"></i>Git &amp; GitHub</span>
+    <span class="marquee-item"><i class="bi bi-npm text-danger"></i>npm</span>
+    <span class="marquee-item"><i class="bi bi-filetype-scss text-pink" style="color:#ec4899;"></i>Sass</span>
+    <span class="marquee-item"><i class="bi bi-hexagon-fill text-success"></i>React</span>
+    <span class="marquee-item"><i class="bi bi-arrow-repeat"></i>Vue</span>
+    <span class="marquee-item"><i class="bi bi-magic"></i>GSAP</span>
+    <span class="marquee-item"><i class="bi bi-brush"></i>Tailwind</span>
+    <span class="marquee-item"><i class="bi bi-filetype-html text-danger"></i>HTML5</span>
+    <span class="marquee-item"><i class="bi bi-filetype-css text-info"></i>CSS3</span>
+    <span class="marquee-item"><i class="bi bi-filetype-js text-warning"></i>JavaScript ES6+</span>
+    <span class="marquee-item"><i class="bi bi-bootstrap-fill text-primary"></i>Bootstrap 5</span>
+    <span class="marquee-item"><i class="bi bi-git"></i>Git &amp; GitHub</span>
+    <span class="marquee-item"><i class="bi bi-npm text-danger"></i>npm</span>
+    <span class="marquee-item"><i class="bi bi-filetype-scss text-pink" style="color:#ec4899;"></i>Sass</span>
+    <span class="marquee-item"><i class="bi bi-hexagon-fill text-success"></i>React</span>
+    <span class="marquee-item"><i class="bi bi-arrow-repeat"></i>Vue</span>
+    <span class="marquee-item"><i class="bi bi-magic"></i>GSAP</span>
+    <span class="marquee-item"><i class="bi bi-brush"></i>Tailwind</span>
+  </div>
+</div>
+
+<!-- TEMARIO: apartados por sección -->
+<!-- TEMARIO: teaser que enlaza a temario.html -->
+<section class="py-5" id="temario" style="padding-top:6rem !important;">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <span class="badge-soft-cyan mb-3 d-inline-flex align-items-center gap-2"><i class="bi bi-list-check"></i> Temario completo</span>
+      <h2 class="display-6 fw-bold text-white mb-2">Un temario en 5 temas · 60 lecciones</h2>
+      <p class="text-secondary w-75 mx-auto" style="color:#94a3b8 !important;">
+        Cada tema está dividido en subsecciones por nivel con sus propias tarjetas.
+        Explora el temario completo o entra directo al tema que quieras.
+      </p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="0">
+        <a class="theme-card d-block text-decoration-none" href="temario.html#html">
+          <div class="theme-head">
+            <div class="icon-badge"><i class="bi bi-filetype-html"></i></div>
+            <div>
+              <h5 class="fw-bold text-white mb-1">HTML</h5>
+              <span class="badge-soft"><i class="bi bi-book me-1"></i>10 lecciones</span>
+            </div>
+          </div>
+          <div class="theme-body">
+            <p class="small mb-3" style="color:#94a3b8 !important;">Fundamentos de HTML: texto, listas, enlaces, imágenes, tablas, formularios, multimedia y accesibilidad.</p>
+            <span class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ver subsección</span>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="100">
+        <a class="theme-card d-block text-decoration-none" href="temario.html#css">
+          <div class="theme-head">
+            <div class="icon-badge cyan"><i class="bi bi-filetype-css"></i></div>
+            <div>
+              <h5 class="fw-bold text-white mb-1">CSS</h5>
+              <span class="badge-soft"><i class="bi bi-book me-1"></i>21 lecciones · 3 niveles</span>
+            </div>
+          </div>
+          <div class="theme-body">
+            <p class="small mb-3" style="color:#94a3b8 !important;">Básico, intermedio y avanzado: selectores, Flexbox, Grid, variables, animaciones y efectos modernos.</p>
+            <span class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ver subsecciones</span>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="200">
+        <a class="theme-card d-block text-decoration-none" href="temario.html#javascript">
+          <div class="theme-head">
+            <div class="icon-badge"><i class="bi bi-filetype-js"></i></div>
+            <div>
+              <h5 class="fw-bold text-white mb-1">JavaScript</h5>
+              <span class="badge-soft"><i class="bi bi-book me-1"></i>19 lecciones · 3 niveles</span>
+            </div>
+          </div>
+          <div class="theme-body">
+            <p class="small mb-3" style="color:#94a3b8 !important;">Básico, intermedio y avanzado: variables, DOM, eventos, fetch, promesas y patrones de diseño.</p>
+            <span class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ver subsecciones</span>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="300">
+        <a class="theme-card d-block text-decoration-none" href="temario.html#bootstrap">
+          <div class="theme-head">
+            <div class="icon-badge warm"><i class="bi bi-bootstrap-fill"></i></div>
+            <div>
+              <h5 class="fw-bold text-white mb-1">Bootstrap 5</h5>
+              <span class="badge-soft"><i class="bi bi-book me-1"></i>5 lecciones</span>
+            </div>
+          </div>
+          <div class="theme-body">
+            <p class="small mb-3" style="color:#94a3b8 !important;">Grid system, componentes, utilidades, personalización y una landing de práctica con AOS y GSAP.</p>
+            <span class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ver lecciones</span>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="400">
+        <a class="theme-card d-block text-decoration-none" href="temario.html#herramientas">
+          <div class="theme-head">
+            <div class="icon-badge cyan"><i class="bi bi-tools"></i></div>
+            <div>
+              <h5 class="fw-bold text-white mb-1">Herramientas y Frameworks</h5>
+              <span class="badge-soft"><i class="bi bi-book me-1"></i>5 lecciones</span>
+            </div>
+          </div>
+          <div class="theme-body">
+            <p class="small mb-3" style="color:#94a3b8 !important;">Git, npm, Sass, React y Vue: del editor al despliegue con herramientas de producción reales.</p>
+            <span class="btn btn-gradient btn-sm w-100"><i class="bi bi-arrow-right me-1"></i>Ver lecciones</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="text-center mt-4" data-aos="fade-up">
+      <a href="temario.html" class="btn btn-gradient btn-lg px-5"><i class="bi bi-mortarboard me-2"></i>Ver el temario completo</a>
+    </div>
+  </div>
+</section>
+<!-- RUTA DE APRENDIZAJE -->
+<section class="py-5" id="ruta" style="padding-top:4rem !important;">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <span class="badge-soft-cyan mb-3 d-inline-flex align-items-center gap-2"><i class="bi bi-signpost-split"></i> Roadmap</span>
+      <h2 class="display-6 fw-bold text-white mb-2">Ruta de aprendizaje</h2>
+      <p class="text-secondary w-75 mx-auto" style="color:#94a3b8 !important;">Cuatro fases progresivas: de novato absoluto a frontend profesional listo para el mercado laboral.</p>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <div class="timeline" data-aos="fade-up">
+          <div class="phase-item pb-4">
+            <h5 class="text-white fw-bold mb-1">Fase 1 — Fundamentos <span class="badge-soft ms-2">Semanas 1-4</span></h5>
+            <p class="mb-0" style="color:#94a3b8 !important;">HTML semántico, CSS básico e intermedio con Flexbox y Grid. Al final sabrás maquetar cualquier layout responsive.</p>
+          </div>
+          <div class="phase-item pb-4">
+            <h5 class="text-white fw-bold mb-1">Fase 2 — JavaScript <span class="badge-soft-cyan ms-2">Semanas 5-10</span></h5>
+            <p class="mb-0" style="color:#94a3b8 !important;">JS de cero a avanzado: variables, DOM, eventos, fetch, promesas y ES6+. La base de todo framework moderno.</p>
+          </div>
+          <div class="phase-item pb-4">
+            <h5 class="text-white fw-bold mb-1">Fase 3 — Producción <span class="badge-soft-pink ms-2">Semanas 11-14</span></h5>
+            <p class="mb-0" style="color:#94a3b8 !important;">Bootstrap 5 a nivel experto, Git/GitHub, npm, Sass y animaciones profesionales (AOS, GSAP).</p>
+          </div>
+          <div class="phase-item">
+            <h5 class="text-white fw-bold mb-1">Fase 4 — Frameworks <span class="badge-soft ms-2">Semanas 15-20</span></h5>
+            <p class="mb-0" style="color:#94a3b8 !important;">React y Vue con fundamentos sólidos, listo para tu portafolio y el mercado laboral.</p>
+          </div>
+        </div>
+        <div class="text-center mt-4" data-aos="fade-up">
+          <a href="ruta-aprendizaje.html" class="btn btn-ghost-glass btn-lg px-5"><i class="bi bi-map me-2"></i>Ver la ruta completa</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECURSOS -->
+<section class="py-5" id="recursos" style="padding-top:4rem !important;">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <span class="badge-soft-cyan mb-3 d-inline-flex align-items-center gap-2"><i class="bi bi-palette-fill"></i> Tecnologías</span>
+      <h2 class="display-6 fw-bold text-white mb-2">Librerías y recursos integrados</h2>
+      <p class="text-secondary w-75 mx-auto" style="color:#94a3b8 !important;">Toda esta guía usa librerías reales cargadas por CDN — aprenderás usando exactamente lo que se usa en producción.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="0">
+        <div class="card-learning h-100">
+          <div class="card-body text-center">
+            <div class="icon-badge mx-auto"><i class="bi bi-bootstrap-fill"></i></div>
+            <h6 class="text-white fw-bold">Bootstrap 5.3</h6>
+            <p class="small mb-0" style="color:#94a3b8 !important;">Grid, componentes y utilidades. Personalizado con variables CSS.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
+        <div class="card-learning h-100">
+          <div class="card-body text-center">
+            <div class="icon-badge cyan mx-auto"><i class="bi bi-bootstrap-icons"></i></div>
+            <h6 class="text-white fw-bold">Bootstrap Icons</h6>
+            <p class="small mb-0" style="color:#94a3b8 !important;">Iconos vectoriales listos para usar en toda la guía.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
+        <div class="card-learning h-100">
+          <div class="card-body text-center">
+            <div class="icon-badge warm mx-auto"><i class="bi bi-award"></i></div>
+            <h6 class="text-white fw-bold">AOS</h6>
+            <p class="small mb-0" style="color:#94a3b8 !important;">Animaciones al scroll con la librería Animate On Scroll.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="300">
+        <div class="card-learning h-100">
+          <div class="card-body text-center">
+            <div class="icon-badge mx-auto"><i class="bi bi-magic"></i></div>
+            <h6 class="text-white fw-bold">GSAP</h6>
+            <p class="small mb-0" style="color:#94a3b8 !important;">Animación profesional de alto rendimiento (GreenSock).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4" data-aos="fade-up">
+      <a href="recursos.html" class="btn btn-ghost-glass btn-lg px-5"><i class="bi bi-collection me-2"></i>Ver todos los recursos</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-5">
+  <div class="container">
+    <div class="row g-4 align-items-start">
+      <div class="col-lg-4">
+        <a class="navbar-brand d-inline-flex align-items-center gap-2 mb-2" href="index.html">
+          <i class="bi bi-code-slash text-gradient fs-4"></i>
+          <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+        </a>
+        <p class="small mb-0" style="color:#64748b !important;">Guía de cero a experto con 60 lecciones prácticas, demos interactivas y una ruta clara hacia el trabajo real en frontend.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6 class="text-white fw-bold mb-3">Temario</h6>
+        <ul class="list-unstyled d-grid gap-2 small">
+          <li><a href="html/index.html" class="text-secondary text-decoration-none">HTML</a></li>
+          <li><a href="css/index.html" class="text-secondary text-decoration-none">CSS</a></li>
+          <li><a href="javascript/index.html" class="text-secondary text-decoration-none">JavaScript</a></li>
+          <li><a href="bootstrap/index.html" class="text-secondary text-decoration-none">Bootstrap 5</a></li>
+          <li><a href="herramientas/index.html" class="text-secondary text-decoration-none">Herramientas</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6 class="text-white fw-bold mb-3">Guía</h6>
+        <ul class="list-unstyled d-grid gap-2 small">
+          <li><a href="temario.html" class="text-secondary text-decoration-none">Temario</a></li>
+          <li><a href="ruta-aprendizaje.html" class="text-secondary text-decoration-none">Ruta de aprendizaje</a></li>
+          <li><a href="recursos.html" class="text-secondary text-decoration-none">Recursos</a></li>
+          <li><a href="#inicio" class="text-secondary text-decoration-none">Volver arriba</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4">
+        <h6 class="text-white fw-bold mb-3">Navegación rápida</h6>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="temario.html#html" class="btn btn-ghost-glass btn-sm"><i class="bi bi-filetype-html me-1"></i>HTML</a>
+          <a href="temario.html#css" class="btn btn-ghost-glass btn-sm"><i class="bi bi-filetype-css me-1"></i>CSS</a>
+          <a href="temario.html#javascript" class="btn btn-ghost-glass btn-sm"><i class="bi bi-filetype-js me-1"></i>JS</a>
+          <a href="temario.html#bootstrap" class="btn btn-ghost-glass btn-sm"><i class="bi bi-bootstrap-fill me-1"></i>BS5</a>
+          <a href="temario.html#herramientas" class="btn btn-ghost-glass btn-sm"><i class="bi bi-tools me-1"></i>Tools</a>
+        </div>
+        <div class="d-flex gap-3 mt-4">
+          <a href="#inicio" class="text-secondary" style="color:#94a3b8 !important;"><i class="bi bi-arrow-up-circle fs-4"></i></a>
+          <a href="#" class="text-secondary" style="color:#94a3b8 !important;"><i class="bi bi-github fs-4"></i></a>
+          <a href="#" class="text-secondary" style="color:#94a3b8 !important;"><i class="bi bi-file-earmark-code fs-4"></i></a>
+        </div>
+      </div>
+    </div>
+    <hr class="my-4" style="border-color: rgba(255,255,255,0.08);">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+      <span class="small" style="color:#64748b !important;">© 2026 Frontend Pro — Hecho con HTML, CSS y JavaScript.</span>
+      <span class="small" style="color:#64748b !important;"><i class="bi bi-mortarboard me-1"></i>60 lecciones · 5 temas · 4 fases</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

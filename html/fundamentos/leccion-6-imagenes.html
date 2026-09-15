@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 6: Imágenes en HTML. img y alt, dimensiones, lazy loading, srcset, sizes, picture y figure con figcaption.">
+  <title>Lección 6 — Imágenes | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">HTML</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Fundamentos</a></li>
+        <li class="breadcrumb-item active text-light">Lección 6</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft">Sección: HTML · Lección 6</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>30 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Imágenes</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">Carga imágenes que pesen poco, se vean nítidas en cualquier pantalla y nunca rompan la maquetación ni la accesibilidad.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-compass text-gradient me-2"></i>Fundamentos de la lección</h2>
+      <p>Las imágenes son el recurso que más pesa en una página y el que más afecta a la experiencia de usuario. Dominarás el <code>alt</code> para accesibilidad, el <code>loading="lazy"</code> para rendimiento y las técnicas avanzadas de <code>srcset</code> y <code>picture</code> para enviar a cada dispositivo la imagen perfecta.</p>
+      <div class="d-flex flex-wrap gap-2 mt-3">
+        <span class="badge-soft">alt descriptivo</span>
+        <span class="badge-soft-cyan">loading="lazy"</span>
+        <span class="badge-soft-pink">picture + source</span>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-image text-gradient me-2"></i>img, alt y dimensiones</h2>
+      <p>La etiqueta <code>&lt;img&gt;</code> se auto-cierra y necesita el atributo <code>src</code>. El <code>alt</code> describe la imagen para lectores de pantalla y aparece si la imagen no carga. Define <code>width</code>/<code>height</code> para evitar "saltos" de layout al cargar.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;img</span>
+  <span class="token-attr">src</span>=<span class="token-value">"foto-montana.jpg"</span>
+  <span class="token-attr">alt</span>=<span class="token-value">"Vista del Mont Blanc al amanecer"</span>
+  <span class="token-attr">width</span>=<span class="token-value">"800"</span>
+  <span class="token-attr">height</span>=<span class="token-value">"450"</span><span class="token-tag">&gt;</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Atributo</th><th scope="col">Para qué sirve</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>alt</code></td><td>Accesibilidad, SEO y respaldo si la imagen no aparece</td></tr>
+          <tr><td><code>width</code> / <code>height</code></td><td>Reservan espacio y evitan movimientos de pantalla (CLS)</td></tr>
+          <tr><td><code>loading="lazy"</code></td><td>Carga solo cuando la imagen está cerca del viewport</td></tr>
+          <tr><td><code>decoding="async"</code></td><td>No bloquea el renderizado del resto de la página</td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box mt-3">
+        <i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>
+        <strong class="text-white">Regla del alt:</strong> si la imagen aporta información, descríbela. Si es decorativa pura, usa <code>alt=""</code> (vacío) para que el lector de pantalla la ignore.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-speedometer text-gradient me-2"></i>Responsive: srcset y sizes</h2>
+      <p>Con <code>srcset</code> ofreces varias versiones de la imagen y con <code>sizes</code> le dices al navegador cuánto espacio ocupará, para que elija la más adecuada según la pantalla. Es una de las claves de <strong>Core Web Vitals</strong>.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;img</span>
+  <span class="token-attr">src</span>=<span class="token-value">"paisaje-800.jpg"</span>
+  <span class="token-attr">srcset</span>=<span class="token-value">"paisaje-400.jpg 400w,
+                  paisaje-800.jpg 800w,
+                  paisaje-1200.jpg 1200w"</span>
+  <span class="token-attr">sizes</span>=<span class="token-value">"(max-width: 576px) 100vw, 800px"</span>
+  <span class="token-attr">alt</span>=<span class="token-value">"Valle con río al atardecer"</span><span class="token-tag">&gt;</span></code></pre>
+      <p class="small mb-0" style="color:#94a3b8 !important;">El sufijo <code>w</code> indica el ancho real en píxeles de cada archivo; el navegador combina esa información con <code>sizes</code> y la densidad de pantalla para decidir.</p>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-images text-gradient me-2"></i>Dirección de arte: picture y source</h2>
+      <p>Mientras <code>srcset</code> cambia de <em>tamaño</em>, <code>&lt;picture&gt;</code> cambia de <em>diseño</em> o <em>formato</em>: puedes recortar la imagen de otra forma en móvil o servir WebP con fallback a JPEG.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;picture&gt;</span>
+  <span class="token-tag">&lt;source</span> <span class="token-attr">media</span>=<span class="token-value">"(min-width: 992px)"</span>
+          <span class="token-attr">srcset</span>=<span class="token-value">"hero-3200.webp"</span> <span class="token-attr">type</span>=<span class="token-value">"image/webp"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;img</span> <span class="token-attr">src</span>=<span class="token-value">"hero-3200.jpg"</span>
+        <span class="token-attr">alt</span>=<span class="token-value">"Mujer usando una laptop frente a una pizarra con código"</span><span class="token-tag">&gt;</span>
+<span class="token-tag">&lt;/picture&gt;</span></code></pre>
+      <div class="tip-box mt-3">
+        <i class="bi bi-star me-2" style="color:#f59e0b;"></i>
+        <strong class="text-white">Orden del &lt;picture&gt;:</strong> el navegador prueba los <code>&lt;source&gt;</code> en orden y usa el primer que cumpla; si ninguno vale, usa el <code>&lt;img&gt;</code> de dentro. Por eso el <code>&lt;img&gt;</code> siempre va <em>después</em> de los sources.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-camera text-gradient me-2"></i>figure y figcaption</h2>
+      <p>Envuelve la imagen (o cualquier contenido) con <code>&lt;figure&gt;</code> y añade un pie de imagen semántico con <code>&lt;figcaption&gt;</code>. El navegador lo asocia automáticamente con el contenido.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;figure&gt;</span>
+  <span class="token-tag">&lt;img</span> <span class="token-attr">src</span>=<span class="token-value">"grafico-ventas.png"</span>
+       <span class="token-attr">alt</span>=<span class="token-value">"Gráfico de barras de ventas por trimestre"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;figcaption&gt;</span>Ventas del año: récord en Q3.<span class="token-tag">&lt;/figcaption&gt;</span>
+<span class="token-tag">&lt;/figure&gt;</span></code></pre>
+      <p class="mt-3">Y así se ve renderizado (con un degradado en lugar de una imagen de ejemplo):</p>
+      <figure class="demo-box mt-2">
+        <div class="rounded-3 fw-bold d-flex align-items-center justify-content-center text-gradient" style="height:140px; background:linear-gradient(135deg,#6366f1,#ec4899);">Figura de ejemplo</div>
+        <figcaption class="small mt-2 mb-0" style="color:#94a3b8 !important;">Aquí iría tu imagen con su <code>&lt;figcaption&gt;</code> debajo.</figcaption>
+      </figure>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-magic text-gradient me-2"></i>Demo: carga diferida en acción</h2>
+      <p>Haz clic para "cargar" una imagen simulada y observa la animación de aparecer. <code>loading="lazy"</code> hace esto mismo automáticamente cuando bajas con el scroll.</p>
+      <div class="demo-box text-center">
+        <div id="demoImgWrap" class="rounded-3 mx-auto d-flex align-items-center justify-content-center" style="height:160px; max-width:480px; background:#1e293b; border:1px dashed #334155;">
+          <span id="demoImgPlaceholder" class="text-secondary small"><i class="bi bi-image me-2"></i>Imagen sin cargar</span>
+          <img id="demoImg" src="" alt="Ilustración generada al hacer clic" class="img-fluid rounded-3 d-none" style="max-height:158px;">
+        </div>
+        <button class="btn btn-gradient btn-sm mt-3" id="btnCargarImg"><i class="bi bi-cloud-arrow-down me-1"></i>Cargar imagen</button>
+        <span class="badge-soft ms-2"><i class="bi bi-hourglass-split me-1"></i>Efecto lazy //</span>
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li><code>&lt;img&gt;</code> siempre con <code>src</code>, <code>alt</code> descriptivo (o <code>alt=""</code> si es decorativa) y <code>width</code>/<code>height</code>.</li>
+        <li><code>loading="lazy"</code> mejora el rendimiento en páginas con muchas imágenes.</li>
+        <li><code>srcset</code> + <code>sizes</code> sirven versiones adaptadas a cada pantalla.</li>
+        <li><code>&lt;picture&gt;</code> permite art direction y formatos modernos con fallback.</li>
+        <li><code>&lt;figure&gt;</code> + <code>&lt;figcaption&gt;</code> dan contexto semántico a la imagen.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-5-listas-y-enlaces.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-7-tablas.html" class="btn btn-gradient">Siguiente: Tablas <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-7-tablas.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var img = document.getElementById('demoImg');
+  var placeholder = document.getElementById('demoImgPlaceholder');
+
+  function cargar() {
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" width="480" height="160">' +
+      '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">' +
+      '<stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs>' +
+      '<rect width="480" height="160" fill="url(#g)" rx="12"/>' +
+      '<text x="240" y="85" font-family="Poppins,Arial" font-size="18" fill="#fff" text-anchor="middle">Imagen cargada con lazy</text>' +
+      '</svg>');
+    img.classList.remove('d-none');
+    placeholder.classList.add('d-none');
+    gsap.fromTo(img, {opacity: 0, scale: 0.9}, {opacity: 1, scale: 1, duration: 0.6, ease: 'power2.out'});
+  }
+
+  document.getElementById('btnCargarImg').addEventListener('click', cargar);
+  gsap.utils.toArray('#demoImgWrap').forEach(function(el) {
+    gsap.from(el, {y: 20, opacity: 0, duration: 0.6, ease: 'power2.out', delay: 0.2});
+  });
+});
+</script>
+</body>
+</html>

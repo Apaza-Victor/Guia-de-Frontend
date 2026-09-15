@@ -1,0 +1,7 @@
+# Configuración interna de opencode (no es parte del sitio)
+.opencode/
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+Desktop.ini

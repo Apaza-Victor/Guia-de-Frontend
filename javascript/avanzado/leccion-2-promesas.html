@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 2 de JavaScript Avanzado: promesas y async/await. Qué es una promesa, sus estados, nuevas Promise, .then/.catch/.finally, Promise.all y async/await.">
+  <title>Lección 2 — Promesas y async/await | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">JavaScript</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Avanzado</a></li>
+        <li class="breadcrumb-item active text-light">Lección 2</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-lightning-charge-fill me-1"></i>JavaScript Avanzado · Lección 2</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>40 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Promesas y async/await</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">Domina el código asíncrono: promesas, estados, cadenas de .then y la elegancia de async/await.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-hourglass-split text-gradient me-2"></i>¿Qué es una promesa?</h2>
+      <p>
+        Una <strong>promesa</strong> es un objeto que representa un valor que estará disponible <em>ahora</em>,
+        <em>en el futuro</em>, o que <em>nunca estará</em>. Es el mecanismo de JavaScript para manejar operaciones
+        que tardan: peticiones a una API, lecturas de archivos, <code>setTimeout</code>…
+      </p>
+      <p>
+        Antes de las promesas solo existían los <em>callbacks</em> (funciones que se pasaban como argumento).
+        El problema: anidar demasiados callbacks crea el famoso "callback hell". Las promesas traen una cadena
+        plana y legible.
+      </p>
+      <table class="table">
+        <thead>
+          <tr><th scope="col">Estado</th><th scope="col">Significado</th><th scope="col">Cómo se llega a él</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>pending</code></td><td>En espera; no ha terminado</td><td>Estado inicial</td></tr>
+          <tr><td><code>fulfilled</code></td><td>Todo salió bien</td><td>Se llama <code>resolve(valor)</code></td></tr>
+          <tr><td><code>rejected</code></td><td>Hubo un error</td><td>Se llama <code>reject(motivo)</code></td></tr>
+        </tbody>
+      </table>
+      <p class="mt-3">Una promesa queda <strong>inmutable</strong>: una vez fulfilled o rejected, ya no cambia.</p>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-lightning text-gradient me-2"></i>Crear una promesa: new Promise</h2>
+      <pre class="code-block"><code><span class="token-prop">const</span> promesa = <span class="token-prop">new</span> <span class="token-attr">Promise</span>((resolve, reject) =&gt; {
+  <span class="token-comment">// Trabajo asíncrono… cuando termina:</span>
+  <span class="token-prop">if</span> (exito) {
+    resolve(datos);        <span class="token-comment">// → fulfilled con "datos"</span>
+  } <span class="token-prop">else</span> {
+    reject(<span class="token-prop">new</span> <span class="token-attr">Error</span>(<span class="token-value">"Algo falló"</span>)); <span class="token-comment">// → rejected</span>
+  }
+});</code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Rara vez escribirás <code>new Promise</code> a mano. Casi siempre la <em>recibirás</em> de una función
+        (<code>fetch</code>, <code>axios</code>…) o la devolverás desde una función propia que envuelve
+        APIs que aún no soportan promesas.
+      </div>
+      <pre class="code-block mt-3"><code><span class="token-comment">// Envolver una API antigua basada en callbacks en una promesa</span>
+<span class="token-prop">function</span> <span class="token-tag">leerArchivo</span>(ruta) {
+  <span class="token-prop">return</span> <span class="token-prop">new</span> <span class="token-attr">Promise</span>((resolve, reject) =&gt; {
+    lector.readAsText(ruta, (error, texto) =&gt; {
+      <span class="token-prop">if</span> (error) reject(error);
+      <span class="token-prop">else</span> resolve(texto);
+    });
+  });
+}</code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-stack text-gradient me-2"></i>Consumir: .then / .catch / .finally</h2>
+      <pre class="code-block"><code>cargarUsuarios()
+  .then(usuarios =&gt; {        <span class="token-comment">// se ejecuta solo si fulfilled</span>
+    <span class="token-attr">renderizar</span>(usuarios);
+    <span class="token-prop">return</span> cargarPosts(usuarios[<span class="token-num">0</span>]);   <span class="token-comment">// encadena la siguiente promesa</span>
+  })
+  .then(posts =&gt; <span class="token-attr">renderizarPosts</span>(posts))
+  .catch(error =&gt; {          <span class="token-comment">// se ejecuta si cualquier paso anterior rechazó</span>
+    <span class="token-attr">mostrarError</span>(error.message);
+  })
+  .finally(() =&gt; {           <span class="token-comment">// siempre, triunfe o falle</span>
+    ocultarSpinner();         <span class="token-comment">// ideal para "limpieza"</span>
+  });</code></pre>
+      <ul class="mt-3">
+        <li><strong><code>.then()</code></strong> recibe el valor resuelto y devuelve una nueva promesa (permite encadenar).</li>
+        <li><strong><code>.catch()</code></strong> captura cualquier rechazo de la cadena y evita que "salte" el error global.</li>
+        <li><strong><code>.finally()</code></strong> se ejecuta siempre, sin importar el resultado: temporizadores, spinners, conexiones.</li>
+      </ul>
+      <pre class="code-block mt-3"><code><span class="token-comment">// Promise.all: espera a que TODAS terminen y devuelve un array de resultados</span>
+<span class="token-attr">Promise</span>.all([cargarUsuarios(), cargarProductos(), cargarPedidos()])
+  .then(([usuarios, productos, pedidos]) =&gt; { <span class="token-comment">// destructuring de arrays</span>
+    <span class="token-attr">inicializarApp</span>({ usuarios, productos, pedidos });
+  })
+  .catch(error =&gt; <span class="token-attr">console</span>.error(<span class="token-value">"Alguna petición falló"</span>, error));
+
+<span class="token-comment">// Promise.allSettled: no interrumpe si una falla, devuelve el estado de todas</span>
+<span class="token-attr">Promise</span>.allSettled([p1, p2, p3])
+  .then(resultados =&gt; resultados.map(r =&gt; r.status));</code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Cuidado con Promise.all:</strong>
+        Si una sola de las promesas se rechaza, <code>Promise.all</code> se rechaza completa (todo o nada).
+        Si necesitas tolerancia a errores individuales, usa <code>Promise.allSettled</code>.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-magic text-gradient me-2"></i>async / await</h2>
+      <p>
+        <strong><code>async</code></strong> marca a una función como "que devuelve una promesa" y habilita la palabra
+        <code>await</code> dentro de ella. <strong><code>await</code></strong> pausa la ejecución hasta que la promesa
+        se resuelve o rechaza, como si el código fuera síncrono, pero sin bloquear el hilo del navegador.
+      </p>
+      <pre class="code-block"><code><span class="token-prop">async function</span> <span class="token-tag">cargarTodo</span>() {
+  <span class="token-prop">try</span> {
+    <span class="token-prop">const</span> usuarios  = <span class="token-prop">await</span> cargarUsuarios();   <span class="token-comment">// espera a que se cumpla</span>
+    <span class="token-prop">const</span> productos = <span class="token-prop">await</span> cargarProductos();
+    <span class="token-comment">// Equivalente a Promise.all:</span>
+    <span class="token-prop">const</span> [pedidos, reviews] = <span class="token-prop">await</span> <span class="token-attr">Promise</span>.all([cargarPedidos(), cargarReviews()]);
+    <span class="token-attr">renderizar</span>({ usuarios, productos, pedidos, reviews });
+  } <span class="token-prop">catch</span> (error) {
+    <span class="token-attr">mostrarError</span>(<span class="token-value">"No se pudo cargar: "</span> + error.message);
+  } <span class="token-prop">finally</span> {
+    ocultarSpinner();
+  }
+}
+
+cargarTodo(); <span class="token-comment">// una función async siempre devuelve una promesa</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Situación</th><th scope="col">Recomendado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Flujo secuencial dependiente</td><td><code>async/await</code> (línea a línea es más claro)</td></tr>
+          <tr><td>Varias peticiones independientes</td><td><code>Promise.all</code> (más rápido: en paralelo)</td></tr>
+          <tr><td>Tomar decisiones según el resultado</td><td><code>await</code> junto a <code>try/catch</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-circle-half text-gradient me-2"></i>Demo interactiva</h2>
+      <p>
+        Simulamos una petición a un servidor con <code>setTimeout</code>. La promesa tarda 2 segundos; mientras
+        tanto se muestra un <strong>spinner</strong>. Al terminar, según el botón que pulses, se resuelve con unos
+        <em>datos de ejemplo</em> o se rechaza con un error. El <code>finally</code> siempre oculta el spinner.
+      </p>
+      <div class="demo-box p-4">
+        <div class="text-center mb-3">
+          <div id="lec2-spinner" class="d-none">
+            <div class="spinner-border text-info mb-2" role="status" style="width:2.5rem;height:2.5rem;"></div>
+            <p class="small mb-0" style="color:#94a3b8 !important;">Simulando petición de red…</p>
+          </div>
+        </div>
+        <div id="lec2-status" class="text-center small mb-3" style="color:#94a3b8 !important;">
+          Estado actual: <code>sin petición</code>
+        </div>
+        <div class="text-center mb-3">
+          <button class="btn btn-gradient me-2" id="lec2-ok"><i class="bi bi-check-circle me-2"></i>Cargar (éxito)</button>
+          <button class="btn btn-ghost-glass" id="lec2-fail"><i class="bi bi-x-circle me-2"></i>Cargar (error)</button>
+        </div>
+        <div id="lec2-resultado" class="text-center" style="min-height:2rem;">
+          <span class="small" style="color:#cbd5e1 !important;">Pulsa un botón para simular una petición.</span>
+        </div>
+      </div>
+      <pre class="code-block mt-3"><code><span class="token-prop">function</span> <span class="token-tag">simularCarga</span>(exito) {
+  <span class="token-prop">return</span> <span class="token-prop">new</span> <span class="token-attr">Promise</span>((resolve, reject) =&gt; {
+    <span class="token-attr">setTimeout</span>(() =&gt; {
+      exito
+        ? resolve({ <span class="token-prop">usuario</span>: <span class="token-value">"ana_dev"</span>, <span class="token-prop">posts</span>: <span class="token-num">12</span> })
+        : reject(<span class="token-prop">new</span> <span class="token-attr">Error</span>(<span class="token-value">"500: el servidor no responde"</span>));
+    }, <span class="token-num">2000</span>);
+  });
+}</code></pre>
+      <script>
+      (function () {
+        const spinnerEl = document.getElementById("lec2-spinner");
+        const statusEl = document.getElementById("lec2-status");
+        const resultEl = document.getElementById("lec2-resultado");
+
+        function estado(texto, color) {
+          statusEl.innerHTML = `Estado actual: <code style="color:${color};">${texto}</code>`;
+        }
+
+        function simularCarga(exito) {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              if (exito) {
+                resolve({ usuario: "ana_dev", posts: 12, seguidores: 340 });
+              } else {
+                reject(new Error("500: el servidor no responde"));
+              }
+            }, 2000);
+          });
+        }
+
+        function animarMensaje() {
+          if (typeof gsap !== "undefined") {
+            gsap.from(resultEl, { y: 12, opacity: 0, duration: 0.4, ease: "power2.out" });
+          }
+        }
+
+        function ejecutar(exito) {
+          spinnerEl.classList.remove("d-none");
+          estado("pending …", "#06b6d4");
+          resultEl.innerHTML = '<span class="small" style="color:#cbd5e1 !important;">Esperando resolución…</span>';
+
+          simularCarga(exito)
+            .then(datos => {
+              estado("fulfilled", "#34d399");
+              resultEl.innerHTML = `
+                <div class="d-inline-block text-start demo-box p-3" style="border:1px solid rgba(255,255,255,.08);">
+                  <p class="small mb-1" style="color:#cbd5e1 !important;"><i class="bi bi-person me-2" style="color:#6366f1;"></i>${datos.usuario}</p>
+                  <p class="small mb-1" style="color:#cbd5e1 !important;"><i class="bi bi-file-earmark-text me-2" style="color:#06b6d4;"></i>${datos.posts} posts</p>
+                  <p class="small mb-0" style="color:#cbd5e1 !important;"><i class="bi bi-people me-2" style="color:#ec4899;"></i>${datos.seguidores} seguidores</p>
+                </div>`;
+            })
+            .catch(err => {
+              estado("rejected", "#f87171");
+              resultEl.innerHTML = `
+                <span class="badge-soft-pink text-white px-3 py-2">
+                  <i class="bi bi-exclamation-octagon me-2"></i>${err.message}
+                </span>`;
+            })
+            .finally(() => {
+              spinnerEl.classList.add("d-none");
+              animarMensaje();
+            });
+        }
+
+        document.getElementById("lec2-ok").addEventListener("click", () => ejecutar(true));
+        document.getElementById("lec2-fail").addEventListener("click", () => ejecutar(false));
+      })();
+      </script>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>Los tres estados de una promesa: <code>pending</code>, <code>fulfilled</code>, <code>rejected</code>.</li>
+        <li>Encadena con <code>.then()</code>, captura errores con <code>.catch()</code> y limpia con <code>.finally()</code>.</li>
+        <li><code>Promise.all</code> lanza en paralelo; <code>Promise.allSettled</code> tolera fallos individuales.</li>
+        <li><code>async/await</code> lee como código síncrono; envuelve siempre en <code>try/catch</code>.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <div class="d-flex gap-2">
+        <a href="../../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Inicio</a>
+        <a href="leccion-1-es6.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      </div>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-3-clases.html" class="btn btn-gradient">Siguiente: Clases y herencia <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— JavaScript Avanzado · Lección 2</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-3-clases.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+</body>
+</html>

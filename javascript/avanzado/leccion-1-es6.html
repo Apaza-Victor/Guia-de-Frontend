@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 1 de JavaScript Avanzado: ES6+ con destructuring y spread. Extrae datos de objetos y arrays, usa rest/spread, optional chaining y nullish coalescing.">
+  <title>Lección 1 — ES6+: destructuring y spread | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">JavaScript</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Avanzado</a></li>
+        <li class="breadcrumb-item active text-light">Lección 1</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-lightning-charge-fill me-1"></i>JavaScript Avanzado · Lección 1</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>35 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">ES6+: destructuring y spread</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">Extrae datos de objetos y arrays con destructuring, combina valores con spread y escribe código más limpio.</p>
+    <div class="progress-tracker">
+      <span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-box-seam text-gradient me-2"></i>Destructuring de objetos</h2>
+      <p>
+        El <strong>destructuring</strong> (desestructuración) te permite <em>extraer</em> valores de un objeto o un array
+        y asignarlos a variables en una sola línea, sin repeticiones innecesarias. Es de las características de ES6
+        que más código eliminan en el día a día.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">// Sin destructuring: mucha repetición</span>
+<span class="token-prop">const</span> nombre = usuario.nombre;
+<span class="token-prop">const</span> edad   = usuario.edad;
+
+<span class="token-comment">// Con destructuring: una sola línea</span>
+<span class="token-prop">const</span> { nombre, edad } = usuario;
+
+<span class="token-comment">// Se puede hacer en los parámetros de una función</span>
+<span class="token-prop">function</span> <span class="token-tag">saludar</span>({ nombre, edad }) {
+  <span class="token-prop">return</span> `Hola ${nombre}, tienes ${edad} años.`;
+}</code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        El destructuring solo crea una <em>copia del valor</em> en la variable. Para objetos anidados usa la misma
+        sintaxis dentro: <code>{ perfil: { avatar } }</code>. El nombre de la variable NO se inventa: debe coincidir con
+        la propiedad del objeto.
+      </div>
+      <pre class="code-block mt-3"><code><span class="token-comment">// Objetos anidados y rest</span>
+<span class="token-prop">const</span> pedido = {
+  <span class="token-prop">id</span>: <span class="token-num">104</span>,
+  <span class="token-prop">cliente</span>: { <span class="token-prop">nombre</span>: <span class="token-value">"Ana"</span>, <span class="token-prop">mail</span>: <span class="token-value">"ana@mail.com"</span> },
+  <span class="token-prop">productos</span>: [<span class="token-value">"Teclado"</span>, <span class="token-value">"Mouse"</span>]
+};
+
+<span class="token-prop">const</span> { id, cliente: { nombre } } = pedido;
+<span class="token-attr">console</span>.log(id, nombre); <span class="token-comment">// 104 "Ana"</span></code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-collection text-gradient me-2"></i>Destructuring de arrays</h2>
+      <p>Con los arrays el orden importa: cada posición de la izquierda toma el valor de la misma posición a la derecha.</p>
+      <pre class="code-block"><code><span class="token-prop">const</span> colores = [<span class="token-value">"rojo"</span>, <span class="token-value">"verde"</span>, <span class="token-value">"azul"</span>];
+
+<span class="token-prop">const</span> [primero, segundo] = colores;
+<span class="token-attr">console</span>.log(primero, segundo); <span class="token-comment">// "rojo" "verde"</span>
+
+<span class="token-comment">// Puedes saltar posiciones con comas vacías</span>
+<span class="token-prop">const</span> [, , tercero] = colores;
+<span class="token-attr">console</span>.log(tercero); <span class="token-comment">// "azul"</span>
+
+<span class="token-comment">// Truco clásico: intercambiar valores sin variable temporal</span>
+<span class="token-prop">let</span> a = <span class="token-num">1</span>, b = <span class="token-num">2</span>;
+[a, b] = [b, a]; <span class="token-comment">// a = 2, b = 1</span></code></pre>
+      <pre class="code-block mt-3"><code><span class="token-comment">// React y destructuring de arrays: los hooks</span>
+<span class="token-prop">const</span> [estado, setEstado] = <span class="token-attr">useState</span>(<span class="token-value">"inicial"</span>);</code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-three-dots text-gradient me-2"></i>Rest y spread: el poder de <code>...</code></h2>
+      <p>
+        El operador <code>...</code> tiene dos personalidades: <strong>rest</strong> (recolecta el resto en una variable,
+        "empuja hacia adentro") y <strong>spread</strong> (expande valores, "dispersa hacia afuera").
+      </p>
+      <pre class="code-block"><code><span class="token-comment">// REST: agrupar el "resto" de los valores</span>
+<span class="token-prop">const</span> [primero, ...resto] = [<span class="token-num">1</span>, <span class="token-num">2</span>, <span class="token-num">3</span>, <span class="token-num">4</span>];
+<span class="token-attr">console</span>.log(resto); <span class="token-comment">// [2, 3, 4]</span>
+
+<span class="token-prop">const</span> { nombre, ...datosExtra } = persona;
+
+<span class="token-comment">// Parámetros rest en funciones</span>
+<span class="token-prop">function</span> <span class="token-tag">sumar</span>(...numeros) {
+  <span class="token-prop">return</span> numeros.reduce((acum, n) =&gt; acum + n, <span class="token-num">0</span>);
+}
+<span class="token-attr">sumar</span>(<span class="token-num">1</span>, <span class="token-num">2</span>, <span class="token-num">3</span>); <span class="token-comment">// 6</span>
+
+<span class="token-comment">// SPREAD: expandir un array en argumentos</span>
+<span class="token-prop">const</span> nums = [<span class="token-num">4</span>, <span class="token-num">5</span>];
+<span class="token-attr">Math</span>.max(...nums, <span class="token-num">9</span>); <span class="token-comment">// 9</span>
+
+<span class="token-comment">// Copiar y combinar (copia superficial)</span>
+<span class="token-prop">const</span> copia      = [...nums];
+<span class="token-prop">const</span> combinado  = [...nums, <span class="token-num">6</span>, <span class="token-num">7</span>];
+<span class="token-prop">const</span> fondoNuevo = { ...config, <span class="token-prop">tema</span>: <span class="token-value">"oscuro"</span> };</code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Operador</th><th scope="col">Contexto</th><th scope="col">Qué hace</th><th scope="col">Ejemplo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>...</code> rest</td><td>Declaración</td><td>Agrupa valores en un array o propiedades en un objeto</td><td><code>const [a, ...r] = arr</code></td></tr>
+          <tr><td><code>...</code> spread</td><td>Llamada / literal</td><td>Expande valores de un iterable</td><td><code>fn(...args)</code>, <code>{...obj}</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-pencil-square text-gradient me-2"></i>Alias, valores por defecto y shorthand</h2>
+      <p>Tres pequeños superpoderes que hacen el destructuring aún más flexible:</p>
+      <pre class="code-block"><code><span class="token-comment">// ALIAS: renombrar la variable extraída</span>
+<span class="token-prop">const</span> { nombre: nombreCompleto } = usuario;
+
+<span class="token-comment">// VALORES POR DEFECTO: si no existe, usa el fallback</span>
+<span class="token-prop">const</span> { ciudad = <span class="token-value">"Desconocida"</span> } = usuario;
+<span class="token-prop">const</span> [x = <span class="token-num">0</span>, y = <span class="token-num">0</span>] = punto;
+
+<span class="token-comment">// SHORTHAND PROPERTIES: si clave === variable, omite la repetición</span>
+<span class="token-prop">const</span> nombre = <span class="token-value">"Lía"</span>;
+<span class="token-prop">const</span> edad   = <span class="token-num">30</span>;
+<span class="token-prop">const</span> obj    = { nombre, edad }; <span class="token-comment">// { nombre: "Lía", edad: 30 }</span>
+
+<span class="token-comment">// Shorthand también funciona en MÉTODOS (shorthand methods)</span>
+<span class="token-prop">const</span> perro = {
+  <span class="token-prop">nombre</span>: <span class="token-value">"Tino"</span>,
+  <span class="token-prop">ladrar</span>() { <span class="token-prop">return</span> <span class="token-value">"¡Guau!"</span>; }  <span class="token-comment">// antes: ladrar: function() {...}</span>
+};</code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-shield-check text-gradient me-2"></i>Optional chaining (?.) y nullish (??)</h2>
+      <p>
+        Acceder a propiedades anidadas solía romper el código cuando faltaba un dato. Con <strong>optional chaining</strong>
+        la expresión "se detiene" y devuelve <code>undefined</code> si el antecesor es <code>null</code> o <code>undefined</code>.
+        Con <strong>nullish coalescing</strong> eliges un valor por defecto <em>solo</em> cuando hay <code>null</code> o <code>undefined</code>.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">// Antes (peligroso):</span>
+<span class="token-prop">const</span> ciudad = usuario.direccion.ciudad; <span class="token-comment">// TypeError si direccion es undefined</span>
+
+<span class="token-comment">// Con optional chaining:</span>
+<span class="token-prop">const</span> ciudad = usuario?.direccion?.ciudad; <span class="token-comment">// undefined si falta, sin fallo</span>
+
+<span class="token-comment">// Nullish coalescing:</span>
+<span class="token-prop">const</span> contexto = datos ?? <span class="token-value">"Sin datos"</span>;
+
+<span class="token-comment">// Cuidado: 0, "" y false NO son "nullish", usar || los reemplazaría</span>
+<span class="token-prop">const</span> precio = descuento ?? <span class="token-num">0</span>; <span class="token-comment">// si descuento es 0, mantiene 0 con ??</span></code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        <code>??</code> y <code>||</code> NO son intercambiables. <code>||</code> reemplaza cualquier valor "falso"
+        (<code>0</code>, <code>""</code>, <code>false</code>, <code>NaN</code>); <code>??</code> solo reemplaza
+        <code>null</code> y <code>undefined</code>. Además no puedes mezclar <code>??</code> con <code>&&</code>
+        o <code>||</code> sin paréntesis.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-boxes text-gradient me-2"></i>Métodos modernos de objetos</h2>
+      <p>ES6+ añadió helpers que recorren objetos sin bucles manuales:</p>
+      <pre class="code-block"><code><span class="token-prop">const</span> inventario = { <span class="token-prop">manzanas</span>: <span class="token-num">4</span>, <span class="token-prop">peras</span>: <span class="token-num">2</span> };
+
+<span class="token-attr">Object</span>.keys(inventario);   <span class="token-comment">// ["manzanas", "peras"]</span>
+<span class="token-attr">Object</span>.values(inventario); <span class="token-comment">// [4, 2]</span>
+<span class="token-attr">Object</span>.entries(inventario); <span class="token-comment">// [["manzanas", 4], ["peras", 2]]</span>
+
+<span class="token-comment">// Recorrer con for...of + destructuring</span>
+<span class="token-prop">for</span> (<span class="token-prop">const</span> [fruta, cantidad] of <span class="token-attr">Object</span>.entries(inventario)) {
+  <span class="token-attr">console</span>.log(`${fruta}: ${cantidad}`);
+}
+
+<span class="token-comment">// Combinar objetos (copia superficial de cada fuente)</span>
+<span class="token-prop">const</span> unido = <span class="token-attr">Object</span>.assign({}, inventario, { <span class="token-prop">uvas</span>: <span class="token-num">6</span> });</code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-lightning-charge text-gradient me-2"></i>Demo interactiva</h2>
+      <p>
+        Desestructuramos cada usuario de un array y creamos una tarjeta con <code>spread</code> (así cada nueva tarjeta
+        parte de un estado base). El botón agrega un usuario nuevo creado con <code>{ ...base, ...datos }</code>.
+      </p>
+      <div class="demo-box text-center p-4">
+        <div id="lec1-cards" class="row g-3 mb-3 text-start"></div>
+        <button class="btn btn-gradient" id="lec1-add"><i class="bi bi-plus-lg me-2"></i>Agregar usuario</button>
+        <button class="btn btn-ghost-glass ms-2" id="lec1-reset"><i class="bi bi-arrow-counterclockwise me-2"></i>Resetear</button>
+        <p class="small mt-3 mb-0" style="color:#94a3b8 !important;">
+          También hay un usuario anidado: se accede con <code>usuario.perfil.rol</code> sin fallos gracias a <code>?.</code>
+        </p>
+      </div>
+      <pre class="code-block mt-3"><code><span class="token-prop">const</span> base = { <span class="token-prop">online</span>: <span class="token-prop">true</span>, <span class="token-prop">plan</span>: <span class="token-value">"básico"</span> };
+
+<span class="token-prop">const</span> crearTarjeta = grupo =&gt;
+  grupo.map(({ nombre, edad, ciudad, perfil }) =&gt; `
+    Carta de <span class="token-attr">${nombre}</span> · ${edad} años
+    Vive en ${ciudad ?? <span class="token-value">"—"</span>} · Rol: ${perfil?.rol ?? <span class="token-value">"default"</span>}
+  `).join(<span class="token-value">""</span>);</code></pre>
+      <script>
+      (function () {
+        const base = { online: true, plan: "básico" };
+        let usuarios = [
+          { nombre: "Ana", edad: 29, ciudad: "Madrid", perfil: { rol: "admin" } },
+          { nombre: "Bruno", edad: 34, ciudad: "Lima", perfil: { rol: "editor" } },
+          { nombre: "Clara", edad: 25, ciudad: null, perfil: null }
+        ];
+        const container = document.getElementById("lec1-cards");
+        const addBtn = document.getElementById("lec1-add");
+        const resetBtn = document.getElementById("lec1-reset");
+
+        function render() {
+          container.innerHTML = usuarios.map((u) => {
+            const { nombre, edad, ciudad, perfil } = u;
+            const { online, plan } = base;
+            const rol = perfil?.rol ?? "default";
+            return `
+              <div class="col-md-4">
+                <div class="demo-box h-100 text-start p-3" style="border: 1px solid rgba(255,255,255,.08);">
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <strong class="text-white">${nombre}</strong>
+                    <span class="badge-soft" style="font-size:.65rem;">${edad} años</span>
+                  </div>
+                  <p class="small mb-1" style="color:#cbd5e1;">
+                    <i class="bi bi-geo-alt me-1" style="color:#6366f1;"></i>${ciudad ?? "Ciudad desconocida"}
+                  </p>
+                  <p class="small mb-2" style="color:#cbd5e1;">
+                    <i class="bi bi-person-badge me-1" style="color:#06b6d4;"></i>Rol: <code>${rol}</code>
+                  </p>
+                  <p class="small mb-0" style="color:#94a3b8;">
+                    <i class="bi ${online ? "bi-circle-fill" : "bi-circle"} me-1" style="color:${online ? "#34d399" : "#64748b"};"></i>
+                    ${online ? "En línea" : "Sin conexión"} · plan ${plan}
+                  </p>
+                </div>
+              </div>`;
+          }).join("");
+
+          const cards = container.querySelectorAll(".demo-box");
+          if (typeof gsap !== "undefined") {
+            gsap.from(cards, { scale: 0.9, opacity: 0, duration: 0.5, stagger: 0.12, ease: "back.out(1.5)" });
+          }
+        }
+
+        addBtn.addEventListener("click", () => {
+          const nuevos = [
+            { nombre: "Diana", edad: 31, ciudad: "Buenos Aires", perfil: { rol: "lectora" } },
+            { nombre: "Erik", edad: 27, ciudad: "Ciudad de México", perfil: null }
+          ];
+          usuarios = [...usuarios, ...nuevos];
+          render();
+        });
+
+        resetBtn.addEventListener("click", () => {
+          usuarios = [
+            { nombre: "Ana", edad: 29, ciudad: "Madrid", perfil: { rol: "admin" } },
+            { nombre: "Bruno", edad: 34, ciudad: "Lima", perfil: { rol: "editor" } },
+            { nombre: "Clara", edad: 25, ciudad: null, perfil: null }
+          ];
+          render();
+        });
+
+        render();
+      })();
+      </script>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li><strong>Destructuring</strong> de objetos usa las claves como nombres; el de arrays usa el orden.</li>
+        <li><strong>Rest</strong> (en declaración) agrupa; <strong>spread</strong> (en llamadas/literales) expande.</li>
+        <li>Usa alias (<code>prop: nombre</code>), valores por defecto (<code>prop = val</code>) y shorthand properties.</li>
+        <li><code>?.</code> protege el acceso anidado y <code>??</code> pone fallback solo ante <code>null/undefined</code>.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="../../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Inicio</a>
+      <div class="progress-tracker">
+        <span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-2-promesas.html" class="btn btn-gradient">Siguiente: Promesas y async/await <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— JavaScript Avanzado · Lección 1</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-2-promesas.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+</body>
+</html>
