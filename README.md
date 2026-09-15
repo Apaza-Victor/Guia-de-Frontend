@@ -19,6 +19,13 @@
   <img src="https://img.shields.io/badge/AOS-Animate%20On%20Scroll-6366f1?style=flat-square" alt="AOS">
 </p>
 
+<p align="center">
+  <a href="https://apaza-victor.github.io/Guia-de-Frontend/">
+    <img src="https://img.shields.io/badge/%F0%9F%8C%90%20Ver%20en%20vivo-GitHub%20Pages-2ea44f?style=for-the-badge&logo=githubpages&logoColor=white&labelColor=0f172a" alt="Ver en vivo">
+  </a>
+  <img src="https://img.shields.io/badge/estado-en%20l%C3%ADnea-22c55e?style=for-the-badge&labelColor=0f172a" alt="Estado">
+</p>
+
 ---
 
 ## 🚀 ¿Qué es esto?
@@ -38,6 +45,20 @@ El proyecto está hecho **100% con HTML, CSS y JavaScript puro** (más Bootstrap
 | 🧭 **Navegación unificada** | Navbar, breadcrumbs y footer consistentes en las 76 páginas |
 | 📱 **Responsive** | Grid de Bootstrap 5 adaptado a móvil, tablet y escritorio |
 | 🔤 **Sin frameworks JS** | JavaScript vainilla, ideal para aprender los fundamentos |
+| 🌐 **Publicado en línea** | Disponible 24/7 gratis con GitHub Pages |
+
+## 🔗 Web desplegada (GitHub Pages)
+
+La guía está publicada y accesible desde cualquier dispositivo:
+
+<p align="center">
+  <a href="https://apaza-victor.github.io/Guia-de-Frontend/" style="text-decoration:none;">
+    <img src="https://img.shields.io/badge/🌐%20Apazar--Victor%2FGuia--de--Frontend-0f172a?style=flat-square&logo=internet&logoColor=white" alt="URL"><br>
+    <b>https://apaza-victor.github.io/Guia-de-Frontend/</b>
+  </a>
+</p>
+
+> 💡 **Tip:** comparte ese enlace y cualquiera podrá navegar la guía sin instalar nada.
 
 ## 📚 Los 5 temas
 
@@ -91,6 +112,7 @@ Guia-de-Frontend/
 - [📖 Temario](temario.html) — Las 60 lecciones en tarjetas
 - [🗺️ Ruta de aprendizaje](ruta-aprendizaje.html) — El roadmap completo
 - [🔗 Recursos](recursos.html) — Enlaces y herramientas recomendadas
+- [🌐 Web en vivo](https://apaza-victor.github.io/Guia-de-Frontend/) — Versión desplegada en GitHub Pages
 
 ## 🚀 Cómo usarlo
 
@@ -108,6 +130,17 @@ npx serve .
 ```
 
 > Recomendado: usa un servidor local para servir los archivos correctamente.
+
+## 🌍 Cómo se despliega en GitHub Pages
+
+El sitio se publica automáticamente con **GitHub Pages** desde la rama `main`, apuntando a la raíz del repositorio (`/`):
+
+1. En el repo → **Settings → Pages** → **Source**: `Deploy from a branch`.
+2. **Branch**: `main` · **Folder**: `/ (root)` → *Save*.
+3. En unos minutos el sitio queda disponible en:
+   `https://apaza-victor.github.io/Guia-de-Frontend/`
+
+El archivo `.nojekyll` en la raíz evita que GitHub Pages procese el sitio con Jekyll, publicándose los HTML tal cual. Cada *push* a `main` actualiza automáticamente la web desplegada.
 
 ## 🛠️ Tecnologías
 
