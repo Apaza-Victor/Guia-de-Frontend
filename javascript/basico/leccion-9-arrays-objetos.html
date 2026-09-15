@@ -235,7 +235,7 @@ contactos.push({ <span class="token-prop">nombre</span>: <span class="token-valu
             <button class="btn btn-ghost-glass btn-sm ms-2" id="btnShift"><i class="bi bi-arrow-down-circle me-1"></i>Quitar primero (shift)</button>
           </div>
         </div>
-        <div id="agendaOutput" class="p-3 rounded" style="background:rgba(99,102,241,0.1); min-height:100px;">
+        <div id="agendaOutput" class="p-3 rounded" style="background:rgba(37,99,235,0.1); min-height:100px;">
           <p class="text-secondary mb-2" id="agendaContador">0 contactos</p>
           <ul id="agendaLista" class="mb-0" style="color:#e2e8f0;"></ul>
         </div>
@@ -302,7 +302,7 @@ contactos.push({ <span class="token-prop">nombre</span>: <span class="token-valu
     let html = '';
     for (let i = 0; i < contactos.length; i++) {
       const c = contactos[i];
-      html += '<li class="py-1"><i class="bi bi-person-circle me-2" style="color:#6366f1;"></i><strong>' +
+      html += '<li class="py-1"><i class="bi bi-person-circle me-2" style="color:#2563eb;"></i><strong>' +
               c.nombre + '</strong> <span class="text-muted">—</span> ' + c.telefono + '</li>';
     }
     agendaLista.innerHTML = html;

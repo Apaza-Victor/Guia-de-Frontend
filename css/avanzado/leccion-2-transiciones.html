@@ -69,12 +69,12 @@
         progresivamente. Es ideal para <em>micro-interacciones</em> discretas y sutiles.
       </p>
       <pre class="code-block"><code><span class="token-comment">/* Sin transición: el color cambia de golpe */</span>
-<span class="token-tag">.boton</span>       { <span class="token-prop">background</span>: <span class="token-value">#6366f1</span>; }
-<span class="token-tag">.boton:hover</span> { <span class="token-prop">background</span>: <span class="token-value">#ec4899</span>; }
+<span class="token-tag">.boton</span>       { <span class="token-prop">background</span>: <span class="token-value">#2563eb</span>; }
+<span class="token-tag">.boton:hover</span> { <span class="token-prop">background</span>: <span class="token-value">#0ea5e9</span>; }
 
 <span class="token-comment">/* Con transición: 0.3s de interpolación suave */</span>
 <span class="token-tag">.boton</span> {
-  <span class="token-prop">background</span>: <span class="token-value">#6366f1</span>;
+  <span class="token-prop">background</span>: <span class="token-value">#2563eb</span>;
   <span class="token-prop">transition</span>: <span class="token-prop">background</span> <span class="token-num">0.3s</span> <span class="token-value">ease</span>;
 }</code></pre>
       <p class="mt-3">
@@ -167,14 +167,14 @@
         La tarjeta gira en 3D con una <strong>transición CSS</strong> (al hacer clic cambia la clase) y puedes lanzar un
         giro extra usando <strong>GSAP</strong>. Observa cómo la curva de transición hace que el giro parezca natural.
       </p>
-      <style>.demo-carta-escena { perspective: 900px; } .demo-carta { transform-style: preserve-3d; transition: transform 0.9s cubic-bezier(0.34, 1.2, 0.64, 1); } .demo-carta.girada { transform: rotateY(180deg); } .demo-carta-cara { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; } .demo-carta-front { background: linear-gradient(135deg, #6366f1, #ec4899); } .demo-carta-back { background: #1e293b; border: 1px solid rgba(255,255,255,.12); transform: rotateY(180deg); color: #e2e8f0; }</style>
+      <style>.demo-carta-escena { perspective: 900px; } .demo-carta { transform-style: preserve-3d; transition: transform 0.9s cubic-bezier(0.34, 1.2, 0.64, 1); } .demo-carta.girada { transform: rotateY(180deg); } .demo-carta-cara { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; } .demo-carta-front { background: linear-gradient(135deg, #2563eb, #0ea5e9); } .demo-carta-back { background: #1e293b; border: 1px solid rgba(255,255,255,.12); transform: rotateY(180deg); color: #e2e8f0; }</style>
       <div class="demo-box text-center">
         <div class="demo-carta-escena mx-auto mb-3" style="height:220px; max-width:340px;">
           <div class="demo-carta position-relative w-100 h-100" id="demoCarta3d">
             <div class="demo-carta-cara demo-carta-front">
               <i class="bi bi-cpu fs-1 text-white"></i>
               <strong class="text-white">Frontend Pro</strong>
-              <span class="small" style="color:#c7d2fe!important;">Cara frontal · CSS transition</span>
+              <span class="small" style="color:#bfdbfe!important;">Cara frontal · CSS transition</span>
             </div>
             <div class="demo-carta-cara demo-carta-back">
               <i class="bi bi-stars fs-1 text-gradient"></i>

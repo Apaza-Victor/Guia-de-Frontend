@@ -21,27 +21,27 @@
       transition: box-shadow 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
     }
     .demo-bem-tarjeta--destacada {
-      border-color: rgba(236, 72, 153, 0.7);
-      box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.22), 0 18px 40px rgba(2, 6, 23, 0.5);
+      border-color: rgba(14, 165, 233, 0.7);
+      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.22), 0 18px 40px rgba(2, 6, 23, 0.5);
     }
     .demo-bem-tarjeta__cabecera {
       height: 120px;
       display: grid;
       place-items: center;
       font-size: 2.4rem;
-      color: #a5b4fc;
-      background: linear-gradient(135deg, #0f172a, #312e81);
+      color: #93c5fd;
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
       transition: background 0.4s ease, color 0.4s ease;
     }
     .demo-bem-tarjeta--destacada .demo-bem-tarjeta__cabecera {
-      background: linear-gradient(135deg, #6366f1, #ec4899);
+      background: linear-gradient(135deg, #2563eb, #0ea5e9);
       color: #fff;
     }
     .demo-bem-tarjeta__cuerpo { padding: 1.25rem; }
     .demo-bem-tarjeta__titulo { color: #e2e8f0; font-weight: 700; margin-bottom: 0.25rem; }
     .demo-bem-tarjeta__texto  { color: #94a3b8; font-size: 0.9rem; margin-bottom: 1rem; }
-    .demo-bem-tarjeta__boton  { background: transparent; border: 1px solid #6366f1; color: #a5b4fc; }
-    .demo-bem-tarjeta--destacada .demo-bem-tarjeta__boton { background: #ec4899; border-color: #ec4899; color: #fff; }
+    .demo-bem-tarjeta__boton  { background: transparent; border: 1px solid #2563eb; color: #93c5fd; }
+    .demo-bem-tarjeta--destacada .demo-bem-tarjeta__boton { background: #0ea5e9; border-color: #0ea5e9; color: #fff; }
   </style>
 </head>
 <body class="pt-0">
@@ -157,7 +157,7 @@
       </p>
       <pre class="code-block"><code><span class="token-comment">/* CSS: base + variante, sin cascada "accidental" */</span>
 <span class="token-tag">.tarjeta</span>             { <span class="token-prop">background</span>: <span class="token-value">#fff</span>; <span class="token-prop">border-radius</span>: <span class="token-num">1rem</span>; <span class="token-prop">padding</span>: <span class="token-num">1rem</span>; }
-<span class="token-tag">.tarjeta--destacada</span> { <span class="token-prop">border</span>: <span class="token-num">2px</span> <span class="token-value">solid</span> <span class="token-value">#6366f1</span>; <span class="token-prop">box-shadow</span>: <span class="token-num">0 12px 30px</span> <span class="token-value">rgba(99, 102, 241, 0.35)</span>; }
+<span class="token-tag">.tarjeta--destacada</span> { <span class="token-prop">border</span>: <span class="token-num">2px</span> <span class="token-value">solid</span> <span class="token-value">#2563eb</span>; <span class="token-prop">box-shadow</span>: <span class="token-num">0 12px 30px</span> <span class="token-value">rgba(37, 99, 235, 0.35)</span>; }
 
 <span class="token-comment">/* HTML: dos clases que se complementan */</span>
 <span class="token-tag">&lt;article</span> <span class="token-attr">class</span>=<span class="token-value">"tarjeta tarjeta--destacada"</span><span class="token-tag">&gt;</span> … <span class="token-tag">&lt;/article&gt;</span></code></pre>

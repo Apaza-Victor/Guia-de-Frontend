@@ -201,7 +201,7 @@ obj2.nombre = <span class="token-value">"Luis"</span>;
       <p>Haz clic en un valor y mira en tiempo real qué devuelven <code>typeof</code> e <code>instanceof</code> para cada uno.</p>
       <div class="demo-box p-4">
         <div class="d-flex flex-wrap gap-2 mb-3" id="tipoBotones"></div>
-        <div id="tipoResultado" class="p-3 rounded" style="background:rgba(99,102,241,0.1); min-height:90px;">
+        <div id="tipoResultado" class="p-3 rounded" style="background:rgba(37,99,235,0.1); min-height:90px;">
           <p class="text-secondary mb-0">Selecciona un valor para inspeccionarlo…</p>
         </div>
       </div>
@@ -282,7 +282,7 @@ obj2.nombre = <span class="token-value">"Luis"</span>;
 
       let html = '<div class="mb-1"><span class="badge-soft-cyan">typeof</span> <code>' + tipo + '</code></div>';
       if (instancias.length > 0) {
-        html += '<div class="mb-1"><span class="badge-soft-pink">instanceof</span> <code>' + instancias.join(', ') + '</code></div>';
+        html += '<div class="mb-1"><span class="badge-soft-sky">instanceof</span> <code>' + instancias.join(', ') + '</code></div>';
       }
       html += '<div class="small mb-1" style="color:#94a3b8 !important;">Valor: <code>' + String(v) + '</code></div>';
       if (Number.isNaN(v)) {

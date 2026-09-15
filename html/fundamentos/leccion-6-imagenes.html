@@ -67,7 +67,7 @@
       <div class="d-flex flex-wrap gap-2 mt-3">
         <span class="badge-soft">alt descriptivo</span>
         <span class="badge-soft-cyan">loading="lazy"</span>
-        <span class="badge-soft-pink">picture + source</span>
+        <span class="badge-soft-sky">picture + source</span>
       </div>
     </section>
 
@@ -142,7 +142,7 @@
 <span class="token-tag">&lt;/figure&gt;</span></code></pre>
       <p class="mt-3">Y así se ve renderizado (con un degradado en lugar de una imagen de ejemplo):</p>
       <figure class="demo-box mt-2">
-        <div class="rounded-3 fw-bold d-flex align-items-center justify-content-center text-gradient" style="height:140px; background:linear-gradient(135deg,#6366f1,#ec4899);">Figura de ejemplo</div>
+        <div class="rounded-3 fw-bold d-flex align-items-center justify-content-center text-gradient" style="height:140px; background:linear-gradient(135deg,#2563eb,#0ea5e9);">Figura de ejemplo</div>
         <figcaption class="small mt-2 mb-0" style="color:#94a3b8 !important;">Aquí iría tu imagen con su <code>&lt;figcaption&gt;</code> debajo.</figcaption>
       </figure>
     </section>
@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
     img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(
       '<svg xmlns="http://www.w3.org/2000/svg" width="480" height="160">' +
       '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">' +
-      '<stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs>' +
+      '<stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#0ea5e9"/></linearGradient></defs>' +
       '<rect width="480" height="160" fill="url(#g)" rx="12"/>' +
       '<text x="240" y="85" font-family="Poppins,Arial" font-size="18" fill="#fff" text-anchor="middle">Imagen cargada con lazy</text>' +
       '</svg>');

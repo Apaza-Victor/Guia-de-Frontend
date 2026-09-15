@@ -67,7 +67,7 @@
       <div class="d-flex flex-wrap gap-2 mt-3">
         <span class="badge-soft"><i class="bi bi-braces me-1"></i>Regla CSS</span>
         <span class="badge-soft-cyan"><i class="bi bi-file-earmark-code me-1"></i>CSS externo</span>
-        <span class="badge-soft-pink"><i class="bi bi-layers me-1"></i>Cascada</span>
+        <span class="badge-soft-sky"><i class="bi bi-layers me-1"></i>Cascada</span>
       </div>
     </section>
 
@@ -97,7 +97,7 @@
 
       <h3 class="h5 text-white fw-bold mt-4 mb-2"><i class="bi bi-1-circle text-gradient me-2"></i>1. CSS Inline (en línea)</h3>
       <p>Se escribe directamente en el atributo <code>style</code> de una etiqueta HTML.</p>
-      <pre class="code-block"><code><span class="token-tag">&lt;h1</span> <span class="token-attr">style</span>=<span class="token-value">"color: #6366f1; font-size: 2rem;"</span><span class="token-tag">&gt;</span>
+      <pre class="code-block"><code><span class="token-tag">&lt;h1</span> <span class="token-attr">style</span>=<span class="token-value">"color: #2563eb; font-size: 2rem;"</span><span class="token-tag">&gt;</span>
   Título con estilo inline
 <span class="token-tag">&lt;/h1&gt;</span></code></pre>
       <table class="table mt-3">
@@ -116,7 +116,7 @@
       <pre class="code-block"><code><span class="token-tag">&lt;head&gt;</span>
   <span class="token-tag">&lt;style&gt;</span>
     <span class="token-prop">h1</span> {
-      <span class="token-prop">color</span>: <span class="token-value">#6366f1</span>;
+      <span class="token-prop">color</span>: <span class="token-value">#2563eb</span>;
       <span class="token-prop">font-size</span>: <span class="token-value">2rem</span>;
     }
   <span class="token-tag">&lt;/style&gt;</span>
@@ -158,7 +158,7 @@
       <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-layers text-gradient me-2"></i>Anatomía de una regla</h2>
       <p>Toda regla CSS tiene dos partes: un <strong>selector</strong> que elige los elementos y un <strong>bloque de declaraciones</strong> que describe el estilo. Cada declaración es una pareja <code>propiedad: valor;</code>.</p>
       <pre class="code-block"><code><span class="token-prop">h1</span> {                     <span class="token-comment">/* selector */</span>
-  <span class="token-prop">color</span>: <span class="token-value">#6366f1</span>;      <span class="token-comment">/* propiedad: valor */</span>
+  <span class="token-prop">color</span>: <span class="token-value">#2563eb</span>;      <span class="token-comment">/* propiedad: valor */</span>
   <span class="token-prop">font-size</span>: <span class="token-num">2.5rem</span>;
   <span class="token-prop">letter-spacing</span>: <span class="token-num">1px</span>;
 }</code></pre>
@@ -171,7 +171,7 @@
             <tr><td><code>selector</code></td><td>Indica a qué elementos se aplica</td><td><code>h1</code>, <code>.boton</code>, <code>#logo</code></td></tr>
             <tr><td>bloque</td><td>Abre y cierra las declaraciones</td><td><code>{ … }</code></td></tr>
             <tr><td>propiedad</td><td>El aspecto que queremos cambiar</td><td><code>color</code>, <code>margin</code></td></tr>
-            <tr><td>valor</td><td>El nuevo estado de la propiedad</td><td><code>#6366f1</code>, <code>1rem</code></td></tr>
+            <tr><td>valor</td><td>El nuevo estado de la propiedad</td><td><code>#2563eb</code>, <code>1rem</code></td></tr>
           </tbody>
         </table>
       </div>
@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var demo = document.getElementById('cascadaDemo');
 
   document.getElementById('btnInline').addEventListener('click', function() {
-    demo.setAttribute('style', 'background:#1e293b; color:#6366f1; font-size:1.5rem; transition: all 0.3s ease;');
+    demo.setAttribute('style', 'background:#1e293b; color:#2563eb; font-size:1.5rem; transition: all 0.3s ease;');
   });
 
   document.getElementById('btnInternal').addEventListener('click', function() {

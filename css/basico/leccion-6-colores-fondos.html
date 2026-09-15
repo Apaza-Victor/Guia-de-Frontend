@@ -81,7 +81,7 @@
           <tr><th scope="col">Propiedad</th><th scope="col">Descripción</th><th scope="col">Ejemplo</th></tr>
         </thead>
         <tbody>
-          <tr><td><code>background-color</code></td><td>Color de relleno base</td><td><code>#6366f1</code></td></tr>
+          <tr><td><code>background-color</code></td><td>Color de relleno base</td><td><code>#2563eb</code></td></tr>
           <tr><td><code>background-image</code></td><td>Imagen o gradiente de fondo</td><td><code>url("img.png")</code></td></tr>
           <tr><td><code>background-size</code></td><td>Dimensiona la imagen: <code>cover</code> rellena, <code>contain</code> ajusta completa</td><td><code>cover</code>, <code>50%</code></td></tr>
           <tr><td><code>background-position</code></td><td>Dónde se ancla la imagen</td><td><code>center</code>, <code>top left</code>, <code>50% 50%</code></td></tr>
@@ -98,17 +98,17 @@
         <p style="color:#cbd5e1 !important;">Los colores de las miniaturas se combinan en <code>background</code>: gradiente + color base.</p>
         <div class="row g-3">
           <div class="col-6 col-md-4">
-            <div class="rounded p-4 d-flex align-items-center justify-content-center text-white fw-bold" style="height:90px; background-color:#6366f1; background-image:linear-gradient(135deg, rgba(6,182,212,.35), transparent 60%);">
+            <div class="rounded p-4 d-flex align-items-center justify-content-center text-white fw-bold" style="height:90px; background-color:#2563eb; background-image:linear-gradient(135deg, rgba(6,182,212,.35), transparent 60%);">
               indigo + cyan
             </div>
           </div>
           <div class="col-6 col-md-4">
-            <div class="rounded p-4 d-flex align-items-center justify-content-center text-white fw-bold" style="height:90px; background-color:#0f172a; background-image:radial-gradient(circle at top right, rgba(236,72,153,.45), transparent 70%);">
+            <div class="rounded p-4 d-flex align-items-center justify-content-center text-white fw-bold" style="height:90px; background-color:#0f172a; background-image:radial-gradient(circle at top right, rgba(14,165,233,.45), transparent 70%);">
               noche + rosa
             </div>
           </div>
           <div class="col-6 col-md-4">
-            <div class="rounded p-4 d-flex align-items-center justify-content-center text-white fw-bold" style="height:90px; background-color:#111827; background-image:linear-gradient(90deg, #6366f1 0%, #06b6d4 100%);">
+            <div class="rounded p-4 d-flex align-items-center justify-content-center text-white fw-bold" style="height:90px; background-color:#111827; background-image:linear-gradient(90deg, #2563eb 0%, #06b6d4 100%);">
               gradiente vívido
             </div>
           </div>
@@ -123,7 +123,7 @@
       <p>Los gradientes se generan con CSS puro, sin imágenes. La función lineal transita de un punto a otro; la radial, desde un centro hacia afuera.</p>
       <pre class="code-block"><code><span class="token-comment">/* Lineal: dirección + paradas de color */</span>
 <span class="token-prop">.lineal</span> {
-  <span class="token-attr">background</span>: <span class="token-value">linear-gradient(135deg, #6366f1, #ec4899)</span>;
+  <span class="token-attr">background</span>: <span class="token-value">linear-gradient(135deg, #2563eb, #0ea5e9)</span>;
 }
 
 <span class="token-comment">/* Radial: desde el centro hacia los bordes */</span>
@@ -133,13 +133,13 @@
 
 <span class="token-comment">/* Con más de dos paradas y posiciones concretas */</span>
 <span class="token-prop">.multi</span> {
-  <span class="token-attr">background</span>: <span class="token-value">linear-gradient(90deg, #111827, #6366f1 50%, #f59e0b)</span>;
+  <span class="token-attr">background</span>: <span class="token-value">linear-gradient(90deg, #111827, #2563eb 50%, #f59e0b)</span>;
 }</code></pre>
       <div class="demo-box p-4">
         <h3 class="h5 text-white fw-bold mb-3"><i class="bi bi-arrow-clockwise me-2"></i>Compara gradientes</h3>
         <div class="row g-3">
           <div class="col-md-6">
-            <div id="gradLinear" class="rounded p-4 d-flex align-items-center justify-content-center" style="height:160px; background:linear-gradient(135deg, #6366f1, #ec4899);">
+            <div id="gradLinear" class="rounded p-4 d-flex align-items-center justify-content-center" style="height:160px; background:linear-gradient(135deg, #2563eb, #0ea5e9);">
               <span class="fw-bold text-white">linear-gradient</span>
             </div>
           </div>
@@ -170,7 +170,7 @@
       </p>
       <pre class="code-block"><code><span class="token-comment">/* CSS personalizado en esta guía, listo para reutilizar */</span>
 <span class="token-prop">:root</span> {
-  <span class="token-attr">--color-primario</span>: <span class="token-value">#6366f1</span>;
+  <span class="token-attr">--color-primario</span>: <span class="token-value">#2563eb</span>;
   <span class="token-attr">--color-acento</span>: <span class="token-value">#06b6d4</span>;
   <span class="token-attr">--fuente-titulos</span>: <span class="token-value">"Poppins", sans-serif</span>;
 }
@@ -261,7 +261,7 @@ function rotateLinear() {
   var deg = 0;
   var interval = setInterval(function() {
     deg = (deg + 5) % 360;
-    el.style.background = 'linear-gradient(' + deg + 'deg, #6366f1, #ec4899)';
+    el.style.background = 'linear-gradient(' + deg + 'deg, #2563eb, #0ea5e9)';
     if (deg === 0) clearInterval(interval);
   }, 30);
 }

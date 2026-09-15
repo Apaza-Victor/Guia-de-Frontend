@@ -100,7 +100,7 @@
         <div class="text-center">
           <span class="d-inline-block" style="background:#f8fafc; padding:6px;">
             <span id="cajaMargin" class="d-inline-block" style="background:#1f2937; border:1px dashed #64748b; padding:10px;">
-              <span id="cajaDemo" class="d-inline-block" style="background:#6366f1; color:#fff; padding:20px; border:4px solid #ec4899; display:inline-block;">
+              <span id="cajaDemo" class="d-inline-block" style="background:#2563eb; color:#fff; padding:20px; border:4px solid #0ea5e9; display:inline-block;">
                 Contenido
               </span>
             </span>
@@ -120,7 +120,7 @@
       <p>Cada una de estas propiedades acepta de 1 a 4 valores, siempre en el orden <strong>arriba, derecha, abajo, izquierda</strong> (sentido horario).</p>
       <pre class="code-block"><code><span class="token-prop">.caja</span> {
   <span class="token-attr">padding</span>: <span class="token-value">10px 20px 30px 40px</span>; <span class="token-comment">/* arriba | derecha | abajo | izquierda */</span>
-  <span class="token-attr">border</span>: <span class="token-value">3px solid #6366f1</span>;       <span class="token-comment">/* ancho estilo color */</span>
+  <span class="token-attr">border</span>: <span class="token-value">3px solid #2563eb</span>;       <span class="token-comment">/* ancho estilo color */</span>
   <span class="token-attr">margin</span>: <span class="token-value">0 auto 1.5rem</span>;          <span class="token-comment">/* arriba | lados | abajo */</span>
 }</code></pre>
       <pre class="code-block mt-3"><code><span class="token-comment">/* Cada lado por separado */</span>
@@ -171,7 +171,7 @@
 <span class="token-prop">.ejemplo</span> {
   <span class="token-attr">width</span>: <span class="token-value">200px</span>;
   <span class="token-attr">padding</span>: <span class="token-value">25px</span>;
-  <span class="token-attr">border</span>: <span class="token-value">5px solid #6366f1</span>;
+  <span class="token-attr">border</span>: <span class="token-value">5px solid #2563eb</span>;
 }</code></pre>
       <table class="table mt-3">
         <thead>
@@ -188,7 +188,7 @@
         <div class="row g-3">
           <div class="col-md-6 text-center">
             <div style="background:#334155; padding:6px;">
-              <div style="width:250px; padding:25px; border:5px solid #ec4899; background:#6366f1; color:#fff; box-sizing:content-box; margin:0 auto;">
+              <div style="width:250px; padding:25px; border:5px solid #0ea5e9; background:#2563eb; color:#fff; box-sizing:content-box; margin:0 auto;">
                 content-box
               </div>
             </div>
@@ -196,7 +196,7 @@
           </div>
           <div class="col-md-6 text-center">
             <div style="background:#334155; padding:6px;">
-              <div style="width:250px; padding:25px; border:5px solid #06b6d4; background:#6366f1; color:#fff; box-sizing:border-box; margin:0 auto;">
+              <div style="width:250px; padding:25px; border:5px solid #06b6d4; background:#2563eb; color:#fff; box-sizing:border-box; margin:0 auto;">
                 border-box
               </div>
             </div>
@@ -303,7 +303,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function apply() {
     caja.style.padding = valPad.textContent;
-    caja.style.border = valBor.textContent + ' solid #ec4899';
+    caja.style.border = valBor.textContent + ' solid #0ea5e9';
     caja.style.borderRadius = valRad.textContent;
   }
 

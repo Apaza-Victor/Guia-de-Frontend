@@ -31,15 +31,15 @@
       transition: all 0.3s ease;
     }
     .pseudo-demo-list li.highlighted {
-      border-color: #6366f1;
-      box-shadow: 0 0 0 1px #6366f1 inset;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 1px #2563eb inset;
     }
     .pseudo-demo-list li:last-child { margin-bottom: 0; }
     .pseudo-toolbar .btn { font-size: 0.8rem; }
     .pseudo-toolbar .btn.active-btn {
-      background: #6366f1;
+      background: #2563eb;
       color: #fff;
-      border-color: #6366f1;
+      border-color: #2563eb;
     }
     /* ---------- DEMO ::AFTER ---------- */
     .badge-pill-empty {
@@ -119,7 +119,7 @@
 }
 
 <span class="token-comment">/* Ejemplos reales */</span>
-<span class="token-tag">a</span>:<span class="token-value">hover</span>   { <span class="token-prop">color</span>: <span class="token-value">#6366f1</span>; }
+<span class="token-tag">a</span>:<span class="token-value">hover</span>   { <span class="token-prop">color</span>: <span class="token-value">#2563eb</span>; }
 <span class="token-tag">button</span>:<span class="token-value">focus</span> { <span class="token-prop">outline</span>: <span class="token-value">2px solid #06b6d4</span>; }
 <span class="token-tag">li</span>:<span class="token-value">first-child</span> { <span class="token-prop">font-weight</span>: <span class="token-value">700</span>; }</code></pre>
       <div class="tip-box mt-3">
@@ -209,7 +209,7 @@
 <span class="token-comment">/* Con :is() — agrupa y reduce */</span>
 <span class="token-tag">:is</span>(<span class="token-tag">.card</span>, <span class="token-tag">.banner</span>)<span class="token-value">:hover</span> <span class="token-tag">.titulo</span>,
 <span class="token-tag">:is</span>(<span class="token-tag">.card</span>, <span class="token-tag">.banner</span>)<span class="token-value">:focus</span> <span class="token-tag">.titulo</span> {
-  <span class="token-prop">color</span>: <span class="token-value">#6366f1</span>;
+  <span class="token-prop">color</span>: <span class="token-value">#2563eb</span>;
 }
 
 <span class="token-comment">/* Combinable: todo menos uno */</span>
@@ -234,7 +234,7 @@
   <span class="token-prop">display</span>: <span class="token-value">block</span>;
   <span class="token-prop">width</span>: <span class="token-value">40px</span>;
   <span class="token-prop">height</span>: <span class="token-value">3px</span>;
-  <span class="token-prop">background</span>: <span class="token-value">#6366f1</span>;
+  <span class="token-prop">background</span>: <span class="token-value">#2563eb</span>;
   <span class="token-prop">border-radius</span>: <span class="token-value">2px</span>;
 }
 
@@ -259,12 +259,12 @@
       <p><code>:has()</code> estiliza un elemento <strong>según sus descendientes</strong>. Es el truco que permite "seleccionar al padre" sin JavaScript:</p>
       <pre class="code-block"><code><span class="token-comment">/* Resalta la card que contiene una imagen */</span>
 <span class="token-tag">.card</span>:<span class="token-value">has</span>(<span class="token-tag">img</span>) {
-  <span class="token-prop">border-color</span>: <span class="token-value">#6366f1</span>;
+  <span class="token-prop">border-color</span>: <span class="token-value">#2563eb</span>;
 }
 
 <span class="token-comment">/* Cambia el padding del form si hay error visible */</span>
 <span class="token-tag">.form-group</span>:<span class="token-value">has</span>(<span class="token-tag">.error</span>) <span class="token-tag">input</span> {
-  <span class="token-prop">border-color</span>: <span class="token-value">#f43f5e</span>;
+  <span class="token-prop">border-color</span>: <span class="token-value">#ea580c</span>;
 }
 
 <span class="token-comment">/* Contadores de navegación del tipo "dropdown" */</span>

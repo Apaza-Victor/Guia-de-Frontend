@@ -311,7 +311,7 @@ mia.depositar(<span class="token-num">100</span>);
         function render(pexito) {
           elSaldo.textContent = CuentaBancaria.formatear(cuenta.saldo);
           elHistorial.innerHTML = cuenta.historial
-            .map(h => `<li class="mb-1"><i class="bi bi-arrow-return-right me-2" style="color:#6366f1;"></i>${h}</li>`)
+            .map(h => `<li class="mb-1"><i class="bi bi-arrow-return-right me-2" style="color:#2563eb;"></i>${h}</li>`)
             .join("");
           if (typeof gsap !== "undefined") {
             gsap.from(elSaldo, { scale: 1.15, duration: 0.3, ease: "power2.out" });

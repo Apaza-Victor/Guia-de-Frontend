@@ -92,7 +92,7 @@
         Cambias el color en un solo lugar y todo el proyecto se actualiza.
       </p>
       <pre class="code-block"><code><span class="token-comment">// _variables.scss — definir</span>
-<span class="token-prop">$color-primario</span>: <span class="token-value">#6366f1</span>;
+<span class="token-prop">$color-primario</span>: <span class="token-value">#2563eb</span>;
 <span class="token-prop">$color-fondo</span>: <span class="token-value">#0f172a</span>;
 <span class="token-prop">$espaciado-base</span>: <span class="token-num">1rem</span>;
 <span class="token-prop">$radio-redondeado</span>: <span class="token-value">12px</span>;
@@ -154,7 +154,7 @@
 }
 
 .boton-primario {
-  <span class="token-prop">@include boton-estilo</span>(<span class="token-value">#6366f1</span>);            <span class="token-comment">/* radio usa el valor por defecto */</span>
+  <span class="token-prop">@include boton-estilo</span>(<span class="token-value">#2563eb</span>);            <span class="token-comment">/* radio usa el valor por defecto */</span>
 }
 
 .boton-peligro {
@@ -185,10 +185,10 @@
           <tr><th scope="col">Función</th><th scope="col">Qué hace</th><th scope="col">Ejemplo</th></tr>
         </thead>
         <tbody>
-          <tr><td><code>darken()</code></td><td>Oscurece un color</td><td><code>darken(#6366f1, 10%)</code></td></tr>
-          <tr><td><code>lighten()</code></td><td>Aclara un color</td><td><code>lighten(#6366f1, 10%)</code></td></tr>
-          <tr><td><code>mix()</code></td><td>Mezcla dos colores</td><td><code>mix(#fff, #6366f1, 70%)</code></td></tr>
-          <tr><td><code>rgba()</code></td><td>Aplica transparencia</td><td><code>rgba(#6366f1, 0.5)</code></td></tr>
+          <tr><td><code>darken()</code></td><td>Oscurece un color</td><td><code>darken(#2563eb, 10%)</code></td></tr>
+          <tr><td><code>lighten()</code></td><td>Aclara un color</td><td><code>lighten(#2563eb, 10%)</code></td></tr>
+          <tr><td><code>mix()</code></td><td>Mezcla dos colores</td><td><code>mix(#fff, #2563eb, 70%)</code></td></tr>
+          <tr><td><code>rgba()</code></td><td>Aplica transparencia</td><td><code>rgba(#2563eb, 0.5)</code></td></tr>
           <tr><td><code>percentage()</code></td><td>Convierte a porcentaje</td><td><code>percentage(0.75)</code> → <code>75%</code></td></tr>
         </tbody>
       </table>
@@ -222,7 +222,7 @@
 
 .boton {
   <span class="token-prop">background</span>: <span class="token-value">variables.$color-primario</span>;   <span class="token-comment">/* namespace + variable */</span>
-  <span class="token-prop">@include</span> <span class="token-value">mixins.boton-estilo(#6366f1)</span>;
+  <span class="token-prop">@include</span> <span class="token-value">mixins.boton-estilo(#2563eb)</span>;
 }</code></pre>
       <div class="tip-box mt-3">
         <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
@@ -265,14 +265,14 @@
       <div class="demo-box p-4" id="sassDemo">
         <div class="d-flex flex-wrap align-items-center gap-3 mb-4">
           <label class="small fw-bold mb-0" style="color:#94a3b8;">Color base:</label>
-          <input type="color" id="sassColor" value="#6366f1" class="form-control form-control-color" style="width:52px;height:44px;background:#0f172a;border-color:#334155;">
-          <code id="sassHex" style="color:#34d399;">#6366f1</code>
+          <input type="color" id="sassColor" value="#2563eb" class="form-control form-control-color" style="width:52px;height:44px;background:#0f172a;border-color:#334155;">
+          <code id="sassHex" style="color:#34d399;">#2563eb</code>
           <button class="btn btn-sm btn-outline-secondary" id="sassReset"><i class="bi bi-arrow-counterclockwise me-1"></i>Reset</button>
         </div>
         <div class="row g-3 align-items-center">
           <div class="col-md-5">
             <p class="small mb-2" style="color:#94a3b8;">Resultado compilado:</p>
-            <button type="button" class="btn w-100 py-4 fw-bold text-white" id="sassPreview" style="background:#6366f1;border:none;">Pásame el puntero</button>
+            <button type="button" class="btn w-100 py-4 fw-bold text-white" id="sassPreview" style="background:#2563eb;border:none;">Pásame el puntero</button>
           </div>
           <div class="col-md-7">
             <pre class="code-block mb-0"><code><span class="token-prop">.boton-primario</span> {
@@ -364,7 +364,7 @@
 
   colorInput.addEventListener('input', render);
   document.getElementById('sassReset').addEventListener('click', function(){
-    colorInput.value = '#6366f1';
+    colorInput.value = '#2563eb';
     render();
   });
 

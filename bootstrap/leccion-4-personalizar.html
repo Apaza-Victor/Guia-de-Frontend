@@ -71,7 +71,7 @@
       <div class="d-flex flex-wrap gap-2 mt-3">
         <span class="badge-soft"><i class="bi bi-slash-square me-1"></i>Variables Sass</span>
         <span class="badge-soft-cyan"><i class="bi bi-braces me-1"></i>:root y --bs-*</span>
-        <span class="badge-soft-pink"><i class="bi bi-palette me-1"></i>Colores de marca</span>
+        <span class="badge-soft-sky"><i class="bi bi-palette me-1"></i>Colores de marca</span>
       </div>
     </section>
 
@@ -84,8 +84,8 @@
         <code>link</code> de Bootstrap. Todos los componentes que usan <code>var(--bs-primary)</code> cambiarán automáticamente:
       </p>
       <pre class="code-block"><code><span class="token-tag">:root</span> {
-  <span class="token-prop">--bs-primary</span>: <span class="token-value">#6366f1</span>;
-  <span class="token-prop">--bs-primary-rgb</span>: <span class="token-num">99, 102, 241</span>;
+  <span class="token-prop">--bs-primary</span>: <span class="token-value">#2563eb</span>;
+  <span class="token-prop">--bs-primary-rgb</span>: <span class="token-num">37, 99, 235</span>;
   <span class="token-prop">--bs-body-bg</span>: <span class="token-value">#0f172a</span>;
   <span class="token-prop">--bs-body-color</span>: <span class="token-value">#cbd5e1</span>;
   <span class="token-prop">--bs-border-radius</span>: <span class="token-num">.75rem</span>;
@@ -100,8 +100,8 @@
           <tr><th scope="col">Variable</th><th scope="col">Qué controla</th><th scope="col">Ejemplo</th></tr>
         </thead>
         <tbody>
-          <tr><td><code>--bs-primary</code></td><td>Color principal (botones, enlaces, focus)</td><td><code>#6366f1</code></td></tr>
-          <tr><td><code>--bs-primary-rgb</code></td><td>Par rgb del primary para transparencias</td><td><code>99, 102, 241</code></td></tr>
+          <tr><td><code>--bs-primary</code></td><td>Color principal (botones, enlaces, focus)</td><td><code>#2563eb</code></td></tr>
+          <tr><td><code>--bs-primary-rgb</code></td><td>Par rgb del primary para transparencias</td><td><code>37, 99, 235</code></td></tr>
           <tr><td><code>--bs-body-bg</code></td><td>Fondo por defecto del documento</td><td><code>#0f172a</code></td></tr>
           <tr><td><code>--bs-body-color</code></td><td>Color de texto por defecto</td><td><code>#cbd5e1</code></td></tr>
           <tr><td><code>--bs-border-radius</code></td><td>Radio de las esquinas en .btn, .card…</td><td><code>.75rem</code></td></tr>
@@ -123,7 +123,7 @@
         Es el método recomendado para aplicaciones reales porque genera un CSS limpio con exactamente tus valores:
       </p>
       <pre class="code-block"><code><span class="token-comment">// variables.css / main.scss</span>
-<span class="token-prop">$primary</span>: <span class="token-value">#6366f1</span>;
+<span class="token-prop">$primary</span>: <span class="token-value">#2563eb</span>;
 <span class="token-prop">$border-radius</span>: <span class="token-num">.75rem</span>;
 <span class="token-prop">$enable-shadows</span>: <span class="token-value">true</span>;
 <span class="token-prop">$font-family-sans-serif</span>: <span class="token-value">"Poppins", system-ui, sans-serif</span>;
@@ -156,11 +156,11 @@
         Bootstrap. Así toda la interfaz (botones, cards, focus, badges) adopta tu identidad con una sola declaración:
       </p>
       <pre class="code-block"><code><span class="token-tag">:root</span> {
-  <span class="token-prop">--marca-indigo</span>: <span class="token-value">#6366f1</span>;
-  <span class="token-prop">--marca-rosa</span>: <span class="token-value">#ec4899</span>;
+  <span class="token-prop">--marca-indigo</span>: <span class="token-value">#2563eb</span>;
+  <span class="token-prop">--marca-rosa</span>: <span class="token-value">#0ea5e9</span>;
 
   <span class="token-prop">--bs-primary</span>: <span class="token-value">var(--marca-indigo)</span>;
-  <span class="token-prop">--bs-primary-rgb</span>: <span class="token-num">99, 102, 241</span>;
+  <span class="token-prop">--bs-primary-rgb</span>: <span class="token-num">37, 99, 235</span>;
   <span class="token-prop">--bs-link-color</span>: <span class="token-value">var(--marca-indigo)</span>;
 }</code></pre>
       <p>
@@ -213,7 +213,7 @@
         <div id="previewTema" data-bs-theme="dark" class="bg-body text-body border rounded-4 p-4 transition-brand">
           <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
             <div>
-              <h5 class="fw-bold mb-1"><i class="bi bi-bootstrap-fill me-2" style="color:#6366f1;"></i>Panel temático</h5>
+              <h5 class="fw-bold mb-1"><i class="bi bi-bootstrap-fill me-2" style="color:#2563eb;"></i>Panel temático</h5>
               <p class="small mb-0 opacity-75">Este bloque hereda sus colores de las variables <code>--bs-*</code>.</p>
             </div>
             <span class="badge text-bg-primary rounded-pill px-3 py-2">badge primary</span>
