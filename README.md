@@ -166,12 +166,15 @@ El archivo `.nojekyll` en la raíz evita que GitHub Pages procese el sitio con J
 - **Sass** (preprocesado), **AOS** (scroll animations) y **GSAP 3.12** (animaciones)
 - **Git / GitHub** como base del flujo de trabajo y **npm** para scripts
 
-## 📄 Licencia
+## 📄 Derechos de autor y licencia
 
-Este proyecto es una guía educativa. Siéntete libre de clonarlo, estudiarlo y usarlo como referencia para tu aprendizaje.
+**© 2026 Apaza Victor. Todos los derechos reservados.**
+
+Este proyecto es una guía educativa. Siéntete libre de clonarlo, estudiarlo y usarlo como referencia para tu aprendizaje. No se permite la distribución comercial ni el uso del contenido como material de venta sin autorización expresa del autor.
 
 ---
 
 <p align="center">
-  Hecho con 💜 · HTML, CSS y JavaScript puro · © 2026 Frontend Pro
+  © 2026 Apaza Victor. Todos los derechos reservados.<br>
+  Hecho con 💜 · HTML, CSS y JavaScript puro · Frontend Pro
 </p>
