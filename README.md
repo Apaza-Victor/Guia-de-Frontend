@@ -41,8 +41,9 @@ El proyecto está hecho **100% con HTML, CSS y JavaScript puro** (más Bootstrap
 | 🎓 **60 lecciones** | Organizadas por dificultad en Básico, Intermedio y Avanzado |
 | 🗺️ **Roadmap de 4 fases** | 20 semanas de ruta de aprendizaje con hitos concretos |
 | 💡 **Ejemplos prácticos** | Código de ejemplo editable en casi todas las lecciones |
-| 🎨 **Tema oscuro** | Diseño moderno con gradientes, glassmorphism y animaciones |
-| 🧭 **Navegación unificada** | Navbar, breadcrumbs y footer consistentes en las 76 páginas |
+| 🎨 **Tema oscuro** | Diseño moderno con gradientes, glassmorphism, malla de fondo y animaciones |
+| 🧭 **Navegación unificada** | Navbar, breadcrumbs, footer y botón "volver arriba" en las 87 páginas |
+| 🔝 **Botón flotante** | Fixed en la parte inferior derecha para volver al inicio en todas las páginas |
 | 📱 **Responsive** | Grid de Bootstrap 5 adaptado a móvil, tablet y escritorio |
 | 🔤 **Sin frameworks JS** | JavaScript vainilla, ideal para aprender los fundamentos |
 | 🌐 **Publicado en línea** | Disponible 24/7 gratis con GitHub Pages |
@@ -86,10 +87,21 @@ La guía está publicada y accesible desde cualquier dispositivo:
 ```
 Guia-de-Frontend/
 ├── index.html                 # Página de inicio (despliega la web en GitHub Pages)
-├── paginas/                   # Páginas de navegación global
+├── paginas/                   # Páginas de navegación global y apartados de tecnologías
 │   ├── temario.html           # Temario completo con las 60 lecciones
 │   ├── ruta-aprendizaje.html  # Roadmap de 4 fases / 20 semanas
-│   └── recursos.html          # Recursos y enlaces útiles
+│   ├── recursos.html          # Recursos y enlaces útiles
+│   ├── html5.html             # Apartado: HTML5
+│   ├── css3.html              # Apartado: CSS3
+│   ├── javascript.html        # Apartado: JavaScript ES6+
+│   ├── bootstrap.html         # Apartado: Bootstrap 5
+│   ├── git-github.html        # Apartado: Git & GitHub
+│   ├── npm.html               # Apartado: npm
+│   ├── sass.html              # Apartado: Sass
+│   ├── react.html             # Apartado: React
+│   ├── vue.html               # Apartado: Vue
+│   ├── gsap.html              # Apartado: GSAP
+│   └── tailwind.html          # Apartado: Tailwind CSS
 ├── html/                      # Tema HTML (10 lecciones)
 │   └── fundamentos/
 ├── css/                       # Tema CSS (21 lecciones)
@@ -104,16 +116,18 @@ Guia-de-Frontend/
 ├── herramientas/              # Git, npm, Sass, React, Vue (5 lecciones)
 └── assets/
     ├── css/style.css          # Design system (tema oscuro, gradientes)
-    └── js/main.js             # Animaciones, contadores y marquee
+    └── js/main.js             # Animaciones, contadores, marquee y botón "volver arriba"
 ```
 
 ## 🧭 Navegación rápida
 
-- [🏠 Inicio](index.html) — Landing con teaser de los 5 temas
+- [🏠 Inicio](index.html) — Landing con teaser de los 5 temas y carrusel infinito de tecnologías
 - [📖 Temario](paginas/temario.html) — Las 60 lecciones en tarjetas
 - [🗺️ Ruta de aprendizaje](paginas/ruta-aprendizaje.html) — El roadmap completo
 - [🔗 Recursos](paginas/recursos.html) — Enlaces y herramientas recomendadas
 - [🌐 Web en vivo](https://apaza-victor.github.io/Guia-de-Frontend/) — Versión desplegada en GitHub Pages
+
+Los chips del carrusel infinito enlazan a su **apartado** en `paginas/`: [HTML5](paginas/html5.html), [CSS3](paginas/css3.html), [JavaScript](paginas/javascript.html), [Bootstrap 5](paginas/bootstrap.html), [Git & GitHub](paginas/git-github.html), [npm](paginas/npm.html), [Sass](paginas/sass.html), [React](paginas/react.html), [Vue](paginas/vue.html), [GSAP](paginas/gsap.html) y [Tailwind](paginas/tailwind.html).
 
 ## 🚀 Cómo usarlo
 

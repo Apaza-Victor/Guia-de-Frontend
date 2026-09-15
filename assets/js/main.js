@@ -49,6 +49,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const backToTop = document.getElementById("backToTop");
   if (backToTop) {
+    const onScrollBt = () => {
+      backToTop.classList.toggle("show", window.scrollY > 400);
+    };
+    window.addEventListener("scroll", onScrollBt, { passive: true });
+    onScrollBt();
     backToTop.addEventListener("click", e => {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: "smooth" });

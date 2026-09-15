@@ -361,6 +361,7 @@ a:hover {
   white-space: nowrap;
   transition: all 0.3s ease;
   backdrop-filter: blur(8px);
+  text-decoration: none;
 }
 
 .marquee-item:hover {
@@ -475,6 +476,40 @@ a:hover {
   border-radius: 50rem;
   font-size: 0.85rem;
   font-weight: 600;
+}
+
+/* ===== Botón volver al inicio (fixed) ===== */
+.btn-scroll-top {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 1050;
+  width: 3.25rem;
+  height: 3.25rem;
+  border: none;
+  border-radius: 50rem;
+  background: linear-gradient(135deg, #2563eb, #06b6d4);
+  color: #fff;
+  font-size: 1.35rem;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.45);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(1rem) scale(0.9);
+  transition: opacity 0.35s ease, visibility 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+  cursor: pointer;
+}
+
+.btn-scroll-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.btn-scroll-top:hover {
+  transform: translateY(-3px) scale(1.06);
+  box-shadow: 0 12px 32px rgba(6, 182, 212, 0.5);
 }
 
 @media (max-width: 768px) {

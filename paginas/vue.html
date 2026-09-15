@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vue: el framework progresivo de JavaScript. Reactividad sencilla, directivas y composición intuitiva.">
+  <title>Vue — Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="temario.html">Temario</a></li>
+        <li class="breadcrumb-item active text-light">Vue</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-arrow-repeat me-1"></i>Vue</span>
+      <span class="badge-soft-cyan"><i class="bi bi-book me-1"></i>1 lección</span>
+      <span class="badge-soft-sky"><i class="bi bi-lightning-charge me-1"></i>Framework</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Vue</h1>
+    <p class="lead mb-3" style="color:#94a3b8 !important;">El framework progresivo: fácil de adoptar poco a poco y con una reactividad tan elegante que empiezas a usarlo en minutos.</p>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-question-circle text-gradient me-2"></i>¿Qué es Vue?</h2>
+      <p>Vue se integra de forma incremental en tu HTML existente o escala a SPA completas. Su sistema <strong class="text-white">reactivo</strong> actualiza la vista automáticamente cuando los datos cambian, con una curva de aprendizaje muy suave.</p>
+      <div class="row g-3 my-2">
+        <div class="col-md-4">
+          <div class="demo-box h-100 text-center">
+            <i class="bi bi-arrow-repeat fs-2 d-block mb-2" style="color:#2563eb;"></i>
+            <strong class="text-white">Directivas</strong>
+            <p class="small mb-0">v-if, v-for y v-model conectan el HTML con los datos.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="demo-box h-100 text-center">
+            <i class="bi bi-recycle fs-2 d-block mb-2" style="color:#06b6d4;"></i>
+            <strong class="text-white">Reactividad</strong>
+            <p class="small mb-0">Cambia el estado y la interfaz se actualiza sola.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="demo-box h-100 text-center">
+            <i class="bi bi-plug fs-2 d-block mb-2" style="color:#f59e0b;"></i>
+            <strong class="text-white">Progresivo</strong>
+            <p class="small mb-0">Úsalo en un botón hoy o en toda la app mañana.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-code-slash text-gradient me-2"></i>Reactividad básica</h2>
+      <pre class="code-block"><code><span class="token-tag">&lt;div</span> <span class="token-attr">id</span>=<span class="token-value">"app"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;p&gt;</span>{{ mensaje }}<span class="token-tag">&lt;/p&gt;</span>
+  <span class="token-tag">&lt;button</span> <span class="token-attr">@click</span>=<span class="token-value">"cambiar"</span><span class="token-tag">&gt;</span>Cambiar<span class="token-tag">&lt;/button&gt;</span>
+<span class="token-tag">&lt;/div&gt;</span>
+
+<span class="token-tag">&lt;script&gt;</span>
+  <span class="token-tag">const</span> <span class="token-prop">app</span> <span class="token-value">= createApp({</span>
+    <span class="token-prop">data()</span> <span class="token-value">{</span>
+      <span class="token-tag">return</span> <span class="token-value">{ mensaje: "Hola Vue" };</span>
+    <span class="token-value">}</span>,
+    <span class="token-prop">methods</span> <span class="token-value">{</span>
+      <span class="token-prop">cambiar()</span> <span class="token-value">{ this.mensaje = "¡Reactivo!"; }</span>
+    <span class="token-value">}</span>
+  <span class="token-value">});</span>
+<span class="token-tag">&lt;/script&gt;</span></code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Vue es ideal como segundo framework: su enfoque progresivo te permite sumarlo a proyectos existentes sin reescribir nada.
+      </div>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Volver al inicio</a>
+      <a href="../herramientas/leccion-5-vue.html" class="btn btn-gradient">Ir a la lección de Vue <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— Vue</span>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+      <a href="../index.html" class="text-secondary">Inicio</a>
+      <a href="ruta-aprendizaje.html" class="text-secondary">Ruta de aprendizaje</a>
+      <a href="recursos.html" class="text-secondary">Recursos</a>
+      <a href="../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>
