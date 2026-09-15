@@ -85,10 +85,11 @@ La guía está publicada y accesible desde cualquier dispositivo:
 
 ```
 Guia-de-Frontend/
-├── index.html                 # Página de inicio
-├── temario.html               # Temario completo con las 60 lecciones
-├── ruta-aprendizaje.html      # Roadmap de 4 fases / 20 semanas
-├── recursos.html              # Recursos y enlaces útiles
+├── index.html                 # Página de inicio (despliega la web en GitHub Pages)
+├── paginas/                   # Páginas de navegación global
+│   ├── temario.html           # Temario completo con las 60 lecciones
+│   ├── ruta-aprendizaje.html  # Roadmap de 4 fases / 20 semanas
+│   └── recursos.html          # Recursos y enlaces útiles
 ├── html/                      # Tema HTML (10 lecciones)
 │   └── fundamentos/
 ├── css/                       # Tema CSS (21 lecciones)
@@ -109,9 +110,9 @@ Guia-de-Frontend/
 ## 🧭 Navegación rápida
 
 - [🏠 Inicio](index.html) — Landing con teaser de los 5 temas
-- [📖 Temario](temario.html) — Las 60 lecciones en tarjetas
-- [🗺️ Ruta de aprendizaje](ruta-aprendizaje.html) — El roadmap completo
-- [🔗 Recursos](recursos.html) — Enlaces y herramientas recomendadas
+- [📖 Temario](paginas/temario.html) — Las 60 lecciones en tarjetas
+- [🗺️ Ruta de aprendizaje](paginas/ruta-aprendizaje.html) — El roadmap completo
+- [🔗 Recursos](paginas/recursos.html) — Enlaces y herramientas recomendadas
 - [🌐 Web en vivo](https://apaza-victor.github.io/Guia-de-Frontend/) — Versión desplegada en GitHub Pages
 
 ## 🚀 Cómo usarlo
