@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 6 de JavaScript Avanzado: el Event Loop. Call stack, cola de tareas, microtasks vs macrotasks y cómo JavaScript ejecuta el código asíncrono en JavaScript.">
+  <title>Lección 6 — El Event Loop | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">JavaScript</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Avanzado</a></li>
+        <li class="breadcrumb-item active text-light">Lección 6</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-lightning-charge-fill text-gradient me-1"></i>JavaScript Avanzado · Lección 6</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>40 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">El Event Loop</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">El porqué del orden de las promesas, los intervals y los eventos.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-stack text-gradient me-2"></i>Un solo hilo, una sola cola</h2>
+      <p>
+        JavaScript en el navegador es <strong>monohilo</strong>: ejecuta una instrucción a la vez. Todo lo que escribes
+        (calls a funciones, bucles, condicionales) se apila en el <strong>call stack</strong>. Cuando el stack se vacía,
+        la página queda "libre" para reaccionar a clics, teclas y animaciones.
+      </p>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        Un bucle infinito o una función que tarda segundos <strong>bloquean la UI</strong>: los clics quedan congelados.
+        Por eso las tareas lentas se delegan a la asincronía.
+      </div>
+      <p class="mt-3">Las funciones que "esperan" (<code>setTimeout</code>, fetch, promesas, eventos) no bloquean: se desvían a las <strong>Web APIs</strong> del navegador y vuelven a través de colas.</p>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-layers text-gradient me-2"></i>Task queue vs microtask queue</h2>
+      <p>
+        El Event Loop no es una sola cola: hay <strong>dos prioridades</strong>. Las promesas saltan primero.
+      </p>
+      <div class="row g-3 my-2">
+        <div class="col-md-6">
+          <div class="demo-box h-100">
+            <i class="bi bi-lightning-charge fs-2 d-block mb-2" style="color:#22c55e;"></i>
+            <strong class="text-white">Microtasks (prioridad alta)</strong>
+            <p class="small mb-0" style="color:#94a3b8;">callbacks de promesas: <code>.then</code>, <code>.catch</code>, <code>await</code>, <code>queueMicrotask</code>.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="demo-box h-100">
+            <i class="bi bi-hourglass-split fs-2 d-block mb-2" style="color:#f59e0b;"></i>
+            <strong class="text-white">Task queue (prioridad normal)</strong>
+            <p class="small mb-0" style="color:#94a3b8;">timers, eventos, I/O, <code>setTimeout</code> e <code>setInterval</code>.</p>
+          </div>
+        </div>
+      </div>
+      <p class="mt-3">El orden siempre es: <strong>1) código síncrono, 2) todas las microtasks pendientes, 3) una tarea</strong> y se repite. Las microtasks se vacían por completo antes de mirar las tareas:</p>
+      <pre class="code-block"><code><span class="token-prop">setTimeout</span>(() =&gt; <span class="token-prop">console</span>.log(<span class="token-value">'A'</span>), <span class="token-num">0</span>);
+<span class="token-prop">Promise</span>.<span class="token-attr">resolve</span>()
+  .<span class="token-attr">then</span>(() =&gt; <span class="token-prop">console</span>.log(<span class="token-value">'B'</span>));
+
+<span class="token-comment">// Orden real: B, luego A</span></code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-diagram-3 text-gradient me-2"></i>Recetario de orden de ejecución</h2>
+      <ul>
+        <li><strong>Síncrono</strong> se ejecuta siempre primero, en el orden escrito.</li>
+        <li><code>await</code> pausa la función actual y mete el resto en la <strong>microtask queue</strong>.</li>
+        <li>Varias promesas seguidas se ordenan por tiempo de resolución, no por el orden del código.</li>
+        <li><code>setTimeout(fn, 0)</code> no es "inmediato": pasa después de <em>todas</em> las microtasks.</li>
+        <li>Dos <code>setInterval</code> iguales se alternan según llegaron, con un mínimo de 4 ms entre tareas.</li>
+      </ul>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Para depurar, reemplaza la intuición por experimentos: abre DevTools → Console y escribe el fragmento
+        para ver el orden real con tus ojos.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-cpu text-gradient me-2"></i>Demo: adivina el orden</h2>
+      <p>
+        Antes de pulsar, piensa el orden que crees que verás. Luego pulsa <strong>"Ver el orden"</strong>:
+      </p>
+      <div class="demo-box p-4">
+        <pre class="code-block mb-3" style="border:none;background:transparent;"><code><span class="token-prop">console</span>.log(<span class="token-value">'1 síncrono'</span>);
+<span class="token-attr">Promise</span>.<span class="token-attr">resolve</span>().<span class="token-attr">then</span>(() =&gt; <span class="token-prop">console</span>.log(<span class="token-value">'2 micro'</span>));
+<span class="token-attr">setTimeout</span>(() =&gt; <span class="token-prop">console</span>.log(<span class="token-value">'3 task'</span>), <span class="token-num">0</span>);
+<span class="token-prop">console</span>.log(<span class="token-value">'4 síncrono'</span>);</code></pre>
+        <div class="d-flex gap-2 flex-wrap">
+          <button type="button" id="demoEjecutar" class="btn btn-gradient"><i class="bi bi-play-fill me-1"></i>Ver el orden</button>
+          <button type="button" id="demoLimpiar" class="btn btn-ghost-glass"><i class="bi bi-eraser me-1"></i>Limpiar</button>
+        </div>
+        <ol id="demoOrden" class="mt-3 mb-0" style="color:#94a3b8;"></ol>
+        <p class="small mt-2 mb-0" style="color:#64748b;">1 y 4 salen al instante; el 2 se descarga de microtasks antes que el 3, aunque el 3 parecía "más urgente".</p>
+      </div>
+      <div class="warning-box mt-4">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        No abuses de la microtask queue: una tarea que <code>await</code> en cadena "roba" tiempo a las tareas normales
+        (rendering, eventos) si encadenas miles de microtasks de golpe.
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>JavaScript es <strong>monohilo</strong>: call stack + Event Loop.</li>
+        <li>Las <strong>microtasks</strong> (promesas/await) tienen prioridad sobre las <strong>tareas</strong> (timers/eventos).</li>
+        <li><code>setTimeout(fn, 0)</code> NO es inmediato: corre tras las microtasks.</li>
+        <li>Orden típico: síncrono → todas las microtasks → una tarea → repite.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <div class="d-flex gap-2">
+        <a href="../../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Inicio</a>
+        <a href="leccion-5-patrones.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      </div>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+      </div>
+      <a href="leccion-7-fetch-avanzado.html" class="btn btn-gradient">Siguiente: Fetch avanzado <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— JavaScript Avanzado · Lección 6</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-7-fetch-avanzado.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+
+<script>
+(function () {
+  const zona = document.getElementById('demoOrden');
+
+  document.getElementById('demoEjecutar').addEventListener('click', () => {
+    zona.innerHTML = '';
+    const linea = (texto, color) => {
+      const li = document.createElement('li');
+      li.textContent = texto;
+      li.style.color = color || '#94a3b8';
+      zona.appendChild(li);
+      gsap.from(li, { opacity: 0, x: -8, duration: 0.25 });
+    };
+
+    console.log('1 síncrono');
+    linea('Esto es síncrono: ' + 1);
+    Promise.resolve().then(() => {
+      linea('Promesa resuelta (microtask): 2', '#22c55e');
+    });
+    setTimeout(() => {
+      linea('Tarea de setTimeout 0ms: 3', '#f59e0b');
+    }, 0);
+    linea('Esto es síncrono: 4');
+  });
+
+  document.getElementById('demoLimpiar').addEventListener('click', () => {
+    zona.innerHTML = '';
+  });
+})();
+</script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

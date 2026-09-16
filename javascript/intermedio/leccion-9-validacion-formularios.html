@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 9 de JavaScript Intermedio: validación de formularios. Atributos HTML5, Constraint Validation API, validity, checkValidity, setCustomValidity y validación en vivo en JavaScript.">
+  <title>Lección 9 — Validación de formularios | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">JavaScript</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Intermedio</a></li>
+        <li class="breadcrumb-item active text-light">Lección 9</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-hdd-network text-gradient me-1"></i>JavaScript Intermedio · Lección 9</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>45 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Validación de formularios</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Avisa al usuario antes de enviar datos incorrectos: nativo primero, a medida después.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-ui-checks text-gradient me-2"></i>Atributos HTML5: validar sin JavaScript</h2>
+      <p>
+        El navegador ya valida por ti con atributos como <code>required</code>, <code>minlength</code>,
+        <code>pattern</code>, <code>type="email"</code>… Obtienes mensajes nativos gratis:
+      </p>
+      <pre class="code-block"><code>&lt;<span class="token-tag">input</span> <span class="token-prop">type</span>=<span class="token-value">"email"</span> <span class="token-prop">required</span>>
+&lt;<span class="token-tag">input</span> <span class="token-prop">minlength</span>=<span class="token-value">"8"</span> <span class="token-prop">pattern</span>=<span class="token-value">"[A-Za-z0-9]+"</span>></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Atributo</th><th scope="col">Qué valida</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>required</code></td><td>que no esté vacío</td></tr>
+          <tr><td><code>minlength</code> / <code>maxlength</code></td><td>largo del texto</td></tr>
+          <tr><td><code>min</code> / <code>max</code></td><td>rango en números y fechas</td></tr>
+          <tr><td><code>pattern</code></td><td>expresión regular</td></tr>
+          <tr><td><code>type</code></td><td>formato: email, url, number…</td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Si el formulario ya valida con HTML5, <strong>no añadas JavaScript</strong> para lo mismo.
+        Usa JS solo para requisitos a medida (contraseñas iguales, cupones, comprobaciones contra el servidor…).
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-list-check text-gradient me-2"></i>Constrain Validation API</h2>
+      <p>
+        Es el puente entre los atributos nativos y JavaScript. Dos herramientas esenciales:
+      </p>
+      <pre class="code-block"><code><span class="token-tag">const</span> form = document.<span class="token-attr">querySelector</span>(<span class="token-value">'form'</span>);
+<span class="token-tag">const</span> email = document.<span class="token-attr">querySelector</span>(<span class="token-value">'#email'</span>);
+
+email.<span class="token-attr">validity</span>.<span class="token-attr">valueMissing</span>;  <span class="token-comment">// true si required y está vacío</span>
+email.<span class="token-attr">validity</span>.<span class="token-attr">typeMismatch</span>; <span class="token-comment">// true si el formato no es email</span>
+form.<span class="token-attr">checkValidity</span>();        <span class="token-comment">// true/false del formulario completo</span>
+form.<span class="token-attr">reportValidity</span>();       <span class="token-comment">// igual + muestra los globos nativos</span></code></pre>
+      <p class="mt-3">El objeto <code>validity</code> tiene un campo por cada regla:</p>
+      <ul>
+        <li><code>valueMissing</code> — campo requerido vacío</li>
+        <li><code>typeMismatch</code> — formato incorrecto</li>
+        <li><code>patternMismatch</code> — no coincide con <code>pattern</code></li>
+        <li><code>tooShort</code> / <code>tooLong</code> — longitud</li>
+        <li><code>rangeUnderflow</code> / <code>rangeOverflow</code> — fuera de rango</li>
+      </ul>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-magic text-gradient me-2"></i>Mensajes a medida: setCustomValidity</h2>
+      <p>
+        Para reglas <strong>más allá de HTML5</strong>, usa <code>setCustomValidity</code>: al ponerle un mensaje
+        el campo deja de ser válido, y al poner <code>''</code> lo vuelves válido:
+      </p>
+      <pre class="code-block"><code>confirmar.<span class="token-attr">addEventListener</span>(<span class="token-value">'input'</span>, () =&gt; {
+  <span class="token-tag">if</span> (confirmar.<span class="token-attr">value</span> !== password.<span class="token-attr">value</span>) {
+    confirmar.<span class="token-attr">setCustomValidity</span>(<span class="token-value">'Las contraseñas no coinciden'</span>);
+  } <span class="token-tag">else</span> {
+    confirmar.<span class="token-attr">setCustomValidity</span>(<span class="token-value">''</span>);
+  }
+});</code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        Si no reseteas a <code>''</code> el mensaje queda "pegado" y el campo <strong>nunca podrá volver a ser válido</strong>.
+        Resetea siempre en el evento <code>input</code>.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-keyboard text-gradient me-2"></i>Validación en vivo (feedback temprano)</h2>
+      <p>
+        La mejor UX avisa <strong>mientras escribes</strong>, no al pulsar enviar. Escucha el evento <code>input</code>
+        y pinta el error al instante:
+      </p>
+      <pre class="code-block"><code>campo.<span class="token-attr">addEventListener</span>(<span class="token-value">'input'</span>, () =&gt; {
+  <span class="token-tag">if</span> (campo.<span class="token-attr">validity</span>.<span class="token-attr">valueMissing</span>) {
+    mensaje.textContent = <span class="token-value">'Este campo es obligatorio'</span>;
+  } <span class="token-tag">else</span> {
+    mensaje.textContent = <span class="token-value">''</span>;
+  }
+});</code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Los mensajes grandes se muestran mejor <strong>bajo el campo</strong> que dentro del globo nativo.
+        Puedes usar <code>reportValidity()</code> solo en el envío y guardar la validación en vivo para tu propio diseño.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-person-vcard text-gradient me-2"></i>Demo: registro con validación a medida</h2>
+      <p>
+        Formulario que combina todo: <code>required</code> nativo, confirmación de contraseña con
+        <code>setCustomValidity</code> y validación en vivo.
+      </p>
+      <div class="demo-box p-4">
+        <form id="demoForm" novalidate>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label small mb-1" style="color:#94a3b8;">Correo</label>
+              <input type="email" id="demoEmail" class="form-control" placeholder="tu@correo.com" required style="background:#1e293b;color:#e2e8f0;border:1px solid #334155;">
+              <small class="demo-msg d-none mt-1" style="color:#ef4444;"></small>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small mb-1" style="color:#94a3b8;">Usuario (mín. 4)</label>
+              <input type="text" id="demoUser" class="form-control" placeholder="anita2010" required minlength="4" style="background:#1e293b;color:#e2e8f0;border:1px solid #334155;">
+              <small class="demo-msg d-none mt-1" style="color:#ef4444;"></small>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small mb-1" style="color:#94a3b8;">Contraseña</label>
+              <input type="password" id="demoPass" class="form-control" placeholder="••••••" required minlength="6" style="background:#1e293b;color:#e2e8f0;border:1px solid #334155;">
+              <small class="demo-msg d-none mt-1" style="color:#ef4444;"></small>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small mb-1" style="color:#94a3b8;">Confirmar contraseña</label>
+              <input type="password" id="demoConfirm" class="form-control" placeholder="••••••" required style="background:#1e293b;color:#e2e8f0;border:1px solid #334155;">
+              <small class="demo-msg d-none mt-1" style="color:#ef4444;"></small>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-gradient"><i class="bi bi-person-plus me-1"></i>Registrarme</button>
+              <span id="demoExito" class="small ms-2" style="color:#22c55e;"></span>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="warning-box mt-4">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        La validación del cliente es <strong>UX</strong>, no seguridad. Un usuario con DevTools puede enviar lo que quiera;
+        el servidor siempre debe validar de nuevo.
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>Empieza siempre por los <strong>atributos HTML5</strong>: validan gratis.</li>
+        <li><code>validity</code> te dice <em>cuál</em> regla falla; <code>checkValidity()</code> dice <em>si</em> falla algo.</li>
+        <li><code>setCustomValidity('msg')</code> para reglas a medida; <code>''</code> las rehabilita.</li>
+        <li>Valida <strong>en vivo</strong> con <code>input</code> y muestra el error bajo el campo.</li>
+        <li>Lo que valida JS es UX: el backend es quien manda.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <div class="d-flex gap-2">
+        <a href="../../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Inicio</a>
+        <a href="leccion-8-apis-navegador.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      </div>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+      </div>
+      <a href="../avanzado/leccion-1-es6.html" class="btn btn-gradient">Siguiente: ES6+ <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— JavaScript Intermedio · Lección 9</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="../avanzado/leccion-1-es6.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+
+<script>
+(function () {
+  const form = document.getElementById('demoForm');
+  const email = document.getElementById('demoEmail');
+  const user = document.getElementById('demoUser');
+  const pass = document.getElementById('demoPass');
+  const confirmar = document.getElementById('demoConfirm');
+  const exito = document.getElementById('demoExito');
+
+  function mostrarCampo(campo, mensaje) {
+    const small = campo.parentElement.querySelector('.demo-msg');
+    if (mensaje) {
+      small.textContent = mensaje;
+      small.classList.remove('d-none');
+      campo.style.borderColor = '#ef4444';
+    } else {
+      small.textContent = '';
+      small.classList.add('d-none');
+      campo.style.borderColor = '#334155';
+    }
+  }
+
+  function validarCampo(campo) {
+    if (campo.validity.valueMissing) {
+      mostrarCampo(campo, 'Este campo es obligatorio');
+    } else if (campo.validity.typeMismatch) {
+      mostrarCampo(campo, 'Escribe un correo válido');
+    } else if (campo.validity.tooShort) {
+      mostrarCampo(campo, 'El mínimo son ' + campo.minLength + ' caracteres');
+    } else if (campo === confirmar && campo.value !== pass.value) {
+      mostrarCampo(campo, 'Las contraseñas no coinciden');
+      campo.setCustomValidity('Las contraseñas no coinciden');
+    } else {
+      campo.setCustomValidity('');
+      mostrarCampo(campo, '');
+    }
+  }
+
+  [email, user, pass, confirmar].forEach((campo) => {
+    campo.addEventListener('input', () => validarCampo(campo));
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    exito.textContent = '';
+    [email, user, pass, confirmar].forEach(validarCampo);
+    if (form.checkValidity()) {
+      exito.textContent = 'Cuenta creada (demo) ✓';
+      gsap.from(form, { opacity: 0.6, y: 6, duration: 0.3 });
+    } else {
+      form.reportValidity();
+    }
+  });
+})();
+</script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

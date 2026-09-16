@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 3 de TypeScript: funciones tipadas con parámetros y retorno, parámetros opcionales con ?, valores por defecto, arrow functions y generics simples.">
+  <title>Lección 3 — Funciones tipadas | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="index.html">TypeScript</a></li>
+        <li class="breadcrumb-item active text-light">Lección 3</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-code-square me-1"></i>TypeScript · Lección 3</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>55 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Funciones tipadas</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Dale contrato a tus funciones: parámetros, retorno, opcionales, valores por defecto y generics.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-braces text-gradient me-2"></i>Parámetros y retorno</h2>
+      <p>Cada parámetro lleva su tipo y, después de los paréntesis, declaras el tipo que devuelve la función:</p>
+      <pre class="code-block"><code><span class="token-tag">function</span> sumar(a: <span class="token-value">number</span>, b: <span class="token-value">number</span>): <span class="token-value">number</span> {
+  <span class="token-tag">return</span> a + b;
+}
+
+<span class="token-tag">function</span> saludar(nombre: <span class="token-value">string</span>): <span class="token-value">string</span> {
+  <span class="token-tag">return</span> <span class="token-value">"Hola "</span> + nombre;
+}
+
+<span class="token-comment">// sumar("a", 2)  Error: el primer argumento debe ser number</span></code></pre>
+      <p>Cuando una función no devuelve nada, se anota con <code>void</code>:</p>
+      <pre class="code-block"><code><span class="token-tag">function</span> registrarLog(mensaje: <span class="token-value">string</span>): <span class="token-value">void</span> {
+  console.log(mensaje);
+}</code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Nota:</strong>
+        si no anotas el retorno, TypeScript lo infiere. Anotarlo explícito documenta la intención y evita que por error devuelvas algo distinto.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-question-square text-gradient me-2"></i>Parámetros opcionales</h2>
+      <p>El signo <code>?</code> marca un parámetro que no es obligatorio. Si llega, vale <code>undefined</code>; tu código debe contemplarlo:</p>
+      <pre class="code-block"><code><span class="token-tag">function</span> presentar(nombre: <span class="token-value">string</span>, apellido?: <span class="token-value">string</span>): <span class="token-value">string</span> {
+  <span class="token-tag">if</span> (apellido) {
+    <span class="token-tag">return</span> nombre + <span class="token-value">" "</span> + apellido;
+  }
+  <span class="token-tag">return</span> nombre;
+}
+
+presentar(<span class="token-value">"Ana"</span>);            <span class="token-comment">// "Ana"</span>
+presentar(<span class="token-value">"Ana"</span>, <span class="token-value">"Perez"</span>);   <span class="token-comment">// "Ana Perez"</span></code></pre>
+      <div class="warning-box">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#fbbf24;"></i>Orden:</strong>
+        los parámetros opcionales siempre van después de los obligatorios. <code>function f(opcional?: string, obligatorio: string)</code> provoca un error de compilación.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-sliders text-gradient me-2"></i>Valores por defecto</h2>
+      <p>Asigna un valor que se usa cuando la función se llama sin ese argumento. Es más cómodo que <code>?</code> porque el parámetro siempre tendrá un valor:</p>
+      <pre class="code-block"><code><span class="token-tag">function</span> calcularPrecio(precio: <span class="token-value">number</span>, descuento: <span class="token-value">number</span> = <span class="token-value">0</span>): <span class="token-value">number</span> {
+  <span class="token-tag">return</span> precio - (precio * descuento) / <span class="token-value">100</span>;
+}
+
+calcularPrecio(<span class="token-value">100</span>);        <span class="token-comment">// 100, sin descuento</span>
+calcularPrecio(<span class="token-value">100</span>, <span class="token-value">10</span>);   <span class="token-comment">// 90</span></code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        usa valores por defecto cuando exista un comportamiento estándar (descuento 0, página 1, idioma "es") y reserva <code>?</code> para datos realmente ausentes.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-arrow-right-circle text-gradient me-2"></i>Arrow functions tipadas</h2>
+      <p>Las funciones flecha se tipan igual: parámetros a la izquierda y retorno tras el <code>=&gt;</code>. Son ideales para callbacks y arrays:</p>
+      <pre class="code-block"><code><span class="token-tag">const</span> duplicar = (n: <span class="token-value">number</span>): <span class="token-value">number</span> =&gt; n * <span class="token-value">2</span>;
+
+<span class="token-tag">const</span> notas = [<span class="token-value">18</span>, <span class="token-value">14</span>, <span class="token-value">17</span>];
+<span class="token-tag">const</span> aprobadas = notas.filter((nota: <span class="token-value">number</span>) =&gt; nota &gt;= <span class="token-value">15</span>);
+
+<span class="token-comment">// En la práctica TS infiere el tipo de "nota" a partir del array</span>
+<span class="token-tag">const</span> total = notas.reduce((acc, nota) =&gt; acc + nota, <span class="token-value">0</span>);</code></pre>
+      <p>También puedes tener un tipo de función reutilizable con un alias:</p>
+      <pre class="code-block"><code><span class="token-tag">type</span> <span class="token-value">Calculadora</span> = (a: <span class="token-value">number</span>, b: <span class="token-value">number</span>) =&gt; <span class="token-value">number</span>;
+
+<span class="token-tag">const</span> restar: <span class="token-value">Calculadora</span> = (a, b) =&gt; a - b;
+<span class="token-tag">const</span> multiplicar: <span class="token-value">Calculadora</span> = (a, b) =&gt; a * b;</code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-code-square text-gradient me-2"></i>Generics simples</h2>
+      <p>Los <strong>generics</strong> permiten que una función trabaje con muchos tipos manteniendo la relación entre ellos. Se declaran con <code>&lt;T&gt;</code>:</p>
+      <pre class="code-block"><code><span class="token-tag">function</span> identidad&lt;T&gt;(valor: <span class="token-value">T</span>): <span class="token-value">T</span> {
+  <span class="token-tag">return</span> valor;
+}
+
+<span class="token-tag">const</span> texto = identidad&lt;<span class="token-value">string</span>&gt;(<span class="token-value">"hola"</span>);
+<span class="token-tag">const</span> num = identidad&lt;<span class="token-value">number</span>&gt;(<span class="token-value">42</span>);
+
+<span class="token-comment">// El retorno siempre coincide con el argumento:</span>
+<span class="token-tag">function</span> primera&lt;T&gt;(lista: <span class="token-value">T[]</span>): <span class="token-value">T | undefined</span> {
+  <span class="token-tag">return</span> lista[<span class="token-value">0</span>];
+}</code></pre>
+      <div class="demo-box p-4">
+        <strong class="text-white">Por qué importan</strong>
+        <p class="small mb-0" style="color:#cbd5e1 !important;"><code>primera</code> con <code>string[]</code> devuelve <code>string | undefined</code> y con <code>number[]</code> devuelve <code>number | undefined</code>. Sin generics tendrías que repetir la función por cada tipo o perder el tipado con <code>any</code>.</p>
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>Parámetros y retorno se anotan: <code>function f(a: number): number</code>.</li>
+        <li><code>?</code> hace un parámetro opcional; los valores por defecto evitan el <code>undefined</code>.</li>
+        <li>Las arrow functions se tipan como las funciones normales: <code>(n: number) =&gt; number</code>.</li>
+        <li><code>&lt;T&gt;</code> crea funciones reutilizables que conservan el tipo entre entrada y salida.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-2-tipos-avanzados.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-4-interfaces-clases.html" class="btn btn-gradient">Siguiente: Interfaces y clases <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— TypeScript · Lección 3</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-4-interfaces-clases.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

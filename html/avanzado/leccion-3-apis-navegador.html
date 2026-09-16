@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 3 de HTML Avanzado: APIs del navegador (Geolocation, Storage, History, Fetch) y off-canvas con HTML.">
+  <title>Lección 3 — APIs del navegador | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">HTML</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Avanzado</a></li>
+        <li class="breadcrumb-item active text-light">Lección 3</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft">Sección: HTML Avanzado · Lección 3</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>45 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">APIs del navegador</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Geolocalización, almacenamiento local, historial y Canvas: el navegador completo como plataforma.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-compass text-gradient me-2"></i>El navegador como plataforma</h2>
+      <p>JavaScript + HTML abren <strong>APIs</strong> que otros lenguajes no tienen: ubicación, batería, notificaciones y almacenamiento. Aprende las tres imprescindibles.</p>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-geo-alt text-gradient me-2"></i>Geolocation API</h2>
+      <pre class="code-block"><code><span class="token-tag">navigator.geolocation.getCurrentPosition</span>((pos) =&gt; {
+  <span class="token-tag">const</span> { latitude, longitude } = pos.coords;
+  console.log(latitude, longitude); <span class="token-comment">// Usa una API de mapas para mostrar</span>
+});</code></pre>
+      <ul class="mt-3">
+        <li>El navegador pide <strong>permiso</strong> al usuario automáticamente.</li>
+        <li>Siempre funciona sobre HTTPS o localhost.</li>
+        <li>Maneja el error de "denegado" con <code>PositionError</code>.</li>
+      </ul>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-database-down text-gradient me-2"></i>LocalStorage y SessionStorage</h2>
+      <p>El <code>localStorage</code> guarda datos de forma persistente en el dispositivo:</p>
+      <pre class="code-block"><code><span class="token-comment">// Guardar (siempre en texto)</span>
+localStorage.setItem(<span class="token-value">'tema'</span>, <span class="token-value">'oscuro'</span>);
+
+<span class="token-comment">// Leer</span>
+const tema = localStorage.getItem(<span class="token-value">'tema'</span>);
+
+<span class="token-comment">// Para objetos hay que serializar a JSON</span>
+localStorage.setItem(<span class="token-value">'usuario'</span>, JSON.stringify({ nombre: <span class="token-value">'Victor'</span> }));</code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        <code>sessionStorage</code> se borra al cerrar la pestaña; <code>localStorage</code> persiste. Nunca guardes datos sensibles aquí.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-link text-gradient me-2"></i>History API y estado del navegador</h2>
+      <p>Forma parte de las <strong>single-page apps (SPA)</strong> sin recargar la página:</p>
+      <pre class="code-block"><code><span class="token-comment">// Cambia la URL sin recargar</span>
+history.pushState({ page: <span class="token-value">'contacto'</span> }, <span class="token-value">''</span>, <span class="token-value">'/contacto'</span>);
+
+<span class="token-comment">// Reacciona al botón "atrás"</span>
+window.addEventListener(<span class="token-value">'popstate'</span>, () =&gt; { <span class="token-comment">/* renderizar */</span> });</code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-lightbulb text-gradient me-2"></i>Demo interactiva</h2>
+      <div class="demo-box text-center p-4">
+        <p style="color:#cbd5e1 !important;">Usa localStorage para "recordar" tu nombre, como lo hacen las webs reales:</p>
+        <div class="d-flex flex-wrap justify-content-center align-items-center gap-2">
+          <input type="text" id="inpDemo" class="form-control" style="max-width:220px; display:inline-block;" placeholder="Tu nombre">
+          <button class="btn btn-gradient" onclick="guardarNombre()"><i class="bi bi-save me-1"></i>Guardar</button>
+          <button class="btn btn-ghost-glass" onclick="borrarNombre()"><i class="bi bi-trash me-1"></i>Borrar</button>
+        </div>
+        <p id="outDemo" class="small mt-3 mb-0" style="color:#94a3b8 !important;"></p>
+      </div>
+      <script>
+        (function () {
+          const out = document.getElementById('outDemo');
+          const nombre = localStorage.getItem('nombre');
+          if (nombre) out.textContent = 'Hola de nuevo, ' + nombre + ' (leído del localStorage).';
+        })();
+        function guardarNombre() {
+          const v = document.getElementById('inpDemo').value.trim();
+          const out = document.getElementById('outDemo');
+          if (!v) { out.textContent = 'Escribe un nombre primero.'; return; }
+          localStorage.setItem('nombre', v);
+          out.textContent = 'Guardado: te recordaré cuando vuelvas.';
+        }
+        function borrarNombre() {
+          localStorage.removeItem('nombre');
+          document.getElementById('outDemo').textContent = 'Datos borrados.';
+        }
+      </script>
+      <div class="warning-box mt-4">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        Siempre envuelve <code>localStorage</code> en <code>try/catch</code>: en modo incógnito o con almacenamiento bloqueado lanza excepción.
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>Geolocation necesita HTTPS y maneja el permiso del usuario.</li>
+        <li>localStorage persiste en el dispositivo; sessionStorage dura una pestaña.</li>
+        <li>History API permite construir SPAs sin recargar.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-2-canvas.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-4-rendimiento.html" class="btn btn-gradient">Siguiente: Rendimiento <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— HTML Avanzado · Lección 3</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-4-rendimiento.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

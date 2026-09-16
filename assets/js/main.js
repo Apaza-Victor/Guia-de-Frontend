@@ -14,6 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const current = document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
       applyTheme(current === "light" ? "dark" : "light");
     });
+    try {
+      const saved = localStorage.getItem(THEME_KEY);
+      if (saved) applyTheme(saved);
+    } catch (e) { /* almacenamiento no disponible */ }
   }
 
   const navbar = document.querySelector(".navbar-guia");

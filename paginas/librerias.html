@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Otras librerías útiles de frontend: AOS, GSAP, Font Awesome, Slick, Chart.js, Three.js y Alpine.js con enlaces a sus recursos oficiales.">
+  <title>Otras librerías útiles — Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="temario.html">Temario</a></li>
+        <li class="breadcrumb-item active text-light">Librerías</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-collection-play me-1"></i>Librerías</span>
+      <span class="badge-soft-cyan"><i class="bi bi-book me-1"></i>7 herramientas</span>
+      <span class="badge-soft-sky"><i class="bi bi-stars me-1"></i>Frontend</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Otras librerías útiles</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Herramientas complementarias que amplían tu caja de frontend: animación, carruseles, iconos, gráficos, 3D y reactividad ligera.</p>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-4"><i class="bi bi-grid-3x3-gap text-gradient me-2"></i>Librerías populares</h2>
+      <div class="row g-3">
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="icon-badge mx-auto"><i class="bi bi-award"></i></div>
+              <h6 class="text-white fw-bold text-center">AOS</h6>
+              <p class="small mb-3" style="color:var(--text-muted);">Animate On Scroll: animaciones de entrada al hacer scroll con una sola clase data-aos. Ya la usas en toda la guía.</p>
+              <a href="https://michalsnik.github.io/aos/" target="_blank" rel="noopener" class="btn btn-gradient btn-sm w-100">Ver recurso <i class="bi bi-box-arrow-up-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="icon-badge cyan mx-auto"><i class="bi bi-magic"></i></div>
+              <h6 class="text-white fw-bold text-center">GSAP</h6>
+              <p class="small mb-3" style="color:var(--text-muted);">GreenSock: el motor de animación de alto rendimiento para secuencias y micro-interacciones profesionales.</p>
+              <a href="https://gsap.com/" target="_blank" rel="noopener" class="btn btn-gradient btn-sm w-100">Ver recurso <i class="bi bi-box-arrow-up-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="icon-badge warm mx-auto"><i class="bi bi-fonts"></i></div>
+              <h6 class="text-white fw-bold text-center">Font Awesome</h6>
+              <p class="small mb-3" style="color:var(--text-muted);">Más de 2.000 iconos vectoriales por CSS. Alternativa a Bootstrap Icons para darle personalidad a tus proyectos.</p>
+              <a href="https://fontawesome.com/" target="_blank" rel="noopener" class="btn btn-gradient btn-sm w-100">Ver recurso <i class="bi bi-box-arrow-up-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="icon-badge mx-auto"><i class="bi bi-collection-play"></i></div>
+              <h6 class="text-white fw-bold text-center">Slick</h6>
+              <p class="small mb-3" style="color:var(--text-muted);">Carruseles y sliders responsive con ligeras dependencias de jQuery, listos para portfolios y galerías.</p>
+              <a href="https://kenwheeler.github.io/slick/" target="_blank" rel="noopener" class="btn btn-gradient btn-sm w-100">Ver recurso <i class="bi bi-box-arrow-up-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="icon-badge cyan mx-auto"><i class="bi bi-bar-chart"></i></div>
+              <h6 class="text-white fw-bold text-center">Chart.js</h6>
+              <p class="small mb-3" style="color:var(--text-muted);">Gráficas y dashboards con canvas: líneas, barras, radar y donas en pocas líneas de JavaScript.</p>
+              <a href="https://www.chartjs.org/" target="_blank" rel="noopener" class="btn btn-gradient btn-sm w-100">Ver recurso <i class="bi bi-box-arrow-up-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="icon-badge warm mx-auto"><i class="bi bi-box"></i></div>
+              <h6 class="text-white fw-bold text-center">Three.js</h6>
+              <p class="small mb-3" style="color:var(--text-muted);">3D en el navegador con WebGL: escenas, modelos e interactividad para experiencias inmersivas.</p>
+              <a href="https://threejs.org/" target="_blank" rel="noopener" class="btn btn-gradient btn-sm w-100">Ver recurso <i class="bi bi-box-arrow-up-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="icon-badge mx-auto"><i class="bi bi-lightning-charge"></i></div>
+              <h6 class="text-white fw-bold text-center">Alpine.js</h6>
+              <p class="small mb-3" style="color:var(--text-muted);">Reactividad ligera declarada en tu HTML con atributos x-data y x-on, sin etapa de compilación.</p>
+              <a href="https://alpinejs.dev/" target="_blank" rel="noopener" class="btn btn-gradient btn-sm w-100">Ver recurso <i class="bi bi-box-arrow-up-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-4"><i class="bi bi-diagram-3 text-gradient me-2"></i>Módulos y apartados relacionados</h2>
+      <p style="color:var(--text-muted);">Estas herramientas se complementan con los módulos de la guía. Si te interesa construir interfaces rápidas, contenido estático potente o tipado seguro, empieza por aquí:</p>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="theme-card h-100">
+            <div class="theme-head">
+              <div class="icon-badge"><i class="bi bi-brush"></i></div>
+              <div>
+                <h5 class="fw-bold text-white mb-1">Tailwind CSS</h5>
+                <span class="badge-soft"><i class="bi bi-book me-1"></i>5 lecciones</span>
+              </div>
+            </div>
+            <div class="theme-body">
+              <p class="small mb-3" style="color:var(--text-muted);">Utilidades first-class para componer interfaces sin escribir CSS separado.</p>
+              <a href="../tailwind/index.html" class="btn btn-gradient btn-sm">Ir al módulo <i class="bi bi-arrow-right ms-1"></i></a>
+              <a href="tailwind.html" class="btn btn-ghost-glass btn-sm">Ver apartado <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="theme-card h-100">
+            <div class="theme-head">
+              <div class="icon-badge cyan"><i class="bi bi-rocket-takeoff"></i></div>
+              <div>
+                <h5 class="fw-bold text-white mb-1">Astro</h5>
+                <span class="badge-soft"><i class="bi bi-book me-1"></i>5 lecciones</span>
+              </div>
+            </div>
+            <div class="theme-body">
+              <p class="small mb-3" style="color:var(--text-muted);">Meta-framework con islas de interacción y contenido Markdown para sitios ultrarrápidos.</p>
+              <a href="../astro/index.html" class="btn btn-gradient btn-sm">Ir al módulo <i class="bi bi-arrow-right ms-1"></i></a>
+              <a href="astro.html" class="btn btn-ghost-glass btn-sm">Ver apartado <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="theme-card h-100">
+            <div class="theme-head">
+              <div class="icon-badge warm"><i class="bi bi-code-square"></i></div>
+              <div>
+                <h5 class="fw-bold text-white mb-1">TypeScript</h5>
+                <span class="badge-soft"><i class="bi bi-book me-1"></i>5 lecciones</span>
+              </div>
+            </div>
+            <div class="theme-body">
+              <p class="small mb-3" style="color:var(--text-muted);">Tipado estático sobre JavaScript: menos bugs y mejor autocompletado en tu editor.</p>
+              <a href="../typescript/index.html" class="btn btn-gradient btn-sm">Ir al módulo <i class="bi bi-arrow-right ms-1"></i></a>
+              <a href="typescript.html" class="btn btn-ghost-glass btn-sm">Ver apartado <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Volver al inicio</a>
+      <a href="recursos.html" class="btn btn-gradient">Ver todos los recursos <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— Librerías</span>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+      <a href="../index.html" class="text-secondary">Inicio</a>
+      <a href="ruta-aprendizaje.html" class="text-secondary">Ruta de aprendizaje</a>
+      <a href="recursos.html" class="text-secondary">Recursos</a>
+      <a href="../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

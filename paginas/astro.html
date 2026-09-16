@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Astro: un meta-framework para construir sitios rápidos por defecto. Componentes .astro, islas de interacción, rutas basadas en archivos y contenido Markdown.">
+  <title>Astro — Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="temario.html">Temario</a></li>
+        <li class="breadcrumb-item active text-light">Astro</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-rocket-takeoff me-1"></i>Astro</span>
+      <span class="badge-soft-cyan"><i class="bi bi-book me-1"></i>5 lecciones</span>
+      <span class="badge-soft-sky"><i class="bi bi-stars me-1"></i>Meta-framework</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Astro</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Un meta-framework que construye sitios rápidos por defecto: componentes .astro, rutas basadas en archivos e islas de interacción con client:load.</p>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-question-circle text-gradient me-2"></i>¿Qué es Astro?</h2>
+      <p>Astro es un <strong class="text-white">meta-framework</strong>: agrupa varios frameworks bajo un solo proyecto pero envía al navegador la mínima cantidad de JavaScript posible. Gracias a su modelo de <strong class="text-white">islas (island architecture)</strong>, cada componente interactivo se hidrata de forma independiente y el resto de la página llega estático y rapidísimo.</p>
+      <div class="row g-3 my-2">
+        <div class="col-md-4">
+          <div class="demo-box h-100 text-center">
+            <i class="bi bi-grid-3x3-gap fs-2 d-block mb-2" style="color:#2563eb;"></i>
+            <strong class="text-white">Islas de interacción</strong>
+            <p class="small mb-0">Solo los componentes con client:load llevan JavaScript al navegador.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="demo-box h-100 text-center">
+            <i class="bi bi-0-circle fs-2 d-block mb-2" style="color:#06b6d4;"></i>
+            <strong class="text-white">Cero JS por defecto</strong>
+            <p class="small mb-0">HTML, CSS y Markdown se renderizan como texto estático sin frameworks.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="demo-box h-100 text-center">
+            <i class="bi bi-filetype-md fs-2 d-block mb-2" style="color:#f59e0b;"></i>
+            <strong class="text-white">Contenido Markdown</strong>
+            <p class="small mb-0">Escribe contenido en Markdown y Astro genera las páginas por ti.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-journal-bookmark text-gradient me-2"></i>Las 5 lecciones de Astro</h2>
+      <div class="row row-cols-1 row-cols-md-2 g-2">
+        <div class="col"><a class="lesson-card" href="../astro/leccion-1-introduccion.html"><span class="lc-num">1</span><span class="flex-grow-1"><span class="lc-title d-block">Introducción y tu primer proyecto</span><span class="lc-meta">40 min · meta-framework, npm create astro y carpetas</span></span></a></div>
+        <div class="col"><a class="lesson-card" href="../astro/leccion-2-componentes.html"><span class="lc-num">2</span><span class="flex-grow-1"><span class="lc-title d-block">Componentes .astro y props</span><span class="lc-meta">50 min · frontmatter, Astro.props y estilos scoped</span></span></a></div>
+        <div class="col"><a class="lesson-card" href="../astro/leccion-3-paginas-rutas.html"><span class="lc-num">3</span><span class="flex-grow-1"><span class="lc-title d-block">Páginas, rutas y layouts</span><span class="lc-meta">45 min · rutas por archivos, slots y slugs</span></span></a></div>
+        <div class="col"><a class="lesson-card" href="../astro/leccion-4-contenido-integraciones.html"><span class="lc-num">4</span><span class="flex-grow-1"><span class="lc-title d-block">Contenido e integraciones</span><span class="lc-meta">55 min · Markdown, Content Collections y client:load</span></span></a></div>
+        <div class="col"><a class="lesson-card" href="../astro/leccion-5-landing.html"><span class="lc-num">5</span><span class="flex-grow-1"><span class="lc-title d-block">Práctica: landing con Astro + Tailwind</span><span class="lc-meta">70 min · Proyecto final completo</span></span></a></div>
+      </div>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Astro se integra con Tailwind, React, Vue o TypeScript: es el contenedor ideal para unificar todo lo que ya aprendiste en la guía.
+      </div>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Volver al inicio</a>
+      <a href="../astro/index.html" class="btn btn-gradient">Explorar el tema Astro <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— Astro</span>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+      <a href="../index.html" class="text-secondary">Inicio</a>
+      <a href="ruta-aprendizaje.html" class="text-secondary">Ruta de aprendizaje</a>
+      <a href="recursos.html" class="text-secondary">Recursos</a>
+      <a href="../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

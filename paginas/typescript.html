@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TypeScript: JavaScript con superpoderes. Tipos básicos y avanzados, funciones tipadas, interfaces y clases, y tipado práctico en el navegador.">
+  <title>TypeScript — Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="temario.html">Temario</a></li>
+        <li class="breadcrumb-item active text-light">TypeScript</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-code-square me-1"></i>TypeScript</span>
+      <span class="badge-soft-cyan"><i class="bi bi-book me-1"></i>5 lecciones</span>
+      <span class="badge-soft-sky"><i class="bi bi-shield-check me-1"></i>Superset tipado</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">TypeScript</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Un superset tipado de JavaScript que detecta errores antes de ejecutar: tipos, funciones, interfaces y clases para código profesional y confiable.</p>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-question-circle text-gradient me-2"></i>¿Qué es TypeScript?</h2>
+      <p>TypeScript es <strong class="text-white">JavaScript con superpoderes</strong>: añade un sistema de tipos que compila a JavaScript plano. El compilador (<code>tsc</code>) revisa tu código antes de ejecutarlo y atrapa errores de tipos en desarrollo, no en producción.</p>
+      <div class="row g-3 my-2">
+        <div class="col-md-4">
+          <div class="demo-box h-100 text-center">
+            <i class="bi bi-shield-check fs-2 d-block mb-2" style="color:#2563eb;"></i>
+            <strong class="text-white">Tipos explícitos</strong>
+            <p class="small mb-0">number, string, boolean: el contrato de tus variables queda claro desde el inicio.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="demo-box h-100 text-center">
+            <i class="bi bi-braces fs-2 d-block mb-2" style="color:#06b6d4;"></i>
+            <strong class="text-white">Uniones y generics</strong>
+            <p class="small mb-0">Tipos avanzados que modelan datos reales sin perder flexibilidad.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="demo-box h-100 text-center">
+            <i class="bi bi-buildings fs-2 d-block mb-2" style="color:#f59e0b;"></i>
+            <strong class="text-white">Interfaces y clases</strong>
+            <p class="small mb-0">Contratos y orientación a objetos con autocompletado en todo el editor.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-journal-bookmark text-gradient me-2"></i>Las 5 lecciones de TypeScript</h2>
+      <div class="row row-cols-1 row-cols-md-2 g-2">
+        <div class="col"><a class="lesson-card" href="../typescript/leccion-1-introduccion.html"><span class="lc-num">1</span><span class="flex-grow-1"><span class="lc-title d-block">Introducción y tipos básicos</span><span class="lc-meta">45 min · tsc, anotaciones y primitivos</span></span></a></div>
+        <div class="col"><a class="lesson-card" href="../typescript/leccion-2-tipos-avanzados.html"><span class="lc-num">2</span><span class="flex-grow-1"><span class="lc-title d-block">Tipos avanzados</span><span class="lc-meta">50 min · arrays, tuplas, uniones y alias</span></span></a></div>
+        <div class="col"><a class="lesson-card" href="../typescript/leccion-3-funciones.html"><span class="lc-num">3</span><span class="flex-grow-1"><span class="lc-title d-block">Funciones tipadas</span><span class="lc-meta">55 min · parámetros, retorno y generics</span></span></a></div>
+        <div class="col"><a class="lesson-card" href="../typescript/leccion-4-interfaces-clases.html"><span class="lc-num">4</span><span class="flex-grow-1"><span class="lc-title d-block">Interfaces y clases</span><span class="lc-meta">60 min · contratos, extends y modificadores</span></span></a></div>
+        <div class="col"><a class="lesson-card" href="../typescript/leccion-5-tipado-practico.html"><span class="lc-num">5</span><span class="flex-grow-1"><span class="lc-title d-block">TypeScript en el navegador</span><span class="lc-meta">60 min · tsconfig, compilar y práctica final</span></span></a></div>
+      </div>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        TypeScript no reemplaza a JavaScript: es una capa que lo extiende. Piensa en los tipos como pruebas automáticas que se ejecutan mientras escribes.
+      </div>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Volver al inicio</a>
+      <a href="../typescript/index.html" class="btn btn-gradient">Explorar el tema TypeScript <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— TypeScript</span>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+      <a href="../index.html" class="text-secondary">Inicio</a>
+      <a href="ruta-aprendizaje.html" class="text-secondary">Ruta de aprendizaje</a>
+      <a href="recursos.html" class="text-secondary">Recursos</a>
+      <a href="../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

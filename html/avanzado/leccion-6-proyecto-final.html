@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 6 de HTML Avanzado: proyecto final que integra todo el módulo HTML en un sitio web completo.">
+  <title>Lección 6 — Proyecto final HTML | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">HTML</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Avanzado</a></li>
+        <li class="breadcrumb-item active text-light">Lección 6</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft">Sección: HTML Avanzado · Lección 6</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>1 h</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Proyecto final HTML</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Integra todo lo aprendido: construye una landing completa, semántica, accesible y validada.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-compass text-gradient me-2"></i>El reto</h2>
+      <p>Construye la página de inicio de <strong>"Café Aurora"</strong>, una cafetería local. Debes usar <strong>solo HTML</strong> (puedes usar una hoja de estilo simple) para demostrar que dominas la estructura completa. Será lo primero que veas en tu portafolio.</p>
+      <div class="demo-box p-4">
+        <strong class="text-white">Requisitos mínimos:</strong>
+        <ul class="small mb-0 mt-2" style="color:#cbd5e1 !important;">
+          <li>Header con nav semántico y logo SVG inline.</li>
+          <li>Hero con <code>&lt;h1&gt;</code>, <code>picture</code> responsive y CTA en <code>&lt;button&gt;</code>.</li>
+          <li>Sección "Menú" con <code>article</code>/<code>section</code> y una tabla accesible de precios.</li>
+          <li>Formulario de reserva con inputs modernos + validación nativa.</li>
+          <li>iframe de Google Maps con <code>title</code> y <code>loading="lazy"</code>.</li>
+          <li>Footer con contacto y microdatos <code>itemscope</code>.</li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-diagram-3 text-gradient me-2"></i>Estructura sugerida</h2>
+      <pre class="code-block"><code><span class="token-tag">index.html</span>
+<span class="token-tag">&lt;!DOCTYPE html&gt;</span>
+<span class="token-tag">&lt;html</span> <span class="token-attr">lang</span>=<span class="token-value">"es"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;head&gt;</span>
+    <span class="token-comment">&lt;!-- charset, viewport, title, meta description, og:*, theme-color --&gt;</span>
+  <span class="token-tag">&lt;/head&gt;</span>
+  <span class="token-tag">&lt;body&gt;</span>
+    <span class="token-tag">&lt;header&gt;</span> &lt;nav&gt; logo + enlaces &lt;/nav&gt; <span class="token-tag">&lt;/header&gt;</span>
+    <span class="token-tag">&lt;main&gt;</span>
+      <span class="token-tag">&lt;section</span> <span class="token-attr">class</span>=<span class="token-value">"hero"</span> <span class="token-attr">aria-labelledby</span>=<span class="token-value">"hero-titulo"</span><span class="token-tag">&gt;</span>…<span class="token-tag">&lt;/section&gt;</span>
+      <span class="token-tag">&lt;section</span> <span class="token-attr">class</span>=<span class="token-value">"menu"</span><span class="token-tag">&gt;</span>… artículos + tabla …<span class="token-tag">&lt;/section&gt;</span>
+      <span class="token-tag">&lt;section</span> <span class="token-attr">class</span>=<span class="token-value">"reserva"</span><span class="token-tag">&gt;</span>… formulario …<span class="token-tag">&lt;/section&gt;</span>
+    <span class="token-tag">&lt;/main&gt;</span>
+    <span class="token-tag">&lt;aside</span> <span class="token-attr">aria-label</span>=<span class="token-value">"Promociones"</span><span class="token-tag">&gt;</span>…<span class="token-tag">&lt;/aside&gt;</span>
+    <span class="token-tag">&lt;footer&gt;</span> contacto + mapa + microdatos <span class="token-tag">&lt;/footer&gt;</span>
+  <span class="token-tag">&lt;/body&gt;</span>
+<span class="token-tag">&lt;/html&gt;</span></code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-stack text-gradient me-2"></i>Checklist de entrega</h2>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="demo-box h-100">
+            <strong class="text-white"><i class="bi bi-check2-circle me-2" style="color:#10b981;"></i>Semántica</strong>
+            <ul class="small mb-0 mt-2" style="color:#cbd5e1 !important;">
+              <li>Un solo <code>h1</code> y landmarks correctos</li>
+              <li><code>section</code> con encabezados</li>
+              <li>Microdatos en el footer</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="demo-box h-100">
+            <strong class="text-white"><i class="bi bi-check2-circle me-2" style="color:#10b981;"></i>Accesibilidad</strong>
+            <ul class="small mb-0 mt-2" style="color:#cbd5e1 !important;">
+              <li>Toda imagen con <code>alt</code></li>
+              <li>Formulario con <code>label</code> vinculado</li>
+              <li>Mapa con <code>title</code></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="demo-box h-100">
+            <strong class="text-white"><i class="bi bi-check2-circle me-2" style="color:#10b981;"></i>Rendimiento</strong>
+            <ul class="small mb-0 mt-2" style="color:#cbd5e1 !important;">
+              <li>Imágenes secundarias con <code>loading="lazy"</code></li>
+              <li>Preconnect a fuentes externas</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="demo-box h-100">
+            <strong class="text-white"><i class="bi bi-check2-circle me-2" style="color:#10b981;"></i>Validación</strong>
+            <ul class="small mb-0 mt-2" style="color:#cbd5e1 !important;">
+              <li>Pasa el validador W3C</li>
+              <li>Lighthouse ≥ 90 en Rendimiento y Accesibilidad</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-lightbulb text-gradient me-2"></i>Demo inspiración</h2>
+      <div class="demo-box text-center p-4">
+        <h3 class="h5 text-gradient mb-2">&lt;Café Aurora /&gt;</h3>
+        <p style="color:#cbd5e1 !important;">Tu proyecto final será una landing como esta: minimalista, semántica y lista para recibir CSS y JS en los siguientes módulos.</p>
+        <ul class="d-flex flex-wrap justify-content-center gap-2 list-unstyled mb-0">
+          <li><span class="badge-soft">HTML Básico</span></li>
+          <li><span class="badge-soft-cyan">HTML Intermedio</span></li>
+          <li><span class="badge-soft-sky">HTML Avanzado</span></li>
+        </ul>
+      </div>
+
+      <div class="demo-box text-center p-5 mt-4 border-success bg-success-subtle" style="background:rgba(16,185,129,0.08) !important;">
+        <i class="bi bi-three-dots fs-1 text-gradient"></i>
+        <h2 class="h3 text-white fw-bold mt-3">¡Has completado el tema HTML!</h2>
+        <p style="color:#cbd5e1 !important;">22 lecciones dominadas: de los cimientos de Básico a Web Components, Canvas y buenas prácticas. Este es el nivel que se espera en una entrevista frontend.</p>
+        <a class="btn btn-gradient mt-2" href="../index.html"><i class="bi bi-award me-2"></i>Terminar el tema HTML</a>
+      </div>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-5-buenas-practicas.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+      </div>
+      <a href="../../paginas/temario.html" class="btn btn-gradient"><i class="bi bi-rocket-takeoff me-2"></i>Siguiente tema</a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— HTML Avanzado · Lección 6</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="../../paginas/temario.html" class="text-secondary"><i class="bi bi-award fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

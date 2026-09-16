@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tema Fundamentos de Programación de la guía Frontend Pro: algoritmos, variables, tipos, parseInt, condicionales, bucles, funciones, arrays y objetos — 8 lecciones para iniciarte en la programación.">
+  <title>Fundamentos de Programación | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../paginas/temario.html">Temario</a></li>
+        <li class="breadcrumb-item active text-light">Programación</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-code-slash me-1"></i>Sección: Programación</span>
+      <span class="badge-soft-cyan"><i class="bi bi-journal-bookmark me-1"></i>8 lecciones</span>
+      <span class="badge-soft-sky"><i class="bi bi-hourglass-split me-1"></i>~6 h</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Fundamentos de Programación</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Aprende a pensar como programador: algoritmos, variables, tipos, parseInt y compañía, condicionales, bucles, funciones y estructuras de datos.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step current"></span>
+      <span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-4"><i class="bi bi-braces-asterisk text-gradient me-2"></i>¿Qué aprenderás?</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="demo-box h-100 text-center">
+            <i class="bi bi-lightbulb fs-2 d-block mb-2" style="color:#2563eb;"></i>
+            <strong class="text-white">Pensar como programador</strong>
+            <p class="small mb-0">Algoritmos, lógica y mentalidad de resolución de problemas.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="demo-box h-100 text-center">
+            <i class="bi bi-123 fs-2 d-block mb-2" style="color:#0ea5e9;"></i>
+            <strong class="text-white">Datos y conversiones</strong>
+            <p class="small mb-0">parseInt, Number, String y cómo transforman tus variables.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="demo-box h-100 text-center">
+            <i class="bi bi-diagram-3 fs-2 d-block mb-2" style="color:#06b6d4;"></i>
+            <strong class="text-white">Estructuras de control</strong>
+            <p class="small mb-0">Condicionales, bucles y funciones que dan vida al código.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <div class="d-flex align-items-center gap-2 mb-4">
+        <i class="bi bi-list-ul fs-3 text-gradient"></i>
+        <h2 class="h3 text-white fw-bold mb-0">Las 8 lecciones</h2>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge-soft"><i class="bi bi-signpost-split me-1"></i>Lección 1</span>
+                <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>40 min</span>
+              </div>
+              <a href="leccion-1-que-es-programar.html" class="lesson-card d-flex mb-3"><span class="lc-num">1</span><span class="lc-title">¿Qué es programar?</span></a>
+              <p class="small mb-3" style="color:var(--text-muted);">Algoritmos, pseudocódigo y el primer "hola mundo".</p>
+              <a class="btn btn-gradient w-100" href="leccion-1-que-es-programar.html">Quiero esta lección <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge-soft"><i class="bi bi-signpost-split me-1"></i>Lección 2</span>
+                <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>45 min</span>
+              </div>
+              <a href="leccion-2-variables-tipos.html" class="lesson-card d-flex mb-3"><span class="lc-num">2</span><span class="lc-title">Variables y tipos de datos</span></a>
+              <p class="small mb-3" style="color:var(--text-muted);">let, const, number, string, boolean y null.</p>
+              <a class="btn btn-gradient w-100" href="leccion-2-variables-tipos.html">Quiero esta lección <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge-soft"><i class="bi bi-signpost-split me-1"></i>Lección 3</span>
+                <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>45 min</span>
+              </div>
+              <a href="leccion-3-operadores-conversiones.html" class="lesson-card d-flex mb-3"><span class="lc-num">3</span><span class="lc-title">Operadores y conversiones</span></a>
+              <p class="small mb-3" style="color:var(--text-muted);">parseInt, parseFloat, Number y String en acción.</p>
+              <a class="btn btn-gradient w-100" href="leccion-3-operadores-conversiones.html">Quiero esta lección <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge-soft"><i class="bi bi-signpost-split me-1"></i>Lección 4</span>
+                <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>40 min</span>
+              </div>
+              <a href="leccion-4-condicionales.html" class="lesson-card d-flex mb-3"><span class="lc-num">4</span><span class="lc-title">Condicionales</span></a>
+              <p class="small mb-3" style="color:var(--text-muted);">if/else, else if, switch y operador ternario.</p>
+              <a class="btn btn-gradient w-100" href="leccion-4-condicionales.html">Quiero esta lección <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge-soft"><i class="bi bi-signpost-split me-1"></i>Lección 5</span>
+                <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>40 min</span>
+              </div>
+              <a href="leccion-5-bucles.html" class="lesson-card d-flex mb-3"><span class="lc-num">5</span><span class="lc-title">Bucles</span></a>
+              <p class="small mb-3" style="color:var(--text-muted);">for, while, do while y notas clásicas de inicio.</p>
+              <a class="btn btn-gradient w-100" href="leccion-5-bucles.html">Quiero esta lección <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge-soft"><i class="bi bi-signpost-split me-1"></i>Lección 6</span>
+                <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>45 min</span>
+              </div>
+              <a href="leccion-6-funciones.html" class="lesson-card d-flex mb-3"><span class="lc-num">6</span><span class="lc-title">Funciones</span></a>
+              <p class="small mb-3" style="color:var(--text-muted);">Parámetros, return, alcance y funciones anónimas.</p>
+              <a class="btn btn-gradient w-100" href="leccion-6-funciones.html">Quiero esta lección <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge-soft"><i class="bi bi-signpost-split me-1"></i>Lección 7</span>
+                <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>45 min</span>
+              </div>
+              <a href="leccion-7-arrays-objetos.html" class="lesson-card d-flex mb-3"><span class="lc-num">7</span><span class="lc-title">Arrays y objetos</span></a>
+              <p class="small mb-3" style="color:var(--text-muted);">Colecciones de datos, indexación y métodos esenciales.</p>
+              <a class="btn btn-gradient w-100" href="leccion-7-arrays-objetos.html">Quiero esta lección <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge-soft"><i class="bi bi-signpost-split me-1"></i>Lección 8</span>
+                <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>50 min</span>
+                <span class="badge-soft-sky"><i class="bi bi-trophy me-1"></i>Reto final</span>
+              </div>
+              <a href="leccion-8-resolver-problemas.html" class="lesson-card d-flex mb-3"><span class="lc-num">8</span><span class="lc-title">Resolver problemas y depurar</span></a>
+              <p class="small mb-3" style="color:var(--text-muted);">console, errores típicos y el reto que integra todo.</p>
+              <a class="btn btn-gradient w-100" href="leccion-8-resolver-problemas.html">Quiero esta lección <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+      <a href="../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-1-que-es-programar.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

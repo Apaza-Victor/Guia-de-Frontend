@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 3 de Tailwind CSS: tipografía, paletas de color, fondos, redondeo y sombras con utilidades.">
+  <title>Lección 3 — Tipografía, color y fondos | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Tailwind CSS</a></li>
+        <li class="breadcrumb-item active text-light">Lección 3</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-wind me-1"></i>Tailwind · Lección 3</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>45 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Tipografía, color y fondos</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Dale personalidad a tus interfaces con escalas de color, familias tipográficas, redondeos y sombras.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-palette text-gradient me-2"></i>Las escalas de color</h2>
+      <p>Todos los colores siguen el patrón <code>color-intensidad</code>, con intensidades de 50 a 950:</p>
+      <div class="row g-3 mb-3">
+        <div class="col-6 col-md-2"><div class="rounded-lg font-bold text-white d-flex align-items-center justify-content-center" style="height:64px; background:#6366f1;">indigo-500</div></div>
+        <div class="col-6 col-md-2"><div class="rounded-lg font-bold text-white d-flex align-items-center justify-content-center" style="height:64px; background:#0ea5e9;">sky-500</div></div>
+        <div class="col-6 col-md-2"><div class="rounded-lg font-bold text-white d-flex align-items-center justify-content-center" style="height:64px; background:#10b981;">emerald-500</div></div>
+        <div class="col-6 col-md-2"><div class="rounded-lg font-bold text-white d-flex align-items-center justify-content-center" style="height:64px; background:#ef4444;">red-500</div></div>
+        <div class="col-6 col-md-2"><div class="rounded-lg font-bold text-white d-flex align-items-center justify-content-center" style="height:64px; background:#f59e0b;">amber-500</div></div>
+        <div class="col-6 col-md-2"><div class="rounded-lg font-bold text-white d-flex align-items-center justify-content-center" style="height:64px; background:#8b5cf6;">violet-500</div></div>
+      </div>
+      <pre class="code-block"><code><span class="token-tag">&lt;p</span> class=<span class="token-value">"text-sky-600"</span><span class="token-tag">&gt;</span>Texto azul cielo<span class="token-tag">&lt;/p&gt;</span>
+<span class="token-tag">&lt;div</span> class=<span class="token-value">"bg-emerald-100 text-emerald-800"</span><span class="token-tag">&gt;</span>Alerta de éxito<span class="token-tag">&lt;/div&gt;</span></code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-type text-gradient me-2"></i>Tipografía</h2>
+      <p>Tailwind trae <code>font-sans</code>, <code>font-serif</code> y <code>font-mono</code>, además de tamaños en escala tipográfica:</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;h1</span> class=<span class="token-value">"text-4xl font-extrabold"</span><span class="token-tag">&gt;</span>Gran titular<span class="token-tag">&lt;/h1&gt;</span>
+<span class="token-tag">&lt;p</span> class=<span class="token-value">"text-base text-slate-600 leading-relaxed"</span><span class="token-tag">&gt;</span>
+  Párrafo legible con interlineado relajado.
+<span class="token-tag">&lt;/p&gt;</span>
+<span class="token-tag">&lt;code</span> class=<span class="token-value">"font-mono text-sm"</span><span class="token-tag">&gt;</span>function(){}<span class="token-tag">&lt;/code&gt;</span></code></pre>
+      <table class="table">
+        <thead>
+          <tr><th scope="col">Clase</th><th scope="col">Equivale a</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>text-xs / sm / base / lg</code></td><td>tamaños de texto</td></tr>
+          <tr><td><code>text-2xl / 4xl / 6xl</code></td><td>titulares grandes</td></tr>
+          <tr><td><code>font-bold / extrabold</code></td><td>pesos de fuente</td></tr>
+          <tr><td><code>leading-relaxed</code></td><td>interlineado</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-border-radius text-gradient me-2"></i>Redondeo, bordes y sombras</h2>
+      <pre class="code-block"><code><span class="token-tag">&lt;div</span> class=<span class="token-value">"rounded-xl border border-slate-200 shadow-lg"</span><span class="token-tag">&gt;</span>...<span class="token-tag">&lt;/div&gt;</span>
+<span class="token-tag">&lt;button</span> class=<span class="token-value">"rounded-full bg-indigo-600 text-white px-6 py-3 shadow-md"</span><span class="token-tag">&gt;</span>Comprar<span class="token-tag">&lt;/button&gt;</span></code></pre>
+      <table class="table">
+        <thead>
+          <tr><th scope="col">Clase</th><th scope="col">Uso</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>rounded-sm / md / lg / xl</code></td><td>esquinas suaves</td></tr>
+          <tr><td><code>rounded-full</code></td><td>píldoras y círculos</td></tr>
+          <tr><td><code>border border-slate-200</code></td><td>bordes sutiles</td></tr>
+          <tr><td><code>shadow-sm / md / lg / 2xl</code></td><td>profundidad discreta o marcada</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-lightbulb text-gradient me-2"></i>Demo interactiva</h2>
+      <div class="demo-box text-center p-4">
+        <p style="color:#cbd5e1 !important;">Cambia el color del botón desde JavaScript para verlo reaccionar:</p>
+        <button id="btnColor" class="btn" style="background:#6366f1; color:#fff; border-radius:999px; padding:12px 32px; font-weight:700;">
+          <i class="bi bi-bag me-1"></i>Añadir al carrito
+        </button>
+        <div class="mt-3 d-flex flex-wrap justify-content-center gap-2">
+          <button class="btn btn-ghost-glass btn-sm" onclick="pintar('#6366f1')">Índigo</button>
+          <button class="btn btn-ghost-glass btn-sm" onclick="pintar('#0ea5e9')">Sky</button>
+          <button class="btn btn-ghost-glass btn-sm" onclick="pintar('#10b981')">Esmeralda</button>
+          <button class="btn btn-ghost-glass btn-sm" onclick="pintar('#ef4444')">Rojo</button>
+        </div>
+      </div>
+      <script>
+        function pintar(color) { document.getElementById('btnColor').style.background = color; }
+      </script>
+      <div class="tip-box mt-4">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        En producción estas clases se escriben en el HTML (<code>bg-indigo-600</code>, <code>hover:bg-indigo-700</code>). La demo solo cambia el color en vivo para que sientas la paleta.
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>Colores: <code>color-intensidad</code> (de 50 a 950).</li>
+        <li>Tipografía: <code>text-4xl</code>, <code>font-bold</code>, <code>leading-*</code>.</li>
+        <li>Acabados: <code>rounded-*</code>, <code>border</code>, <code>shadow-*</code>.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-2-layout.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-4-responsive.html" class="btn btn-gradient">Siguiente: Responsive <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— Tailwind · Lección 3</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-4-responsive.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

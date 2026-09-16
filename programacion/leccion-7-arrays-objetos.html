@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 7 de Fundamentos de Programación: arrays, objetos, métodos push, length, map y acceso a propiedades.">
+  <title>Lección 7 — Arrays y objetos | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Programación</a></li>
+        <li class="breadcrumb-item active text-light">Lección 7</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-code-slash me-1"></i>Programación · Lección 7</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>50 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Arrays y objetos</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Agrupa datos en listas y en fichas con nombre: las estructuras que usan todas las apps.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-list text-gradient me-2"></i>Arrays: listas ordenadas</h2>
+      <p>Un <strong>array</strong> guarda varios valores en orden, entre corchetes. Cada valor tiene un <strong>índice</strong> que empieza en 0:</p>
+      <pre class="code-block"><code><span class="token-tag">const</span> colores = [<span class="token-value">"rojo"</span>, <span class="token-value">"verde"</span>, <span class="token-value">"azul"</span>];
+
+colores[<span class="token-tag">0</span>]           <span class="token-comment">// "rojo"  (índice 0)</span>
+colores.length      <span class="token-comment">// 3  (cantidad de elementos)</span>
+
+colores.push(<span class="token-value">"amarillo"</span>); <span class="token-comment">// añade al final</span>
+colores.pop();        <span class="token-comment">// quita el último</span></code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Empieza a contar desde 0: el último elemento de una lista con 3 items está en el índice 2.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-braces text-gradient me-2"></i>Objetos: fichas con nombre</h2>
+      <p>Un <strong>objeto</strong> agrupa datos (<em>propiedades</em>) con su nombre, entre llaves:</p>
+      <pre class="code-block"><code><span class="token-tag">const</span> usuario = {
+  nombre: <span class="token-value">"Ana"</span>,
+  edad: <span class="token-tag">25</span>,
+  esAdmin: <span class="token-tag">false</span>
+};
+
+usuario.nombre       <span class="token-comment">// "Ana" (punto)</span>
+usuario[<span class="token-value">"edad"</span>]       <span class="token-comment">// 25   (corchetes)</span>
+
+usuario.ciudad = <span class="token-value">"Cusco"</span>; <span class="token-comment">// agrega propiedad</span></code></pre>
+      <p>Los objetos también llevan <strong>funciones</strong> (métodos):</p>
+      <pre class="code-block"><code><span class="token-tag">const</span> punto = {
+  x: <span class="token-tag">2</span>,
+  y: <span class="token-tag">3</span>,
+  mover: <span class="token-tag">()</span> <span class="token-tag">=&gt;</span> console.log(<span class="token-value">"Moviendo..."</span>)
+};
+punto.mover();</code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-people text-gradient me-2"></i>Combinarlos: lista de objetos</h2>
+      <p>El patrón que verás en toda aplicación real (productos, usuarios, mensajes...):</p>
+      <pre class="code-block"><code><span class="token-tag">const</span> productos = [
+  { nombre: <span class="token-value">"Café"</span>, precio: <span class="token-tag">12</span> },
+  { nombre: <span class="token-value">"Té"</span>,   precio: <span class="token-tag">8</span>  },
+  { nombre: <span class="token-value">"Pan"</span>,  precio: <span class="token-tag">5</span>  }
+];
+
+<span class="token-tag">for</span> (<span class="token-tag">const</span> producto of productos) {
+  console.log(producto.nombre + <span class="token-value">" -> S/ "</span> + producto.precio);
+}</code></pre>
+      <p><code>map</code> transforma creando una <strong>nueva lista</strong> (no modifica la original):</p>
+      <pre class="code-block"><code><span class="token-tag">const</span> soloNombres = productos.map(p <span class="token-tag">=&gt;</span> p.nombre);
+<span class="token-comment">// ["Café", "Té", "Pan"]</span></code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-funnel text-gradient me-2"></i>filtrar, encontrar y ordenar</h2>
+      <pre class="code-block"><code><span class="token-tag">const</span> baratos = productos.filter(p <span class="token-tag">=&gt;</span> p.precio <span class="token-tag">&lt;</span> <span class="token-tag">10</span>);
+<span class="token-comment">// [{ nombre: "Té", precio: 8 }, { nombre: "Pan", precio: 5 }]</span>
+
+<span class="token-tag">const</span> cafecito = productos.find(p <span class="token-tag">=&gt;</span> p.nombre === <span class="token-value">"Café"</span>);
+
+<span class="token-tag">const</span> porPrecio = [...productos].sort((a, b) <span class="token-tag">=&gt;</span> a.precio - b.precio);</code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Cuidado:</strong>
+        <code>sort</code> modifica el array original. Usa la copia con <code>[...productos]</code> si no quieres alterarlo.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-lightbulb text-gradient me-2"></i>Demo interactiva</h2>
+      <div class="demo-box text-center p-4">
+        <p style="color:#cbd5e1 !important;">Añade productos al carrito y calcula el total con un bucle:</p>
+        <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
+          <input type="text" id="inpNombre" class="form-control" style="max-width:140px; display:inline-block;" placeholder="Producto" value="Galletas">
+          <input type="number" id="inpCosto" class="form-control" style="max-width:110px; display:inline-block;" placeholder="Precio" value="6">
+          <button class="btn btn-gradient" onclick="agregarProducto()"><i class="bi bi-plus me-1"></i>Agregar</button>
+          <button class="btn btn-ghost-glass" onclick="verCarrito()"><i class="bi bi-cart me-1"></i>Total</button>
+        </div>
+        <p id="salidaCarrito" class="small mt-3 mb-0 text-start font-monospace" style="color:#7dd3fc !important; white-space:pre;"></p>
+      </div>
+      <script>
+        const carrito = [
+          { nombre: 'Café', precio: 12 },
+          { nombre: 'Té', precio: 8 }
+        ];
+        function agregarProducto() {
+          const nombre = document.getElementById('inpNombre').value.trim();
+          const precio = parseInt(document.getElementById('inpCosto').value, 10);
+          if (!nombre || isNaN(precio)) { alert('Completa nombre y precio.'); return; }
+          carrito.push({ nombre, precio });
+          actualizarCarrito();
+        }
+        function verCarrito() { actualizarCarrito(); }
+        function actualizarCarrito() {
+          let total = 0;
+          let texto = 'CARRITO (n = ' + carrito.length + ')\n';
+          for (const p of carrito) {
+            texto += ' - ' + p.nombre + ': S/ ' + p.precio + '\n';
+            total += p.precio;
+          }
+          texto += 'TOTAL: S/ ' + total;
+          document.getElementById('salidaCarrito').textContent = texto;
+        }
+        actualizarCarrito();
+      </script>
+      <div class="tip-box mt-4">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Combina <code>map</code>/<code>filter</code>/<code>reduce</code> para operar listas sin escribir bucles largos: son el pan de cada día del frontend.
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>Arrays guardan listas ordenadas (índice desde 0); objetos guardan datos con nombre.</li>
+        <li>La combinación lista-de-objetos modela productos, usuarios y más.</li>
+        <li><code>push</code>, <code>map</code>, <code>filter</code> y <code>find</code> son tus aliados cotidianos.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-6-funciones.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span>
+      </div>
+      <a href="leccion-8-resolver-problemas.html" class="btn btn-gradient">Siguiente: Resolver problemas <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— Programación · Lección 7</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-8-resolver-problemas.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

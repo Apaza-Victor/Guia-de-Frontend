@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 3 de HTML Intermedio: formularios avanzados con tipos de input modernos, pattern, datalist y validación.">
+  <title>Lección 3 — Formularios avanzados | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">HTML</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Intermedio</a></li>
+        <li class="breadcrumb-item active text-light">Lección 3</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft">Sección: HTML Intermedio · Lección 3</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>45 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Formularios avanzados</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Tipos de input modernos, datalist, pattern con regex y validación en tiempo real: formularios profesionales sin JavaScript.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-compass text-gradient me-2"></i>De lo básico a lo avanzado</h2>
+      <p>Ya conoces <code>&lt;input&gt;</code>, <code>&lt;select&gt;</code> y <code>&lt;textarea&gt;</code>. Ahora verás que HTML5 trae <strong>tipos semánticos</strong> que activan teclados móviles correctos, validación nativa y selectores visuales sin escribir una línea de JS.</p>
+      <div class="d-flex flex-wrap gap-2">
+        <span class="badge-soft">types modernos</span>
+        <span class="badge-soft-cyan">pattern + regex</span>
+        <span class="badge-soft-sky">datalist y autocomplete</span>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-input-cursor-text text-gradient me-2"></i>Tipos de input modernos</h2>
+      <table class="table">
+        <thead>
+          <tr><th scope="col">Tipo</th><th scope="col">Qué hace</th><th scope="col">Ventaja</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>type="date"</code></td><td>Selector de fecha nativa</td><td>Evita errores de formato</td></tr>
+          <tr><td><code>type="time"</code></td><td>Selector de hora</td><td>Internacionalizado por el navegador</td></tr>
+          <tr><td><code>type="range"</code></td><td>Control deslizante</td><td>Perfecto para valores numéricos acotados</td></tr>
+          <tr><td><code>type="color"</code></td><td>Selector de color</td><td>UI nativa sin librerías</td></tr>
+          <tr><td><code>type="tel"</code></td><td>Teléfono</td><td>Teclado numérico en móvil</td></tr>
+          <tr><td><code>type="url"</code></td><td>Enlace web</td><td>Validación de URL automática</td></tr>
+        </tbody>
+      </table>
+      <pre class="code-block"><code><span class="token-tag">&lt;label</span> <span class="token-attr">for</span>=<span class="token-value">"fecha"</span><span class="token-tag">&gt;</span>Fecha de entrega<span class="token-tag">&lt;/label&gt;</span>
+<span class="token-tag">&lt;input</span> <span class="token-attr">type</span>=<span class="token-value">"date"</span> <span class="token-attr">id</span>=<span class="token-value">"fecha"</span> <span class="token-attr">min</span>=<span class="token-value">"2026-01-01"</span> <span class="token-attr">max</span>=<span class="token-value">"2026-12-31"</span><span class="token-tag">&gt;</span></code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-filetype-regex text-gradient me-2"></i>pattern: validación con expresiones regulares</h2>
+      <p>El atributo <code>pattern</code> valida el valor contra una <strong>expresión regular</strong> nativa. Es ideal para formatos específicos:</p>
+      <pre class="code-block"><code><span class="token-comment">&lt;!-- Solo 8 dígitos exactos --&gt;</span>
+<span class="token-tag">&lt;input</span> <span class="token-attr">type</span>=<span class="token-value">"text"</span> <span class="token-attr">id</span>=<span class="token-value">"telefono"</span>
+  <span class="token-attr">pattern</span>=<span class="token-value">"[0-9]{8}"</span>
+  <span class="token-attr">title</span>=<span class="token-value">"Introduce 8 dígitos sin espacios"</span><span class="token-tag">&gt;</span></code></pre>
+      <ul class="mt-3">
+        <li><code>\d{3}-\d{3}-\d{4}</code> valida formatos tipo <code>555-123-4567</code>.</li>
+        <li>Combina siempre <code>pattern</code> con <code>title</code>: es el mensaje que explica el formato.</li>
+        <li>La validación con <code>:invalid</code> se puede estilizar con CSS puro.</li>
+      </ul>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        "Email" y "URL" ya validan solos su formato; no les pongas <code>pattern</code> innecesario.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-list-target text-gradient me-2"></i>datalist y autocomplete</h2>
+      <p><code>&lt;datalist&gt;</code> ofrece <strong>sugerencias</strong> dentro de un campo editable:</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;label</span> <span class="token-attr">for</span>=<span class="token-value">"ciudad"</span><span class="token-tag">&gt;</span>Ciudad<span class="token-tag">&lt;/label&gt;</span>
+<span class="token-tag">&lt;input</span> <span class="token-attr">list</span>=<span class="token-value">"ciudades"</span> <span class="token-attr">id</span>=<span class="token-value">"ciudad"</span> <span class="token-attr">autocomplete</span>=<span class="token-value">"off"</span> <span class="token-attr">required</span><span class="token-tag">&gt;</span>
+<span class="token-tag">&lt;datalist</span> <span class="token-attr">id</span>=<span class="token-value">"ciudades"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;option</span> <span class="token-attr">value</span>=<span class="token-value">"Lima"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;option</span> <span class="token-attr">value</span>=<span class="token-value">"Arequipa"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;option</span> <span class="token-attr">value</span>=<span class="token-value">"Cusco"</span><span class="token-tag">&gt;</span>
+<span class="token-tag">&lt;/datalist&gt;</span></code></pre>
+      <p>Y <code>autocomplete</code> deja que el navegador rellene campos conocidos (<code>name</code>, <code>email</code>, <code>street-address</code>…), mejorando conversión en formularios.</p>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-lightbulb text-gradient me-2"></i>Demo interactiva</h2>
+      <div class="demo-box p-4">
+        <p style="color:#cbd5e1 !important;">Prueba el formulario: escribe un email inválido y envía; la validación nativa lo rechaza sin JavaScript.</p>
+        <form id="demoForm" class="row g-3" novalidate>
+          <div class="col-md-6">
+            <label for="demoEmail" class="form-label text-white">Email</label>
+            <input type="email" class="form-control" id="demoEmail" required placeholder="tucorreo@ejemplo.com">
+          </div>
+          <div class="col-md-6">
+            <label for="demoTel" class="form-label text-white">Teléfono (8 dígitos)</label>
+            <input type="text" class="form-control" id="demoTel" pattern="[0-9]{8}" title="8 dígitos sin espacios" placeholder="55512345">
+          </div>
+          <div class="col-md-6">
+            <label for="demoRango" class="form-label text-white">Presupuesto estimado</label>
+            <input type="range" class="form-range" id="demoRango" min="0" max="100" value="50">
+          </div>
+          <div class="col-md-6">
+            <label for="demoColor" class="form-label text-white">Color de marca</label>
+            <input type="color" class="form-control form-control-color" id="demoColor" value="#0ea5e9">
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-gradient">Enviar formulario <i class="bi bi-send ms-1"></i></button>
+            <span id="demoEstado" class="ms-3 small text-secondary" style="color:#94a3b8 !important;"></span>
+          </div>
+        </form>
+      </div>
+      <script>
+        (function () {
+          var form = document.getElementById('demoForm');
+          if (!form) return;
+          form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var estado = document.getElementById('demoEstado');
+            if (form.checkValidity()) {
+              estado.textContent = '¡Valido! El formulario se enviaría al servidor.';
+              estado.style.color = '#10b981';
+            } else {
+              form.reportValidity();
+              estado.textContent = 'Revisa los campos marcados en rojo.';
+              estado.style.color = '#f87171';
+            }
+          });
+        })();
+      </script>
+      <div class="tip-box mt-4">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        La validación nativa es solo UX. En producción, <strong>siempre</strong> valida también en el servidor.
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>Los <code>type</code> modernos dan validación, teclado y UI nativa.</li>
+        <li><code>pattern</code> + <code>title</code> validan formatos custom con regex.</li>
+        <li><code>datalist</code> agrega autocompletado editable; <code>autocomplete</code> mejora la conversión.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-2-embebidos.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-4-semantica-avanzada.html" class="btn btn-gradient">Siguiente: Semántica avanzada <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— HTML Intermedio · Lección 3</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-4-semantica-avanzada.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>
