@@ -662,9 +662,119 @@ a:hover {
   .display-5 {
     font-size: 2.2rem;
   }
-  .hero-full {
+  .hero-full,
+  .hero-section {
     min-height: 100vh;
     padding: 5rem 0 3rem;
+  }
+  .section-apartado {
+    padding: 3.5rem 0;
+  }
+  .card-learning .card-body {
+    padding: 1.5rem;
+  }
+  .theme-card .theme-head {
+    padding: 1.4rem 1.4rem 0.9rem;
+  }
+  .theme-card .theme-body {
+    padding: 0 1.4rem 1.4rem;
+  }
+}
+
+@media (max-width: 576px) {
+  body {
+    overflow-x: clip;
+  }
+
+  .display-1 { font-size: calc(2rem + 2vw); }
+  .display-2 { font-size: calc(1.85rem + 2vw); }
+  .display-3 { font-size: calc(1.7rem + 2.5vw); }
+  .display-4 { font-size: calc(1.5rem + 2vw); }
+  .display-5 { font-size: 1.9rem; }
+  .lead { font-size: 1.05rem; }
+
+  .lesson-content {
+    font-size: 0.95rem;
+  }
+  .lesson-content h2,
+  .lesson-content h3,
+  .lesson-content h4 {
+    overflow-wrap: break-word;
+  }
+
+  .table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .code-block {
+    padding: 1rem;
+    font-size: 0.82rem;
+  }
+  .tip-box,
+  .warning-box {
+    padding: 1rem;
+  }
+  .demo-box {
+    padding: 1.25rem 1rem;
+  }
+
+  .card-learning .card-body {
+    padding: 1.25rem;
+  }
+  .theme-card .theme-head {
+    padding: 1.25rem 1.25rem 0.75rem;
+  }
+  .theme-card .theme-body {
+    padding: 0 1.25rem 1.25rem;
+  }
+  .lesson-card {
+    padding: 0.6rem 0.75rem;
+  }
+
+  .badge-soft,
+  .badge-soft-cyan,
+  .badge-soft-sky {
+    font-size: 0.72rem;
+    padding: 0.3rem 0.7rem;
+  }
+  .marquee-item {
+    font-size: 0.85rem;
+    padding: 0.55rem 1rem;
+  }
+
+  .navbar-guia .navbar-brand {
+    font-size: 1rem;
+  }
+  .section-apartado {
+    padding: 3rem 0;
+  }
+  footer .container {
+    font-size: 0.85rem;
+  }
+  .btn-scroll-top {
+    width: 2.75rem;
+    height: 2.75rem;
+    font-size: 1.1rem;
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .display-4 { font-size: 1.75rem; }
+  .display-5 { font-size: 1.65rem; }
+  .lesson-header {
+    padding: 2rem 0 1.25rem;
+    font-size: 0.9rem;
+  }
+  .btn {
+    font-size: 0.85rem;
+  }
+  .navbar-guia .navbar-brand {
+    font-size: 0.95rem;
   }
 }
 
