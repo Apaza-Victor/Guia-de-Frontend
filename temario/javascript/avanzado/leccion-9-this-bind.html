@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 9 de JavaScript Avanzado: el contexto this. Cómo se determina this, call y apply, bind, arrow functions y pérdida de contexto en JavaScript.">
+  <title>Lección 9 — this, call, apply y bind | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">JavaScript</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Avanzado</a></li>
+        <li class="breadcrumb-item active text-light">Lección 9</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-lightning-charge-fill text-gradient me-1"></i>JavaScript Avanzado · Lección 9</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>40 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">this, call, apply y bind</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Controla el contexto de tus funciones en cada llamada.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-asterisk text-gradient me-2"></i>¿Qué es this y cómo se determina?</h2>
+      <p>
+        <code>this</code> es un valor <strong>dinámico</strong>: no depende de dónde se declara la función, sino de
+        <strong>cómo se llama</strong>. Las reglas principales:
+      </p>
+      <div class="row g-3 my-2">
+        <div class="col-md-4">
+          <div class="demo-box h-100">
+            <i class="bi bi-globe fs-2 d-block mb-2" style="color:#2563eb;"></i>
+            <strong class="text-white">Llamada normal</strong>
+            <p class="small mb-0" style="color:#94a3b8;"><code>fn()</code> → <code>this</code> es <code>undefined</code> (estricto) o <code>window</code>.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="demo-box h-100">
+            <i class="bi bi-braces fs-2 d-block mb-2" style="color:#22c55e;"></i>
+            <strong class="text-white">Método de objeto</strong>
+            <p class="small mb-0" style="color:#94a3b8;"><code>obj.fn()</code> → <code>this</code> es <code>obj</code>.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="demo-box h-100">
+            <i class="bi bi-plus-lg fs-2 d-block mb-2" style="color:#06b6d4;"></i>
+            <strong class="text-white">new / arrow</strong>
+            <p class="small mb-0" style="color:#94a3b8;"><code>new F()</code> → el nuevo objeto; las <strong>flechas</strong> heredan el de fuera.</p>
+          </div>
+        </div>
+      </div>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        El error más clásico: pasar un método sin contexto
+        (<code>addEventListener('click', obj.metodo)</code>) hace que <code>this</code> sea el elemento clickeado.
+        Para eso existen <code>bind</code> y las flechas.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-telephone text-gradient me-2"></i>call y apply: invocar con contexto</h2>
+      <p>
+        <code>fn.call(contexto, a, b)</code> y <code>fn.apply(contexto, [a, b])</code> invocan la función de inmediato
+        forzando el <code>this</code>. La única diferencia: <code>apply</code> recibe los argumentos en <strong>array</strong>.
+      </p>
+      <pre class="code-block"><code><span class="token-tag">function</span> presentar(ciudad, anio) {
+  <span class="token-tag">return</span> <span class="token-value">`${this.nombre} vive en ${ciudad} desde ${anio}`</span>;
+}
+
+<span class="token-tag">const</span> persona = { <span class="token-attr">nombre</span>: <span class="token-value">'Ana'</span> };
+
+presentar.<span class="token-prop">call</span>(persona, <span class="token-value">'Lima'</span>, <span class="token-num">2018</span>);   <span class="token-comment">// "Ana vive en Lima desde 2018"</span>
+presentar.<span class="token-prop">apply</span>(persona, [<span class="token-value">'Lima'</span>, <span class="token-num">2018</span>]); <span class="token-comment">// igual</span>
+
+<span class="token-comment">// "Préstamo" clásico:</span>
+<span class="token-prop">Array</span>.<span class="token-prop">prototype</span>.<span class="token-prop">slice</span>.<span class="token-prop">call</span>(arguments);</code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        <code>apply</code> brilla cuando el número de argumentos es variable: por ejemplo
+        <code>Math.max.apply(null, [3, 9, 4])</code> (hoy prefieres <code>Math.max(...arr)</code>, pero el patrón vive
+        en librerías antiguas).
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-link-45deg text-gradient me-2"></i>bind: fijar para siempre</h2>
+      <p>
+        <code>fn.bind(contexto)</code> NO ejecuta: devuelve una <strong>copia con el this fijado</strong>.
+        Perfecto para pasar métodos a eventos o timers sin perder el contexto:
+      </p>
+      <pre class="code-block"><code><span class="token-tag">const</span> contador = {
+  <span class="token-attr">valor</span>: <span class="token-num">0</span>,
+  incrementar() {
+    <span class="token-tag">this</span>.<span class="token-attr">valor</span>++;
+    <span class="token-prop">console</span>.log(<span class="token-tag">this</span>.<span class="token-attr">valor</span>);
+  }
+};
+
+<span class="token-comment">// ¡this se pierde! boton → elemento</span>
+boton.<span class="token-attr">addEventListener</span>(<span class="token-value">'click'</span>, contador.<span class="token-attr">incrementar</span>);
+
+<span class="token-comment">// Correcto: enlazamos el contexto</span>
+boton.<span class="token-attr">addEventListener</span>(<span class="token-value">'click'</span>, contador.<span class="token-attr">incrementar</span>.<span class="token-prop">bind</span>(contador));</code></pre>
+      <p class="mt-3"><code>bind</code> también puede <strong>prefijar argumentos</strong> (parámetros parciales):</p>
+      <pre class="code-block"><code><span class="token-tag">const</span> sumar = (a, b) =&gt; a + b;
+<span class="token-tag">const</span> sumar5 = sumar.<span class="token-prop">bind</span>(null, <span class="token-num">5</span>); <span class="token-comment">// el 5 queda fijo</span>
+sumar5(<span class="token-num">3</span>); <span class="token-comment">// 8</span></code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-arrow-down-short text-gradient me-2"></i>Arrow functions: el this léxico</h2>
+      <p>
+        Las funciones flecha <strong>no tienen su propio this</strong>: lo toman del ámbito donde se crearon.
+        Esto elimina la pérdida de contexto dentro de callbacks:
+      </p>
+      <pre class="code-block"><code><span class="token-tag">const</span> reloj = {
+  <span class="token-attr">hora</span>: <span class="token-num">0</span>,
+  arrancar() {
+    <span class="token-comment">// flecha → this = reloj, no el setTimeout</span>
+    <span class="token-prop">setInterval</span>(() =&gt; { <span class="token-tag">this</span>.<span class="token-attr">hora</span>++; }, <span class="token-num">1000</span>);
+  }
+};</code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Regla de oro: <strong>flecha para callbacks cortos</strong> (heredan contexto), <strong>function + bind</strong>
+        cuando necesitas tu propio <code>this</code> (clases, métodos reusables).
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-joystick text-gradient me-2"></i>Demo: controlador con bind</h2>
+      <p>
+        Un control remoto que guarda su <code>volumen</code>. Prueba los botones: los handlers están vinculados
+        con <code>bind</code> para conservar el contexto del objeto.
+      </p>
+      <div class="demo-box p-4 text-center">
+        <div id="demoNivel" class="display-6 fw-bold text-white mb-3" style="font-family:'Fira Code',monospace;">50</div>
+        <div class="progress mb-4 mx-auto" style="max-width:320px;height:10px;background:#1e293b;">
+          <div id="demoBarra" class="progress-bar" style="width:50%;background:linear-gradient(90deg,#2563eb,#06b6d4);"></div>
+        </div>
+        <div class="d-flex justify-content-center gap-2 flex-wrap">
+          <button type="button" id="demoMenos" class="btn btn-ghost-glass"><i class="bi bi-dash-lg me-1"></i>Bajar</button>
+          <button type="button" id="demoMas" class="btn btn-ghost-glass"><i class="bi bi-plus-lg me-1"></i>Subir</button>
+          <button type="button" id="demoRestaurar" class="btn btn-gradient"><i class="bi bi-arrow-counterclockwise me-1"></i>Restaurar</button>
+        </div>
+        <p class="small mt-3 mb-0" style="color:#94a3b8;">Los handlers se guardan con <code>bind(this)</code>.</p>
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li><code>this</code> se decide <strong>en la llamada</strong>, no en la declaración.</li>
+        <li><code>call</code> y <code>apply</code> invocan con contexto dado (apply con array).</li>
+        <li><code>bind</code> devuelve una copia con contexto (y args) fijo.</li>
+        <li>Las flechas toman el <code>this</code> del ámbito exterior: adiós rest pérdida de contexto.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <div class="d-flex gap-2">
+        <a href="../../../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Inicio</a>
+        <a href="leccion-8-manejo-errores.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      </div>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+      </div>
+      <a href="leccion-10-observadores.html" class="btn btn-gradient">Siguiente: Observadores <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— JavaScript Avanzado · Lección 9</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-10-observadores.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../../assets/js/main.js"></script>
+
+<script>
+(function () {
+  const control = {
+    volumen: 50,
+    minimo: 0,
+    maximo: 100,
+    nivel: document.getElementById('demoNivel'),
+    barra: document.getElementById('demoBarra'),
+    pintar() {
+      this.nivel.textContent = String(this.volumen).padStart(2, '0');
+      this.barra.style.width = this.volumen + '%';
+    },
+    bajar() {
+      this.volumen = Math.max(this.minimo, this.volumen - 10);
+      this.pintar();
+    },
+    subir() {
+      this.volumen = Math.min(this.maximo, this.volumen + 10);
+      this.pintar();
+    },
+    restaurar() {
+      this.volumen = 50;
+      this.pintar();
+    }
+  };
+
+  control.pintar();
+  document.getElementById('demoMenos').addEventListener('click', control.bajar.bind(control));
+  document.getElementById('demoMas').addEventListener('click', control.subir.bind(control));
+  document.getElementById('demoRestaurar').addEventListener('click', control.restaurar.bind(control));
+})();
+</script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

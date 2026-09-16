@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 4 de JavaScript Avanzado: módulos ES y closures. import/export, default vs nombrados, y el patrón closure para encapsular estado.">
+  <title>Lección 4 — Módulos ES y closures | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">JavaScript</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Avanzado</a></li>
+        <li class="breadcrumb-item active text-light">Lección 4</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-lightning-charge-fill me-1"></i>JavaScript Avanzado · Lección 4</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>35 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Módulos ES y closures</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Divide tu código en archivos independientes y encapsula estado con closures.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-box-seam text-gradient me-2"></i>¿Qué son los módulos ES?</h2>
+      <p>
+        Un <strong>módulo</strong> es un archivo JavaScript que <em>exporta</em> valores y <em>importa</em> los de
+        otros. ES6 aportó la sintaxis <code>import</code>/<code>export</code>, que hoy es el estándar en el navegador
+        (con la etiqueta <code>&lt;script type="module"&gt;</code>), en Node.js y en todos los bundlers
+        (Vite, Webpack).
+      </p>
+      <div class="tip-box">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Beneficios:</strong>
+        separación de responsabilidades, reutilización real, árbol de dependencias claro y <em>scope propio</em>
+        (cada módulo tiene su propio ámbito, nada se filtra al global).
+      </div>
+      <pre class="code-block mt-3"><code><span class="token-comment">// utilidades.js — EXPORTA</span>
+<span class="token-prop">export function</span> <span class="token-tag">formatearFecha</span>(fecha) { <span class="token-comment">/* … */</span> }
+
+<span class="token-prop">export const</span> MIN_PASS = <span class="token-num">8</span>;
+<span class="token-prop">export const</span> CONFIG = { <span class="token-prop">tema</span>: <span class="token-value">"oscuro"</span>, <span class="token-prop">lengua</span>: <span class="token-value">"es"</span> };
+
+<span class="token-comment">// Export por defecto (solo uno por módulo)</span>
+<span class="token-prop">export default</span> <span class="token-prop">function</span> <span class="token-tag">print</span>(v) { <span class="token-attr">console</span>.log(v); }</code></pre>
+      <pre class="code-block mt-2"><code><span class="token-comment">// app.js — IMPORTA</span>
+<span class="token-prop">import</span> print <span class="token-prop">from</span> <span class="token-value">"./utilidades.js"</span>;                    <span class="token-comment">// default (nombre libre)</span>
+<span class="token-prop">import</span> { formatearFecha, MIN_PASS } <span class="token-prop">from</span> <span class="token-value">"./utilidades.js"</span>;
+<span class="token-prop">import</span> * <span class="token-prop">as</span> util <span class="token-prop">from</span> <span class="token-value">"./utilidades.js"</span>;            <span class="token-comment">// todo el módulo</span>
+
+... </code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-node-plus text-gradient me-2"></i>Múltiples módulos: proveedor de datos</h2>
+      <pre class="code-block"><code><span class="token-comment">// api.js</span>
+<span class="token-prop">export async function</span> <span class="token-tag">obtenerUsuarios</span>() {
+  <span class="token-prop">const</span> res = <span class="token-prop">await</span> <span class="token-attr">fetch</span>(<span class="token-value">"/api/usuarios"</span>);
+  <span class="token-prop">if</span> (!res.ok) <span class="token-prop">throw new</span> <span class="token-attr">Error</span>(<span class="token-value">"Error de red"</span>);
+  <span class="token-prop">return</span> res.json();
+}
+
+<span class="token-comment">// ui.js</span>
+<span class="token-prop">export function</span> <span class="token-tag">pintarUsuarios</span>(lista) {
+  <span class="token-attr">renderizar</span>(lista.map(u =&gt; u.nombre));
+}
+
+<span class="token-comment">// main.js (punto de entrada)</span>
+<span class="token-prop">import</span> { obtenerUsuarios } <span class="token-prop">from</span> <span class="token-value">"./api.js"</span>;
+<span class="token-prop">import</span> { pintarUsuarios } <span class="token-prop">from</span> <span class="token-value">"./ui.js"</span>;
+
+<span class="token-attr">obtenerUsuarios</span>()
+  .then(pintarUsuarios)
+  .catch(err =&gt; <span class="token-attr">console</span>.error(err));</code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Antes (many scripts)</th><th scope="col">Con módulos</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Todo en globals; orden de carga importa</td><td>Dependencias explícitas; el orden lo resuelve el sistema</td></tr>
+          <tr><td>Colisión de variables entre archivos</td><td>Cada módulo tiene su propio scope</td></tr>
+          <tr><td>Difícil compartir una función sin duplicarla</td><td>Importa/exporta una sola vez</td></tr>
+        </tbody>
+      </table>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>En el navegador:</strong>
+        usa <code>&lt;script type="module" src="main.js"&gt;&lt;/script&gt;</code>. Los módulos usan
+        <strong>CORS</strong> y rutas <em>absolutas o relativas con su extensión</em> (<code>./api.js</code>, no <code>./api</code>).
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-lock text-gradient me-2"></i>Closures: memoria que no se escapa</h2>
+      <p>
+        Un <strong>closure</strong> es una función que <em>recuerda</em> las variables del ámbito donde fue creada,
+        incluso después de que ese ámbito haya terminado. Es la base para encapsular estado "privado" sin clases.
+      </p>
+      <pre class="code-block"><code><span class="token-prop">function</span> <span class="token-tag">crearContador</span>(inicial = <span class="token-num">0</span>) {
+  <span class="token-prop">let</span> valor = inicial;    <span class="token-comment">// variable privada del closure</span>
+
+  <span class="token-prop">return</span> {
+    <span class="token-prop">incrementar</span>: () =&gt; ++valor,
+    <span class="token-prop">decrementar</span>: () =&gt; --valor,
+    <span class="token-prop">ver</span>:        () =&gt; valor,
+    <span class="token-prop">resetear</span>:   () =&gt; { valor = inicial; }
+  };
+}
+
+<span class="token-prop">const</span> contadorA = <span class="token-tag">crearContador</span>(<span class="token-num">5</span>);
+<span class="token-prop">const</span> contadorB = <span class="token-tag">crearContador</span>();   <span class="token-comment">// cada uno con su propio estado</span>
+
+contadorA.incrementar();  <span class="token-comment">// 6</span>
+contadorB.decrementar();  <span class="token-comment">// -1</span>
+contadorA.incrementar();  <span class="token-comment">// 7 (aún recuerda su "valor")</span>
+<span class="token-attr">console</span>.log(contadorA.ver()); <span class="token-comment">// 7</span></code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Uso real:</strong>
+        la variable <code>valor</code> queda protegida: nadie desde fuera puede reasignarla. Lo mismo explotan
+        librerías como <code>useState</code> (React) en vanilla, o los <em>módulos IIFE</em> de hace unos años.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-collection text-gradient me-2"></i>Patrón módulo con closure</h2>
+      <p>
+        Combinando <strong>closure + objeto devuelto</strong> obtienes un mini-módulo con API pública y estado privado.
+        Es exactamente la idea detrás de los <em>factory functions</em>.
+      </p>
+      <pre class="code-block"><code><span class="token-prop">const</span> Carrito = <span class="token-prop">function</span> () {
+  <span class="token-comment">// ESTADO PRIVADO</span>
+  <span class="token-prop">const</span> items = [];
+
+  <span class="token-comment">// API PÚBLICA (expuesta)</span>
+  <span class="token-prop">function</span> <span class="token-tag">agregar</span>(producto) {
+    items.push(producto);
+  }
+  <span class="token-prop">function</span> <span class="token-tag">total</span>() {
+    <span class="token-prop">return</span> items.reduce((acc, p) =&gt; acc + p.precio, <span class="token-num">0</span>);
+  }
+
+  <span class="token-prop">return</span> { agregar, total };
+}();   <span class="token-comment">// IIFE: se ejecuta una sola vez</span>
+
+Carrito.agregar({ <span class="token-prop">nombre</span>: <span class="token-value">"piano"</span>, <span class="token-prop">precio</span>: <span class="token-num">1200</span> });
+<span class="token-attr">console</span>.log(Carrito.total());            <span class="token-comment">// 1200</span>
+<span class="token-attr">console</span>.log(Carrito.items);              <span class="token-comment">// undefined (privado)</span></code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-cart-check text-gradient me-2"></i>Demo interactiva: carrito con closure</h2>
+      <p>
+        Un <strong>carrito</strong> implementado con closure: los ítems viven en estado privado y solo se manipulan
+        a través de la API pública <code>agregar</code>, <code>quitar</code>, <code>total</code>.
+      </p>
+      <div class="demo-box p-4">
+        <div class="row g-3 mb-3 align-items-end">
+          <div class="col-md-4">
+            <label class="form-label small text-white mb-1">Producto</label>
+            <input type="text" id="lec4-nombre" class="form-control form-control-sm bg-dark text-white border-secondary" value="Lámpara LED">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label small text-white mb-1">Precio</label>
+            <input type="number" id="lec4-precio" class="form-control form-control-sm bg-dark text-white border-secondary" value="45" min="0">
+          </div>
+          <div class="col-md-5 d-flex gap-2">
+            <button class="btn btn-gradient" id="lec4-agregar"><i class="bi bi-cart-plus me-1"></i>Agregar</button>
+            <button class="btn btn-ghost-glass" id="lec4-vaciar"><i class="bi bi-trash me-1"></i>Vaciar</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-7">
+            <ul id="lec4-lista" class="list-unstyled small" style="color:#cbd5e1 !important;"></ul>
+          </div>
+          <div class="col-md-5 text-center">
+            <div class="display-6 fw-bold text-gradient" id="lec4-total">$0</div>
+            <div class="small" style="color:var(--text-muted);">total del carrito</div>
+          </div>
+        </div>
+        <p class="small mt-3 mb-0" style="color:var(--text-faint);"><i class="bi bi-shield-lock me-1"></i>El array <code>items</code> no es accesible desde fuera del closure.</p>
+      </div>
+      <pre class="code-block mt-3"><code><span class="token-prop">const</span> crearCarrito = () =&gt; {
+  <span class="token-prop">const</span> items = [];                       <span class="token-comment">// privado gracias al closure</span>
+  <span class="token-prop">return</span> {
+    <span class="token-prop">agregar</span>(p) {
+      items.push(p);
+      <span class="token-prop">return</span> items.length;
+    },
+    <span class="token-prop">quitar</span>(pos) { items.splice(pos, <span class="token-num">1</span>); },
+    <span class="token-prop">total</span>()    { <span class="token-prop">return</span> items.reduce((acc, p) =&gt; acc + p.precio, <span class="token-num">0</span>); },
+    <span class="token-prop">listar</span>()   { <span class="token-prop">return</span> [...items]; },
+    <span class="token-prop">vaciar</span>()   { items.length = <span class="token-num">0</span>; }
+  };
+};</code></pre>
+      <script>
+      (function () {
+        const crearCarrito = () => {
+          const items = [];
+          return {
+            agregar(p) { items.push(p); return items.length; },
+            quitar(pos) { items.splice(pos, 1); },
+            total() { return items.reduce((acc, p) => acc + p.precio, 0); },
+            listar() { return [...items]; },
+            vaciar() { items.length = 0; }
+          };
+        };
+        const carrito = crearCarrito();
+        const elLista = document.getElementById("lec4-lista");
+        const elTotal = document.getElementById("lec4-total");
+        const formatear = m => "$" + m.toFixed(2);
+
+        function render() {
+          const items = carrito.listar();
+          if (items.length === 0) {
+            elLista.innerHTML = '<li class="mb-1 text-secondary"><i class="bi bi-cart me-2"></i>El carrito está vacío.</li>';
+          } else {
+            elLista.innerHTML = items.map((it, i) => `
+              <li class="mb-2 d-flex justify-content-between align-items-center gap-3">
+                <span><i class="bi bi-box-seam me-2" style="color:#2563eb;"></i>${it.nombre}</span>
+                <span class="text-white">${formatear(it.precio)}
+                  <button class="btn btn-sm btn-ghost-glass ms-2 py-0 px-1" data-pos="${i}" aria-label="Quitar">
+                    <i class="bi bi-x-lg"></i>
+                  </button>
+                </span>
+              </li>`).join("");
+            elLista.querySelectorAll("[data-pos]").forEach(btn => {
+              btn.addEventListener("click", () => {
+                carrito.quitar(parseInt(btn.dataset.pos, 10));
+                render();
+              });
+            });
+          }
+          elTotal.textContent = formatear(carrito.total());
+          if (typeof gsap !== "undefined") {
+            gsap.from(elTotal, { y: 8, opacity: 0.6, duration: 0.3 });
+          }
+        }
+
+        document.getElementById("lec4-agregar").addEventListener("click", () => {
+          const nombre = document.getElementById("lec4-nombre").value.trim() || "Producto anónimo";
+          const precio = Math.max(0, parseFloat(document.getElementById("lec4-precio").value) || 0);
+          carrito.agregar({ nombre, precio });
+          render();
+        });
+        document.getElementById("lec4-vaciar").addEventListener("click", () => {
+          carrito.vaciar();
+          render();
+        });
+
+        render();
+      })();
+      </script>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li><code>export</code> comparte valores; por defecto uno por módulo; el resto, <strong>nombrados</strong>.</li>
+        <li>En el navegador usa <code>&lt;script type="module"&gt;</code>; las rutas llevan extensión <code>.js</code>.</li>
+        <li>Un <strong>closure</strong> conserva las variables del entorno donde nació.</li>
+        <li>Closure + objeto devuelto = estado privado con API pública (patrón módulo).</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <div class="d-flex gap-2">
+        <a href="../../../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Inicio</a>
+        <a href="leccion-3-clases.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      </div>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-5-patrones.html" class="btn btn-gradient">Siguiente: Patrones y buenas prácticas <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— JavaScript Avanzado · Lección 4</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-5-patrones.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

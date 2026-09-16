@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 5 de Astro: práctica final. Construye una landing de alta conversión con Astro + Tailwind, compila con astro build y revisa tu checklist de entrega.">
+  <title>Lección 5 — Práctica: landing con Astro + Tailwind | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Astro</a></li>
+        <li class="breadcrumb-item active text-light">Lección 5</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-rocket-takeoff me-1"></i>Astro · Lección 5</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>70 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Práctica: landing con Astro + Tailwind</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Proyecto final: una landing estática de alta conversión con componentes .astro, layouts, Tailwind y una isla de interacción.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-bullseye text-gradient me-2"></i>Tu proyecto final</h2>
+      <p>Elige una de estas dos opciones y construye su landing con Astro. La meta: un sitio rápido, con componente modular y una isla interactiva.</p>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="icon-badge mb-3"><i class="bi bi-person-badge"></i></div>
+              <h6 class="text-white fw-bold">Opción A: Portfolio</h6>
+              <p class="small mb-0" style="color:var(--text-muted);">Landing de tu perfil como desarrollador: hero con tu nombre, sección de proyectos, habilidades y contacto. Perfecta para tu marca personal.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card-learning h-100">
+            <div class="card-body">
+              <div class="icon-badge cyan mb-3"><i class="bi bi-box-seam"></i></div>
+              <h6 class="text-white fw-bold">Opción B: SaaS</h6>
+              <p class="small mb-0" style="color:var(--text-muted);">Landing de un producto: hero con CTA, 3 características, testimonios, precio y un formulario de registro. Enfoque de conversión total.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-diagram-3 text-gradient me-2"></i>Estructura de la landing</h2>
+      <p>Divide la página en componentes pequeños dentro de <code>src/components</code> y únelos desde <code>src/pages/index.astro</code> usando el layout base.</p>
+      <pre class="code-block"><code>src/
+├── <span class="token-prop">components/</span>
+│   ├── Navbar.astro
+│   ├── Hero.astro
+│   ├── Features.astro
+│   ├── Testimonios.astro
+│   ├── Precios.astro
+│   ├── Cta.astro
+│   └── Footer.astro
+├── <span class="token-prop">layouts/</span>
+│   └── Base.astro
+└── <span class="token-prop">pages/</span>
+    └── index.astro</code></pre>
+      <pre class="code-block mt-3"><code><span class="token-comment">---
+import Base from "../layouts/Base.astro";
+import Navbar from "../components/Navbar.astro";
+import Hero from "../components/Hero.astro";
+import Features from "../components/Features.astro";
+import Testimonios from "../components/Testimonios.astro";
+import Precios from "../components/Precios.astro";
+import Cta from "../components/Cta.astro";
+import Footer from "../components/Footer.astro";
+---</span>
+
+<span class="token-tag">&lt;Base</span> <span class="token-attr">titulo</span>=<span class="token-value">"Aura SaaS · Menos código, más velocidad"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;Navbar</span> <span class="token-tag">/&gt;</span>
+  <span class="token-tag">&lt;main&gt;</span>
+    <span class="token-tag">&lt;Hero</span> <span class="token-tag">/&gt;</span>
+    <span class="token-tag">&lt;Features</span> <span class="token-tag">/&gt;</span>
+    <span class="token-tag">&lt;Testimonios</span> <span class="token-tag">/&gt;</span>
+    <span class="token-tag">&lt;Precios</span> <span class="token-tag">/&gt;</span>
+    <span class="token-tag">&lt;Cta</span> <span class="token-tag">/&gt;</span>
+  <span class="token-tag">&lt;/main&gt;</span>
+  <span class="token-tag">&lt;Footer</span> <span class="token-tag">/&gt;</span>
+<span class="token-tag">&lt;/Base&gt;</span></code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-wind text-gradient me-2"></i>Hero con utilidades Tailwind</h2>
+      <p>Dentro del componente <code>Hero.astro</code> escribes las clases directamente. Con la integración <code>@astrojs/tailwind</code> añadida en la Lección 4, esta clase ya funciona sin CSS extra.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;section</span> <span class="token-attr">class</span>=<span class="token-value">"bg-slate-950 py-24 px-6 text-center"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;p</span> <span class="token-attr">class</span>=<span class="token-value">"text-sm font-medium text-sky-400"</span><span class="token-tag">&gt;</span>Nueva versión 2.0<span class="token-tag">&lt;/p&gt;</span>
+  <span class="token-tag">&lt;h1</span> <span class="token-attr">class</span>=<span class="token-value">"text-4xl md:text-6xl font-bold text-white mt-4"</span><span class="token-tag">&gt;</span>
+    Menos código,
+    <span class="token-tag">&lt;span</span> <span class="token-attr">class</span>=<span class="token-value">"bg-gradient-to-r from-sky-400 to-violet-400 bg-clip-text text-transparent"</span><span class="token-tag">&gt;</span>más velocidad<span class="token-tag">&lt;/span&gt;</span>
+  <span class="token-tag">&lt;/h1&gt;</span>
+  <span class="token-tag">&lt;p</span> <span class="token-attr">class</span>=<span class="token-value">"text-slate-300 mt-6 max-w-2xl mx-auto"</span><span class="token-tag">&gt;</span>
+    Publica sitios ultrarápidos con Astro y estiliza con utilidades Tailwind.
+  <span class="token-tag">&lt;/p&gt;</span>
+  <span class="token-tag">&lt;a</span> <span class="token-attr">href</span>=<span class="token-value">"/registro"</span> <span class="token-attr">class</span>=<span class="token-value">"inline-block bg-sky-500 px-6 py-3 rounded-lg font-semibold text-white mt-8"</span><span class="token-tag">&gt;</span>
+    Empezar gratis
+  <span class="token-tag">&lt;/a&gt;</span>
+<span class="token-tag">&lt;/section&gt;</span></code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Responsive:</strong>
+        el prefijo <code>md:</code> aplica la clase solo a partir de 768px, igual que las variantes sm/lg que ya conoces de Tailwind. Un solo archivo se adapta a todas las pantallas.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-fire text-gradient me-2"></i>La isla del formulario</h2>
+      <p>La única interacción real de esta landing: un formulario que responde al enviar. Lo marcas con <code>client:load</code> para que Astro lo hidrate solo a él.</p>
+      <pre class="code-block"><code><span class="token-comment">---
+import FormularioCta from "../components/FormularioCta.astro";
+---</span>
+
+<span class="token-tag">&lt;FormularioCta</span> <span class="token-attr">client:load</span> <span class="token-tag">/&gt;</span></code></pre>
+      <div class="demo-box p-4 text-center">
+        <strong class="text-white">Mini demo: botón de isla</strong>
+        <p class="small mb-0" style="color:#cbd5e1 !important;">Este bloque simula una isla: el HTML llega estático y el script después lo dota de comportamiento.</p>
+        <div class="d-flex flex-wrap justify-content-center gap-2 mt-3">
+          <button class="btn btn-gradient" onclick="enviarDemo()"><i class="bi bi-send me-1"></i>Enviar</button>
+          <span id="estadoDemo" class="d-inline-flex align-items-center"><i class="bi bi-info-circle me-1 text-secondary"></i><span class="small text-secondary">Listo para enviar</span></span>
+        </div>
+      </div>
+      <script>
+        function enviarDemo() {
+          var estado = document.getElementById('estadoDemo');
+          estado.innerHTML = '<i class="bi bi-check-circle me-1" style="color:#10b981;"></i><span class="small" style="color:#10b981;">Formulario enviado (isla hidratada)</span>';
+        }
+      </script>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-rocket-takeoff text-gradient me-2"></i>Compilar y desplegar</h2>
+      <p>El flujo final es tan corto como en la Lección 1: <code>astro build</code> genera la carpeta <code>dist/</code> lista para cualquier host de estáticos.</p>
+      <pre class="code-block"><code><span class="token-value">npm run build</span>
+<span class="token-comment"># Genera dist/ con HTML, CSS, imágenes y el JS mínimo de las islas
+
+# Verifica el resultado en local antes de desplegar</span>
+<span class="token-value">npm run preview</span></code></pre>
+      <div class="demo-box p-4">
+        <strong class="text-white">Resultado esperado</strong>
+        <p class="small mb-0" style="color:#cbd5e1 !important;">Un <code>dist/</code> con pocos kilobytes de JavaScript total: cada isla recibe su propios pequeños scripts y nada más. Eso se nota en el Lighthouse móvil.</p>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-list-check text-gradient me-2"></i>Checklist de entrega</h2>
+      <ul>
+        <li>Proyecto creado con <code>npm create astro@latest</code> y dependencias instaladas.</li>
+        <li>Integración <code>@astrojs/tailwind</code> registrada en <code>astro.config.mjs</code>.</li>
+        <li>Layout <code>Base.astro</code> con slot, head y footer compartidos.</li>
+        <li>Landing dividida en al menos 5 componentes reutilizables.</li>
+        <li>Hero con CTA y gradiente Tailwind responsive (sm/md).</li>
+        <li>Al menos una isla con <code>client:load</code> (formulario o contador).</li>
+        <li><code>npm run build</code> termina sin errores y <code>npm run preview</code> la muestra.</li>
+      </ul>
+      <div class="celebration-box p-5 text-center" data-aos="fade-up">
+        <i class="bi bi-patch-check-fill display-1"></i>
+        <h4 class="text-white fw-bold mt-3 mb-2">¡Completaste Astro!</h4>
+        <p class="mb-4" style="color:#cbd5e1 !important;">5 lecciones: primer proyecto, componentes con props, páginas y rutas, contenido e integraciones y una landing con Astro + Tailwind. Ya puedes construir sitios rápidos por defecto.</p>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+          <a href="index.html" class="btn btn-gradient"><i class="bi bi-arrow-left me-2"></i>Volver al módulo</a>
+          <a href="../typescript/index.html" class="btn btn-ghost-glass">Continuar con TypeScript <i class="bi bi-arrow-right ms-2"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-4-contenido-integraciones.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+      </div>
+      <a href="../typescript/index.html" class="btn btn-ghost-glass">Ir a TypeScript <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— Astro · Lección 5</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="../typescript/index.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 4 de Fundamentos de Programación: condicionales if/else, else if, switch y operador ternario.">
+  <title>Lección 4 — Condicionales | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Programación</a></li>
+        <li class="breadcrumb-item active text-light">Lección 4</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-code-slash me-1"></i>Programación · Lección 4</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>40 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Condicionales</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Haz que tu programa decida: if/else, else if, switch y el operador ternario.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-signpost text-gradient me-2"></i>Decisiones con if / else</h2>
+      <p>Las computadoras estarían vacías sin <strong>condiciones</strong>. El bloque <code>if</code> ejecuta código solo si la condición da <code>true</code>:</p>
+      <pre class="code-block"><code><span class="token-tag">const</span> edad = <span class="token-tag">17</span>;
+
+<span class="token-tag">if</span> (edad <span class="token-tag">&gt;=</span> <span class="token-tag">18</span>) {
+  console.log(<span class="token-value">"Eres mayor de edad"</span>);
+} <span class="token-tag">else</span> {
+  console.log(<span class="token-value">"Aún eres menor"</span>);
+}</code></pre>
+      <p>Con varias condiciones usa <code>else if</code>:</p>
+      <pre class="code-block"><code><span class="token-tag">if</span> (nota <span class="token-tag">&gt;=</span> <span class="token-tag">90</span>) {
+  <span class="token-value">"Excelente"</span>;
+} <span class="token-tag">else if</span> (nota <span class="token-tag">&gt;=</span> <span class="token-tag">70</span>) {
+  <span class="token-value">"Buen trabajo"</span>;
+} <span class="token-tag">else</span> {
+  <span class="token-value">"A seguir practicando"</span>;
+}</code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-list-columns text-gradient me-2"></i>switch: muchas opciones iguales</h2>
+      <p>Cuando comparas <em>un mismo valor</em> contra muchas opciones, <code>switch</code> es más limpio:</p>
+      <pre class="code-block"><code><span class="token-tag">const</span> dia = <span class="token-value">"lun"</span>;
+
+<span class="token-tag">switch</span> (dia) {
+  <span class="token-tag">case</span> <span class="token-value">"lun"</span>:
+    console.log(<span class="token-value">"A trabajar"</span>);
+    <span class="token-tag">break</span>;
+  <span class="token-tag">case</span> <span class="token-value">"sab"</span>:
+  <span class="token-tag">case</span> <span class="token-value">"dom"</span>:
+    console.log(<span class="token-value">"Fin de semana"</span>);
+    <span class="token-tag">break</span>;
+  <span class="token-tag">default</span>:
+    console.log(<span class="token-value">"Día normal"</span>);
+}</code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        Sin <code>break</code> los casos "caen" hacia abajo. Úsalo siempre o agrupa casos a propósito (como <code>"sab"</code>/<code>"dom"</code>).
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-question-lg text-gradient me-2"></i>El operador ternario</h2>
+      <p>Para <strong>decisiones simples en una línea</strong>, el ternario es tu atajo:</p>
+      <pre class="code-block"><code>condición <span class="token-tag">?</span> <span class="token-value">"valor si true"</span> <span class="token-tag">:</span> <span class="token-value">"valor si false"</span>;
+
+<span class="token-tag">const</span> mensaje = edad <span class="token-tag">&gt;=</span> <span class="token-tag">18</span> <span class="token-tag">?</span> <span class="token-value">"Adulto"</span> <span class="token-tag">:</span> <span class="token-value">"Menor"</span>;</code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Consejo:</strong>
+        Si la lógica supera una línea o complica la lectura, vuelve al <code>if/else</code>. El código legible gana siempre.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-split text-gradient me-2"></i>Valores truthy y falsy</h2>
+      <p>JavaScript convierte cualquier valor a verdadero o falso en una condición. Te conviene memorizar <strong>los 6 falsos</strong>:</p>
+      <table class="table">
+        <thead>
+          <tr><th scope="col">Valor</th><th scope="col">En un if</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>0</code></td><td>false</td></tr>
+          <tr><td><code>""</code> (string vacío)</td><td>false</td></tr>
+          <tr><td><code>null</code></td><td>false</td></tr>
+          <tr><td><code>undefined</code></td><td>false</td></tr>
+          <tr><td><code>NaN</code></td><td>false</td></tr>
+          <tr><td><code>false</code></td><td>false</td></tr>
+        </tbody>
+      </table>
+      <pre class="code-block"><code><span class="token-tag">if</span> (0) { <span class="token-comment">/* no se ejecuta */</span> }
+<span class="token-tag">if</span> (<span class="token-value">"texto"</span>) { <span class="token-comment">/* sí se ejecuta */</span> }</code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-lightbulb text-gradient me-2"></i>Demo interactiva</h2>
+      <div class="demo-box text-center p-4">
+        <p style="color:#cbd5e1 !important;">Introduce tu edad y deja que las condiciones decidan:</p>
+        <div class="d-flex flex-wrap justify-content-center gap-2">
+          <input type="number" id="inpEdad" class="form-control" style="max-width:130px; display:inline-block;" placeholder="edad" value="17">
+          <button class="btn btn-gradient" onclick="evaluarEdad()"><i class="bi bi-play me-1"></i>Evaluar</button>
+        </div>
+        <p id="salidaEdad" class="small mt-3 mb-0 fw-bold text-gradient" style="min-height:24px;"></p>
+      </div>
+      <script>
+        function evaluarEdad() {
+          const edad = parseInt(document.getElementById('inpEdad').value, 10);
+          let msj;
+          if (isNaN(edad)) msj = 'Introduce un número válido.';
+          else if (edad >= 18) msj = 'Eres mayor de edad: puedes continuar.';
+          else msj = 'Aún eres menor: sigue practicando con tus demos.';
+          document.getElementById('salidaEdad').textContent = msj;
+        }
+      </script>
+      <div class="tip-box mt-4">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Valida siempre con <code>isNaN</code> tras un <code>parseInt</code>: evita que un <code>NaN</code> entre a tus condiciones.
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li><code>if/else</code> y <code>else if</code> ramifican el flujo.</li>
+        <li><code>switch</code> es ideal con muchas opciones del mismo valor.</li>
+        <li>El ternario simplifica si/else de una línea; recuerda los 6 falsy.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-3-operadores-conversiones.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-5-bucles.html" class="btn btn-gradient">Siguiente: Bucles <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— Programación · Lección 4</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-5-bucles.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

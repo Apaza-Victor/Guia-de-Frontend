@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 7 de CSS Avanzado: glassmorphism con backdrop-filter y blur, neumorphism con sombras suaves, gradientes avanzados con hue-rotate y filtros.">
+  <title>Lección 7 — Efectos modernos: glassmorphism y neumorphism | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+  <style>
+    .demo-bg {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+      background: linear-gradient(135deg, #1e3a8a, #2563eb, #ea580c, #0e7490);
+      background-size: 300% 300%;
+      animation: demo-aura 10s ease-in-out infinite;
+    }
+    @keyframes demo-aura {
+      0%, 100% { background-position: 0% 0%; }
+      50%      { background-position: 100% 100%; }
+    }
+    .demo-bg::before, .demo-bg::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(18px);
+      opacity: .7;
+    }
+    .demo-bg::before {
+      width: 220px; height: 220px;
+      background: #f472b6;
+      top: -40px; right: -40px;
+    }
+    .demo-bg::after {
+      width: 260px; height: 260px;
+      background: #06b6d4;
+      bottom: -60px; left: -30px;
+    }
+    .demo-telefono {
+      position: relative;
+      width: 300px;
+      max-width: 90%;
+      margin: 0 auto;
+      border-radius: 2.4rem;
+      padding: 1rem;
+      background: rgba(15, 23, 42, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 30px 60px rgba(2, 6, 23, 0.55);
+    }
+    .demo-telefono-pantalla {
+      border-radius: 1.8rem;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.06);
+      height: 540px;
+      position: relative;
+    }
+    .demo-glass {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(14px) saturate(160%);
+      -webkit-backdrop-filter: blur(14px) saturate(160%);
+      border-radius: 1rem;
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(2, 6, 23, 0.35);
+    }
+    .demo-glass:hover { background: rgba(255, 255, 255, 0.18); }
+    .demo-telefono-baldosa {
+      background: #ff6b6b;
+      border-radius: 0.9rem;
+      width: 52px; height: 52px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 1.4rem;
+    }
+    .demo-neumo {
+      background: #eceef4;
+      border-radius: 1rem;
+      box-shadow: 9px 9px 22px rgba(174, 181, 199, 0.7), -9px -9px 22px rgba(255, 255, 255, 0.95);
+      color: #5b6478;
+    }
+    .demo-neumo:active {
+      box-shadow: inset 9px 9px 22px rgba(174, 181, 199, 0.7), inset -9px -9px 22px rgba(255, 255, 255, 0.95);
+    }
+  </style>
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">CSS</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Avanzado</a></li>
+        <li class="breadcrumb-item active text-light">Lección 7</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-3-circle me-1"></i>CSS Avanzado · Lección 7</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>35 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Efectos modernos: glassmorphism y neumorphism</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Vidrio esmerilado, botones blandos y gradientes vivos: el repertorio estético de las interfaces actuales.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-window-stack text-gradient me-2"></i>¿Qué es el glassmorphism?</h2>
+      <p>
+        El <strong>glassmorphism</strong> ("efecto cristal") simula un panel de vidrio esmerilado sobre un fondo colorido.
+        Sus ingredientes: un fondo <strong>translúcido</strong> (baja opacidad), un <strong>borde</strong> claro
+        (1px blanquecino) y <strong>backdrop-filter</strong> con <code>blur()</code> y algo de <code>saturate()</code>
+        para que coloree lo que hay detrás.
+      </p>
+      <pre class="code-block"><code><span class="token-tag">.tarjeta-vidrio</span> {
+  <span class="token-prop">background</span>: <span class="token-value">rgba(255, 255, 255, 0.12)</span>;      <span class="token-comment">/* traslúcido */</span>
+  <span class="token-prop">border</span>: <span class="token-num">1px</span> <span class="token-value">solid rgba(255, 255, 255, 0.22)</span>;
+  <span class="token-prop">backdrop-filter</span>: <span class="token-value">blur(14px) saturate(160%)</span>;
+  <span class="token-prop">-webkit-backdrop-filter</span>: <span class="token-value">blur(14px) saturate(160%)</span>;
+  <span class="token-prop">border-radius</span>: <span class="token-num">1rem</span>;
+  <span class="token-prop">box-shadow</span>: <span class="token-num">0 8px 24px</span> <span class="token-value">rgba(2, 6, 23, 0.35)</span>;
+}</code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Pieza</th><th scope="col">Truco</th><th scope="col">Función visual</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Fondo</td><td><code>rgba(255,255,255,.1)</code></td><td>Base etérea del cristal</td></tr>
+          <tr><td>Borde</td><td>1px claro con poca opacidad</td><td>Describe el "canto" del vidrio</td></tr>
+          <tr><td><code>blur(Npx)</code></td><td>Desenfoque del fondo que pasa detrás</td><td>El efecto esmerilado</td></tr>
+          <tr><td><code>saturate(%)</code></td><td>Sube la viveza de los colores</td><td>Evita que se vea gris/con agua</td></tr>
+          <tr><td><code>box-shadow</code></td><td>Sombra suave y cercana</td><td>Despega el panel del fondo</td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box mt-4">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Repite <code>-webkit-backdrop-filter</code>: los navegadores WebKit (Safari y Chrome antiguos) necesitan el prefijo.
+        Y recuerda que <code>backdrop-filter</code> solo se nota si <strong>hay algo detrás</strong>: usa fondos coloridos.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-hand-index-thumb text-gradient me-2"></i>Neumorphism: sombras suaves en relieve</h2>
+      <p>
+        El <strong>neumorphism</strong> ("neumorfismo") juega con <strong>dos sombras opuestas</strong>: una oscura abajo a la
+        derecha y una clara arriba a la izquierda. Simula un material blando hundido o sobresaliendo de su fondo.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">/* Fondo y objeto deben compartir el mismo color base */</span>
+<span class="token-tag">.boton-blando</span> {
+  <span class="token-prop">background</span>: <span class="token-value">#eceef4</span>;                     <span class="token-comment">/* mismo tono que el fondo */</span>
+  <span class="token-prop">border-radius</span>: <span class="token-num">1rem</span>;
+  <span class="token-prop">box-shadow</span>:
+    <span class="token-num">9px</span> <span class="token-num">9px</span> <span class="token-num">22px</span> <span class="token-value">rgba(174, 181, 199, 0.7)</span>,   <span class="token-comment">/* sombra "abajo" */</span>
+    <span class="token-num">-9px</span> <span class="token-num">-9px</span> <span class="token-num">22px</span> <span class="token-value">rgba(255, 255, 255, 0.95)</span>; <span class="token-comment">/* luz "arriba" */</span>
+}
+
+<span class="token-comment">/* :active invierte las direcciones → el botón se "hunde" */</span>
+<span class="token-tag">.boton-blando:active</span> {
+  <span class="token-prop">box-shadow</span>:
+    <span class="token-value">inset</span> <span class="token-num">9px</span> <span class="token-num">9px</span> <span class="token-num">22px</span> <span class="token-value">rgba(174, 181, 199, 0.7)</span>,
+    <span class="token-value">inset</span> <span class="token-num">-9px</span> <span class="token-num">-9px</span> <span class="token-num">22px</span> <span class="token-value">rgba(255, 255, 255, 0.95)</span>;
+}</code></pre>
+      <div class="warning-box mt-4">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        Usa el neumorphism con moderación: sobre fondos oscuros o con mucha densidad deja poco contraste. Es un efecto
+        "de superficie" que combina mejor en pequeños controles que en bloques de texto grande.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-palette text-gradient me-2"></i>Gradientes avanzados y filtros</h2>
+      <p>
+        Un gradiente puede llevar <strong>varios stops</strong>, indicar dirección y combinarse con la propiedad
+        <code>filter: hue-rotate()</code> para "barajar" la paleta sin reescribir colores. La función <code>filter</code>
+        también ofrece <code>brightness()</code>, <code>grayscale()</code> y <code>invert()</code>, entre otras.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">/* Gradiente con varios stops y dirección oblicua */</span>
+<span class="token-prop">background</span>: <span class="token-value">linear-gradient(135deg, #1e3a8a, #2563eb 40%, #ea580c 70%, #0e7490)</span>;
+
+<span class="token-comment">/* Rotación de fase: cambia todo el rango cromático */</span>
+<span class="token-tag">.fondo-vivo</span> { <span class="token-prop">filter</span>: <span class="token-value">hue-rotate(90deg)</span>; }
+
+<span class="token-comment">/* Filtros combinados: escala de grises que se "enciende" al hover */</span>
+<span class="token-tag">.foto</span> { <span class="token-prop">filter</span>: <span class="token-value">grayscale(1) brightness(0.95)</span>; }
+<span class="token-tag">.foto:hover</span> { <span class="token-prop">filter</span>: <span class="token-value">grayscale(0) brightness(1.05)</span>; }</code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Función</th><th scope="col">Efecto</th><th scope="col">Truco rápido</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>hue-rotate(deg)</code></td><td>Gira el tono de todos los colores</td><td>Un "tema" de color sin editar stops</td></tr>
+          <tr><td><code>blur(px)</code></td><td>Desenfoca el elemento</td><td>Fondo de modal "soft"</td></tr>
+          <tr><td><code>grayscale(n)</code></td><td>Desatura a escala de grises</td><td>Estado inactivo o filtro en hover</td></tr>
+          <tr><td><code>drop-shadow()</code></td><td>Sombra que respeta la forma</td><td>Sombras reales sobre transparencias</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-phone text-gradient me-2"></i>Demo interactiva: celular con tarjetas glass</h2>
+      <p>
+        Un "celular" decorativo flota sobre un fondo con gradientes animados. Sus tarjetas son <strong>glassmorphism</strong>
+        real (<code>backdrop-filter</code> difumina lo que pasa detrás) y GSAP las mantiene flotando con brisas suaves.
+        El botón geométrico inferior es <strong>neumórfico</strong> y se hunde al pulsarlo.
+      </p>
+      <div class="demo-box">
+        <div class="demo-bg p-4">
+          <div class="demo-telefono">
+            <div class="demo-telefono-pantalla p-3">
+              <div class="demo-glass p-3 mb-3 demo-float-card" id="glassCard1">
+                <div class="d-flex align-items-center gap-3">
+                  <div class="demo-telefono-baldosa"><i class="bi bi-credit-card"></i></div>
+                  <div>
+                    <strong class="d-block">Saldo total</strong>
+                    <span class="small" style="color:#cbd5e1!important;">$2,840.75 · actualizado hoy</span>
+                  </div>
+                </div>
+              </div>
+              <div class="demo-glass p-3 mb-3 demo-float-card" id="glassCard2">
+                <div class="d-flex align-items-center gap-3">
+                  <div class="demo-telefono-baldosa" style="background:#22d3ee;"><i class="bi bi-lightning-charge"></i></div>
+                  <div>
+                    <strong class="d-block">Progreso del curso</strong>
+                    <span class="small" style="color:#cbd5e1!important;">CSS Avanzado · 6/7 lecciones</span>
+                  </div>
+                </div>
+              </div>
+              <div class="demo-glass p-3 demo-float-card" id="glassCard3">
+                <div class="d-flex align-items-center gap-3">
+                  <div class="demo-telefono-baldosa" style="background:#fbbf24;"><i class="bi bi-star"></i></div>
+                  <div>
+                    <strong class="d-block">Logro desbloqueado</strong>
+                    <span class="small" style="color:#cbd5e1!important;">Maestro del cristal esmerilado</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center align-items-center gap-3 mt-4">
+          <button class="btn btn-gradient btn-sm" onclick="window.interactuaDemo()"><i class="bi bi-wind me-1"></i>Revolotear con GSAP</button>
+          <button class="demo-neumo px-4 py-3 fw-bold" onclick="window.demoHundir(this)"><i class="bi bi-hand-index-thumb me-2"></i>Botón neumórfico</button>
+        </div>
+        <p class="small mt-3 mb-0" style="color:var(--text-muted);">Las tarjetas difuminan el fondo con <code>backdrop-filter: blur(14px) saturate(160%)</code>. El botón beige usa sombras exterior/interior del neumorphism.</p>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>Glassmorphism = fondo traslúcido + borde claro + <code>backdrop-filter: blur() saturate()</code>.</li>
+        <li>Neumorphism = dos sombras opuestas (oscura + clara) sobre un fondo del mismo tono; <code>inset</code> para "hundir".</li>
+        <li><code>filter</code> ofrece <code>hue-rotate()</code>, <code>grayscale()</code>, <code>brightness()</code>…" sobre cualquier elemento.</li>
+        <li>Usa estos efectos para <em>destacar</em>, no como fondo por defecto: el contraste y la legibilidad mandan.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-6-bem.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+      </div>
+      <a href="index.html" class="btn btn-gradient">Finalizar CSS Avanzado <i class="bi bi-check2-square ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— CSS Avanzado · Lección 7</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="leccion-6-bem.html" class="text-secondary"><i class="bi bi-arrow-left-circle fs-5"></i></a>
+      <a href="index.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../../assets/js/main.js"></script>
+<script>
+  gsap.to(".demo-float-card", {
+    y: -10,
+    duration: 2.2,
+    ease: "sine.inOut",
+    yoyo: true,
+    repeat: -1,
+    stagger: 0.4
+  });
+  window.interactuaDemo = function () {
+    gsap.fromTo(".demo-float-card",
+      { y: 14, rotation: -3, opacity: 0.5 },
+      { y: 0, rotation: 0, opacity: 1, duration: 0.9, stagger: 0.15, ease: "back.out(2)" });
+  };
+  window.demoHundir = function (btn) {
+    gsap.fromTo(btn, { scale: 0.96 }, { scale: 1, duration: 0.4, ease: "elastic.out(1, 0.4)" });
+  };
+</script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

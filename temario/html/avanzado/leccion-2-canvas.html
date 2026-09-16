@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 2 de HTML Avanzado: Canvas 2D y SVG inline para gráficos y visualizaciones dentro de HTML.">
+  <title>Lección 2 — Canvas y SVG | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">HTML</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Avanzado</a></li>
+        <li class="breadcrumb-item active text-light">Lección 2</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft">Sección: HTML Avanzado · Lección 2</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>45 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Canvas y SVG en HTML</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Dos poderosas formas de dibujar en la web: &lt;canvas&gt; para píxeles y gráficos dinámicos, y SVG para vectores accesibles.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-compass text-gradient me-2"></i>¿Cuándo usar cada uno?</h2>
+      <table class="table">
+        <thead>
+          <tr><th scope="col"></th><th scope="col">Canvas</th><th scope="col">SVG</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Modelo</strong></td><td>Píxeles (raster)</td><td>Formas vectoriales</td></tr>
+          <tr><td><strong>Ideal para</strong></td><td>Juegos, animaciones, fotos</td><td>Iconos, diagramas, logos, escalado</td></tr>
+          <tr><td><strong>Accesible</strong></td><td>No (solo un área plana)</td><td>Sí (elementos y texto indexables)</td></tr>
+          <tr><td><strong>Escala</strong></td><td>Pierde nitidez al agrandar</td><td>Nítido a cualquier tamaño</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-grid text-gradient me-2"></i>&lt;canvas&gt; básico</h2>
+      <p>El <code>&lt;canvas&gt;</code> es un lienzo que se dibuja con JavaScript vía su contexto 2D:</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;canvas</span> <span class="token-attr">id</span>=<span class="token-value">"lienzo"</span> <span class="token-attr">width</span>=<span class="token-value">"400"</span> <span class="token-attr">height</span>=<span class="token-value">"200"</span><span class="token-tag">&gt;</span>
+  <span class="token-comment">&lt;!-- Texto alternativo para navegadores sin soporte --&gt;</span>
+  Tu navegador no soporta canvas.
+<span class="token-tag">&lt;/canvas&gt;</span></code></pre>
+      <pre class="code-block"><code><span class="token-tag">const</span> ctx = document.getElementById(<span class="token-value">'lienzo'</span>).getContext(<span class="token-value">'2d'</span>);
+ctx.fillStyle = <span class="token-value">'#0ea5e9'</span>;      <span class="token-comment">// color del relleno</span>
+ctx.fillRect(<span class="token-value">20</span>, <span class="token-value">20</span>, <span class="token-value">150</span>, <span class="token-value">100</span>); <span class="token-comment">// rectángulo x,y,w,h</span></code></pre>
+      <ul class="mt-3">
+        <li><code>fillRect</code>, <code>arc</code>, <code>beginPath</code> y <code>stroke</code> son las herramientas base.</li>
+        <li>Se redibuja cada frame; perfecto para animaciones con <code>requestAnimationFrame</code>.</li>
+      </ul>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-hexagon text-gradient me-2"></i>SVG inline</h2>
+      <p>SVG se escribe directamente como XML dentro del HTML. Escala sin perder calidad y es accesible:</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;svg</span> <span class="token-attr">width</span>=<span class="token-value">"100"</span> <span class="token-attr">height</span>=<span class="token-value">"100"</span> <span class="token-attr">viewBox</span>=<span class="token-value">"0 0 100 100"</span> <span class="token-attr">role</span>=<span class="token-value">"img"</span>
+     <span class="token-attr">aria-labelledby</span>=<span class="token-value">"tituloCirculo"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;title</span> <span class="token-attr">id</span>=<span class="token-value">"tituloCirculo"</span><span class="token-tag">&gt;</span>Círculo azul<span class="token-tag">&lt;/title&gt;</span>
+  <span class="token-tag">&lt;circle</span> <span class="token-attr">cx</span>=<span class="token-value">"50"</span> <span class="token-attr">cy</span>=<span class="token-value">"50"</span> <span class="token-attr">r</span>=<span class="token-value">"40"</span> <span class="token-attr">fill</span>=<span class="token-value">"#06b6d4"</span><span class="token-tag">/&gt;</span>
+<span class="token-tag">&lt;/svg&gt;</span></code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        En SVG los elementos son <strong>DOM</strong>: se animan con CSS o GSAP y se estilizan con clases normales.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-lightbulb text-gradient me-2"></i>Demo interactiva</h2>
+      <div class="demo-box text-center p-4">
+        <p style="color:#cbd5e1 !important;">Un circulito SVG animado con GSAP y un lienzo dibujado en vivo:</p>
+        <div class="row g-4 justify-content-center">
+          <div class="col-md-5">
+            <svg width="140" height="140" viewBox="0 0 140 140" role="img" aria-label="Círculo degradado">
+              <circle id="svgDemo" cx="70" cy="70" r="52" fill="url(#grad1)" />
+              <defs>
+                <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#0ea5e9" />
+                  <stop offset="100%" stop-color="#2563eb" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <div><small style="color:#94a3b8 !important;">SVG</small></div>
+          </div>
+          <div class="col-md-5">
+            <canvas id="canvasDemo" width="140" height="140" style="border:1px solid #1e293b; border-radius:8px;"></canvas>
+            <div><small style="color:#94a3b8 !important;">Canvas (dibujado en vivo)</small></div>
+          </div>
+        </div>
+      </div>
+      <script>
+        (function () {
+          const canvas = document.getElementById('canvasDemo');
+          if (canvas) {
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#0d1b2a';
+            ctx.fillRect(0, 0, 140, 140);
+            ctx.fillStyle = '#06b6d4';
+            ctx.beginPath();
+            ctx.arc(70, 70, 45, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#e2e8f0';
+            ctx.font = '16px Fira Code';
+            ctx.textAlign = 'center';
+            ctx.fillText('2D', 70, 76);
+          }
+          if (window.gsap && document.getElementById('svgDemo')) {
+            gsap.to('#svgDemo', { x: 12, duration: 2, yoyo: true, repeat: -1, ease: 'sine.inOut', transformOrigin: 'center' });
+          }
+        })();
+      </script>
+      <div class="tip-box mt-4">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Solo <code>stroke</code> y <code>fill</code> no bastan: añade siempre <code>role</code> e <code>aria-label</code> a tus SVG decorativos con significado.
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>Canvas: píxeles dinámicos dibujados con JS (mejor animaciones complejas).</li>
+        <li>SVG: vectores en el DOM, accesibles y escalables (mejor iconos y diagramas).</li>
+        <li>Decide según necesites nitidez, accesibilidad o dinamismo.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-1-web-components.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-3-apis-navegador.html" class="btn btn-gradient">Siguiente: APIs del navegador <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— HTML Avanzado · Lección 2</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-3-apis-navegador.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 1 de CSS Avanzado: variables y custom properties a través de :root, la función var(), scoping, fallbacks y personalización de Bootstrap.">
+  <title>Lección 1 — Variables y custom properties | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+  <style>
+    :root {
+      --demo-bg: #f1f5f9;
+      --demo-card: #ffffff;
+      --demo-text: #0f172a;
+      --demo-muted: #475569;
+      --demo-accent: #2563eb;
+      --demo-border: rgba(15, 23, 42, 0.10);
+      --demo-shadow: rgba(15, 23, 42, 0.12);
+    }
+    :root[data-theme="dark"] {
+      --demo-bg: #0f172a;
+      --demo-card: #1e293b;
+      --demo-text: #e2e8f0;
+      --demo-muted: #94a3b8;
+      --demo-accent: #93c5fd;
+      --demo-border: rgba(255, 255, 255, 0.12);
+      --demo-shadow: rgba(0, 0, 0, 0.45);
+    }
+    .demo-tablero {
+      background: var(--demo-bg);
+      color: var(--demo-text);
+      border: 1px solid var(--demo-border);
+      border-radius: 1rem;
+      padding: 1.25rem;
+      box-shadow: 0 12px 30px var(--demo-shadow);
+      transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+    .demo-tablero .mini-card {
+      background: var(--demo-card);
+      border: 1px solid var(--demo-border);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      color: var(--demo-text);
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+    .demo-tablero .mini-val {
+      color: var(--demo-accent);
+      font-family: "Poppins", sans-serif;
+      font-weight: 700;
+    }
+    .demo-tablero .mini-muted { color: var(--demo-muted); }
+  </style>
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">CSS</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Avanzado</a></li>
+        <li class="breadcrumb-item active text-light">Lección 1</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-3-circle me-1"></i>CSS Avanzado · Lección 1</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>25 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Variables y custom properties</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Centraliza tus valores, crea temas dinámicos y personaliza Bootstrap con variables CSS nativas.</p>
+    <div class="progress-tracker">
+      <span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-sliders text-gradient me-2"></i>¿Qué son las custom properties?</h2>
+      <p>
+        Las <strong>custom properties</strong> (o "variables de CSS") permiten guardar un valor con nombre y reutilizarlo
+        en todo el documento. Son la evolución natural de repetir a mano colores, espaciados o fuentes.
+        Se <strong>definen</strong> con <code>--nombre</code> y se <strong>consumen</strong> con la función <code>var()</code>.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">/* Definición: la convención manda declararlas en :root */</span>
+<span class="token-tag">:root</span> {
+  <span class="token-prop">--color-primario</span>: <span class="token-value">#2563eb</span>;
+  <span class="token-prop">--radio</span>: <span class="token-num">0.75rem</span>;
+  <span class="token-prop">--duracion</span>: <span class="token-num">0.3s</span>;
+}
+
+<span class="token-comment">/* Consumo: var() sustituye el valor donde se necesite */</span>
+<span class="token-tag">.boton</span> {
+  <span class="token-prop">background</span>: <span class="token-value">var(--color-primario)</span>;
+  <span class="token-prop">border-radius</span>: <span class="token-value">var(--radio)</span>;
+  <span class="token-prop">transition</span>: <span class="token-value">transform var(--duracion)</span>;
+}</code></pre>
+      <p class="mt-3">
+        A diferencia de variables de preprocesadores como Sass, las custom properties son <strong>dinámicas</strong>:
+        se <em>resuelven en tiempo de renderizado</em>, se heredan y se pueden cambiar con JavaScript sin recompilar nada.
+      </p>
+      <table class="table mt-4">
+        <thead>
+          <tr><th scope="col">Concepto</th><th scope="col">Sintaxis</th><th scope="col">En qué se usa</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Definición</td><td><code>--color-base: #0f172a;</code></td><td>Dos guiones (--) + nombre descriptivo</td></tr>
+          <tr><td>Consumo</td><td><code>var(--color-base)</code></td><td>Dentro de cualquier propiedad</td></tr>
+          <tr><td>Fallback</td><td><code>var(--color-base, #000)</code></td><td>Segundo argumento si la variable no existe</td></tr>
+          <tr><td>Ámbito</td><td>Selección donde se define</td><td><code>:root</code> = global; un selector = local</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-diagram-3 text-gradient me-2"></i>Scope y herencia de variables</h2>
+      <p>
+        El valor de una custom property se aplica al elemento donde se define y a <strong>todos sus descendientes</strong>.
+        Si declaras una variable en <code>:root</code> estará disponible en todo el documento; si la declaras en un
+        componente, solo dentro de ese subárbol.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">/* Variable global */</span>
+<span class="token-tag">:root</span>   { <span class="token-prop">--radio</span>: <span class="token-num">0.5rem</span>; }
+
+<span class="token-comment">/* Override local: .panel y sus hijos ven 1rem */</span>
+<span class="token-tag">.panel</span> { <span class="token-prop">--radio</span>: <span class="token-num">1rem</span>; }
+
+<span class="token-tag">.panel-</span><span class="token-tag">hijo</span> {
+  <span class="token-prop">border-radius</span>: <span class="token-value">var(--radio)</span>; <span class="token-comment">/* 1rem */</span>
+}</code></pre>
+      <div class="tip-box mt-4">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Crea un "sistema de tokens" en <code>:root</code> con nombres semánticos (<code>--color-peligro</code>,
+        <code>--espacio-md</code>) en lugar de nombres descriptivos del valor (<code>--rojo-500</code>, <code>--16px</code>).
+        Así cambiar de tema es aislar el cambio en un solo lugar.
+      </div>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        Las custom properties funcionan en <em>todas</em> las propiedades CSS, pero <code>var()</code> no se puede usar
+        dentro de media queries como nombre de consulta (sí dentro de los valores). Para condicionar valores, redefine
+        la variable dentro del <code>@media</code>.
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-arrow-repeat text-gradient me-2"></i>Sobreescribir con media queries y atributos</h2>
+      <p>
+        Como las variables se resuelven en tiempo de ejecución, puedes redefinirlas según el contexto: un
+        <code>@media</code>, una clase de utilidad o un atributo en el <code>&lt;html&gt;</code>. Este último truco es el
+        motor de casi todos los sistemas de temas dark/light.
+      </p>
+      <pre class="code-block"><code><span class="token-tag">:root</span> { <span class="token-prop">--fondo</span>: <span class="token-value">#fff</span>; <span class="token-prop">--texto</span>: <span class="token-value">#0f172a</span>; }
+
+<span class="token-comment">/* Tema oscuro activado por el atributo data-theme */</span>
+<span class="token-tag">:root[</span><span class="token-attr">data-theme</span>=<span class="token-value">"dark"</span><span class="token-tag">]</span> {
+  <span class="token-prop">--fondo</span>: <span class="token-value">#0f172a</span>;
+  <span class="token-prop">--texto</span>: <span class="token-value">#e2e8f0</span>;
+}
+
+<span class="token-comment">/* Desde JS: document.documentElement.setAttribute('data-theme', 'dark') */</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Estrategia</th><th scope="col">Selector</th><th scope="col">Cuándo usarla</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Media query</td><td><code>@media (max-width: 768px)</code></td><td>Adaptar medidas a pantallas</td></tr>
+          <tr><td>Atributo</td><td><code>:root[data-theme="dark"]</code></td><td>Temas cambiados por JS</td></tr>
+          <tr><td>Preferencia OSC</td><td><code>@media (prefers-color-scheme: dark)</code></td><td>Respetar el tema del sistema</td></tr>
+          <tr><td>Clase en contenedor</td><td><code>.modo-oscuro</code></td><td>Tema por sección específica</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-magic text-gradient me-2"></i>Demo interactiva: tablero con tema dark/light</h2>
+      <p>
+        Este tablero usa únicamente dos conjuntos de variables (definidas en el <code>&lt;head&gt;</code> con
+        <code>:root</code> y <code>:root[data-theme="dark"]</code>). El botón solo cambia el atributo <code>data-theme</code>
+        del <code>&lt;html&gt;</code>; el CSS hace el resto. Prueba a cambiar de tema y observa cómo la transición es suave.
+      </p>
+      <div class="demo-box">
+        <div class="d-flex flex-wrap gap-2 mb-3">
+          <button class="btn btn-gradient btn-sm" onclick="setTheme('light')"><i class="bi bi-sun me-1"></i>Tema claro</button>
+          <button class="btn btn-ghost-glass btn-sm" onclick="setTheme('dark')"><i class="bi bi-moon-stars me-1"></i>Tema oscuro</button>
+          <span class="badge-soft ms-auto align-self-center">data-theme actual: <span id="themeActual">light</span></span>
+        </div>
+        <div class="demo-tablero" id="demoTablero">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <strong class="mini-val">Panel de control</strong>
+            <span class="mini-muted small">Última actualización: hoy</span>
+          </div>
+          <div class="row g-3">
+            <div class="col-6 col-md-4">
+              <div class="mini-card">
+                <div class="mini-muted small mb-1">Ventas</div>
+                <div class="mini-val fs-4">$12,480</div>
+                <div class="mini-muted small">+8.2% vs ayer</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-4">
+              <div class="mini-card">
+                <div class="mini-muted small mb-1">Visitas</div>
+                <div class="mini-val fs-4">48.9k</div>
+                <div class="mini-muted small">+3.4% esta semana</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-4">
+              <div class="mini-card">
+                <div class="mini-muted small mb-1">Conversión</div>
+                <div class="mini-val fs-4">3.7%</div>
+                <div class="mini-muted small">Meta: 4.0%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="small mt-2 mb-0" style="color:var(--text-muted);">Cada tarjeta lee <code>var(--demo-card)</code>, <code>var(--demo-text)</code> y <code>var(--demo-accent)</code>. Ningún color está repetido en el HTML.</p>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-bootstrap text-gradient me-2"></i>Cómo se personaliza Bootstrap con variables</h2>
+      <p>
+        Bootstrap 5 usa su propio conjunto de variables CSS con prefijo <code>--bs-</code>. Sobrescribirlas en tu
+        <code>style.css</code> (o en un bloque propio) cambia colores, radios y sombras <em>sin tocar el CSS del framework</em>.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">/* Sobrescritura de tokens de Bootstrap 5 */</span>
+<span class="token-tag">:root</span> {
+  <span class="token-prop">--bs-primary</span>: <span class="token-value">#2563eb</span>;
+  <span class="token-prop">--bs-primary-rgb</span>: <span class="token-num">124, 58, 237</span>;
+  <span class="token-prop">--bs-border-radius</span>: <span class="token-num">1rem</span>;
+  <span class="token-prop">--bs-body-bg</span>: <span class="token-value">#ffffff</span>;
+}
+
+<span class="token-comment">/* Cambios condicionales por breakpoint sin recurrencias */</span>
+<span class="token-tag">@media</span> (<span class="token-prop">min-width</span>: <span class="token-num">992px</span>) {
+  <span class="token-tag">:root</span> { <span class="token-prop">--bs-border-radius</span>: <span class="token-num">1.5rem</span>; }
+}</code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Variable Bootstrap</th><th scope="col">Controla</th><th scope="col">Ejemplo de valor</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>--bs-primary</code></td><td>Color principal de botones y enlaces</td><td><code>#2563eb</code></td></tr>
+          <tr><td><code>--bs-primary-rgb</code></td><td>Versión RGB, para opacidades (bg-opacity)</td><td><code>37, 99, 235</code></td></tr>
+          <tr><td><code>--bs-border-radius</code></td><td>Radio de esquinas de componentes</td><td><code>0.75rem</code></td></tr>
+          <tr><td><code>--bs-body-bg / --bs-body-color</code></td><td>Fondo y texto del documento</td><td><code>#0f172a / #e2e8f0</code></td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Para personalizar colores de forma sostenible, define tus propios tokens (<code>--fp-color-primario</code>) y luego
+        asigna <code>--bs-primary: var(--fp-color-primario)</code>. Un solo cambio propaga todo.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>Las custom properties se declaran con <code>--nombre</code> y se leen con <code>var(--nombre, fallback)</code>.</li>
+        <li>Definidas en <code>:root</code> son globales; en un selector, su alcance es local y heredable.</li>
+        <li>Con <code>:root[data-theme="dark"]</code> + <code>setAttribute()</code> creas temas swap-instantáneo con un solo atributo.</li>
+        <li>Bootstrap 5 se personaliza sobrescribiendo sus variables <code>--bs-*</code> en <code>:root</code>.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="../../../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Inicio</a>
+      <div class="progress-tracker">
+        <span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-2-transiciones.html" class="btn btn-gradient">Siguiente: Transiciones <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— CSS Avanzado · Lección 1</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-2-transiciones.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../../assets/js/main.js"></script>
+<script>
+  function setTheme(tema) {
+    document.documentElement.setAttribute("data-theme", tema);
+    document.getElementById("themeActual").textContent = tema;
+    gsap.fromTo("#demoTablero", { y: 8, opacity: 0.4 }, { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" });
+  }
+</script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

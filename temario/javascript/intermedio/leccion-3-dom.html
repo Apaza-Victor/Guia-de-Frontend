@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 3 de JavaScript Intermedio: manipulación del DOM. querySelector, getElementById, textContent vs innerHTML, createElement, classList y dataset en JavaScript.">
+  <title>Lección 3 — Manipulación del DOM | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">JavaScript</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Intermedio</a></li>
+        <li class="breadcrumb-item active text-light">Lección 3</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-hdd-network me-1"></i>JavaScript Intermedio · Lección 3</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>45 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Manipulación del DOM</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Selecciona, crea y modifica elementos para pintar interfaces en tiempo real.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-search text-gradient me-2"></i>Seleccionar elementos</h2>
+      <p>
+        El <strong>DOM</strong> (Document Object Model) es la representación en memoria de tu HTML. Con JavaScript puedes
+        <em>seleccionar</em> cualquier nodo y luego leerlo o modificarlo.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">// Selectores modernos (CSS)</span>
+<span class="token-tag">const</span> titulo = document.<span class="token-prop">querySelector</span>(<span class="token-value">'.card h2'</span>);   <span class="token-comment">// el primero que coincida</span>
+<span class="token-tag">const</span> todos  = document.<span class="token-prop">querySelectorAll</span>(<span class="token-value">'.card'</span>);  <span class="token-comment">// NodeList (iterable)</span>
+
+<span class="token-comment">// Selector clásico por id</span>
+<span class="token-tag">const</span> boton = document.<span class="token-prop">getElementById</span>(<span class="token-value">'btnGuardar'</span>);
+
+todos.<span class="token-prop">forEach</span>(card =&gt; <span class="token-prop">console</span>.log(card));</code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Método</th><th scope="col">Select</th><th scope="col">Devuelve</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>querySelector</code></td><td>por selector CSS</td><td>primer elemento o <code>null</code></td></tr>
+          <tr><td><code>querySelectorAll</code></td><td>por selector CSS</td><td>NodeList iterable</td></tr>
+          <tr><td><code>getElementById</code></td><td>por <code>id</code></td><td>un elemento o <code>null</code></td></tr>
+          <tr><td><code>getElementsByClassName</code></td><td>por clase</td><td>HTMLCollection (viva)</td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Prefiere <code>querySelector</code> a secas: acepta cualquier selector CSS y es idéntico al que ya conoces de los <code>&lt;style&gt;</code>.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-shield-exclamation text-gradient me-2"></i>textContent vs innerHTML y el XSS</h2>
+      <p>
+        <code>textContent</code> asigna texto <em>puro</em>; <code>innerHTML</code> interpreta etiquetas HTML.
+        Esta diferencia es crítica por <strong>seguridad</strong>: un usuario malintencionado podría inyectar
+        <code>&lt;script&gt;</code> a través de un campo de texto (ataque <strong>XSS</strong>).
+      </p>
+      <pre class="code-block"><code><span class="token-comment">// ✅ Seguro: trata el contenido como texto simple</span>
+elemento.<span class="token-prop">textContent</span> = userInput;
+
+<span class="token-comment">// ⚠️ Peligroso: interpreta el contenido como HTML</span>
+elemento.<span class="token-prop">innerHTML</span> = <span class="token-value">`&lt;b&gt;${userInput}&lt;/b&gt;`</span>;  <span class="token-comment">// XSS si viene del usuario</span></code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Regla de oro:</strong>
+        Para mostrar datos de usuarios usa SIEMPRE <code>textContent</code>. Solo usa <code>innerHTML</code> con HTML
+        que tú controlas al 100%, nunca con entradas externas sin sanitizar.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-plus-square text-gradient me-2"></i>Crear y montar elementos</h2>
+      <p>
+        <code>createElement</code> crea la etiqueta, y <code>appendChild</code> / <code>append</code> la insertan en el árbol.
+        La clase y los estilos se controlan con <code>classList</code> y <code>style</code>.
+      </p>
+      <pre class="code-block"><code><span class="token-tag">const</span> tarjeta = document.<span class="token-prop">createElement</span>(<span class="token-value">'div'</span>);
+tarjeta.classList.<span class="token-prop">add</span>(<span class="token-value">'card'</span>, <span class="token-value">'mb-2'</span>);
+tarjeta.classList.<span class="token-prop">toggle</span>(<span class="token-value">'activa'</span>, esActiva);
+tarjeta.style.marginTop = <span class="token-value">'1rem'</span>;
+tarjeta.dataset.tipo = <span class="token-value">'nota'</span>;
+
+<span class="token-tag">const</span> parrafo = document.<span class="token-prop">createElement</span>(<span class="token-value">'p'</span>);
+parrafo.<span class="token-prop">textContent</span> = <span class="token-value">'Contenido seguro'</span>;
+tarjeta.<span class="token-prop">appendChild</span>(parrafo);
+
+contenedor.<span class="token-prop">append</span>(tarjeta);   <span class="token-comment">// monta la tarjeta en el DOM</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">API</th><th scope="col">Uso</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>classList.add/remove/toggle</code></td><td>gestión declarativa de clases</td></tr>
+          <tr><td><code>style.propiedad</code></td><td>estilos en línea, en camelCase</td></tr>
+          <tr><td><code>dataset.clave</code></td><td>lee/escribe <code>data-*</code> del HTML</td></tr>
+          <tr><td><code>append()</code></td><td>inserta nodos y/o cadenas al final</td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Los atributos <code>data-nombre</code> del HTML se leen con <code>elemento.dataset.nombre</code> (camelCase).
+        Son ideales para guardar información en los elementos, como en la demo de la siguiente lección.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-columns-gap text-gradient me-2"></i>Demo: constructor de tarjetas</h2>
+      <p>
+        Crea tantas tarjetas como quieras. Todo se construye con <code>createElement</code>, <code>appendChild</code>,
+        <code>classList</code>, <code>style</code> y <code>dataset</code>. Marca una tarjeta como favorita y observa el <code>toggle</code> de clase.
+      </p>
+      <div class="demo-box p-4">
+        <form id="formTarjeta" class="d-flex gap-2 mb-3">
+          <select id="selColor" class="form-select demo-input" style="max-width:180px;">
+            <option value="#2563eb">Índigo</option>
+            <option value="#0ea5e9">Rosa</option>
+            <option value="#06b6d4">Cian</option>
+          </select>
+          <input type="text" id="inputTarjeta" class="form-control demo-input" placeholder="Texto de la tarjeta…" autocomplete="off">
+          <button type="submit" class="btn btn-gradient"><i class="bi bi-plus-lg me-1"></i>Crear</button>
+        </form>
+        <div id="contenedorTarjetas" class="row g-3"></div>
+      </div>
+      <div class="warning-box mt-4">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        Es tentador construir HTML como cadena con <code>innerHTML +=</code>. Además de re-renderizar todo,
+        es la puerta de entrada al XSS. La demo construye nodos con <code>createElement</code> y <code>textContent</code>: siempre la opción segura.
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li><code>querySelector</code> / <code>getElementById</code> para seleccionar.</li>
+        <li><code>textContent</code> para texto seguro; <code>innerHTML</code> solo con HTML de confianza.</li>
+        <li><code>createElement</code> + <code>append</code> = construir interfaces dinámicas.</li>
+        <li><code>classList</code>, <code>style</code> y <code>dataset</code> para control fino del elemento.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <div class="d-flex gap-2">
+        <a href="../../../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Inicio</a>
+        <a href="leccion-2-objetos-json.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      </div>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-4-eventos.html" class="btn btn-gradient">Siguiente: Eventos y delegación <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— JavaScript Intermedio · Lección 3</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-4-eventos.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../../assets/js/main.js"></script>
+
+<script>
+(function () {
+  const contenedor = document.getElementById('contenedorTarjetas');
+  const form = document.getElementById('formTarjeta');
+  const input = document.getElementById('inputTarjeta');
+  const color = document.getElementById('selColor');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const texto = input.value.trim();
+    if (!texto) return;
+
+    const col = document.createElement('div');
+    col.className = 'col-sm-6 col-lg-4';
+
+    const tarjeta = document.createElement('div');
+    tarjeta.className = 'demo-card p-3';
+    tarjeta.style.borderColor = color.value;
+    tarjeta.style.boxShadow = '0 0 0 1px ' + color.value + ', 0 8px 24px rgba(0,0,0,0.25)';
+    tarjeta.dataset.favorita = 'no';
+
+    const titulo = document.createElement('h6');
+    titulo.className = 'fw-bold small text-uppercase mb-2';
+    titulo.style.color = color.value;
+    titulo.textContent = 'Tarjeta #' + (contenedor.children.length + 1);
+
+    const parrafo = document.createElement('p');
+    parrafo.className = 'small mb-3';
+    parrafo.style.color = '#cbd5e1';
+    parrafo.textContent = texto;
+
+    const boton = document.createElement('button');
+    boton.type = 'button';
+    boton.className = 'btn btn-sm btn-ghost-glass';
+    boton.textContent = 'Favorita';
+    boton.addEventListener('click', () => {
+      const esFavorita = tarjeta.dataset.favorita === 'no';
+      tarjeta.dataset.favorita = esFavorita ? 'si' : 'no';
+      tarjeta.classList.toggle('favorita', esFavorita);
+      boton.textContent = esFavorita ? '★ Favorita' : 'Favorita';
+      gsap.fromTo(tarjeta, { scale: 0.96 }, { scale: 1, duration: 0.3, ease: 'back.out(2)' });
+    });
+
+    tarjeta.append(titulo, parrafo, boton);
+    col.appendChild(tarjeta);
+    contenedor.appendChild(col);
+    input.value = '';
+
+    gsap.fromTo(col, { opacity: 0, y: 16, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.4 });
+  });
+})();
+</script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

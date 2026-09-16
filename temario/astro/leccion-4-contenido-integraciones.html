@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 4 de Astro: contenido con Markdown y Content Collections, integraciones oficiales como @astrojs/tailwind y islas de interacción con client:load.">
+  <title>Lección 4 — Contenido e integraciones | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Astro</a></li>
+        <li class="breadcrumb-item active text-light">Lección 4</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-rocket-takeoff me-1"></i>Astro · Lección 4</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>55 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Contenido e integraciones</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Escribe en Markdown, organiza con Content Collections y conecta integraciones oficiales e islas de interacción.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-file-earmark-richtext text-gradient me-2"></i>Contenido con Markdown</h2>
+      <p>Astro entiende Markdown de forma nativa. Escribe un archivo <code>.md</code> con frontmatter y Astro lo convierte en HTML durante el build, sin base de datos ni CMS.</p>
+      <pre class="code-block"><code><span class="token-comment">---
+titulo: "Mi primer post con Astro"
+fecha: 2026-09-16
+descripcion: "Contenido en Markdown renderizado como HTML estático."
+---</span>
+
+Astro convierte este **Markdown** en HTML al compilar.
+Puedes usar listas, imágenes, enlaces y hasta componentes `.astro`.
+
+- Escribes en texto plano
+- Astro genera el HTML final
+- El visitante recibe HTML puro, sin JS innecesario</code></pre>
+      <pre class="code-block mt-3"><code><span class="token-comment">---
+// src/pages/blog/index.astro: lista todos los posts
+import { getCollection } from "astro:content";
+const posts = await getCollection("blog");
+---</span>
+
+<span class="token-tag">&lt;ul&gt;</span>
+  {posts.map((post) =&gt; (
+    <span class="token-tag">&lt;li&gt;</span>
+      <span class="token-tag">&lt;a</span> <span class="token-attr">href</span>=<span class="token-value">{`/blog/${post.slug}`}</span><span class="token-tag">&gt;</span>{post.data.titulo}<span class="token-tag">&lt;/a&gt;</span>
+    <span class="token-tag">&lt;/li&gt;</span>
+  ))}
+<span class="token-tag">&lt;/ul&gt;</span></code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-collection text-gradient me-2"></i>Content Collections</h2>
+      <p>Una <strong>Content Collection</strong> es una carpeta de contenido con un <em>esquema</em> definido. Cada post debe cumplirlo; si falta el campo obligatorio, el build falla y te avisa.</p>
+      <pre class="code-block"><code><span class="token-comment">// src/content.config.ts
+import { defineCollection, z } from "astro:content";
+
+const blog = defineCollection({
+  type: "content",
+  schema: z.object({
+    titulo: z.string(),
+    fecha: z.date(),
+    descripcion: z.string().optional()
+  })
+});
+
+export const collections = { blog };</span></code></pre>
+      <table class="table">
+        <thead>
+          <tr><th scope="col">Concepto</th><th scope="col">Qué hace</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>defineCollection</code></td><td>Define una colección tipada de contenido.</td></tr>
+          <tr><td><code>type: "content"</code></td><td>Los archivos son Markdown/MDX con frontmatter.</td></tr>
+          <tr><td><code>z.object(...)</code></td><td>Validación del frontmatter con Zod.</td></tr>
+          <tr><td><code>getCollection</code></td><td>Consulta los documentos de una colección.</td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Las collections convierten tu blog en un sistema con tipos: el editor se queja en el momento si olvidas un campo, antes de desplegar.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-puzzle text-gradient me-2"></i>Integraciones oficiales</h2>
+      <p>Las <strong>integraciones</strong> añaden capacidades a Astro con un comando: Tailwind, React, Preact, Svelte, Vue, sitemap, MDX... La CLI las instala y las registra automáticamente en <code>astro.config.mjs</code>.</p>
+      <pre class="code-block"><code><span class="token-value">npx astro add tailwind</span>
+<span class="token-value">npx astro add react</span>
+<span class="token-value">npx astro add sitemap</span>
+
+<span class="token-comment"># Cada comando instala el paquete y actualiza astro.config.mjs por ti</span></code></pre>
+      <pre class="code-block mt-3"><code><span class="token-comment">// astro.config.mjs después ejecutar astro add tailwind</span>
+<span class="token-tag">import</span> { defineConfig } <span class="token-tag">from</span> <span class="token-value">"astro/config"</span>;
+<span class="token-tag">import</span> tailwind <span class="token-tag">from</span> <span class="token-value">"@astrojs/tailwind"</span>;
+
+<span class="token-tag">export default</span> defineConfig({
+  integrations: [<span class="token-prop">tailwind</span>()]
+});</code></pre>
+      <div class="demo-box p-4">
+        <strong class="text-white">¿Qué es @astrojs/tailwind?</strong>
+        <p class="small mb-0" style="color:#cbd5e1 !important;">La integración oficial de Tailwind para Astro: procesa las clases de tus componentes y layouts al construir. Es exactamente lo que usarás en la Lección 5 para la landing final.</p>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-fire text-gradient me-2"></i>Islas de interacción</h2>
+      <p>Para que un componente tenga JavaScript en el navegador, lo marcas como <strong>isla</strong> con un atributo <code>client:*</code>. Astro hidrata solo esa pieza; el resto sigue siendo HTML estático.</p>
+      <table class="table">
+        <thead>
+          <tr><th scope="col">Directiva</th><th scope="col">Cuándo se hidrata</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>client:load</code></td><td>Inmediatamente al cargar la página.</td></tr>
+          <tr><td><code>client:idle</code></td><td>Cuando el navegador está libre de tareas.</td></tr>
+          <tr><td><code>client:visible</code></td><td>Cuando el componente entra en el viewport.</td></tr>
+          <tr><td><code>client:only</code></td><td>Se renderiza solo en el navegador.</td></tr>
+        </tbody>
+      </table>
+      <pre class="code-block mt-3"><code><span class="token-comment">---
+import Contador from "../components/Contador.jsx";
+import MenuMovil from "../components/MenuMovil.astro";
+---</span>
+
+<span class="token-comment">&lt;!-- Isla con React, hidratada al instante --&gt;</span>
+<span class="token-tag">&lt;Contador</span> <span class="token-attr">client:load</span> <span class="token-tag">/&gt;</span>
+
+<span class="token-comment">&lt;!-- Isla de Astro pura, hidratada al asomarse --&gt;</span>
+<span class="token-tag">&lt;MenuMovil</span> <span class="token-attr">client:visible</span> <span class="token-tag">/&gt;</span></code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#fbbf24;"></i>Concepto clave:</strong>
+        sin <code>client:*</code>, un componente se renderiza en el servidor y llega como HTML "muerto". La directiva es justamente lo que lo "enciende" en el navegador.
+      </div>
+      <pre class="code-block mt-3"><code><span class="token-comment">---
+// Un <script> en el template también viaja al navegador
+const frutas = ["manzana", "pera", "mango"];
+---</span>
+
+<span class="token-tag">&lt;ul</span> id=<span class="token-value">"listaFrutas"</span><span class="token-tag">&gt;</span>
+  {frutas.map((fruta) =&gt; <span class="token-tag">&lt;li&gt;</span>{fruta}<span class="token-tag">&lt;/li&gt;</span>)}
+<span class="token-tag">&lt;/ul&gt;</span>
+
+<span class="token-tag">&lt;script&gt;</span>
+  <span class="token-comment">// Este código corre en el navegador del visitante</span>
+  console.log(document.querySelectorAll(<span class="token-prop">'#listaFrutas li'</span>).length);
+<span class="token-tag">&lt;/script&gt;</span></code></pre>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>Markdown y Content Collections con esquema tipado para tu contenido.</li>
+        <li><code>npx astro add paquete</code> instala y configura integraciones oficiales.</li>
+        <li><code>@astrojs/tailwind</code> trae las utilidades de Tailwind al build.</li>
+        <li><code>client:load</code> convierte un componente en isla hidratada.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-3-paginas-rutas.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span>
+      </div>
+      <a href="leccion-5-landing.html" class="btn btn-gradient">Siguiente: Landing con Astro <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— Astro · Lección 4</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-5-landing.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

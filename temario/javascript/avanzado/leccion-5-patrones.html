@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 5 de JavaScript Avanzado: patrones y buenas prácticas. DRY/KISS, patrones módulo y fábrica, nombres, comentarios y checklist de calidad.">
+  <title>Lección 5 — Patrones y buenas prácticas | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">JavaScript</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Avanzado</a></li>
+        <li class="breadcrumb-item active text-light">Lección 5</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-lightning-charge-fill me-1"></i>JavaScript Avanzado · Lección 5</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>45 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Patrones y buenas prácticas</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Cierra el tema con los principios y patrones que separan código "que funciona" de código profesional.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-compass text-gradient me-2"></i>Principios de diseño</h2>
+      <p>
+        Antes de memorizar patrones, interioriza los <strong>principios</strong> que guían las decisiones técnicas.
+        Son reglas cortas y fáciles de recordar que mejoran la calidad de cualquier código.
+      </p>
+      <table class="table">
+        <thead>
+          <tr><th scope="col">Principio</th><th scope="col">Qué dice</th><th scope="col">Ejemplo de aplicación</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>DRY</strong></td><td>No te repitas</td><td>Extraer la validación duplicada a una función <code>validarEmail()</code></td></tr>
+          <tr><td><strong>KISS</strong></td><td>Mantenlo simple</td><td>Preferir una solución clara antes que una "ingeniosa"</td></tr>
+          <tr><td><strong>YAGNI</strong></td><td>No lo vas a necesitar</td><td>No anticipar funcionalidad futura sin necesidad real</td></tr>
+          <tr><td><strong>SOLID</strong> (resumen)</td><td>Separar responsabilidades</td><td>Una función cumple UNA tarea y se llama con un único motivo</td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Del lado del front:</strong>
+        un componente o función debería poder entenderse <em>sin leer el resto de la app</em>. Si una función hace
+        más de tres cosas (leer DOM + validar + guardar + pintar), divídela.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-factory text-gradient me-2"></i>Patrón módulo (revisión) y factoría</h2>
+      <p>
+        Ya viste el <strong>patrón módulo</strong> en la lección anterior. Ahora lo consolidamos con dos variantes
+        de uso común y las comparamos con las clases.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">// FÁBRICA (factory): función que devuelve un objeto nuevo en cada llamada</span>
+<span class="token-prop">const</span> crearTarea = (titulo, prioridad = <span class="token-value">"media"</span>) =&gt; ({
+  titulo,
+  prioridad,
+  <span class="token-prop">completada</span>: <span class="token-prop">false</span>,
+  <span class="token-prop">completar</span>() { <span class="token-prop">this</span>.completada = <span class="token-prop">true</span>; },
+  <span class="token-prop">resumen</span>() {
+    <span class="token-prop">const</span> estado = <span class="token-prop">this</span>.completada ? <span class="token-value">"hecha"</span> : <span class="token-value">"pendiente"</span>;
+    <span class="token-prop">return</span> `[${prioridad}] ${titulo} — ${estado}`;
+  }
+});
+
+<span class="token-prop">const</span> t1 = <span class="token-tag">crearTarea</span>(<span class="token-value">"Diseñar mockups"</span>, <span class="token-value">"alta"</span>);
+<span class="token-prop">const</span> t2 = <span class="token-tag">crearTarea</span>(<span class="token-value">"Escribir docs"</span>);
+t1.completar();
+<span class="token-attr">console</span>.log(t1.resumen()); <span class="token-comment">// [alta] Diseñar mockups — hecha</span>
+<span class="token-attr">console</span>.log(t2.resumen()); <span class="token-comment">// [media] Escribir docs — pendiente</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Enfoque</th><th scope="col">Cuándo elegirlo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Función fábrica</td><td>Objetos simples, sin herencia; máximo control y mínima magia</td></tr>
+          <tr><td>Clase</td><td>Necesitas herencia, campos privados <code>#</code> o métodos estáticos</td></tr>
+          <tr><td>Patrón módulo (IIFE)</td><td>Un único singleton con estado privado global (config, caché)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-pencil-square text-gradient me-2"></i>Nombres, comentarios y formato</h2>
+      <pre class="code-block"><code><span class="token-comment">// ❌ Mala legibilidad</span>
+<span class="token-prop">const</span> fn = <span class="token-prop">(a, b, c) =&gt; b.length &gt; a ? c * <span class="token-num">1.21</span> : c;</code></pre>
+      <pre class="code-block mt-2"><code><span class="token-comment">// ✅ Versión legible</span>
+<span class="token-prop">function</span> <span class="token-tag">calcularPrecioConIva</span>(tipoCliente, items, base) {
+  <span class="token-prop">const</span> tieneDescuento = items.length &gt; <span class="token-num">5</span>;
+  <span class="token-prop">const</span> iva = <span class="token-num">0.21</span>;
+  <span class="token-prop">const</span> recargoMayorista = tipoCliente === <span class="token-value">"mayorista"</span>;
+
+  <span class="token-prop">if</span> (tieneDescuento) {
+    <span class="token-prop">const</span> precio = base - base * <span class="token-num">0.10</span>;
+    <span class="token-prop">return</span> recargoMayorista ? precio * (<span class="token-num">1</span> + iva) : precio;
+  }
+  <span class="token-prop">return</span> base * (<span class="token-num">1</span> + iva);
+}</code></pre>
+      <ul class="mt-3">
+        <li><strong>Nombres expresivos:</strong> verbos para funciones (<code>obtenerUsuario</code>), sustantivos para datos (<code>usuariosActivos</code>).</li>
+        <li><strong>1 idea por función:</strong> si tienes que poner un "y" al explicarla, divídela.</li>
+        <li><strong>Comentarios = por QUÉ, no por QUÉ.</strong> Si el código se explica solo, el comentario sobra.</li>
+        <li><strong>Formato consistente:</strong> 2 espacios (como en toda esta guía), comillas simples o dobles, siempre igual.</li>
+      </ul>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-bug text-gradient me-2"></i>Consistencia con el DOM y rendimiento</h2>
+      <pre class="code-block"><code><span class="token-comment">// ❌ Búsqueda constante en el DOM dentro de un loop</span>
+<span class="token-prop">for</span> (<span class="token-prop">let</span> i = <span class="token-num">0</span>; i &lt; 100; i++) {
+  <span class="token-attr">document</span>.querySelector(<span class="token-value">".item"</span>).classList.add(<span class="token-value">"activo"</span>);
+}</code></pre>
+      <pre class="code-block mt-2"><code><span class="token-comment">// ✅ Cachea el nodo antes del loop y usa batching</span>
+<span class="token-prop">const</span> items = <span class="token-attr">document</span>.querySelectorAll(<span class="token-value">".item"</span>);
+<span class="token-prop">const</span> frag = <span class="token-attr">document</span>.createDocumentFragment();
+
+items.forEach(it =&gt; {
+  <span class="token-prop">const</span> caja = <span class="token-attr">document</span>.createElement(<span class="token-value">"div"</span>);
+  caja.className = <span class="token-value">"item activo"</span>;
+  frag.appendChild(caja);
+});
+lista.appendChild(frag);   <span class="token-comment">// 1 solo re-paint, no cientos</span></code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Errores de novato que debes evitar:</strong>
+        mezclar <code>==</code> con <code>===</code>, dejar <code>console.log</code> en producción,
+        manipular el DOM en cada vuelta del bucle, y comparar arrays con <code>===</code> (compara <em>referencias</em>, no contenido).
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-check2-square text-gradient me-2"></i>Demo interactiva: checklist de calidad</h2>
+      <p>
+        Una pequeña herramienta que aplica los principios de la lección: un patrón módulo expone funciones puras que
+        <em>validan</em> el estilo de tu código, y una fábrica crea los ítems del chequeo.
+      </p>
+      <div class="demo-box p-4">
+        <div class="row g-3 mb-3 align-items-end">
+          <div class="col-md-6">
+            <label class="form-label small text-white mb-1">Pega aquí tu código de ejemplo</label>
+            <textarea id="lec5-codigo" class="form-control form-control-sm bg-dark text-white border-secondary" rows="4" spellcheck="false">const valor=5;
+function suma(a,b){return a+b;}</textarea>
+          </div>
+          <div class="col-md-6 d-flex flex-column gap-2">
+            <button class="btn btn-gradient" id="lec5-analizar"><i class="bi bi-search me-1"></i>Analizar calidad</button>
+            <div id="lec5-metricas" class="small text-secondary" style="color:var(--text-muted);">Total de checks: 4</div>
+          </div>
+        </div>
+        <ul id="lec5-resultados" class="list-unstyled small" style="color:#cbd5e1 !important;"></ul>
+      </div>
+      <pre class="code-block mt-3"><code><span class="token-comment">// Módulo analizador con funciones puras (fáciles de testear)</span>
+<span class="token-prop">const</span> AnalizadorCodigo = (<span class="token-prop">function</span> () {
+  <span class="token-prop">const</span> checks = {
+    <span class="token-prop">espaciado</span>: (codigo) =&gt; /\s+[=]=/.test(codigo) ? <span class="token-value">"Faltan espacios en comparación (usa ===)"</span> : <span class="token-prop">null</span>,
+    <span class="token-prop">consola</span>:   (codigo) =&gt; codigo.includes(<span class="token-value">"console.log"</span>) ? <span class="token-value">"Consola incluida en producción"</span> : <span class="token-prop">null</span>,
+    <span class="token-prop">estricto</span>:  (codigo) =&gt; /\s==\s/.test(codigo) ? <span class="token-value">"Comparación suelta con =="</span> : <span class="token-prop">null</span>,
+    <span class="token-prop">semicolon</span>: (codigo) =&gt; /\w\s*\n[^\n=]/.test(codigo) ? <span class="token-value">"Punto y coma inconsistente"</span> : <span class="token-prop">null</span>
+  };
+  <span class="token-prop">return</span> {
+    <span class="token-prop">analizar</span>(codigo) {
+      <span class="token-prop">return</span> <span class="token-attr">Object</span>.entries(checks)
+        .map(([nombre, fn]) =&gt; ({ nombre, mensaje: fn(codigo) }));
+    }
+  };
+})();</code></pre>
+      <script>
+      (function () {
+        const AnalizadorCodigo = (function () {
+          const checks = {
+            espaciado: (codigo) => !/\s+=/.test(codigo.replace(/==|<=|>=|!==|===/g, "")) ? null : "Hay espacios raros alrededor de asignaciones",
+            consola:   (codigo) => codigo.includes("console.log") ? "console.log presente en tu código" : null,
+            estricto:  (codigo) => /\s==\s/.test(codigo) ? "Usa == (comparación no estricta)" : null,
+            semis:     (codigo) => codigo.includes("function(") ? "Falta espacio en function(" : null
+          };
+          return {
+            analizar(codigo) {
+              return Object.entries(checks).map(([nombre, fn]) => ({ nombre, mensaje: fn(codigo) }));
+            }
+          };
+        })();
+
+        const crearTarjeta = (resultado) => {
+          const esError = !!resultado.mensaje;
+          return `
+            <li class="mb-2 d-flex align-items-start gap-2">
+              <i class="bi ${esError ? "bi-x-circle" : "bi-check2-circle"} me-1" style="color:${esError ? "#f87171" : "#34d399"};"></i>
+              <span><code class="me-1">${resultado.nombre}</code>${
+                esError ? `<span class="text-muted">${resultado.mensaje}</span>` : `<span class="text-muted">correcto</span>`
+              }</span>
+            </li>`;
+        };
+
+        document.getElementById("lec5-analizar").addEventListener("click", () => {
+          const codigo = document.getElementById("lec5-codigo").value || "";
+          const resultados = AnalizadorCodigo.analizar(codigo);
+          const el = document.getElementById("lec5-resultados");
+          el.innerHTML = resultados.map(crearTarjeta).join("");
+          if (typeof gsap !== "undefined") {
+            gsap.from(el.children, { opacity: 0, y: 6, stagger: 0.06, duration: 0.3 });
+          }
+        });
+      })();
+      </script>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Checklist final</h2>
+      <ul>
+        <li><code>===</code> siempre; <code>==</code> solo si sabes exactamente por qué.</li>
+        <li>Funciones pequeñas y con un único propósito; nombres que se lean como frases.</li>
+        <li>Estado privado vía closures o <code>#campos</code>; nada de variables globales colgadas.</li>
+        <li>DOM: cachea nodos, agrupa en <code>DocumentFragment</code> y escucha una sola vez.</li>
+        <li>Elige el patrón que toque: módulo para singletons, fábrica para objetos, clase si hay herencia.</li>
+      </ul>
+      <div class="text-center py-2">
+        <p class="lead text-white mb-3"><i class="bi bi-arrow-right-circle text-gradient me-2"></i>Continúa el nivel avanzado</p>
+        <a class="btn btn-gradient btn-lg" href="leccion-6-event-loop.html"><i class="bi bi-stack me-2"></i>Siguiente: El Event Loop</a>
+      </div>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <div class="d-flex gap-2">
+        <a href="../../../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Inicio</a>
+        <a href="leccion-4-modulos.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      </div>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-6-event-loop.html" class="btn btn-gradient">Siguiente: El Event Loop <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— JavaScript Avanzado · Lección 5</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-6-event-loop.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

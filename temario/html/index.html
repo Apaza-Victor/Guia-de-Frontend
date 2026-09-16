@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Temario completo del tema HTML: Básico (10 lecciones), Intermedio (6 lecciones) y Avanzado (6 lecciones). 22 lecciones para dominar HTML.">
+  <title>HTML desde cero — Sección | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../../paginas/temario.html">Temario</a></li>
+        <li class="breadcrumb-item active text-light">HTML</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft">Sección: HTML</span>
+      <span class="badge-soft-cyan"><i class="bi bi-book me-1"></i>22 lecciones</span>
+      <span class="badge-soft-sky"><i class="bi bi-hourglass-split me-1"></i>~14 h</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">HTML desde cero</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">El esqueleto y el contenido de toda la web, organizado en tres niveles: Básico, Intermedio y Avanzado. Domina HTML por completo.</p>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="card-learning h-100">
+            <div class="card-body text-center">
+              <div class="icon-badge"><i class="bi bi-mortarboard"></i></div>
+              <h5 class="fw-bold text-white mb-2">Qué aprenderás</h5>
+              <p class="small mb-0" style="color:var(--text-muted);">Estructura y semántica, SEO con metadatos, formularios avanzados, Web Components, Canvas, APIs del navegador y rendimiento.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-learning h-100">
+            <div class="card-body text-center">
+              <div class="icon-badge cyan"><i class="bi bi-graph-up-arrow"></i></div>
+              <h5 class="fw-bold text-white mb-2">Niveles</h5>
+              <p class="small mb-0" style="color:var(--text-muted);">3 subsecciones con progresión clara: cimientos sólidos en Básico, técnicas reales en Intermedio y nivel experto en Avanzado.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-learning h-100">
+            <div class="card-body text-center">
+              <div class="icon-badge warm"><i class="bi bi-hourglass-split"></i></div>
+              <h5 class="fw-bold text-white mb-2">Duración</h5>
+              <p class="small mb-0" style="color:var(--text-muted);">Aproximadamente 14 horas repartidas en 22 lecciones con demos, trackers de progreso y un proyecto final.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <div class="d-flex align-items-center gap-2 mb-4">
+        <i class="bi bi-collection fs-3 text-gradient"></i>
+        <h2 class="h3 text-white fw-bold mb-0">Subsecciones</h2>
+      </div>
+
+      <div class="theme-card mb-4">
+        <div class="theme-head">
+          <div class="icon-badge cyan"><i class="bi bi-bezier2"></i></div>
+          <div>
+            <h5 class="fw-bold text-white mb-1">HTML Básico</h5>
+            <span class="badge-soft"><i class="bi bi-book me-1"></i>10 lecciones</span>
+            <span class="badge-soft-cyan ms-1"><i class="bi bi-hourglass-split me-1"></i>5 h</span>
+          </div>
+        </div>
+        <div class="theme-body">
+          <p class="small mb-3" style="color:var(--text-muted);">Los cimientos de todo documento web: estructura, texto, semántica, imágenes, tablas, formularios, multimedia y accesibilidad.</p>
+          <a href="basico/index.html" class="btn btn-gradient mb-3"><i class="bi bi-rocket-takeoff me-2"></i>Ir a la subsección</a>
+          <div class="row g-2">
+            <div class="col-md-6">
+              <a href="basico/leccion-1-introduccion.html" class="lesson-card">
+                <span class="lc-num">1</span>
+                <div><span class="lc-title d-block">Introducción a HTML</span><span class="lc-meta">Qué es y cómo funciona</span></div>
+                <i class="bi bi-arrow-right ms-auto lc-meta"></i>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="basico/leccion-2-estructura.html" class="lesson-card">
+                <span class="lc-num">2</span>
+                <div><span class="lc-title d-block">Estructura Base del Documento</span><span class="lc-meta">Head, body y SEO</span></div>
+                <i class="bi bi-arrow-right ms-auto lc-meta"></i>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="basico/leccion-3-texto-formatos.html" class="lesson-card">
+                <span class="lc-num">3</span>
+                <div><span class="lc-title d-block">Texto y Formatos</span><span class="lc-meta">Encabezados, párrafos y énfasis</span></div>
+                <i class="bi bi-arrow-right ms-auto lc-meta"></i>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="basico/leccion-4-semantica.html" class="lesson-card">
+                <span class="lc-num">4</span>
+                <div><span class="lc-title d-block">Etiquetas Semánticas HTML5</span><span class="lc-meta">header, main, article, section…</span></div>
+                <i class="bi bi-arrow-right ms-auto lc-meta"></i>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="basico/leccion-5-listas-y-enlaces.html" class="lesson-card">
+                <span class="lc-num">5</span>
+                <div><span class="lc-title d-block">Listas y Enlaces</span><span class="lc-meta">ul, ol, dl y navegación</span></div>
+                <i class="bi bi-arrow-right ms-auto lc-meta"></i>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="basico/leccion-6-imagenes.html" class="lesson-card">
+                <span class="lc-num">6</span>
+                <div><span class="lc-title d-block">Imágenes</span><span class="lc-meta">img, srcset y picture</span></div>
+                <i class="bi bi-arrow-right ms-auto lc-meta"></i>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="basico/leccion-7-tablas.html" class="lesson-card">
+                <span class="lc-num">7</span>
+                <div><span class="lc-title d-block">Tablas</span><span class="lc-meta">thead, tbody, colspans</span></div>
+                <i class="bi bi-arrow-right ms-auto lc-meta"></i>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="basico/leccion-8-formularios.html" class="lesson-card">
+                <span class="lc-num">8</span>
+                <div><span class="lc-title d-block">Formularios y Validación</span><span class="lc-meta">inputs, labels y validación</span></div>
+                <i class="bi bi-arrow-right ms-auto lc-meta"></i>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="basico/leccion-9-multimedia.html" class="lesson-card">
+                <span class="lc-num">9</span>
+                <div><span class="lc-title d-block">Multimedia y Contenido Embebido</span><span class="lc-meta">audio, video e iframes</span></div>
+                <i class="bi bi-arrow-right ms-auto lc-meta"></i>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="basico/leccion-10-accesibilidad.html" class="lesson-card">
+                <span class="lc-num">10</span>
+                <div><span class="lc-title d-block">Accesibilidad e Inclusión</span><span class="lc-meta">ARIA, foco y contraste</span></div>
+                <i class="bi bi-arrow-right ms-auto lc-meta"></i>
+              </a>
+            </div>
+          </div>
+          <div class="mt-3 text-center text-md-start">
+            <a href="basico/index.html" class="btn btn-ghost-glass"><i class="bi bi-eye me-2"></i>Ver todas las lecciones</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="theme-card mb-4">
+        <div class="theme-head">
+          <div class="icon-badge warm"><i class="bi bi-puzzle"></i></div>
+          <div>
+            <h5 class="fw-bold text-white mb-1">HTML Intermedio</h5>
+            <span class="badge-soft"><i class="bi bi-book me-1"></i>6 lecciones</span>
+            <span class="badge-soft-cyan ms-1"><i class="bi bi-hourglass-split me-1"></i>4 h</span>
+          </div>
+        </div>
+        <div class="theme-body">
+          <p class="small mb-3" style="color:var(--text-muted);">HTML en acción: metadatos y SEO técnico, contenido embebido, formularios avanzados, semántica fina, elementos interactivos y atributos globales.</p>
+          <a href="intermedio/index.html" class="btn btn-gradient mb-3"><i class="bi bi-rocket-takeoff me-2"></i>Ir a la subsección</a>
+          <div class="row g-2">
+            <div class="col-md-6">
+              <a href="intermedio/leccion-1-metadatos-seo.html" class="lesson-card">
+                <span class="lc-num">1</span>
+                <div><span class="lc-title d-block">Head profesional: Metadatos y SEO</span><span class="lc-meta">description, OG y JSON-LD</span></div>
+                <i class="bi bi-arrow-right ms-auto lc-meta"></i>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="intermedio/leccion-2-embebidos.html" class="lesson-card">
+                <span class="lc-num">2</span>
+                <div><span class="lc-title d-block">Contenido embebido: iframes y más</span><span class="lc-meta">Videos, mapas y widgets</span></div>
+                <i class="bi bi-arrow-right ms-auto lc-meta"></i>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="intermedio/leccion-3-formularios-avanzados.html" class="lesson-card">
+                <span class="lc-num">3</span>
+                <div><span class="lc-title d-block">Formularios avanzados</span><span class="lc-meta">pattern, datalist y validación</span></div>
+                <i class="bi bi-arrow-right ms-auto lc-meta"></i>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="intermedio/leccion-4-semantica-avanzada.html" class="lesson-card">
+                <span class="lc-num">4</span>
+                <div><span class="lc-title d-block">Semántica avanzada</span><span class="lc-meta">Landmarks, ARIA y microdatos</span></div>
+                <i class="bi bi-arrow-right ms-auto lc-meta"></i>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="intermedio/leccion-5-elementos-interactivos.html" class="lesson-card">
+                <span class="lc-num">5</span>
+                <div><span class="lc-title d-block">Elementos interactivos</span><span class="lc-meta">dialog, details y popover</span></div>
+                <i class="bi bi-arrow-right ms-auto lc-meta"></i>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="intermedio/leccion-6-atributos-globales.html" class="lesson-card">
+                <span class="lc-num">6</span>
+                <div><span class="lc-title d-block">Atributos globales</span><span class="lc-meta">data-*, lang y tabindex</span></div>
+                <i class="bi bi-arrow-right ms-auto lc-meta"></i>
+              </a>
+            </div>
+          </div>
+          <div class="mt-3 text-center text-md-start">
+            <a href="intermedio/index.html" class="btn btn-ghost-glass"><i class="bi bi-eye me-2"></i>Ver todas las lecciones</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="theme-card">
+        <div class="theme-head">
+          <div class="icon-badge"><i class="bi bi-stars"></i></div>
+          <div>
+            <h5 class="fw-bold text-white mb-1">HTML Avanzado</h5>
+            <span class="badge-soft"><i class="bi bi-book me-1"></i>6 lecciones</span>
+            <span class="badge-soft-cyan ms-1"><i class="bi bi-hourglass-split me-1"></i>4 h 30 min</span>
+          </div>
+        </div>
+        <div class="theme-body">
+          <p class="small mb-3" style="color:var(--text-muted);">El nivel experto: Web Components, Canvas y SVG, APIs del navegador, rendimiento, validación profesional y un proyecto final completo.</p>
+          <a href="avanzado/index.html" class="btn btn-gradient mb-3"><i class="bi bi-rocket-takeoff me-2"></i>Ir a la subsección</a>
+          <div class="row g-2">
+            <div class="col-md-6">
+              <a href="avanzado/leccion-1-web-components.html" class="lesson-card">
+                <span class="lc-num">1</span>
+                <div><span class="lc-title d-block">Web Components</span><span class="lc-meta">Custom elements y Shadow DOM</span></div>
+                <i class="bi bi-arrow-right ms-auto lc-meta"></i>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="avanzado/leccion-2-canvas.html" class="lesson-card">
+                <span class="lc-num">2</span>
+                <div><span class="lc-title d-block">Canvas y SVG en HTML</span><span class="lc-meta">Gráficos raster y vectoriales</span></div>
+                <i class="bi bi-arrow-right ms-auto lc-meta"></i>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="avanzado/leccion-3-apis-navegador.html" class="lesson-card">
+                <span class="lc-num">3</span>
+                <div><span class="lc-title d-block">APIs del navegador</span><span class="lc-meta">Geolocation, storage y History</span></div>
+                <i class="bi bi-arrow-right ms-auto lc-meta"></i>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="avanzado/leccion-4-rendimiento.html" class="lesson-card">
+                <span class="lc-num">4</span>
+                <div><span class="lc-title d-block">Rendimiento web</span><span class="lc-meta">defer, async y Core Web Vitals</span></div>
+                <i class="bi bi-arrow-right ms-auto lc-meta"></i>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="avanzado/leccion-5-buenas-practicas.html" class="lesson-card">
+                <span class="lc-num">5</span>
+                <div><span class="lc-title d-block">Buenas prácticas y validación</span><span class="lc-meta">W3C, axe y Lighthouse</span></div>
+                <i class="bi bi-arrow-right ms-auto lc-meta"></i>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="avanzado/leccion-6-proyecto-final.html" class="lesson-card">
+                <span class="lc-num">6</span>
+                <div><span class="lc-title d-block">Proyecto final HTML</span><span class="lc-meta">Landing completa para tu portafolio</span></div>
+                <i class="bi bi-arrow-right ms-auto lc-meta"></i>
+              </a>
+            </div>
+          </div>
+          <div class="mt-3 text-center text-md-start">
+            <a href="avanzado/index.html" class="btn btn-ghost-glass"><i class="bi bi-eye me-2"></i>Ver todas las lecciones</a>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+      <a href="../../index.html" class="text-secondary">Inicio</a>
+      <a href="basico/index.html" class="text-secondary">HTML Básico</a>
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

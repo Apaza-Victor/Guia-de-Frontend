@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tema Herramientas de la guía Frontend Pro: Git y GitHub, npm, Sass, React y Vue 3 — 5 lecciones prácticas para profesionalizar tu flujo de trabajo de frontend.">
+  <title>Herramientas y Frameworks | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../../paginas/temario.html">Temario</a></li>
+        <li class="breadcrumb-item active text-light">Herramientas</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-tools me-1"></i>Sección: Herramientas</span>
+      <span class="badge-soft-cyan"><i class="bi bi-journal-bookmark me-1"></i>5 lecciones</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Herramientas y Frameworks</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">El cinturón de herramientas del frontend real: control de versiones, automatización, preprocesadores CSS y los frameworks modernos que aceleran el desarrollo.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step current"></span>
+      <span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-4"><i class="bi bi-braces-asterisk text-gradient me-2"></i>¿Qué aprenderás?</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card-learning h-100">
+            <div class="card-body text-center">
+              <div class="icon-badge mx-auto"><i class="bi bi-tools"></i></div>
+              <h6 class="text-white fw-bold">Qué aprenderás</h6>
+              <p class="small mb-0" style="color:var(--text-muted);">Control de versiones con Git y GitHub, automatización con npm, preprocesado de CSS con Sass e introducciones prácticas a React y Vue 3 con demos en vivo.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-learning h-100">
+            <div class="card-body text-center">
+              <div class="icon-badge cyan mx-auto"><i class="bi bi-bar-chart"></i></div>
+              <h6 class="text-white fw-bold">Nivel</h6>
+              <p class="small mb-0" style="color:var(--text-muted);">Progresivo: Git y npm parten desde cero, y Sass, React y Vue asumen HTML, CSS y JavaScript básico. Ideal para dar el salto a proyectos reales.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-learning h-100">
+            <div class="card-body text-center">
+              <div class="icon-badge warm mx-auto"><i class="bi bi-hourglass-split"></i></div>
+              <h6 class="text-white fw-bold">Duración estimada</h6>
+              <p class="small mb-0" style="color:var(--text-muted);"><strong>5</strong> lecciones · <strong>≈ 3-4 horas</strong> con demos interactivas y componentes reales renderizados en vivo. Cada lección es autónoma y navegable.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- LECCIONES -->
+    <section class="mb-5" data-aos="fade-up">
+      <div class="card-learning">
+        <div class="card-body p-4 p-lg-5">
+          <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3 mb-4">
+            <div class="icon-badge"><i class="bi bi-tools"></i></div>
+            <div class="flex-grow-1">
+              <span class="badge-soft-cyan mb-1 d-inline-block"><i class="bi bi-1-circle me-1"></i>Tema · 5 lecciones</span>
+              <h3 class="text-white fw-bold mb-1">Herramientas y Frameworks</h3>
+              <p class="small mb-0" style="color:var(--text-muted);">Del control de versiones a los frameworks: cada lección termina con una demo interactiva o un componente en vivo.</p>
+            </div>
+            <a href="leccion-1-git.html" class="btn btn-gradient btn-sm flex-shrink-0"><i class="bi bi-arrow-right me-1"></i>Empezar</a>
+          </div>
+          <div class="row row-cols-1 row-cols-md-2 g-2">
+            <div class="col"><a class="lesson-card" href="leccion-1-git.html"><span class="lc-num">1</span><span class="flex-grow-1"><span class="lc-title d-block">Git y GitHub desde cero</span><span class="lc-meta">45 min · init, add, commit, ramas y merge</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="leccion-2-npm.html"><span class="lc-num">2</span><span class="flex-grow-1"><span class="lc-title d-block">npm y automatización</span><span class="lc-meta">40 min · package.json, install y scripts</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="leccion-3-sass.html"><span class="lc-num">3</span><span class="flex-grow-1"><span class="lc-title d-block">Sass: preprocesador CSS</span><span class="lc-meta">40 min · Variables, mixins y @use</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="leccion-4-react.html"><span class="lc-num">4</span><span class="flex-grow-1"><span class="lc-title d-block">React: introducción práctica</span><span class="lc-meta">45 min · JSX, componentes y useState</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="leccion-5-vue.html"><span class="lc-num">5</span><span class="flex-grow-1"><span class="lc-title d-block">Vue 3: introducción práctica</span><span class="lc-meta">45 min · Directivas v-bind, v-model y setup</span></span></a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="../../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Volver al inicio</a>
+      <a href="leccion-1-git.html" class="btn btn-gradient">Empezar por Git y GitHub <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— Tema Herramientas</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-1-git.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

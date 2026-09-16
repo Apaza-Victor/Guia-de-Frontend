@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 4 de CSS Avanzado: @keyframes, animation-name, duration, iteration-count, direction, timing, steps() y librerías de animación como AOS y GSAP.">
+  <title>Lección 4 — Keyframes y animaciones | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+  <style>
+    .demo-pista {
+      position: relative;
+      height: 120px;
+      border-bottom: 2px solid rgba(148, 163, 184, 0.35);
+      overflow: hidden;
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: 0.75rem;
+    }
+    .demo-pelota {
+      position: absolute;
+      left: 50%;
+      bottom: 8px;
+      width: 54px;
+      height: 54px;
+      margin-left: -27px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #93c5fd, #2563eb 60%, #1e3a8a);
+      box-shadow: 0 0 24px rgba(37, 99, 235, 0.55);
+      animation: saltar 1.1s cubic-bezier(0.28, 0.84, 0.42, 1) infinite;
+    }
+    @keyframes saltar {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-72px); }
+    }
+    .demo-boton-css {
+      animation: latido 1.6s ease-in-out infinite;
+    }
+    @keyframes latido {
+      0%, 100% { transform: scale(1); }
+      50%      { transform: scale(1.08); }
+    }
+  </style>
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">CSS</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Avanzado</a></li>
+        <li class="breadcrumb-item active text-light">Lección 4</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-3-circle me-1"></i>CSS Avanzado · Lección 4</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>30 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Keyframes y animaciones</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Pasa de las transiciones a las @keyframes: animaciones en bucle, con etapas, steps() y librerías como AOS y GSAP.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-film text-gradient me-2"></i>¿Qué es una animación CSS?</h2>
+      <p>
+        Las <strong>animaciones CSS</strong> describen <em>keyframes</em>: una secuencia de estados intermedios que el
+        navegador calcula automáticamente en el tiempo. A diferencia de <code>transition</code>, no necesitan un cambio de
+        estado para iniciarse: pueden repetirse (<code>infinite</code>), ir y volver, o reproducirse al cargar la página.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">/* 1. Definir los keyframes */</span>
+<span class="token-tag">@keyframes</span> aparecer {
+  <span class="token-num">0%</span>   { <span class="token-prop">opacity</span>: <span class="token-num">0</span>; <span class="token-prop">transform</span>: <span class="token-value">translateY(20px)</span>; }
+  <span class="token-num">100%</span> { <span class="token-prop">opacity</span>: <span class="token-num">1</span>; <span class="token-prop">transform</span>: <span class="token-value">translateY(0)</span>; }
+}
+
+<span class="token-comment">/* 2. Aplicarla a un elemento */</span>
+<span class="token-tag">.hero-titulo</span> {
+  <span class="token-prop">animation</span>: <span class="token-value">aparecer</span> <span class="token-num">1s</span> <span class="token-value">ease-out</span> <span class="token-value">both</span>;
+}</code></pre>
+      <p class="mt-3">
+        Los keyframes se declaran con porcentajes (<code>0%</code> → <code>100%</code>) o con los atajos
+        <code>from</code> y <code>to</code>. Cada cuadro indica los <strong>valores</strong> que tomarán las propiedades.
+      </p>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-sliders2 text-gradient me-2"></i>El shorthand animation y sus propiedades</h2>
+      <pre class="code-block"><code><span class="token-comment">/* Orden típico: name duration timing-function delay iteration direction fill-mode */</span>
+<span class="token-tag">.cargador</span> {
+  <span class="token-prop">animation</span>: <span class="token-value">girar</span> <span class="token-num">0.8s</span> <span class="token-value">linear</span> <span class="token-num">0s</span> <span class="token-value">infinite</span> <span class="token-value">normal</span>;
+}
+
+<span class="token-comment">/* Equivalente con sub-propiedades por separado */</span>
+<span class="token-tag">.cargador</span> {
+  <span class="token-prop">animation-name</span>: <span class="token-value">girar</span>;
+  <span class="token-prop">animation-duration</span>: <span class="token-num">0.8s</span>;
+  <span class="token-prop">animation-timing-function</span>: <span class="token-value">linear</span>;
+  <span class="token-prop">animation-delay</span>: <span class="token-num">0s</span>;
+  <span class="token-prop">animation-iteration-count</span>: <span class="token-value">infinite</span>;
+  <span class="token-prop">animation-direction</span>: <span class="token-value">normal</span>;
+}</code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Propiedad</th><th scope="col">Qué controla</th><th scope="col">Valores clave</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>animation-name</code></td><td>Qué @keyframes se usa</td><td>Nombre definido por ti</td></tr>
+          <tr><td><code>animation-duration</code></td><td>Duración de un ciclo</td><td><code>2s</code>, <code>500ms</code></td></tr>
+          <tr><td><code>animation-iteration-count</code></td><td>Cuántos ciclos</td><td><code>3</code>, <code>infinite</code></td></tr>
+          <tr><td><code>animation-direction</code></td><td>Sentido de reproducción</td><td><code>normal</code>, <code>reverse</code>, <code>alternate</code></td></tr>
+          <tr><td><code>animation-timing-function</code></td><td>Curva dentro de cada ciclo</td><td><code>ease</code>, <code>linear</code>, <code>steps(6)</code></td></tr>
+          <tr><td><code>animation-fill-mode</code></td><td>Estado antes/después</td><td><code>none</code>, <code>forwards</code>, <code>both</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-grid-3x3-gap text-gradient me-2"></i>steps() y timing por fotogramas</h2>
+      <p>
+        Mientras <code>cubic-bezier</code> interpola de forma <em>continua</em>, <code>steps(n)</code> avanza a saltos
+        discretos: ideal para <strong>animaciones de sprites</strong> o contadores "de números". Con
+        <code>animation-timing-function: steps(m)</code> entre cada keyframe rompes la suavidad en m escalones.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">/* Efecto de números: avanza en 10 saltos bruscos */</span>
+<span class="token-tag">@keyframes</span> contar {
+  <span class="token-tag">from</span> { <span class="token-prop">content</span>: <span class="token-value">"0"</span>; }
+  <span class="token-tag">to</span>   { <span class="token-prop">content</span>: <span class="token-value">"100"</span>; }
+}
+<span class="token-tag">.contador</span> {
+  <span class="token-prop">animation</span>: <span class="token-value">contar</span> <span class="token-num">3s</span> <span class="token-value">steps(10)</span> <span class="token-value">both</span>;
+}</code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Función</th><th scope="col">Comportamiento</th><th scope="col">Cuándo usarla</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>ease / linear</code></td><td>Interpolación continua</td><td>Movimiento orgánico y suave</td></tr>
+          <tr><td><code>steps(n)</code></td><td>n saltos discretos</td><td>Sprites, slot machines, contadores</td></tr>
+          <tr><td><code>steps(n, jump-end)</code></td><td>Salto al final de cada escalón</td><td>Afinar el momento del "clic"</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-box-seam text-gradient me-2"></i>Librerías: AOS y GSAP</h2>
+      <p>
+        Para animaciones de scroll y escenas más complejas, las librerías aceleran muchísimo el desarrollo:
+      </p>
+      <ul class="mt-2">
+        <li>
+          <strong>AOS</strong> (Animate On Scroll) activa animaciones al entrar en pantalla con solo un atributo:
+          <code>data-aos="fade-up"</code>. Ya lo usas en esta guía: cada sección aparece con AOS.
+        </li>
+        <li>
+          <strong>GSAP</strong> es una librería de animación profesional basada en JavaScript. Anima <em>cualquier</em>
+          propiedad con curvas muy expresivas y no depende de los keyframes del CSS.
+        </li>
+      </ul>
+      <pre class="code-block"><code><span class="token-comment">&lt;!-- AOS: un atributo y listo —&gt;</span>
+<span class="token-tag">&lt;div</span> <span class="token-attr">data-aos</span>=<span class="token-value">"fade-up"</span> <span class="token-attr">data-aos-delay</span>=<span class="token-value">"200"</span><span class="token-tag">&gt;</span>contenido<span class="token-tag">&lt;/div&gt;</span>
+
+<span class="token-comment">// GSAP: poder total desde JS</span>
+<span class="token-tag">gsap.</span><span class="token-value">to</span>(<span class="token-value">".logo"</span>, {
+  <span class="token-prop">y</span>: <span class="token-num">-20</span>,
+  <span class="token-prop">rotation</span>: <span class="token-num">360</span>,
+  <span class="token-prop">duration</span>: <span class="token-num">1</span>,
+  <span class="token-prop">ease</span>: <span class="token-value">"elastic.out(1, 0.4)"</span>,
+  <span class="token-prop">repeat</span>: <span class="token-num">2</span>, <span class="token-prop">yoyo</span>: <span class="token-value">true</span>
+});</code></pre>
+      <div class="tip-box mt-4">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Los dos enfoques <strong>conviven</strong>: CSS para lo simple y reproducible (pulse, hover), GSAP para lo complejo
+        (líneas de tiempo, encadenados, elements scrubbing con scroll). Elige según la complejidad de la escena.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-magic text-gradient me-2"></i>Demo interactiva: CSS y GSAP a la vez</h2>
+      <p>
+        La pelota <strong>salta por keyframes de CSS</strong> (bucle infinito). Pulsa el botón y <strong>GSAP</strong>
+        añadirá su propia rotación, desplazamiento y escala a la misma pelota: ambos motores animan el mismo elemento
+        simultáneamente. El botón "latido" usa también una animación CSS infinita.
+      </p>
+      <div class="demo-box">
+        <div class="demo-pista" id="demoPista">
+          <div class="demo-pelota" id="demoPelota"></div>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center gap-2 mt-3">
+          <button class="btn btn-gradient btn-sm" onclick="window.demoGiro()"><i class="bi bi-play-fill me-1"></i>Lanzar GSAP</button>
+          <button class="btn btn-ghost-glass btn-sm" onclick="window.demoReset()"><i class="bi bi-arrow-counterclockwise me-1"></i>Reiniciar</button>
+          <button class="btn btn-ghost-glass btn-sm demo-boton-css"><i class="bi bi-heart me-1"></i>Button con animación CSS</button>
+        </div>
+        <p class="small mt-3 mb-0" style="color:var(--text-muted);">El rebote vertical es <code>@keyframes saltar</code> (CSS); el giro y el desplazamiento lateral vienen de <code>gsap.to()</code>. Idéntica pelota, dos motores.</p>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>Define con <code>@keyframes</code> + porcentajes y aplica con <code>animation</code> (shorthand).</li>
+        <li>Controla repetición (<code>infinite</code>), dirección (<code>alternate</code>) y forma de avance (<code>steps()</code>).</li>
+        <li>Usa <code>animation-fill-mode: both</code> para evitar saltos antes y después de la animación.</li>
+        <li>AOS para scroll, GSAP para escenas complejas: conviven sin conflictos con las animaciones CSS.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-3-transformaciones.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-5-funciones-clamp.html" class="btn btn-gradient">Siguiente: Funciones modernas <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— CSS Avanzado · Lección 4</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="leccion-3-transformaciones.html" class="text-secondary"><i class="bi bi-arrow-left-circle fs-5"></i></a>
+      <a href="leccion-5-funciones-clamp.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../../assets/js/main.js"></script>
+<script>
+  window.demoGiro = function () {
+    gsap.fromTo("#demoPelota",
+      { x: 0, rotation: 0, scale: 1 },
+      { x: 150, rotation: 720, scale: 1.15, duration: 1.4, ease: "power2.inOut", onComplete: () => gsap.to("#demoPelota", { x: 0, scale: 1, duration: 0.8, ease: "bounce.out" }) }
+    );
+  };
+  window.demoReset = function () {
+    gsap.to("#demoPelota", { x: 0, rotation: 0, scale: 1, duration: 0.5, ease: "power2.out" });
+  };
+</script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

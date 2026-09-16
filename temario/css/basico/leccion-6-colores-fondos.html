@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 6 de CSS Básico: colores, gradientes y fondos en CSS. background-color, background-image, background-size, linear-gradient y radial-gradient.">
+  <title>Lección 6 — Colores, gradientes y fondos | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">CSS</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Básico</a></li>
+        <li class="breadcrumb-item active text-light">Lección 6</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-6-circle me-1"></i>CSS Básico · Lección 6</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>45 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Colores, gradientes y fondos</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Decora tus elementos con fondos de color e imágenes, y crea gradientes lineales y radiales sin una sola imagen.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-wallpaper text-gradient me-2"></i>Propiedades de fondo</h2>
+      <p>CSS permite pintar los fondos de los elementos con colores, imágenes y gradientes:</p>
+      <pre class="code-block"><code><span class="token-prop">.hero</span> {
+  <span class="token-attr">background-color</span>: <span class="token-value">#0f172a</span>;
+  <span class="token-attr">background-image</span>: <span class="token-value">url("fondos/hero.jpg")</span>;
+  <span class="token-attr">background-size</span>: <span class="token-value">cover</span>;
+  <span class="token-attr">background-position</span>: <span class="token-value">center</span>;
+  <span class="token-attr">background-repeat</span>: <span class="token-value">no-repeat</span>;
+}
+
+<span class="token-comment">/* Atajo: color + imagen + posición + tamaño si va junto */</span>
+<span class="token-prop">.resumen</span> {
+  <span class="token-attr">background</span>: <span class="token-value">url("logo.svg") no-repeat center / contain</span>;
+}</code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Propiedad</th><th scope="col">Descripción</th><th scope="col">Ejemplo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>background-color</code></td><td>Color de relleno base</td><td><code>#2563eb</code></td></tr>
+          <tr><td><code>background-image</code></td><td>Imagen o gradiente de fondo</td><td><code>url("img.png")</code></td></tr>
+          <tr><td><code>background-size</code></td><td>Dimensiona la imagen: <code>cover</code> rellena, <code>contain</code> ajusta completa</td><td><code>cover</code>, <code>50%</code></td></tr>
+          <tr><td><code>background-position</code></td><td>Dónde se ancla la imagen</td><td><code>center</code>, <code>top left</code>, <code>50% 50%</code></td></tr>
+          <tr><td><code>background-repeat</code></td><td>Si la imagen se repite</td><td><code>no-repeat</code>, <code>repeat-x</code></td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Siempre define un <code>background-color</code> además de la imagen: si esta no carga,
+        el color actúa como <em>respaldo</em> visual.
+      </div>
+      <div class="demo-box p-4 mt-3">
+        <h3 class="h5 text-white fw-bold mb-3"><i class="bi bi-grid-3x3-gap me-2"></i>Paleta de respaldo en acción</h3>
+        <p style="color:#cbd5e1 !important;">Los colores de las miniaturas se combinan en <code>background</code>: gradiente + color base.</p>
+        <div class="row g-3">
+          <div class="col-6 col-md-4">
+            <div class="rounded p-4 d-flex align-items-center justify-content-center text-white fw-bold" style="height:90px; background-color:#2563eb; background-image:linear-gradient(135deg, rgba(6,182,212,.35), transparent 60%);">
+              indigo + cyan
+            </div>
+          </div>
+          <div class="col-6 col-md-4">
+            <div class="rounded p-4 d-flex align-items-center justify-content-center text-white fw-bold" style="height:90px; background-color:#0f172a; background-image:radial-gradient(circle at top right, rgba(14,165,233,.45), transparent 70%);">
+              noche + rosa
+            </div>
+          </div>
+          <div class="col-6 col-md-4">
+            <div class="rounded p-4 d-flex align-items-center justify-content-center text-white fw-bold" style="height:90px; background-color:#111827; background-image:linear-gradient(90deg, #2563eb 0%, #06b6d4 100%);">
+              gradiente vívido
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-gradient text-gradient me-2"></i>Gradientes lineal y radial</h2>
+      <p>Los gradientes se generan con CSS puro, sin imágenes. La función lineal transita de un punto a otro; la radial, desde un centro hacia afuera.</p>
+      <pre class="code-block"><code><span class="token-comment">/* Lineal: dirección + paradas de color */</span>
+<span class="token-prop">.lineal</span> {
+  <span class="token-attr">background</span>: <span class="token-value">linear-gradient(135deg, #2563eb, #0ea5e9)</span>;
+}
+
+<span class="token-comment">/* Radial: desde el centro hacia los bordes */</span>
+<span class="token-prop">.radial</span> {
+  <span class="token-attr">background</span>: <span class="token-value">radial-gradient(circle, #06b6d4, #0f172a 70%)</span>;
+}
+
+<span class="token-comment">/* Con más de dos paradas y posiciones concretas */</span>
+<span class="token-prop">.multi</span> {
+  <span class="token-attr">background</span>: <span class="token-value">linear-gradient(90deg, #111827, #2563eb 50%, #f59e0b)</span>;
+}</code></pre>
+      <div class="demo-box p-4">
+        <h3 class="h5 text-white fw-bold mb-3"><i class="bi bi-arrow-clockwise me-2"></i>Compara gradientes</h3>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div id="gradLinear" class="rounded p-4 d-flex align-items-center justify-content-center" style="height:160px; background:linear-gradient(135deg, #2563eb, #0ea5e9);">
+              <span class="fw-bold text-white">linear-gradient</span>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div id="gradRadial" class="rounded p-4 d-flex align-items-center justify-content-center" style="height:160px; background:radial-gradient(circle, #06b6d4, #0f172a 70%);">
+              <span class="fw-bold text-white">radial-gradient</span>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex flex-wrap gap-2 mt-3">
+          <button class="btn btn-sm btn-outline-info" onclick="rotateLinear()">
+            <i class="bi bi-arrow-clockwise me-1"></i>Rotar gradiente lineal
+          </button>
+          <button class="btn btn-sm btn-outline-warning" onclick="animarRadial()">
+            <i class="bi bi-broadcast me-1"></i>Animar gradiente radial
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-sliders2 text-gradient me-2"></i>Variables CSS: estilos reutilizables</h2>
+      <p>
+        Para mantener paletas coherentes, define tus colores como <strong>variables CSS</strong> en <code>:root</code>
+        y reutilízalas con <code>var()</code>. Cambiar la paleta del sitio se vuelve cuestión de editar un solo lugar.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">/* CSS personalizado en esta guía, listo para reutilizar */</span>
+<span class="token-prop">:root</span> {
+  <span class="token-attr">--color-primario</span>: <span class="token-value">#2563eb</span>;
+  <span class="token-attr">--color-acento</span>: <span class="token-value">#06b6d4</span>;
+  <span class="token-attr">--fuente-titulos</span>: <span class="token-value">"Poppins", sans-serif</span>;
+}
+
+<span class="token-prop">.bandera</span> {
+  <span class="token-attr">background</span>: <span class="token-value">var(--color-primario)</span>;
+  <span class="token-attr">font-family</span>: <span class="token-value">var(--fuente-titulos)</span>;
+}</code></pre>
+      <div class="tip-box">
+        <strong class="text-white"><i class="bi bi-star me-2" style="color:#f59e0b;"></i>Dato:</strong>
+        Los ejemplos anteriores —gradientes, variables CSS y unidades fluidas— son exactamente
+        el tipo de técnicas que esta guía usa en su propia hoja de estilos personalizada.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-rulers text-gradient me-2"></i>De las medidas se encarga la lección 7</h2>
+      <p>
+        Detrás de todo buen fondo hay <strong>medidas fluidas</strong>: unidades como <code>rem</code>, <code>vw</code>,
+        <code>vh</code> o <code>%</code> deciden si tu diseño respira en móvil y escritorio.
+        Aquí las resumimos y en la <a href="leccion-7-unidades.html" class="text-gradient">lección 7 — Unidades de medida</a>
+        entraremos en el detalle completo, incluyendo <code>vmin</code>, <code>vmax</code> y <code>clamp()</code>.
+      </p>
+      <table class="table">
+        <thead>
+          <tr><th scope="col">Unidad</th><th scope="col">Relativa a</th><th scope="col">Uso típico</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>px</code></td><td>Píxel físico (absoluta)</td><td>Bordes, sombras y detalles finos</td></tr>
+          <tr><td><code>em</code></td><td>El tamaño de fuente del elemento <em>padre</em></td><td>Padding y espacios locales al contenido</td></tr>
+          <tr><td><code>rem</code></td><td>El tamaño de fuente de la <em>raíz</em> (&lt;html&gt;)</td><td>Tipografía global</td></tr>
+          <tr><td><code>%</code></td><td>El tamaño del contenedor padre</td><td>Anchuras y alturas proporcionales</td></tr>
+          <tr><td><code>vh</code> / <code>vw</code></td><td>El alto / ancho de la ventana (viewport)</td><td>Secciones a pantalla completa y héroes</td></tr>
+        </tbody>
+      </table>
+      <div class="warning-box">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Consejo práctico:</strong>
+        Usa <code>rem</code> para tipografía y márgenes globales (fácil de escalar y predecible), y reserva el
+        <code>em</code> para propiedades que deben crecer junto al texto del propio elemento, como el padding de un botón.
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>Fondos: <code>background-color</code>, <code>background-image</code>, <code>background-size: cover</code> y <code>background-position</code>.</li>
+        <li>Siempre define un <code>background-color</code> de respaldo junto a cualquier imagen o gradiente.</li>
+        <li>Gradientes con <code>linear-gradient()</code> y <code>radial-gradient()</code>, sin necesidad de imágenes.</li>
+        <li>Con variables CSS en <code>:root</code> reutilizas colores con <code>var(--color)</code>.</li>
+        <li>Las unidades fluidas (<code>rem</code>, <code>%</code>, <code>vh</code>, <code>vw</code>) se dominan en la <a href="leccion-7-unidades.html" class="text-gradient">lección 7</a>.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-5-tipografia.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span>
+      </div>
+      <a href="leccion-7-unidades.html" class="btn btn-gradient">Siguiente: Unidades de medida <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— CSS Básico · Lección 6</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-7-unidades.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../../assets/js/main.js"></script>
+<script>
+function rotateLinear() {
+  var el = document.getElementById('gradLinear');
+  var deg = 0;
+  var interval = setInterval(function() {
+    deg = (deg + 5) % 360;
+    el.style.background = 'linear-gradient(' + deg + 'deg, #2563eb, #0ea5e9)';
+    if (deg === 0) clearInterval(interval);
+  }, 30);
+}
+
+function animarRadial() {
+  var el = document.getElementById('gradRadial');
+  gsap.fromTo(el,
+    {xPercent: -4, scale: 0.98},
+    {xPercent: 4, scale: 1.02, duration: 1.2, yoyo: true, repeat: -1, ease: 'sine.inOut'}
+  );
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  gsap.from(['#gradLinear', '#gradRadial'], {opacity: 0, scale: 0.9, duration: 0.6, ease: 'power2.out', stagger: 0.15});
+});
+</script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

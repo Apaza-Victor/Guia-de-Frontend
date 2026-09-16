@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 3 de Fundamentos de Programación: operadores, parseInt, parseFloat, Number y conversión de tipos en JavaScript.">
+  <title>Lección 3 — Operadores y conversiones | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Programación</a></li>
+        <li class="breadcrumb-item active text-light">Lección 3</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-code-slash me-1"></i>Programación · Lección 3</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>45 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Operadores y conversiones</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Aritmética, parseInt y compañía: aprende a transformar números y texto para que tus cálculos sean correctos.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-calculator text-gradient me-2"></i>Operadores aritméticos</h2>
+      <p>Son los que hacen matemática sobre números:</p>
+      <pre class="code-block"><code><span class="token-tag">const</span> a = <span class="token-tag">10</span>;
+<span class="token-tag">const</span> b = <span class="token-tag">3</span>;
+
+a + b   <span class="token-comment">// 13   suma</span>
+a - b   <span class="token-comment">// 7    resta</span>
+a * b   <span class="token-comment">// 30   multiplicación</span>
+a / b   <span class="token-comment">// 3.33 división</span>
+a % b   <span class="token-comment">// 1    módulo (resto)</span>
+a ** b  <span class="token-comment">// 1000 potencia</span></code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        El módulo <code>%</code> es ideal para saber si un número es par (<code>n % 2 === 0</code>) o hacer lógica circular.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-arrow-repeat text-gradient me-2"></i>parseInt y la conversión de texto a número</h2>
+      <p>El error clásico de principiante: <code>"2" + "2"</code> da <code>"22"</code>, porque ambos son texto. <code>parseInt</code> convierte un <strong>string</strong> a un <strong>entero</strong>:</p>
+      <pre class="code-block"><code><span class="token-tag">parseInt</span>(<span class="token-value">"25"</span>);        <span class="token-comment">// 25</span>
+<span class="token-tag">parseInt</span>(<span class="token-value">"25px"</span>);      <span class="token-comment">// 25 (ignora lo que no es número)</span>
+<span class="token-tag">parseInt</span>(<span class="token-value">"3.99"</span>);      <span class="token-comment">// 3  (trunca a entero)</span>
+<span class="token-tag">parseInt</span>(<span class="token-value">"hola"</span>);      <span class="token-comment">// NaN (no es un número)</span></code></pre>
+      <p>La conversión antes de sumar lo arregla todo:</p>
+      <pre class="code-block"><code><span class="token-tag">const</span> num1 = <span class="token-tag">parseInt</span>(<span class="token-value">"10"</span>);    <span class="token-comment">// 10</span>
+<span class="token-tag">const</span> num2 = <span class="token-tag">parseInt</span>(<span class="token-value">"5"</span>);     <span class="token-comment">// 5</span>
+<span class="token-tag">const</span> total = num1 + num2;        <span class="token-comment">// 15 ✓ (y no "105")</span></code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-123 text-gradient me-2"></i>Compañeros de parseInt</h2>
+      <table class="table">
+        <thead>
+          <tr><th scope="col">Función</th><th scope="col">Resultado</th><th scope="col">Cuándo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>parseFloat("3.99")</code></td><td><code>3.99</code></td><td>Conservar decimales</td></tr>
+          <tr><td><code>Number("42")</code></td><td><code>42</code></td><td>Conversión estricta (nada de texto suelto)</td></tr>
+          <tr><td><code>String(25)</code></td><td><code>"25"</code></td><td>Convertir número a texto</td></tr>
+          <tr><td><code>+"7"</code></td><td><code>7</code></td><td>Atajo con el operador unario más</td></tr>
+        </tbody>
+      </table>
+      <pre class="code-block"><code><span class="token-tag">parseFloat</span>(<span class="token-value">"3.99"</span>);  <span class="token-comment">// 3.99</span>
+<span class="token-tag">Number</span>(<span class="token-value">"42"</span>);        <span class="token-comment">// 42</span>
+<span class="token-tag">Number</span>(<span class="token-value">"42px"</span>);     <span class="token-comment">// NaN  (estricto: todo o nada)</span>
+<span class="token-tag">String</span>(<span class="token-tag">25</span>);          <span class="token-comment">// "25"</span>
++<span class="token-value">"7"</span>;                 <span class="token-comment">// 7</span></code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>NaN:</strong>
+        <code>NaN</code> significa "Not a Number". Cualquier operación rota con él se propaga; siempre valida antes de calcular.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-arrow-left-right text-gradient me-2"></i>Comparación y lógica</h2>
+      <p>Sirven para tomar decisiones (las verás en la lección 4), pero conviene conocerlas ya:</p>
+      <pre class="code-block"><code><span class="token-tag">6</span> <span class="token-tag">&gt;</span> <span class="token-tag">3</span>           <span class="token-comment">// true</span>
+<span class="token-tag">6</span> <span class="token-tag">===</span> <span class="token-value">"6"</span>        <span class="token-comment">// false (tipos distintos e igualdad estricta)</span>
+<span class="token-tag">6</span> <span class="token-tag">==</span> <span class="token-value">"6"</span>         <span class="token-comment">// true  (igualdad suelta — evítala)</span>
+!(<span class="token-tag">true</span>)             <span class="token-comment">// false (negación)</span></code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Regla:</strong>
+        usa siempre <code>===</code> y <code>!==</code> (comparación estricta). El doble <code>==</code> genera bugs silenciosos.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-lightbulb text-gradient me-2"></i>Demo interactiva</h2>
+      <div class="demo-box text-center p-4">
+        <p style="color:#cbd5e1 !important;">Suma dos números "de entrada" (que llegan como texto): compara sumar sin convertir vs convertir con parseInt:</p>
+        <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
+          <input type="text" id="inpA" class="form-control" style="max-width:110px; display:inline-block;" placeholder="10" value="10">
+          <input type="text" id="inpB" class="form-control" style="max-width:110px; display:inline-block;" placeholder="5" value="5">
+          <button class="btn btn-gradient" onclick="sumarConParsInt()"><i class="bi bi-play me-1"></i>Calcular</button>
+        </div>
+        <p id="salidaParse" class="small mt-3 mb-0 text-start font-monospace" style="color:#7dd3fc !important; white-space:pre;"></p>
+      </div>
+      <script>
+        function sumarConParsInt() {
+          const a = document.getElementById('inpA').value;
+          const b = document.getElementById('inpB').value;
+          const mal = a + b;
+          const bien = parseInt(a, 10) + parseInt(b, 10);
+          document.getElementById('salidaParse').textContent =
+            'Sin convertir: ' + a + ' + ' + b + ' = ' + mal + '   (concatena texto)\n' +
+            'Con parseInt:  ' + parseInt(a, 10) + ' + ' + parseInt(b, 10) + ' = ' + bien + '   (suma real)';
+        }
+      </script>
+      <div class="tip-box mt-4">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        En <code>parseInt(x)</code> pasa siempre la base <code>10</code> como segundo argumento: <code>parseInt("10", 10)</code>. Evita sorpresas con bases.
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li><code>+</code> suma números pero concatena texto.</li>
+        <li><code>parseInt</code>/<code>Number</code> convierten texto a número antes de calcular.</li>
+        <li><code>parseFloat</code> conserva decimales; <code>===</code> compara sin sorpresas.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-2-variables-tipos.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-4-condicionales.html" class="btn btn-gradient">Siguiente: Condicionales <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— Programación · Lección 3</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-4-condicionales.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

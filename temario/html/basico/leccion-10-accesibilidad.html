@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 10: Accesibilidad e inclusión. ARIA, alt y lang, orden de foco con tabindex, contraste, lectores de pantalla y Open Graph.">
+  <title>Lección 10 — Accesibilidad e Inclusión | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">HTML</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Básico</a></li>
+        <li class="breadcrumb-item active text-light">Lección 10</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft">Sección: HTML · Lección 10</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>40 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Accesibilidad e Inclusión</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Haz que tu web funcione para todos: ARIA, foco, contraste, lectores de pantalla y una buena tarjeta de redes sociales.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-compass text-gradient me-2"></i>Fundamentos de la lección</h2>
+      <p>La accesibilidad (a11y) garantiza que tu web sea usable por personas con discapacidad visual, motora o cognitiva, y que las máquinas la entiendan. No es un extra: es una práctica profesional de frontend amparada por estándares como las <strong>WCAG</strong>. Además, una web accesible suele ser una web mejor rankeada.</p>
+      <div class="d-flex flex-wrap gap-2 mt-3">
+        <span class="badge-soft">ARIA</span>
+        <span class="badge-soft-cyan">tabindex</span>
+        <span class="badge-soft-sky">Open Graph</span>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-universal-access text-gradient me-2"></i>ARIA: roles y atributos</h2>
+      <p><strong>ARIA</strong> (Accessible Rich Internet Applications) complementa HTML cuando el significado nativo no basta (p. ej. en componentes hechos a medida) mediante roles y atributos <code>aria-*</code>.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;nav</span> <span class="token-attr">aria-label</span>=<span class="token-value">"Navegación principal"</span><span class="token-tag">&gt;</span>…<span class="token-tag">&lt;/nav&gt;</span>
+
+<span class="token-tag">&lt;div</span> <span class="token-attr">role</span>=<span class="token-value">"tablist"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;button</span> <span class="token-attr">role</span>=<span class="token-value">"tab"</span> <span class="token-attr">aria-selected</span>=<span class="token-value">"true"</span><span class="token-tag">&gt;</span>HTML<span class="token-tag">&lt;/button&gt;</span>
+<span class="token-tag">&lt;/div&gt;</span>
+
+<span class="token-tag">&lt;div</span> <span class="token-attr">aria-live</span>=<span class="token-value">"polite"</span><span class="token-tag">&gt;</span>Resultado del envío…<span class="token-tag">&lt;/div&gt;</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Atributo / rol</th><th scope="col">Para qué sirve</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>aria-label</code></td><td>Nombre audible alternativo para un elemento</td></tr>
+          <tr><td><code>aria-selected</code></td><td>Indica el elemento activo de un grupo con pestañas</td></tr>
+          <tr><td><code>aria-expanded</code></td><td>Anuncia si un menú o acordeón está abierto</td></tr>
+          <tr><td><code>aria-live</code></td><td>Región que el lector de pantalla debe anunciar al cambiar</td></tr>
+          <tr><td><code>role</code></td><td>Define el comportamiento que no existe como etiqueta nativa</td></tr>
+        </tbody>
+      </table>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#fbbf24;"></i>Regla de oro:</strong>
+        "No uses ARIA si existe una etiqueta HTML que haga lo mismo". Un <code>&lt;button&gt;</code> nativo siempre es mejor que un <code>&lt;div role="button"&gt;</code>.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-translate text-gradient me-2"></i>alt, lang e idioma</h2>
+      <p>El atributo <code>lang</code> en <code>&lt;html&gt;</code> informa al lector de pantalla cómo pronunciar y al navegador cómo corregir ortografía. El <code>alt</code> describe imágenes para quien no puede verlas.</p>
+      <pre class="code-block"><code><span class="token-comment">&lt;!-- Inicio del documento --&gt;</span>
+<span class="token-tag">&lt;html</span> <span class="token-attr">lang</span>=<span class="token-value">"es"</span><span class="token-tag">&gt;</span>
+
+<span class="token-comment">&lt;!-- Imagen informativa --&gt;</span>
+<span class="token-tag">&lt;img</span> <span class="token-attr">src</span>=<span class="token-value">"mapa-tienda.png"</span>
+     <span class="token-attr">alt</span>=<span class="token-value">"Mapa de acceso a la tienda, entrada por la calle Mayor"</span><span class="token-tag">&gt;</span>
+
+<span class="token-comment">&lt;!-- Cambio de idioma puntual --&gt;</span>
+<span class="token-tag">&lt;p&gt;</span>El término <span class="token-tag">&lt;span</span> <span class="token-attr">lang</span>=<span class="token-value">"en"</span><span class="token-tag">&gt;</span>web design<span class="token-tag">&lt;/span&gt;</span> es inglés.<span class="token-tag">&lt;/p&gt;</span></code></pre>
+      <div class="tip-box mt-3">
+        <i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>
+        <strong class="text-white">Resumen del alt:</strong> informativo → descripción; decorativo → <code>alt=""</code>; dentro de un enlace → describe el destino del enlace.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-keyboard text-gradient me-2"></i>Orden de foco: tabindex</h2>
+      <p>La tecla <kbd>Tab</kbd> navega por elementos interactivos en el orden del documento. <code>tabindex="0"</code> hace enfocable un elemento que no lo era y <code>tabindex="-1"</code> permite enfocarlo por código pero no por Tab.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;a</span> <span class="token-attr">href</span>=<span class="token-value">"#contenido"</span> <span class="token-attr">class</span>=<span class="token-value">"skip-link"</span><span class="token-tag">&gt;</span>Saltar al contenido<span class="token-tag">&lt;/a&gt;</span>
+
+<span class="token-tag">&lt;div</span> <span class="token-attr">tabindex</span>=<span class="token-value">"0"</span> <span class="token-attr">class</span>=<span class="token-value">"card-demo"</span><span class="token-tag">&gt;</span>Tarjeta enfocable<span class="token-tag">&lt;/div&gt;</span></code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#fbbf24;"></i>Anti-patrón:</strong>
+        evitar <code>tabindex</code> con valores positivos (1, 2, 3…). Sufren de mantenimiento, rompen el orden natural del documento y provocan una experiencia caótica de teclado.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-contrast text-gradient me-2"></i>Contraste y tamaño de texto</h2>
+      <p>El texto debe mantener un <strong>mínimo de contraste</strong> respecto a su fondo (WCAG AA: 4.5:1 para texto normal). Además, evita que el tamaño de fuente bloqueo el zoom del usuario: nunca pongas <code>font-size</code> fija cuando se pueda usar <code>rem</code>.</p>
+      <div class="demo-box mt-3">
+        <h3 class="h5 text-white fw-bold mb-3"><i class="bi bi-eyedropper me-2"></i>Demo: prueba el contraste</h3>
+        <p class="small" style="color:#cbd5e1 !important;">Usa el deslizador y mira cuándo el texto deja de ser legible frente al fondo.</p>
+        <label for="rangoContraste" class="form-label small text-white">Color de texto</label>
+        <input type="range" id="rangoContraste" class="form-range" min="0" max="100" value="35">
+        <div id="cajaContraste" class="rounded-3 p-4 text-center fw-bold" style="background:#0f172a; color:#94a3b8; font-size:1.25rem;">
+          El contraste importa para leer sin esfuerzo.
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-ear text-gradient me-2"></i>Lectores de pantalla y sr-only</h2>
+      <p>Los lectores de pantalla anuncian títulos, enlaces y elementos interactivos en orden. La clase <code>.visually-hidden</code> de Bootstrap (equivalente a <code>.sr-only</code>) oculta texto visualmente, pero lo deja disponible para el lector de pantalla.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;a</span> <span class="token-attr">href</span>=<span class="token-value">"ruta.pdf"</span><span class="token-tag">&gt;</span>Descargar informe
+  <span class="token-tag">&lt;span</span> <span class="token-attr">class</span>=<span class="token-value">"visually-hidden"</span><span class="token-tag">&gt;</span>(PDF, 2 MB)<span class="token-tag">&lt;/span&gt;</span>
+<span class="token-tag">&lt;/a&gt;</span>
+
+<span class="token-tag">&lt;button</span> <span class="token-attr">class</span>=<span class="token-value">"btn btn-gradient"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;i</span> <span class="token-attr">class</span>=<span class="token-value">"bi bi-search"</span> <span class="token-attr">aria-hidden</span>=<span class="token-value">"true"</span><span class="token-tag">&gt;&lt;/i&gt;</span>
+  <span class="token-tag">&lt;span</span> <span class="token-attr">class</span>=<span class="token-value">"visually-hidden"</span><span class="token-tag">&gt;</span>Buscar<span class="token-tag">&lt;/span&gt;</span>
+<span class="token-tag">&lt;/button&gt;</span></code></pre>
+      <div class="tip-box mt-3">
+        <i class="bi bi-star me-2" style="color:#f59e0b;"></i>
+        <strong class="text-white">Practica de verdad:</strong> instala una extensión de "texto a voz" y navega tu propia web solo con teclado. Es la prueba más rápida de accesibilidad.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-share text-gradient me-2"></i>Open Graph: tu web en redes</h2>
+      <p><strong>Open Graph</strong> (protocolo de Facebook/Meta) define cómo se ve tu enlace al compartirlo en WhatsApp, Twitter/X o LinkedIn: título, descripción e imagen de previsualización.</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;meta</span> <span class="token-attr">property</span>=<span class="token-value">"og:title"</span> <span class="token-attr">content</span>=<span class="token-value">"Frontend Pro"</span><span class="token-tag">&gt;</span>
+<span class="token-tag">&lt;meta</span> <span class="token-attr">property</span>=<span class="token-value">"og:description"</span>
+      <span class="token-attr">content</span>=<span class="token-value">"Aprende HTML, CSS y JavaScript desde cero"</span><span class="token-tag">&gt;</span>
+<span class="token-tag">&lt;meta</span> <span class="token-attr">property</span>=<span class="token-value">"og:image"</span> <span class="token-attr">content</span>=<span class="token-value">"https://…/portada.png"</span><span class="token-tag">&gt;</span>
+<span class="token-tag">&lt;meta</span> <span class="token-attr">property</span>=<span class="token-value">"og:type"</span> <span class="token-attr">content</span>=<span class="token-value">"website"</span><span class="token-tag">&gt;</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Etiqueta</th><th scope="col">Contenido recomendado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>og:title</code></td><td>60-90 caracteres, atractivo</td></tr>
+          <tr><td><code>og:description</code></td><td>Resumen que invite al clic</td></tr>
+          <tr><td><code>og:image</code></td><td>URL absoluta, 1200×630 px aprox.</td></tr>
+          <tr><td><code>og:type</code></td><td><code>website</code> para páginas normales</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>ARIA complementa, nunca sustituye, a las etiquetas HTML nativas.</li>
+        <li>Usa <code>lang</code>, <code>alt</code> descriptivo y <code>.visually-hidden</code> para información extra.</li>
+        <li>Mantén el orden natural del foco; evita <code>tabindex</code> positivo.</li>
+        <li>Contraste mínimo 4.5:1 y tamaño con unidades relativas (<code>rem</code>).</li>
+        <li>Open Graph prepara una previsualización profesional para tus enlaces compartidos.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-9-multimedia.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+      </div>
+      <a href="../intermedio/leccion-1-metadatos-seo.html" class="btn btn-gradient">Siguiente: Metadatos y SEO <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— Básico · Lección 10</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="../intermedio/leccion-1-metadatos-seo.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../../assets/js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var caja = document.getElementById('cajaContraste');
+  var rango = document.getElementById('rangoContraste');
+
+  function aplicar(brillo) {
+    var r = Math.round(148 + (230 - 148) * (brillo / 100));
+    var g = Math.round(163 + (238 - 163) * (brillo / 100));
+    var b = Math.round(184 + (248 - 184) * (brillo / 100));
+    caja.style.color = 'rgb(' + r + ',' + g + ',' + b + ')';
+  }
+
+  rango.addEventListener('input', function() {
+    aplicar(parseInt(rango.value, 10));
+  });
+
+  gsap.from('#cajaContraste', {opacity: 0, y: 20, duration: 0.6, ease: 'power2.out'});
+});
+</script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

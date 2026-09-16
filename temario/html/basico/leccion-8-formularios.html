@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Leccion 8: Formularios HTML y validacion nativa. input, select, textarea, atributos de validacion y accesibilidad.">
+  <title>Leccion 8 — Formularios y Validacion | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">HTML</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Básico</a></li>
+        <li class="breadcrumb-item active text-light">Leccion 8</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft">Seccion HTML · Leccion 8</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>45 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Formularios y Validacion</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">La puerta de entrada de los datos de tu web: inputs, selects y validacion sin JavaScript.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-compass text-gradient me-2"></i>Fundamentos de la leccion</h2>
+      <p>Los formularios son la forma estandar de capturar datos del usuario: desde un simple campo de nombre hasta un formulario de registro completo con validacion en tiempo real. En esta leccion vas a dominar <code>&lt;input&gt;</code>, <code>&lt;select&gt;</code>, <code>&lt;textarea&gt;</code> y los atributos nativos que validan sin necesidad de una sola linea de JavaScript.</p>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-grid-3x3-gap text-gradient me-2"></i>Conceptos clave</h2>
+      <div class="d-flex flex-wrap gap-2">
+        <span class="badge-soft">label + input accesible</span>
+        <span class="badge-soft-cyan">validacion nativa</span>
+        <span class="badge-soft-sky">required, pattern, min/max</span>
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-input-cursor-text text-gradient me-2"></i>El elemento &lt;form&gt; y sus campos</h2>
+      <p>Un formulario envia datos al servidor. Su estructura base:</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;form</span> <span class="token-attr">action</span>=<span class="token-value">"/enviar"</span> <span class="token-attr">method</span>=<span class="token-value">"post"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;label</span> <span class="token-attr">for</span>=<span class="token-value">"email"</span><span class="token-tag">&gt;</span>Email<span class="token-tag">&lt;/label&gt;</span>
+  <span class="token-tag">&lt;input</span> <span class="token-attr">type</span>=<span class="token-value">"email"</span> <span class="token-attr">id</span>=<span class="token-value">"email"</span> <span class="token-attr">required</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;button</span> <span class="token-attr">type</span>=<span class="token-value">"submit"</span><span class="token-tag">&gt;</span>Enviar<span class="token-tag">&lt;/button&gt;</span>
+<span class="token-tag">&lt;/form&gt;</span></code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Importante:</strong>
+        cada <code>&lt;input&gt;</code> con <code>&lt;label for="id"&gt;</code> conectado. Hace el campo accesible y, al hacer clic en el label, se enfoca el input.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-ui-checks text-gradient me-2"></i>Tipos de input mas usados</h2>
+      <table class="table">
+        <thead>
+          <tr><th scope="col"><code>type</code></th><th scope="col">Para que se usa</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>text</code></td><td>Texto libre de una linea (por defecto)</td></tr>
+          <tr><td><code>email</code></td><td>Valida el formato de @ automaticamente</td></tr>
+          <tr><td><code>password</code></td><td>Oculta los caracteres escritos</td></tr>
+          <tr><td><code>number</code></td><td>Solo numeros con min/max y steps</td></tr>
+          <tr><td><code>date</code></td><td>Selector de fecha del navegador</td></tr>
+          <tr><td><code>tel</code></td><td>Numero de telefono (con teclado telefonico en movil)</td></tr>
+          <tr><td><code>url</code></td><td>Valida que sea una URL valida</td></tr>
+          <tr><td><code>checkbox</code></td><td>Casillas de seleccion multiple</td></tr>
+          <tr><td><code>radio</code></td><td>Opcion unica de un grupo</td></tr>
+          <tr><td><code>file</code></td><td>Subida de archivos</td></tr>
+          <tr><td><code>range</code></td><td>Deslizador de valores</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-shield-check text-gradient me-2"></i>Validacion nativa sin JavaScript</h2>
+      <p>Estos atributos hacen la validacion sin una sola linea de JS:</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;input</span> <span class="token-attr">type</span>=<span class="token-value">"email"</span>
+       <span class="token-attr">required</span>                          <span class="token-comment">&lt;!-- obligatorio --&gt;</span>
+       <span class="token-attr">minlength</span>=<span class="token-value">"3"</span>                      <span class="token-comment">&lt;!-- minimo de caracteres --&gt;</span>
+       <span class="token-attr">maxlength</span>=<span class="token-value">"50"</span>                     <span class="token-comment">&lt;!-- maximo de caracteres --&gt;</span>
+       <span class="token-attr">pattern</span>=<span class="token-value">"[a-z]{3}"</span>                  <span class="token-comment">&lt;!-- regex validacion --&gt;</span>
+       <span class="token-attr">placeholder</span>=<span class="token-value">"tucorreo@mail.com"</span><span class="token-tag">&gt;</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Atributo</th><th scope="col">Que valida</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>required</code></td><td>No puede quedar vacio</td></tr>
+          <tr><td><code>min</code> / <code>max</code></td><td>Rango en number y date</td></tr>
+          <tr><td><code>minlength</code> / <code>maxlength</code></td><td>Limites de longitud</td></tr>
+          <tr><td><code>pattern</code></td><td>Expresion regular</td></tr>
+          <tr><td><code>step</code></td><td>Incrementos permitidos (ej: <code>step="5"</code>)</td></tr>
+          <tr><td><code>accept</code></td><td>Tipos de archivo para <code>file</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-emoji-smile text-gradient me-2"></i>Demo interactiva: formulario en vivo</h2>
+      <div class="demo-box">
+        <form id="demoForm" class="row g-3" novalidate>
+          <div class="col-md-6">
+            <label for="fNombre" class="form-label text-white small fw-semibold">Nombre completo</label>
+            <input type="text" class="form-control bg-dark text-light border-secondary" id="fNombre" required minlength="3" placeholder="Tu nombre">
+            <div class="invalid-feedback">El nombre necesita al menos 3 letras.</div>
+          </div>
+          <div class="col-md-6">
+            <label for="fEmail" class="form-label text-white small fw-semibold">Email</label>
+            <input type="email" class="form-control bg-dark text-light border-secondary" id="fEmail" required placeholder="tucorreo@mail.com">
+            <div class="invalid-feedback">Escribe un email valido.</div>
+          </div>
+          <div class="col-md-6">
+            <label for="fEdad" class="form-label text-white small fw-semibold">Edad</label>
+            <input type="number" class="form-control bg-dark text-light border-secondary" id="fEdad" required min="18" max="99" placeholder="18">
+            <div class="invalid-feedback">Debes ser mayor de 18.</div>
+          </div>
+          <div class="col-md-6">
+            <label for="fNivel" class="form-label text-white small fw-semibold">Nivel</label>
+            <select class="form-select bg-dark text-light border-secondary" id="fNivel" required>
+              <option value="">Elige una opcion...</option>
+              <option>Principiante</option>
+              <option>Intermedio</option>
+              <option>Avanzado</option>
+            </select>
+            <div class="invalid-feedback">Elige un nivel.</div>
+          </div>
+          <div class="col-12">
+            <label for="fMensaje" class="form-label text-white small fw-semibold">Mensaje</label>
+            <textarea class="form-control bg-dark text-light border-secondary" id="fMensaje" rows="3" maxlength="200" placeholder="Escribe hasta 200 caracteres"></textarea>
+          </div>
+          <div class="col-12 form-check">
+            <input class="form-check-input" type="checkbox" id="fAcepto" required>
+            <label class="form-check-label text-white small" for="fAcepto">Acepto los terminos y condiciones</label>
+            <div class="invalid-feedback">Debes aceptar los terminos.</div>
+          </div>
+          <div class="col-12">
+            <button class="btn btn-gradient px-5" type="submit"><i class="bi bi-send me-2"></i>Enviar</button>
+            <button class="btn btn-ghost-glass ms-2" type="reset"><i class="bi bi-arrow-counterclockwise me-1"></i>Limpiar</button>
+          </div>
+          <div id="fSuccess" class="col-12 d-none">
+            <div class="alert alert-success bg-opacity-75 mb-0 d-flex align-items-center gap-2">
+              <i class="bi bi-check-circle-fill me-1"></i> &#161;Formulario valido! Aqui usarias <code>fetch()</code> para enviar los datos.
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rapido</h2>
+      <ul>
+        <li>Siempre <code>&lt;label for&gt;</code> conectado a su <code>&lt;input id&gt;</code>.</li>
+        <li>La validacion nativa (required, pattern, min/max) cubre el 80% del trabajo.</li>
+        <li><code>&lt;select&gt;</code> para opciones; <code>&lt;textarea&gt;</code> para texto largo.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-7-tablas.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-9-multimedia.html" class="btn btn-gradient">Siguiente: Multimedia <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-9-multimedia.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../../assets/js/main.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("demoForm");
+  const success = document.getElementById("fSuccess");
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    e.stopPropagation();
+    form.classList.add("was-validated");
+    if (form.checkValidity()) {
+      success.classList.remove("d-none");
+      form.classList.remove("was-validated");
+      form.reset();
+      gsap.from("#" + success.id, { y: 20, opacity: 0, duration: 0.5 });
+    }
+  });
+});
+</script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 6 de HTML Intermedio: atributos globales (data-*, lang, hidden, contenteditable, tabindex) y buenas prácticas.">
+  <title>Lección 6 — Atributos globales | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">HTML</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Intermedio</a></li>
+        <li class="breadcrumb-item active text-light">Lección 6</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft">Sección: HTML Intermedio · Lección 6</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>35 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Atributos globales</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Los superpoderes que comparten todas las etiquetas: data-*, lang, hidden, contenteditable, draggable y más.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-compass text-gradient me-2"></i>¿Qué son los atributos globales?</h2>
+      <p>Los atributos <strong>globales</strong> se pueden aplicar a cualquier elemento HTML. Dominarlos multiplica tu control sobre cada página.</p>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-database text-gradient me-2"></i>data-*: datos personalizados</h2>
+      <p>El prefijo <code>data-</code> crea atributos propios para guardar información y leerla desde JavaScript/CSS:</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;button</span> <span class="token-attr">data-price</span>=<span class="token-value">"99"</span> <span class="token-attr">data-producto</span>=<span class="token-value">"auriculares"</span><span class="token-tag">&gt;</span>
+  Comprar
+<span class="token-tag">&lt;/button&gt;</span></code></pre>
+      <pre class="code-block"><code><span class="token-comment">// JavaScript accede sin fricción:</span>
+<span class="token-tag">const</span> btn = document.querySelector(<span class="token-value">'[data-producto]'</span>);
+console.log(btn.dataset.precio); <span class="token-comment">// "99"</span></code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        En CSS usa selectores como <code>[data-theme="dark"]</code> para temas o estados. Este mismo sitio alterna tema con ese truco.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-translate text-gradient me-2"></i>lang, dir y translate</h2>
+      <p>Dejan el idioma y la dirección de lectura bien definidos para buscadores y lectores de pantalla:</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;html</span> <span class="token-attr">lang</span>=<span class="token-value">"es"</span><span class="token-tag">&gt;</span>
+<span class="token-tag">&lt;blockquote</span> <span class="token-attr">lang</span>=<span class="token-value">"en"</span> <span class="token-attr">translate</span>=<span class="token-value">"no"</span><span class="token-tag">&gt;</span>Stay hungry.<span class="token-tag">&lt;/blockquote&gt;</span>
+<span class="token-tag">&lt;p</span> <span class="token-attr">dir</span>=<span class="token-value">"rtl"</span><span class="token-tag">&gt;</span>نص عربي<span class="token-tag">&lt;/p&gt;</span></code></pre>
+      <ul class="mt-3">
+        <li><code>lang</code> en <code>&lt;html&gt;</code> es obligatorio para una buena accesibilidad.</li>
+        <li><code>translate="no"</code> evita que el navegador traduzca marcas, códigos o nombres propios.</li>
+        <li><code>dir="rtl"</code> invierte el flujo para idiomas árabes o hebreos.</li>
+      </ul>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-arrow-right text-gradient me-2"></i>hidden, contenteditable y draggable</h2>
+      <table class="table">
+        <thead>
+          <tr><th scope="col">Atributo</th><th scope="col">Qué hace</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>hidden</code></td><td>Oculta el elemento (ni se muestra ni entra en el flujo)</td></tr>
+          <tr><td><code>contenteditable</code></td><td>Hace editable el contenido en el navegador, ideal para editores</td></tr>
+          <tr><td><code>draggable</code></td><td>Permite arrastrar (base de Drag &amp; Drop)</td></tr>
+          <tr><td><code>spellcheck</code></td><td>Activa o desactiva la corrección ortográfica</td></tr>
+        </tbody>
+      </table>
+      <pre class="code-block"><code><span class="token-tag">&lt;p</span> <span class="token-attr">hidden</span><span class="token-tag">&gt;</span>No se verá ni se accesibilizará<span class="token-tag">&lt;/p&gt;</span>
+<span class="token-tag">&lt;div</span> <span class="token-attr">contenteditable</span>=<span class="token-value">"true"</span> <span class="token-attr">spellcheck</span>=<span class="token-value">"true"</span><span class="token-tag">&gt;</span>
+  Edita esta nota…
+<span class="token-tag">&lt;/div&gt;</span></code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-keyboard text-gradient me-2"></i>tabindex y el orden del foco</h2>
+      <p>Controla quién recibe el foco con teclado y en qué orden:</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;button&gt;</span>Natural 1<span class="token-tag">&lt;/button&gt;</span>
+<span class="token-tag">&lt;button</span> <span class="token-attr">tabindex</span>=<span class="token-value">"-1"</span><span class="token-tag">&gt;</span>Fuera del orden<span class="token-tag">&lt;/button&gt;</span>
+<span class="token-tag">&lt;div</span> <span class="token-attr">tabindex</span>=<span class="token-value">"0"</span><span class="token-tag">&gt;</span>Div enfocable<span class="token-tag">&lt;/div&gt;</span></code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        Evita <code>tabindex</code> positivos (1, 2, 3…): rompen el orden natural para usuarios de teclado. Usa 0 o -1.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-lightbulb text-gradient me-2"></i>Demo interactiva</h2>
+      <div class="demo-box text-center p-4">
+        <p style="color:#cbd5e1 !important;">Edita el texto del panel (es <code>contenteditable</code>) y toca el botón para leer sus datos <code>data-</code>:</p>
+        <div contenteditable="true" class="border rounded p-3 mb-3 text-start" style="color:#e2e8f0 !important; min-height:70px;">Nota editable: cambia este texto y pulsa el botón…</div>
+        <button class="btn btn-gradient" data-accion="leer" onclick="document.querySelector('.text-secondary').innerHTML='Acción data-*: ' + this.dataset.accion + ' — leída desde dataset';">Ejecutar con data-*</button>
+      </div>
+      <div class="tip-box mt-4">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Usa <code>spellcheck="false"</code> en campos de código o terminal para que el navegador no subraye tu sintaxis.
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li><code>data-*</code> guarda datos custom accesibles desde JS y CSS.</li>
+        <li><code>lang</code>, <code>dir</code> y <code>hidden</code> definen idioma, dirección y visibilidad.</li>
+        <li>Nada de <code>tabindex</code> positivos: mantén el orden natural del foco.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-5-elementos-interactivos.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+      </div>
+      <a href="../avanzado/leccion-1-web-components.html" class="btn btn-gradient">Siguiente: Web Components <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— HTML Intermedio · Lección 6</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="../avanzado/leccion-1-web-components.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

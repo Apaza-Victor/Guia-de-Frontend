@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 8 de JavaScript Intermedio: APIs del navegador. navigator, geolocalización, Clipboard API, estado de conexión online/offline y más APIs del navegador en JavaScript.">
+  <title>Lección 8 — APIs del navegador | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">JavaScript</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Intermedio</a></li>
+        <li class="breadcrumb-item active text-light">Lección 8</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-hdd-network text-gradient me-1"></i>JavaScript Intermedio · Lección 8</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>40 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">APIs del navegador</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Haz que tu app hable con el dispositivo: portapapeles, ubicación y conexión.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-tools text-gradient me-2"></i>Detectar capacidades primero</h2>
+      <p>
+        Las APIs modernas no están en todos los navegadores. Antes de usarlas, comprueba que existen con un simple
+        <code>if</code>. Es lo que se llama <strong>feature detection</strong>:
+      </p>
+      <pre class="code-block"><code><span class="token-tag">if</span> (<span class="token-value">'clipboard'</span> <span class="token-tag">in</span> <span class="token-prop">navigator</span>) {
+  <span class="token-comment">// usa navigator.clipboard</span>
+} <span class="token-tag">else</span> {
+  <span class="token-comment">// fallback con document.execCommand</span>
+}</code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        La mayoría de estas APIs requieren <strong>HTTPS</strong> (o <code>localhost</code>). En <code>file://</code>
+        pueden fallar o pedir permisos.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-clipboard-check text-gradient me-2"></i>Clipboard API: copiar con estilo</h2>
+      <p>
+        El clásico "copiar al portapapeles" ya no necesita textareas ocultos. La API moderna es promesa pura:
+      </p>
+      <pre class="code-block"><code><span class="token-tag">async</span> <span class="token-tag">function</span> copiarTexto(texto) {
+  <span class="token-tag">try</span> {
+    <span class="token-tag">await</span> <span class="token-prop">navigator</span>.<span class="token-prop">clipboard</span>.<span class="token-attr">writeText</span>(texto);
+    <span class="token-prop">console</span>.log(<span class="token-value">'Copiado ✓'</span>);
+  } <span class="token-tag">catch</span> (err) {
+    <span class="token-prop">console</span>.error(<span class="token-value">'No se pudo copiar'</span>, err);
+  }
+}</code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        Debe llamarse <strong>dentro de un gesto del usuario</strong> (clic) para que los permisos se concedan.
+        No funciona si lo lanzas al cargar la página.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-geo-alt text-gradient me-2"></i>Geolocalización</h2>
+      <p>
+        Pide la posición (con permiso del usuario) mediante <code>navigator.geolocation.getCurrentPosition</code>.
+        El callback recibe un objeto con <code>coords.latitude</code> y <code>coords.longitude</code>:
+      </p>
+      <pre class="code-block"><code><span class="token-prop">navigator</span>.<span class="token-prop">geolocation</span>.<span class="token-attr">getCurrentPosition</span>(
+  (pos) =&gt; {
+    <span class="token-prop">console</span>.log(<span class="token-value">'Lat:'</span>, pos.<span class="token-prop">coords</span>.<span class="token-attr">latitude</span>);
+    <span class="token-prop">console</span>.log(<span class="token-value">'Lng:'</span>, pos.<span class="token-prop">coords</span>.<span class="token-attr">longitude</span>);
+  },
+  (error) =&gt; <span class="token-prop">console</span>.error(error.<span class="token-attr">message</span>)
+);</code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Código de error</th><th scope="col">Significado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>1 PERMISSION_DENIED</code></td><td>el usuario denegó el permiso</td></tr>
+          <tr><td><code>2 POSITION_UNAVAILABLE</code></td><td>no se pudo obtener posición</td></tr>
+          <tr><td><code>3 TIMEOUT</code></td><td>tardó demasiado</td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Siempre muestra un fallback ("no pudimos obtener tu ubicación") en el callback de error:
+        los permisos se deniegan más a menudo de lo que crees.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-wifi text-gradient me-2"></i>Estado de conexión</h2>
+      <p>
+        Detectar si hay red se hace con <code>navigator.onLine</code> y los eventos <code>online</code>/<code>offline</code>
+        (se disparan automáticamente): puedes avisar al usuario en tiempo real:
+      </p>
+      <pre class="code-block"><code><span class="token-prop">window</span>.<span class="token-attr">addEventListener</span>(<span class="token-value">'offline'</span>, () =&gt; {
+  <span class="token-prop">console</span>.log(<span class="token-value">'Sin conexión'</span>);
+});
+<span class="token-prop">window</span>.<span class="token-attr">addEventListener</span>(<span class="token-value">'online'</span>, () =&gt; {
+  <span class="token-prop">console</span>.log(<span class="token-value">'De vuelta a internet'</span>);
+});</code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-controller text-gradient me-2"></i>Demo: caja de herramientas</h2>
+      <p>
+        Un mini panel con tres APIs en acción: copiar al portapapeles, estado de conexión y geolocalización.
+        (La geolocalización pide permiso la primera vez.)
+      </p>
+      <div class="demo-box p-4">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="text-center">
+              <button type="button" id="demoCopiar" class="btn btn-gradient w-100 mb-2"><i class="bi bi-clipboard me-1"></i>Copiar enlace</button>
+              <p class="small mb-0" style="color:#94a3b8;">Copia el texto de prueba</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="text-center">
+              <button type="button" id="demoRed" class="btn btn-ghost-glass w-100 mb-2"><i class="bi bi-wifi me-1"></i>Chequear red</button>
+              <p class="small mb-0" id="demoEstadoRed" style="color:#94a3b8;">Pulsa para comprobar</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="text-center">
+              <button type="button" id="demoGeo" class="btn btn-ghost-glass w-100 mb-2"><i class="bi bi-geo-alt me-1"></i>Mi ubicación</button>
+              <p class="small mb-0" id="demoCoordenadas" style="color:#94a3b8;">Pulsa para obtenerla</p>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-3">
+          <span id="demoFeedback" class="small" style="color:#22c55e;"></span>
+        </div>
+      </div>
+      <div class="warning-box mt-4">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        Si esta página se abre como <code>file://</code>, el portapapeles y la geolocalización pueden requerir
+        un servidor local (Live Server) para funcionar con permisos.
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>Comprueba la API con <code>'clipboard' in navigator</code> antes de usarla: <strong>feature detection</strong>.</li>
+        <li>Clipboard, geolocalización y notificaciones necesitan un <strong>gesto del usuario</strong> y permisos.</li>
+        <li>Usa <code>navigator.onLine</code> + <code>online/offline</code> para UI reactiva a la red.</li>
+        <li>Siempre define un <strong>fallback</strong> claro cuando fallan estas APIs.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <div class="d-flex gap-2">
+        <a href="../../../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Inicio</a>
+        <a href="leccion-7-temporizadores.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      </div>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+      </div>
+      <a href="leccion-9-validacion-formularios.html" class="btn btn-gradient">Siguiente: Validación <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— JavaScript Intermedio · Lección 8</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-9-validacion-formularios.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../../assets/js/main.js"></script>
+
+<script>
+(function () {
+  const feedback = document.getElementById('demoFeedback');
+
+  function avisar(mensaje, ok) {
+    feedback.textContent = mensaje;
+    feedback.style.color = ok ? '#22c55e' : '#ef4444';
+  }
+
+  document.getElementById('demoCopiar').addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText('https://frontendpro.dev/guia');
+      avisar('Enlace copiado al portapapeles ✓', true);
+    } catch (err) {
+      avisar('No se pudo copiar: ' + err.message, false);
+    }
+  });
+
+  const estadoRed = document.getElementById('demoEstadoRed');
+  function pintarRed() {
+    const ok = navigator.onLine;
+    estadoRed.textContent = ok ? 'Estás en línea ✓' : 'Sin conexión ✗';
+    estadoRed.style.color = ok ? '#22c55e' : '#ef4444';
+  }
+  document.getElementById('demoRed').addEventListener('click', pintarRed);
+  window.addEventListener('online', pintarRed);
+  window.addEventListener('offline', pintarRed);
+
+  document.getElementById('demoGeo').addEventListener('click', () => {
+    const coords = document.getElementById('demoCoordenadas');
+    if (!('geolocation' in navigator)) {
+      coords.textContent = 'Geolocalización no soportada';
+      coords.style.color = '#ef4444';
+      return;
+    }
+    coords.textContent = 'Pidiendo permiso…';
+    coords.style.color = '#2563eb';
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        coords.textContent = pos.coords.latitude.toFixed(4) + ', ' + pos.coords.longitude.toFixed(4);
+        coords.style.color = '#22c55e';
+        avisar('Ubicación obtenida ✓', true);
+      },
+      (error) => {
+        coords.textContent = 'Denegado o no disponible';
+        coords.style.color = '#ef4444';
+        avisar('No se pudo obtener la ubicación.', false);
+      }
+    );
+  });
+})();
+</script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 6 de CSS Avanzado: metodología BEM (Block, Element, Modifier), nombres de clases, especificidad plana, arquitectura CSS y componentes reutilizables.">
+  <title>Lección 6 — Metodología BEM y arquitectura | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+  <style>
+    .demo-bem-tarjeta {
+      max-width: 320px;
+      margin: 0 auto;
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: box-shadow 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
+    }
+    .demo-bem-tarjeta--destacada {
+      border-color: rgba(14, 165, 233, 0.7);
+      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.22), 0 18px 40px rgba(2, 6, 23, 0.5);
+    }
+    .demo-bem-tarjeta__cabecera {
+      height: 120px;
+      display: grid;
+      place-items: center;
+      font-size: 2.4rem;
+      color: #93c5fd;
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+    .demo-bem-tarjeta--destacada .demo-bem-tarjeta__cabecera {
+      background: linear-gradient(135deg, #2563eb, #0ea5e9);
+      color: #fff;
+    }
+    .demo-bem-tarjeta__cuerpo { padding: 1.25rem; }
+    .demo-bem-tarjeta__titulo { color: #e2e8f0; font-weight: 700; margin-bottom: 0.25rem; }
+    .demo-bem-tarjeta__texto  { color: #94a3b8; font-size: 0.9rem; margin-bottom: 1rem; }
+    .demo-bem-tarjeta__boton  { background: transparent; border: 1px solid #2563eb; color: #93c5fd; }
+    .demo-bem-tarjeta--destacada .demo-bem-tarjeta__boton { background: #0ea5e9; border-color: #0ea5e9; color: #fff; }
+  </style>
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">CSS</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Avanzado</a></li>
+        <li class="breadcrumb-item active text-light">Lección 6</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-3-circle me-1"></i>CSS Avanzado · Lección 6</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>35 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Metodología BEM y arquitectura</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Nombra tus clases como una profesional: bloques, elementos y modificadores para un CSS escalable y predecible.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-grid text-gradient me-2"></i>¿Qué es BEM?</h2>
+      <p>
+        <strong>BEM</strong> (<em>Block, Element, Modifier</em>) es una convención de nombres que organiza el CSS en
+        <strong>bloques</strong> reutilizables, sus <strong>elementos</strong> internos y sus variaciones
+        (<strong>modificadores</strong>). El patrón de nombre es:
+      </p>
+      <pre class="code-block"><code><span class="token-tag">.bloque__elemento--modificador</span>
+
+<span class="token-comment">/* Ejemplo real: una tarjeta de producto */</span>
+<span class="token-tag">.tarjeta</span>              <span class="token-comment">/* bloque              */</span>
+<span class="token-tag">.tarjeta__imagen</span>     <span class="token-comment">/* elemento (imagen)  */</span>
+<span class="token-tag">.tarjeta__titulo</span>     <span class="token-comment">/* elemento (título)  */</span>
+<span class="token-tag">.tarjeta__boton</span>      <span class="token-comment">/* elemento (botón)   */</span>
+<span class="token-tag">.tarjeta__boton--ok</span>  <span class="token-comment">/* mod. del botón     */</span>
+<span class="token-tag">.tarjeta--destacada</span>  <span class="token-comment">/* mod. del bloque    */</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Familia</th><th scope="col">Nombre</th><th scope="col">Significado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Bloque</td><td><code>.tarjeta</code></td><td>Componente autónomo y reutilizable</td></tr>
+          <tr><td>Elemento</td><td><code>.tarjeta__titulo</code></td><td>Parte que solo tiene sentido dentro del bloque</td></tr>
+          <tr><td>Modificador</td><td><code>.tarjeta--destacada</code></td><td>Variación de estado o apariencia</td></tr>
+        </tbody>
+      </table>
+      <p>
+        Dos guiones bajos separan bloque de elemento; dos guiones separan el modificador. El objetivo: <strong>especificidad
+        plana</strong> (una clase = un selector), sin anidamientos infinitos ni reglas <code>!important</code>.
+      </p>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-diagram-3 text-gradient me-2"></i>Bloques versus elementos</h2>
+      <p>
+        Un <strong>bloque</strong> es un componente independiente que podría vivir en cualquier parte del sitio sin perder
+        sentido. Un <strong>elemento</strong> solo existe dentro de su bloque: <code>.menu__enlace</code> no significa nada
+        fuera de <code>.menu</code>. Por eso BEM prohíbe nombrar elementos globales.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">/* Bloques anidados: cada uno conserva su propio vocabulario */</span>
+<span class="token-tag">&lt;header</span> <span class="token-attr">class</span>=<span class="token-value">"cabecera"</span><span class="token-tag">&gt;</span>
+  <span class="token-tag">&lt;nav</span> <span class="token-attr">class</span>=<span class="token-value">"menu"</span><span class="token-tag">&gt;</span>
+    <span class="token-tag">&lt;a</span> <span class="token-attr">class</span>=<span class="token-value">"menu__enlace menu__enlace--activo"</span> <span class="token-attr">href</span>=<span class="token-value">"#"</span><span class="token-tag">&gt;</span>Inicio<span class="token-tag">&lt;/a&gt;</span>
+  <span class="token-tag">&lt;/nav&gt;</span>
+<span class="token-tag">&lt;/header&gt;</span></code></pre>
+      <p class="mt-3">
+        Nótese que el estado "activo" es un <strong>modificador</strong> independiente: semanas después, cambiar el estado
+        activo del menú no toca el HTML hijo, solo la clase que lleva.
+      </p>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-box-seam text-gradient me-2"></i>BEM en la práctica: un componente real</h2>
+      <p>
+        Los modificadores cambian el aspecto de un bloque o elemento sin duplicar estilos. Observa cómo una variante
+        "destacada" sobreescribe únicamente lo que necesita:
+      </p>
+      <pre class="code-block"><code><span class="token-comment">/* CSS: base + variante, sin cascada "accidental" */</span>
+<span class="token-tag">.tarjeta</span>             { <span class="token-prop">background</span>: <span class="token-value">#fff</span>; <span class="token-prop">border-radius</span>: <span class="token-num">1rem</span>; <span class="token-prop">padding</span>: <span class="token-num">1rem</span>; }
+<span class="token-tag">.tarjeta--destacada</span> { <span class="token-prop">border</span>: <span class="token-num">2px</span> <span class="token-value">solid</span> <span class="token-value">#2563eb</span>; <span class="token-prop">box-shadow</span>: <span class="token-num">0 12px 30px</span> <span class="token-value">rgba(37, 99, 235, 0.35)</span>; }
+
+<span class="token-comment">/* HTML: dos clases que se complementan */</span>
+<span class="token-tag">&lt;article</span> <span class="token-attr">class</span>=<span class="token-value">"tarjeta tarjeta--destacada"</span><span class="token-tag">&gt;</span> … <span class="token-tag">&lt;/article&gt;</span></code></pre>
+      <div class="tip-box mt-3">
+        <i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>
+        <strong class="text-white">Tip:</strong> los modificadores <em>se añaden</em>, nunca <em>sustituyen</em> la clase
+        base. El tema abre el bloque y el modificador lo ajusta, lo que te permite cambiar todo el componente tocando un
+        solo archivo.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-layers text-gradient me-2"></i>Especificidad plana y buenas prácticas</h2>
+      <p>
+        La mayor ventaja de BEM no es estética: es que todos tus selectores pesan <strong>exactamente lo mismo</strong>
+        (una clase). Cuando dos reglas empatan, gana la que aparece después en el CSS, así que el resultado depende del
+        orden, nunca de un selector más largo. Resultado: CSS más predecible, más barato de mantener y sin
+        <code>!important</code>.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">/* ✗ Especificidad creciente e impredecible */</span>
+<span class="token-tag">.sidebar</span> <span class="token-tag">nav ul li a:hover</span> { … }
+
+<span class="token-comment">/* ✓ Una clase por nivel: plana y reutilizable */</span>
+<span class="token-tag">.menu</span>            { … }
+<span class="token-tag">.menu__enlace</span>    { … }
+<span class="token-tag">.menu__enlace:hover</span> { … }
+<span class="token-tag">.menu__enlace--activo</span> { … }</code></pre>
+      <ul class="mt-3">
+        <li>Evita anidar elementos: <code>.menu__item__enlace</code> es difícil de leer. Prefiere <code>.menu__item</code> + <code>.menu__enlace</code>.</li>
+        <li>Un elemento dentro de un modificador (<code>.menu__enlace--activo</code>) se escribe <strong>pegado al bloque</strong> del que depende.</li>
+        <li>Los estados de <code>JS</code> (clases <code>is-*</code>) se reservan como marcadores; BEM describe estructura, no comportamiento.</li>
+      </ul>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        BEM puede parecer verboso (<code>.tarjeta__titulo</code> vs. <code>.titulo</code>). Es un precio a pagar
+        consciente: los nombres largos se escriben una vez si usas CSS Modules, preprocesadores o plantillas que reutilizan
+        la clase.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-magic text-gradient me-2"></i>Demo interactiva: tarjeta BEM con modificador</h2>
+      <p>
+        Esta tarjeta está construida 100% con BEM: <code>demo-bem-tarjeta</code> es el bloque, sus partes usan
+        <code>__</code> y el botón de abajo añade o quita el modificador <code>--destacada</code>. Observa que el CSS
+        "vive" en el modificador, no se duplica en el HTML.
+      </p>
+      <div class="demo-box">
+        <div class="p-3">
+          <article class="demo-bem-tarjeta" id="demoBemTarjeta">
+            <div class="demo-bem-tarjeta__cabecera"><i class="bi bi-cpu-fill"></i></div>
+            <div class="demo-bem-tarjeta__cuerpo">
+              <h5 class="demo-bem-tarjeta__titulo">Frontend Pro</h5>
+              <p class="demo-bem-tarjeta__texto">Una tarjeta construida con bloques, elementos y modificadores BEM.</p>
+              <button class="btn btn-sm demo-bem-tarjeta__boton"><i class="bi bi-lightning-charge me-1"></i>Suscribirme</button>
+            </div>
+          </article>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center gap-2 pb-3">
+          <button class="btn btn-gradient btn-sm" onclick="window.demoAlternarBEM()"><i class="bi bi-stars me-1"></i>Alternar modificador --destacada</button>
+          <button class="btn btn-ghost-glass btn-sm" onclick="window.demoPulsoBEM()"><i class="bi bi-heart me-1"></i>Pulso con GSAP</button>
+        </div>
+        <p class="small mt-0 mb-0 pb-3" style="color:var(--text-muted);">El modificador cambia borde, sombra, cabecera y botón de una sola vez. <code>demo-bem-tarjeta--destacada</code> se añade y se quita desde JS con <code>classList.toggle()</code>.</p>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>BEM: <code>bloque__elemento--modificador</code> para especificidad plana y componentes reutilizables.</li>
+        <li>Los elementos solo existen dentro de su bloque; los modificadores <strong>se añaden</strong> a la clase base.</li>
+        <li>Todos los selectores pesan lo mismo: el orden del CSS decide, no la longitud del selector.</li>
+        <li>No anides elementos, no uses <code>!important</code> y reserva las clases <code>is-*</code> como marcadores de JS.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-5-funciones-clamp.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span>
+      </div>
+      <a href="leccion-7-efectos.html" class="btn btn-gradient">Siguiente: Efectos modernos <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— CSS Avanzado · Lección 6</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="leccion-5-funciones-clamp.html" class="text-secondary"><i class="bi bi-arrow-left-circle fs-5"></i></a>
+      <a href="leccion-7-efectos.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../../assets/js/main.js"></script>
+<script>
+  window.demoAlternarBEM = function () {
+    document.getElementById('demoBemTarjeta').classList.toggle('demo-bem-tarjeta--destacada');
+    gsap.fromTo('#demoBemTarjeta', { scale: 0.97 }, { scale: 1, duration: 0.5, ease: 'power2.out' });
+  };
+  window.demoPulsoBEM = function () {
+    gsap.fromTo('#demoBemTarjeta', { scale: 0.96 }, { scale: 1, duration: 0.6, ease: 'elastic.out(1, 0.4)' });
+  };
+</script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

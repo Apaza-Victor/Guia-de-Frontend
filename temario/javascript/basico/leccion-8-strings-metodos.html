@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 8 de JavaScript Básico: Strings y métodos. length, toUpperCase, toLowerCase, trim, includes, startsWith, replace, split/join, slice, template literals y toFixed.">
+  <title>Lección 8 — Strings y métodos | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">JavaScript</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Básico</a></li>
+        <li class="breadcrumb-item active text-light">Lección 8</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-filetype-js me-1"></i>JavaScript Básico · Lección 8</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>40 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Strings y métodos</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Manipula texto como un profesional: mide, transforma, busca, corta y une strings, y formatea números con toFixed.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-alphabet text-gradient me-2"></i>Los strings y su longitud</h2>
+      <p>Un <code>string</code> es una secuencia de caracteres entre comillas. Aunque se vea como un texto simple, cada carácter tiene una posición (índice) que empieza en <code>0</code>. La propiedad <code>length</code> cuenta cuántos caracteres hay.</p>
+
+      <pre class="code-block"><code><span class="token-tag">const</span> nombre = <span class="token-value">"Frontend Pro"</span>;
+
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(nombre.length);   <span class="token-comment">// 12 (incluye el espacio)</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(nombre[<span class="token-num">0</span>]);        <span class="token-comment">// "F" ← primer carácter (índice 0)</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(nombre[<span class="token-num">11</span>]);       <span class="token-comment">// "o" ← último carácter</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(nombre[nombre.length - <span class="token-num">1</span>]); <span class="token-comment">// "o" ← siempre el último</span></code></pre>
+
+      <div class="table-responsive mt-3">
+        <table class="table">
+          <thead>
+            <tr><th scope="col">Posición</th><th scope="col">0</th><th scope="col">1</th><th scope="col">…</th><th scope="col">7</th><th scope="col">…</th><th scope="col">11</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Carácter</td><td>F</td><td>r</td><td>…</td><td>d</td><td>…</td><td>o</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-arrows-fullscreen text-gradient me-2"></i>Transformar y limpiar: toUpperCase, toLowerCase y trim</h2>
+      <p>Estos métodos <strong>devuelven un string nuevo</strong> (los strings son inmutables: el original no cambia). <code>trim()</code> elimina espacios de los extremos, imprescindible al leer formularios.</p>
+
+      <pre class="code-block"><code><span class="token-tag">const</span> usario = <span class="token-value">"   Ana García  "</span>;
+
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(usario.trim());                 <span class="token-comment">// "Ana García"</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(usario.trim().toUpperCase());  <span class="token-comment">// "ANA GARCÍA"</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(usario.trim().toLowerCase());  <span class="token-comment">// "ana garcía"</span>
+
+<span class="token-comment">// Encadenar métodos es habitual y legible</span>
+<span class="token-tag">const</span> email = <span class="token-value">"  USUARIO@GMAIL.COM  "</span>;
+<span class="token-tag">const</span> limpio = email.trim().toLowerCase(); <span class="token-comment">// "usuario@gmail.com"</span></code></pre>
+
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Antes de comparar textos de formularios, aplica siempre <code>.trim().toLowerCase()</code> para evitar errores por espacios y mayúsculas.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-search text-gradient me-2"></i>Buscar y verificar: includes, startsWith y replace</h2>
+      <p>Para comprobar si un texto contiene, empieza o termina con una palabra, o para reemplazar fragmentos, usa estos tres métodos.</p>
+
+      <pre class="code-block"><code><span class="token-tag">const</span> frase = <span class="token-value">"Aprende JavaScript en Frontend Pro"</span>;
+
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(frase.includes(<span class="token-value">"JavaScript"</span>)); <span class="token-comment">// true</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(frase.includes(<span class="token-value">"CSS"</span>));        <span class="token-comment">// false</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(frase.startsWith(<span class="token-value">"Aprende"</span>)); <span class="token-comment">// true</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(frase.endsWith(<span class="token-value">"Pro"</span>));     <span class="token-comment">// true</span>
+
+<span class="token-comment">// replace reemplaza la PRIMERA coincidencia</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(frase.replace(<span class="token-value">"JavaScript"</span>, <span class="token-value">"CSS"</span>));
+<span class="token-comment">// "Aprende CSS en Frontend Pro"</span>
+
+<span class="token-comment">// Para todas las coincidencias usa una expresión regular /g</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(<span class="token-value">"a-a-a"</span>.replace(<span class="token-tag">/a/g</span>, <span class="token-value">"o"</span>)); <span class="token-comment">// "o-o-o"</span></code></pre>
+
+      <div class="table-responsive mt-3">
+        <table class="table">
+          <thead>
+            <tr><th scope="col">Método</th><th scope="col">Qué hace</th><th scope="col">Resultado</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>includes("x")</code></td><td>¿Contiene el texto "x"?</td><td><code>boolean</code></td></tr>
+            <tr><td><code>startsWith("x")</code></td><td>¿Empieza con "x"?</td><td><code>boolean</code></td></tr>
+            <tr><td><code>endsWith("x")</code></td><td>¿Termina con "x"?</td><td><code>boolean</code></td></tr>
+            <tr><td><code>replace("a", "b")</code></td><td>Reemplaza la primera coincidencia</td><td>string nuevo</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-scissors text-gradient me-2"></i>Cortar y unir: slice, substring, split y join</h2>
+      <p><code>slice()</code> y <code>substring()</code> extraen una parte del string; <code>split()</code>/<code>join()</code> convierten entre texto y arrays.</p>
+
+      <pre class="code-block"><code><span class="token-tag">const</span> url = <span class="token-value">"frontend-pro.com/articulos/javascript"</span>;
+
+<span class="token-comment">// slice(inicio, finInclusive?): corta el string</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(url.slice(<span class="token-num">0</span>, <span class="token-num">15</span>)); <span class="token-comment">// "frontend-pro.c"</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(url.slice(<span class="token-num">-10</span>));   <span class="token-comment">// "javascript" ← índices negativos</span>
+
+<span class="token-comment">// substring: similar, pero sin soportar índices negativos</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(url.substring(<span class="token-num">0</span>, <span class="token-num">15</span>)); <span class="token-comment">// "frontend-pro.c"</span>
+
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(<span class="token-value">"a,b,c"</span>.split(<span class="token-value">","</span>));       <span class="token-comment">// ["a", "b", "c"]</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>([<span class="token-value">"a"</span>, <span class="token-value">"b"</span>, <span class="token-value">"c"</span>].join(<span class="token-value">"-"</span>)); // "a-b-c"
+
+<span class="token-comment">// Patrón típico: separar y volver a unir</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(<span class="token-value">"Hola mundo JS"</span>.split(<span class="token-value">" "</span>).join(<span class="token-value">" · "</span>));</code></pre>
+
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Diferencia clave:</strong>
+        <code>slice()</code> acepta <strong>índices negativos</strong> (cuenta desde el final) y es la recomendada. <code>substring()</code> no los soporta.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-braces text-gradient me-2"></i>Template literals y toFixed de Number</h2>
+      <p>Las <strong>template literals</strong> embeben variables y expresiones dentro del texto. Y para los números, <code>toFixed(n)</code> fija el número de decimales — tan usado en precios y cálculos que precisan formateo.</p>
+
+      <pre class="code-block"><code><span class="token-comment">// Template literals: inserta valores con ${...}</span>
+<span class="token-tag">const</span> producto = <span class="token-value">"Teclado"</span>;
+<span class="token-tag">const</span> precio = <span class="token-num">49.9</span>;
+
+<span class="token-tag">const</span> mensaje = <span class="token-value">`El ${producto} cuesta $${precio.toFixed(2)}`</span>;
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(mensaje); <span class="token-comment">// "El Teclado cuesta $49.90"</span>
+
+<span class="token-comment">// toFixed devuelve un STRING con los decimales pedidos</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>((<span class="token-num">10</span> / <span class="token-num">3</span>).toFixed(<span class="token-num">2</span>));   <span class="token-comment">// "3.33"</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>(<span class="token-prop">typeof</span> (<span class="token-num">3.14159</span>).toFixed(<span class="token-num">2</span>)); <span class="token-comment">// "string"</span>
+<span class="token-prop">console</span>.<span class="token-prop">log</span>((<span class="token-num">2</span>).toFixed(<span class="token-num">3</span>));        <span class="token-comment">// "2.000"</span></code></pre>
+
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Herramienta</th><th scope="col">Tipo de dato</th><th scope="col">Uso típico</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>`texto ${var}`</code></td><td>string</td><td>Interpolar variables y expresiones</td></tr>
+          <tr><td><code>.toFixed(2)</code></td><td>number → string</td><td>Formatear precios y decimales</td></tr>
+        </tbody>
+      </table>
+
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        <code>toFixed()</code> devuelve un string. Si necesitas seguir haciendo operaciones matemáticas, conviértelo de vuelta con <code>parseFloat()</code> o <code>Number()</code>.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-lightbulb text-gradient me-2"></i>Demo interactiva: analizador de textos</h2>
+      <p>Escribe un texto o un precio y observa en tiempo real cómo responden los métodos y las template literals.</p>
+      <div class="demo-box p-4">
+        <div class="row g-3 align-items-end">
+          <div class="col-md-7">
+            <label for="textoEntrada" class="form-label text-white fw-semibold">Escribe un texto:</label>
+            <input type="text" class="form-control bg-dark text-white border-secondary" id="textoEntrada" value="  Aprende JavaScript  " autocomplete="off">
+            <button class="btn btn-gradient w-100 mt-2" id="btnAnalizarTexto">
+              <i class="bi bi-zoom-in me-1"></i>Analizar texto
+            </button>
+          </div>
+          <div class="col-md-5">
+            <label for="precioEntrada" class="form-label text-white fw-semibold">Precio (decimales):</label>
+            <input type="number" step="0.01" class="form-control bg-dark text-white border-secondary" id="precioEntrada" value="49.9595">
+            <button class="btn btn-gradient w-100 mt-2" id="btnFormatearPrecio">
+              <i class="bi bi-currency-dollar me-1"></i>Formatear precio
+            </button>
+          </div>
+        </div>
+        <div id="analisisOutput" class="mt-3 p-3 rounded text-center fs-6" style="background:rgba(37,99,235,0.1); color:#93c5fd; min-height:90px; display:flex; align-items:center; justify-content:center;">
+          Presiona un botón para ver el resultado…
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li><code>length</code> cuenta caracteres; los índices empiezan en <code>0</code>.</li>
+        <li><code>toUpperCase / toLowerCase / trim</code> devuelven strings nuevos (los strings son inmutables).</li>
+        <li><code>includes</code>, <code>startsWith</code> y <code>endsWith</code> verifican; <code>replace</code> cambia texto.</li>
+        <li><code>split</code> → array; <code>join</code> → string; <code>slice</code> corta (con índices negativos).</li>
+        <li>Las <strong>template literals</strong> interpola con <code>${...}</code> y <code>toFixed(2)</code> formatea decimales.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-7-funciones.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span>
+      </div>
+      <a href="leccion-9-arrays-objetos.html" class="btn btn-gradient">Siguiente: Arrays y objetos <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— JavaScript Básico · Lección 8</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-9-arrays-objetos.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../../assets/js/main.js"></script>
+
+<script>
+(function () {
+  const textoEntrada = document.getElementById('textoEntrada');
+  const btnAnalizarTexto = document.getElementById('btnAnalizarTexto');
+  const precioEntrada = document.getElementById('precioEntrada');
+  const btnFormatearPrecio = document.getElementById('btnFormatearPrecio');
+  const output = document.getElementById('analisisOutput');
+
+  function analizarTexto() {
+    const t = textoEntrada.value;
+
+    const lineas = [
+      'Longitud (length): <code>' + t.length + '</code>',
+      'Original: <code>"' + t + '"</code>',
+      'toUpperCase: <code>' + t.toUpperCase() + '</code>',
+      'toLowerCase: <code>' + t.toLowerCase() + '</code>',
+      'trim: <code>"' + t.trim() + '"</code> (length ' + t.trim().length + ')',
+      'includes("JavaScript"): <code>' + t.includes('JavaScript') + '</code>',
+      'startsWith("A"): <code>' + t.trim().startsWith('A') + '</code>',
+      'split(" ").join(" | "): <code>' + t.trim().split(' ').join(' | ') + '</code>'
+    ];
+
+    output.innerHTML = lineas.join('<br class="d-none d-sm-block"> ');
+    console.log('Análisis de texto:', lineas);
+  }
+
+  function formatearPrecio() {
+    const precio = parseFloat(precioEntrada.value);
+    if (isNaN(precio)) {
+      output.innerHTML = 'Ingresa un precio válido.';
+      return;
+    }
+    const conImpuesto = precio * 1.21;
+    output.innerHTML = 'Precio: <code>$' + precio.toFixed(2) + '</code> → con IVA (21%): <code>$' + conImpuesto.toFixed(2) + '</code>';
+    console.log('Precio formateado:', precio.toFixed(2), '| con IVA:', conImpuesto.toFixed(2));
+  }
+
+  btnAnalizarTexto.addEventListener('click', analizarTexto);
+  btnFormatearPrecio.addEventListener('click', formatearPrecio);
+  textoEntrada.addEventListener('keydown', function (e) { if (e.key === 'Enter') analizarTexto(); });
+  precioEntrada.addEventListener('keydown', function (e) { if (e.key === 'Enter') formatearPrecio(); });
+})();
+</script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 5 de JavaScript Intermedio: Fetch API y AJAX. Qué es AJAX, fetch con then y catch, response.ok, manejo de errores y estados de carga en JavaScript.">
+  <title>Lección 5 — Fetch API y AJAX | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">JavaScript</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Intermedio</a></li>
+        <li class="breadcrumb-item active text-light">Lección 5</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-hdd-network me-1"></i>JavaScript Intermedio · Lección 5</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>50 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Fetch API y AJAX</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Carga datos de servidores sin recargar la página y píntalos al instante.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-globe2 text-gradient me-2"></i>¿Qué es AJAX?</h2>
+      <p>
+        <strong>AJAX</strong> (<em>Asynchronous JavaScript And XML</em>) es la técnica que permite comunicar el navegador
+        con un servidor <strong>sin recargar la página</strong>. Cuando envías un formulario, haces clic en "me gusta"
+        o ves actualizarse un panel en vivo, estás usando AJAX.
+      </p>
+      <p>El flujo típico es:</p>
+      <ul>
+        <li>1. El navegador <strong>solicita</strong> datos a una URL (una <em>API</em>).</li>
+        <li>2. El servidor responde con una <strong>respuesta</strong>, normalmente en JSON.</li>
+        <li>3. JavaScript <strong>procesa</strong> los datos y actualiza el DOM.</li>
+      </ul>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        El nombre conserva "XML" por historia, pero hoy el formato estándar de intercambio es el <strong>JSON</strong> que aprendiste en la lección 2.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-cloud-arrow-down text-gradient me-2"></i>fetch() y las Promesas</h2>
+      <p>
+        <code>fetch(url)</code> lanza una petición y devuelve una <strong>Promesa</strong>. Con <code>.then()</code> encadenamos
+        lo que ocurre cuando la promesa se cumple, y con <code>.catch()</code> qué hacemos si falla.
+      </p>
+      <pre class="code-block"><code><span class="token-prop">fetch</span>(<span class="token-value">'https://jsonplaceholder.typicode.com/users'</span>)
+  .then((respuesta) =&gt; respuesta.<span class="token-prop">json</span>())  <span class="token-comment">// convierte la respuesta en JSON</span>
+  .then((datos) =&gt; {                     <span class="token-comment">// datos ya es un array real</span>
+    <span class="token-prop">console</span>.log(datos.length);           <span class="token-comment">// 10 usuarios</span>
+  })
+  .<span class="token-prop">catch</span>((error) =&gt; {
+    <span class="token-prop">console</span>.error(<span class="token-value">'No se pudo cargar'</span>, error);
+  });</code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Paso</th><th scope="col">Qué devuelve</th><th scope="col">Ejemplo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>fetch(url)</code></td><td>Promesa → Response</td><td>objeto con status, headers…</td></tr>
+          <tr><td><code>.json()</code></td><td>Promesa → datos</td><td>array u objeto ya parseado</td></tr>
+          <tr><td><code>.catch()</code></td><td>maneja el error</td><td>red caída, URL inválida…</td></tr>
+        </tbody>
+      </table>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        <code>fetch</code> NO lanza error con HTTP 404/500. Eso solo hace fallar la red o la URL.
+        Por eso se comprueba <code>respuesta.ok</code>: para detectar respuestas "de fallo" del servidor, como hace la demo siguiente.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-shield-check text-gradient me-2"></i>response.ok y manejo de errores</h2>
+      <p>
+        <code>respuesta.ok</code> es <code>true</code> si el código HTTP está entre 200 y 299. Es la comprobación
+        estándar antes de parsear el JSON.
+      </p>
+      <pre class="code-block"><code><span class="token-prop">fetch</span>(url)
+  .then((respuesta) =&gt; {
+    <span class="token-tag">if</span> (!respuesta.<span class="token-prop">ok</span>) <span class="token-tag">throw</span> <span class="token-tag">new</span> <span class="token-prop">Error</span>(<span class="token-value">`HTTP ${respuesta.status}`</span>);
+    <span class="token-tag">return</span> respuesta.<span class="token-prop">json</span>();
+  })
+  .<span class="token-prop">catch</span>((error) =&gt; {
+    <span class="token-prop">console</span>.error(<span class="token-value">'Error al cargar:'</span>, error.<span class="token-prop">message</span>);
+  });</code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        La demo de abajo usa esta misma versión con <code>throw new Error</code>, así el <code>catch</code> se encarga
+        de TODO fallo: red, servidor o JSON inválido.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-hourglass-split text-gradient me-2"></i>Estados de carga: UX real</h2>
+      <p>Toda petición pasa por tres estados. Mostrarlos al usuario es buena práctica: nada de pantallas congeladas.</p>
+      <div class="row g-3 my-2">
+        <div class="col-md-4">
+          <div class="demo-box h-100 text-center">
+            <i class="bi bi-arrow-repeat fs-2 d-block mb-2" style="color:#2563eb;"></i>
+            <strong class="text-white">Cargando</strong>
+            <p class="small mb-0">spinner / "Espera…" mientras el fetch viaja</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="demo-box h-100 text-center">
+            <i class="bi bi-check-circle fs-2 d-block mb-2" style="color:#22c55e;"></i>
+            <strong class="text-white">Éxito</strong>
+            <p class="small mb-0">pintamos los datos recibidos</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="demo-box h-100 text-center">
+            <i class="bi bi-exclamation-circle fs-2 d-block mb-2" style="color:#ef4444;"></i>
+            <strong class="text-white">Error</strong>
+            <p class="small mb-0">mensaje claro y amable para el usuario</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-people text-gradient me-2"></i>Demo: cargar usuarios con fetch real</h2>
+      <p>
+        Este botón hace una petición <strong>real</strong> a la API pública
+        <code>https://jsonplaceholder.typicode.com/users</code> (no hace falta clave). Observa el estado de carga,
+        el manejo de errores con <code>then/catch</code> y cómo <code>map</code> convierte el array de usuarios en tarjetas.
+      </p>
+      <div class="demo-box p-4">
+        <div class="d-flex align-items-center gap-3 mb-3 flex-wrap">
+          <button type="button" id="btnCargar" class="btn btn-gradient"><i class="bi bi-cloud-arrow-down me-2"></i>Cargar usuarios</button>
+          <span id="estadoCarga" class="small" style="color:#94a3b8;">Sin cargar aún.</span>
+        </div>
+        <div id="contenedorUsuarios" class="row g-3"></div>
+      </div>
+      <div class="tip-box mt-4">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        JSONPlaceholder es una API de pruebas totalmente gratuita. En proyectos reales, mejor usa
+        <code>async/await</code> con <code>try/catch</code> — lo verás en JavaScript Avanzado —, pero aquí subrayamos
+        la cadena <code>.then()</code> para entender el alma de las promesas.
+      </div>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        Si abres el archivo como <code>file://</code> sin servidor, algunos navegadores pueden bloquear el fetch por
+        <strong>CORS</strong>. La demo funciona perfectamente en VS Code con "Live Server" o cualquier servidor local.
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>AJAX = pedir datos al servidor <strong>sin recargar</strong>; JSON es el formato de intercambio.</li>
+        <li><code>fetch(url).then(r =&gt; r.json()).then(...).catch(...)</code> es la cadena básica.</li>
+        <li>Comprueba <code>respuesta.ok</code>: 404/500 no lanzan error por sí solos.</li>
+        <li>Muestra siempre los tres estados: <strong>cargando → éxito / error</strong>.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <div class="d-flex gap-2">
+        <a href="../../../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Inicio</a>
+        <a href="leccion-4-eventos.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      </div>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-6-almacenamiento.html" class="btn btn-gradient">Siguiente: Almacenamiento local <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— JavaScript Intermedio · Lección 5</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-6-almacenamiento.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../../assets/js/main.js"></script>
+
+<script>
+(function () {
+  const boton = document.getElementById('btnCargar');
+  const estado = document.getElementById('estadoCarga');
+  const contenedor = document.getElementById('contenedorUsuarios');
+  const URL = 'https://jsonplaceholder.typicode.com/users';
+
+  function pintarUsuarios(usuarios) {
+    contenedor.innerHTML = '';
+    usuarios.map((u, i) => {
+      const col = document.createElement('div');
+      col.className = 'col-sm-6 col-lg-4';
+      const tarjeta = document.createElement('div');
+      tarjeta.className = 'demo-card p-3 h-100';
+      tarjeta.dataset.userId = u.id;
+
+      const encabezado = document.createElement('div');
+      encabezado.className = 'd-flex align-items-center gap-2 mb-2';
+      const avatar = document.createElement('div');
+      avatar.className = 'demo-avatar flex-shrink-0';
+      avatar.textContent = u.name.split(' ').map((n) => n[0]).slice(0, 2).join('');
+      const nombre = document.createElement('h6');
+      nombre.className = 'fw-bold text-white mb-0';
+      nombre.textContent = u.name;
+      encabezado.append(avatar, nombre);
+
+      const empresa = document.createElement('p');
+      empresa.className = 'small mb-2';
+      empresa.style.color = '#2563eb';
+      empresa.textContent = u.company.name;
+
+      const email = document.createElement('p');
+      email.className = 'small mb-1';
+      email.style.color = '#94a3b8';
+      email.innerHTML = '<i class="bi bi-envelope me-1"></i>' + u.email;
+
+      const telefono = document.createElement('p');
+      telefono.className = 'small mb-0';
+      telefono.style.color = '#94a3b8';
+      telefono.innerHTML = '<i class="bi bi-telephone me-1"></i>' + u.phone;
+
+      tarjeta.append(encabezado, empresa, email, telefono);
+      col.appendChild(tarjeta);
+      contenedor.appendChild(col);
+
+      gsap.fromTo(col, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.35, delay: i * 0.05 });
+    });
+  }
+
+  function mostrarEstado(mensaje, color) {
+    estado.textContent = mensaje;
+    estado.style.color = color || '#94a3b8';
+  }
+
+  boton.addEventListener('click', () => {
+    mostrarEstado('Cargando usuarios…', '#2563eb');
+    boton.disabled = true;
+
+    fetch(URL)
+      .then((respuesta) => {
+        if (!respuesta.ok) {
+          throw new Error('El servidor respondió con HTTP ' + respuesta.status);
+        }
+        return respuesta.json();
+      })
+      .then((usuarios) => {
+        pintarUsuarios(usuarios);
+        mostrarEstado('Se cargaron ' + usuarios.length + ' usuarios correctamente.', '#22c55e');
+        boton.disabled = false;
+      })
+      .catch((error) => {
+        contenedor.innerHTML = '';
+        mostrarEstado('Error: ' + error.message + '. Inténtalo de nuevo.', '#ef4444');
+        boton.disabled = false;
+      });
+  });
+})();
+</script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

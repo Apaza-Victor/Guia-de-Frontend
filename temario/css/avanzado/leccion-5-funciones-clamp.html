@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 5 de CSS Avanzado: funciones modernas clamp(), min(), max() y calc() para tipografía fluida, contenedores que nunca desbordan, aspect-ratio y buenas prácticas.">
+  <title>Lección 5 — Funciones modernas: clamp, min, calc | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+  <style>
+    .demo-clamp {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      border-radius: 1rem;
+      background: linear-gradient(135deg, rgba(37,99,235,.18), rgba(14,165,233,.18));
+      border: 1px solid rgba(37,99,235,.35);
+    }
+    .demo-clamp-titulo {
+      font-family: "Poppins", sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.5rem, 1rem + 4vw, 4.5rem);
+      line-height: 1.1;
+      background: linear-gradient(135deg, #2563eb, #0ea5e9, #06b6d4);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+    .demo-clamp-mini {
+      font-size: clamp(0.75rem, 0.4rem + 1vw, 1.1rem);
+      color: #cbd5e1;
+      margin-bottom: 0.25rem;
+    }
+  </style>
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">CSS</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Avanzado</a></li>
+        <li class="breadcrumb-item active text-light">Lección 5</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-3-circle me-1"></i>CSS Avanzado · Lección 5</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>30 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Funciones modernas: clamp, min, calc</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Tipografía fluida, contenedores que nunca desbordan y cálculos con unidades mixtas: las matemáticas del CSS moderno.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-4" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-calculator text-gradient me-2"></i>Fundamentos de la lección</h2>
+      <p>Durante años, adaptar una web a cada pantalla exigía media queries llenas de excepciones. Las <strong>funciones matemáticas</strong> de CSS — <code>clamp()</code>, <code>min()</code>, <code>max()</code> y <code>calc()</code> — resuelven buena parte de eso <em>dentro de una sola declaración</em>: mezclan unidades (<code>rem</code>, <code>vw</code>, <code>%</code>…) y se recalculan automáticamente al redimensionar la ventana.</p>
+      <div class="d-flex flex-wrap gap-2 mt-3">
+        <span class="badge-soft"><i class="bi bi-bezier2 me-1"></i>clamp()</span>
+        <span class="badge-soft-cyan"><i class="bi bi-arrows-angle-expand me-1"></i>min / max</span>
+        <span class="badge-soft-sky"><i class="bi bi-bounding-box me-1"></i>aspect-ratio</span>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-bezier2 text-gradient me-2"></i>clamp(): tipografía fluida sin media queries</h2>
+      <p>
+        La joya es <code>clamp(MIN, IDÓNEO, MÁX)</code>: elige el valor <strong>ideal</strong> mientras esté entre un
+        <strong>mínimo</strong> y un <strong>máximo</strong>. Para tipografía fluida se usa un valor ideal que mezcla
+        <code>rem</code> con <code>vw</code> (o <code>vmin</code>): así el texto crece con la ventana pero nunca queda
+        diminuto en móvil ni gigante en un monitor enorme.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">/* Crece con la ventana, nunca pasa los límites */</span>
+<span class="token-tag">h1</span> { <span class="token-prop">font-size</span>: <span class="token-value">clamp(</span><span class="token-num">1.75rem</span>, <span class="token-num">1rem</span> <span class="token-value">+</span> <span class="token-num">3vw</span>, <span class="token-num">3.5rem</span><span class="token-value">)</span>; }
+
+<span class="token-comment">/* Mismo patrón para paddings, gaps o anchos */</span>
+<span class="token-tag">.hero</span> { <span class="token-prop">padding</span>: <span class="token-value">clamp(</span><span class="token-num">1.5rem</span>, <span class="token-num">1rem</span> <span class="token-value">+</span> <span class="token-num">4vw</span>, <span class="token-num">5rem</span><span class="token-value">)</span>; }</code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Parámetro</th><th scope="col">Significado</th><th scope="col">Analogía</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Mínimo</td><td>Nunca se baja de aquí</td><td>"Tamaño piso"</td></tr>
+          <tr><td>Ideal</td><td>El valor que "prefiere" el navegador</td><td>"El que fluye con la ventana"</td></tr>
+          <tr><td>Máximo</td><td>Nunca se supera</td><td>"Tamaño techo"</td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box mt-3">
+        <i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>
+        <strong class="text-white">Tip:</strong> escribe el ideal como <code>1rem + 3vw</code> (no como <code>3vw</code> solo).
+        La parte fija en <code>rem</code> garantiza un mínimo legible que respeta la preferencia de tamaño de fuente del usuario.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-arrows-angle-expand text-gradient me-2"></i>min() y max(): valores límite</h2>
+      <p>
+        <code>min(a, b)</code> devuelve el <strong>más pequeño</strong> de sus argumentos y <code>max(a, b)</code> el
+        <strong>más grande</strong>. Acaban con el clásico patrón "ancho al 100% pero con tope": antes necesitabas dos
+        propiedades (<code>width</code> + <code>max-width</code>) y ahora solo una.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">/* Contenedor: el mayor de dos que quepa sin desbordar */</span>
+<span class="token-tag">.contenedor</span> {
+  <span class="token-prop">width</span>: <span class="token-value">min(100% - 2rem, 1200px)</span>;
+  <span class="token-prop">margin-inline</span>: <span class="token-value">auto</span>;
+}
+
+<span class="token-comment">/* Garantizar un tamaño legible mínimo */</span>
+<span class="token-tag">.fuente-nota</span> { <span class="token-prop">font-size</span>: <span class="token-value">max(</span><span class="token-num">1rem</span>, <span class="token-num">1em</span><span class="token-value">)</span>; }</code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Función</th><th scope="col">Resultado</th><th scope="col">Analogía</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>min(a, b)</code></td><td>El valor más pequeño</td><td>"Cabe o no te pasas del límite"</td></tr>
+          <tr><td><code>max(a, b)</code></td><td>El valor más grande</td><td>"Nunca menor que el mínimo"</td></tr>
+          <tr><td><code>clamp(m, i, x)</code></td><td>Entre m y x, prefiere i</td><td>"Ni menos, ni más, ideal en medio"</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-plus-slash-minus text-gradient me-2"></i>calc(): matemáticas con unidades mixtas</h2>
+      <p>
+        <code>calc()</code> permite <strong>sumar y restar unidades diferentes</strong>: descuenta una columna fija de la
+        barra lateral, resta un margen de un porcentaje o combina <code>clamp()</code> dentro de otro cálculo.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">/* Columna principal que deja margen para una sidebar de 80px */</span>
+<span class="token-tag">.contenido</span> { <span class="token-prop">margin-left</span>: <span class="token-value">calc(80px + 1rem)</span>; }
+
+<span class="token-comment">/* Columnas que nunca se pegan: % y rem juntos */</span>
+<span class="token-tag">.grid-item</span> { <span class="token-prop">width</span>: <span class="token-value">calc(25% - 1rem)</span>; }
+
+<span class="token-comment">/* calc() acepta clamp() dentro */</span>
+<span class="token-prop">padding</span>: <span class="token-value">calc(</span><span class="token-num">1rem</span> <span class="token-value">+</span> <span class="token-num">2vw</span><span class="token-value">)</span>;</code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        En <code>calc()</code>, los operadores <code>+</code> y <code>-</code> requieren espacios a ambos lados (requisito de
+        la especificación); <code>*</code> y <code>/</code> no. Un <code>calc(100%-30px)</code> se ignora por inválido.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-bounding-box text-gradient me-2"></i>aspect-ratio: proporciones sin altura fija</h2>
+      <p>
+        Con <code>aspect-ratio</code> fijas una proporción <code>ancho / alto</code> y el navegador despeja la otra
+        dimensión automáticamente. Perfecto para vídeos, imágenes, tarjetas o placeholders responsivos: ya no hace falta
+        el doloroso truco del <code>padding-top</code> al 56.25%.
+      </p>
+      <pre class="code-block"><code><span class="token-comment">/* Vídeo 16/9 y tarjetas cuadrado cuadrado 1/1 */</span>
+<span class="token-tag">.video</span>  { <span class="token-prop">aspect-ratio</span>: <span class="token-num">16 / 9</span>; }
+<span class="token-tag">.avatar</span> { <span class="token-prop">aspect-ratio</span>: <span class="token-num">1</span>; <span class="token-prop">width</span>: <span class="token-num">48px</span>; }
+
+<span class="token-comment">/* Combinado: porcentaje de ancho + proporción = altura responsiva */</span>
+<span class="token-tag">.hero-imagen</span> { <span class="token-prop">width</span>: <span class="token-value">100%</span>; <span class="token-prop">aspect-ratio</span>: <span class="token-num">21 / 9</span>; }</code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Función / propiedad</th><th scope="col">Sintaxis</th><th scope="col">Ejemplo útil</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>calc()</code></td><td><code>calc(expr)</code></td><td><code>width: calc(25% - 1rem)</code></td></tr>
+          <tr><td><code>clamp()</code></td><td><code>clamp(mín, ideal, máx)</code></td><td><code>font-size: clamp(1rem, 4vw, 3rem)</code></td></tr>
+          <tr><td><code>min() / max()</code></td><td><code>min(a, b) / max(a, b)</code></td><td>Contenedores que nunca desbordan</td></tr>
+          <tr><td><code>aspect-ratio</code></td><td><code>w / h</code></td><td>Cajas 1/1 o 16/9 responsive</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-lightbulb text-gradient me-2"></i>Buenas prácticas</h2>
+      <ul class="mt-2">
+        <li>Usa <code>clamp()</code> para <strong>tipografía fluida</strong> en títulos y textos destacados; evita tipografías fluidas en bloques de lectura larga (la longitud de línea se descontrola).</li>
+        <li>Los límites de <code>min()/max()/clamp()</code> deben pensarse con sentido: un máximo de <code>80ch</code> para texto mejora la legibilidad.</li>
+        <li>Mezcla unidades con criterio: <code>rem</code>/<code>em</code> llevan la proporción al usuario, <code>vw</code>/<code>%</code> aportan fluidez, <code>px</code> es fijo.</li>
+        <li>Las media queries siguen existiendo para <strong>layout</strong> (columnas, navegación); las funciones matemáticas sustituyen, sobre todo, los ajustes de <strong>medida</strong>.</li>
+      </ul>
+      <div class="tip-box mt-3">
+        <i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>
+        <strong class="text-white">Tip:</strong> comprueba el resultado con <code>getComputedStyle(elemento)</code> en la
+        consola del navegador: verás el valor <em>ya resuelto</em> en px para el ancho actual de la ventana.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-magic text-gradient me-2"></i>Demo interactiva: tipografía fluida con clamp()</h2>
+      <p>
+        El título de abajo usa <code>font-size: clamp(1.5rem, 1rem + 4vw, 4.5rem)</code>: se adapta "en vivo" al ancho de la
+        ventana. Cambia el tamaño de la ventana del navegador o pulsa los botones para comprobarlo.
+      </p>
+      <div class="demo-box">
+        <div class="demo-clamp" id="demoClamp">
+          <p class="demo-clamp-mini mb-2">clamp(1.5rem, 1rem + 4vw, 4.5rem)</p>
+          <div class="demo-clamp-titulo" id="demoClampTitulo">Tipografía fluida</div>
+          <span class="badge-soft mt-3" id="demoClampMedida">font-size actual: — px</span>
+          <span class="badge-soft-cyan mt-2" id="demoAnchoVentana">ancho de ventana: — px</span>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center gap-2 mt-3">
+          <button class="btn btn-gradient btn-sm" onclick="window.demoVivacidad()"><i class="bi bi-stars me-1"></i>Rebotar con GSAP</button>
+          <button class="btn btn-ghost-glass btn-sm" onclick="window.demoReducir()"><i class="bi bi-arrow-down-right me-1"></i>Reduce la ventana… o arrastra</button>
+        </div>
+        <p class="small mt-3 mb-0" style="color:var(--text-muted);">El tamaño real se lee con <code>getComputedStyle()</code> y se actualiza al redimensionar. El ancho mínimo/máximo los pone <code>clamp()</code>, no media queries.</p>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li><code>clamp(mín, ideal, máx)</code> es la forma más elegante de tipografía fluida responsive.</li>
+        <li><code>min()</code> y <code>max()</code> sustituyen a <code>max-width</code> y a los mínimos legibles en una sola propiedad.</li>
+        <li><code>calc()</code> mezcla unidades; respeta los espacios en <code>+ / -</code> o la declaración se ignora.</li>
+        <li><code>aspect-ratio</code> fija proporciones sin altura fija: contenido responsive al instante.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-4-animaciones.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-6-bem.html" class="btn btn-gradient">Siguiente: Metodología BEM <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— CSS Avanzado · Lección 5</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="leccion-4-animaciones.html" class="text-secondary"><i class="bi bi-arrow-left-circle fs-5"></i></a>
+      <a href="leccion-6-bem.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../../assets/js/main.js"></script>
+<script>
+  function medir() {
+    var titulo = document.getElementById("demoClampTitulo");
+    var fs = getComputedStyle(titulo).fontSize;
+    document.getElementById("demoClampMedida").textContent = "font-size actual: " + fs;
+    document.getElementById("demoAnchoVentana").textContent = "ancho de ventana: " + window.innerWidth + "px";
+  }
+  window.addEventListener("resize", medir);
+  document.addEventListener("DOMContentLoaded", medir);
+  window.demoVivacidad = function () {
+    gsap.fromTo("#demoClamp", { scale: 0.94 }, { scale: 1, duration: 0.7, ease: "elastic.out(1, 0.5)" });
+    gsap.fromTo("#demoClampTitulo", { y: 8, rotate: -2 }, { y: 0, rotate: 0, duration: 0.5, ease: "power2.out" });
+    medir();
+  };
+  window.demoReducir = function () {
+    gsap.to("#demoClamp", { scale: 0.96, duration: 0.3, yoyo: true, repeat: 1 });
+    setTimeout(medir, 600);
+  };
+</script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

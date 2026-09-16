@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tema JavaScript de la guía Frontend Pro: tres subsecciones — Básico, Intermedio y Avanzado — con 28 lecciones para dominar el lenguaje de la web de cero a experto.">
+  <title>JavaScript — de cero a experto | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../../paginas/temario.html">Temario</a></li>
+        <li class="breadcrumb-item active text-light">JavaScript</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-filetype-js me-1"></i>Sección: JavaScript</span>
+      <span class="badge-soft-cyan"><i class="bi bi-journal-bookmark me-1"></i>28 lecciones</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">JavaScript: de cero a experto</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">El lenguaje que da vida a la web: desde variables y tipos hasta closures y patrones de diseño, con demos interactivas en cada lección.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-4"><i class="bi bi-braces-asterisk text-gradient me-2"></i>¿Qué aprenderás?</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card-learning h-100">
+            <div class="card-body text-center">
+              <div class="icon-badge mx-auto"><i class="bi bi-journal-bookmark"></i></div>
+              <h6 class="text-white fw-bold">Qué aprenderás</h6>
+              <p class="small mb-0" style="color:var(--text-muted);">Variables, tipos, condicionales, bucles, funciones, strings, arrays y objetos. Luego DOM, eventos, fetch, promesas, ES6+, clases y patrones de diseño.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-learning h-100">
+            <div class="card-body text-center">
+              <div class="icon-badge cyan mx-auto"><i class="bi bi-bar-chart"></i></div>
+              <h6 class="text-white fw-bold">Nivel</h6>
+              <p class="small mb-0" style="color:var(--text-muted);">Progresivo: empieza en <strong>Básico</strong> sin conocimientos previos, consolida en <strong>Intermedio</strong> y profesionaliza en <strong>Avanzado</strong>.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-learning h-100">
+            <div class="card-body text-center">
+              <div class="icon-badge warm mx-auto"><i class="bi bi-hourglass-split"></i></div>
+              <h6 class="text-white fw-bold">Duración estimada</h6>
+              <p class="small mb-0" style="color:var(--text-muted);"><strong>≈ 28</strong> lecciones · <strong>≈ 18-19 horas</strong> con demos interactivas y práctica real. Cada lección es autónoma y navegable.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- BÁSICO -->
+    <section class="mb-5" data-aos="fade-up">
+      <div class="card-learning">
+        <div class="card-body p-4 p-lg-5">
+          <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3 mb-4">
+            <div class="icon-badge"><i class="bi bi-filetype-js"></i></div>
+            <div class="flex-grow-1">
+              <span class="badge-soft-cyan mb-1 d-inline-block"><i class="bi bi-1-circle me-1"></i>Subsección · 9 lecciones</span>
+              <h3 class="text-white fw-bold mb-1">JavaScript Básico</h3>
+              <p class="small mb-0" style="color:var(--text-muted);">Los cimientos: introducción, variables, tipos, operadores, condicionales, bucles, funciones, strings, arrays y objetos.</p>
+            </div>
+            <a href="basico/index.html" class="btn btn-gradient btn-sm flex-shrink-0"><i class="bi bi-arrow-right me-1"></i>Ver todas las lecciones</a>
+          </div>
+          <div class="row row-cols-1 row-cols-md-2 g-2">
+            <div class="col"><a class="lesson-card" href="basico/leccion-1-introduccion.html"><span class="lc-num">1</span><span class="flex-grow-1"><span class="lc-title d-block">Introducción a JavaScript</span><span class="lc-meta">35 min · Qué es JS y el primer script</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="basico/leccion-2-variables.html"><span class="lc-num">2</span><span class="flex-grow-1"><span class="lc-title d-block">Variables: let, const y var</span><span class="lc-meta">40 min · Declaración, scope y template literals</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="basico/leccion-3-tipos-datos.html"><span class="lc-num">3</span><span class="flex-grow-1"><span class="lc-title d-block">Tipos de datos</span><span class="lc-meta">35 min · Primitivos, NaN, Infinity y typeof</span></span><span class="badge-soft-sky">Nuevo</span></a></div>
+            <div class="col"><a class="lesson-card" href="basico/leccion-4-operadores.html"><span class="lc-num">4</span><span class="flex-grow-1"><span class="lc-title d-block">Operadores</span><span class="lc-meta">45 min · Aritméticos, comparación y lógicos</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="basico/leccion-5-condicionales.html"><span class="lc-num">5</span><span class="flex-grow-1"><span class="lc-title d-block">Condicionales</span><span class="lc-meta">40 min · if/else, switch, ternario y truthy/falsy</span></span><span class="badge-soft-sky">Nuevo</span></a></div>
+            <div class="col"><a class="lesson-card" href="basico/leccion-6-bucles.html"><span class="lc-num">6</span><span class="flex-grow-1"><span class="lc-title d-block">Bucles y iteración</span><span class="lc-meta">40 min · for, while, do...while y for...of</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="basico/leccion-7-funciones.html"><span class="lc-num">7</span><span class="flex-grow-1"><span class="lc-title d-block">Funciones</span><span class="lc-meta">45 min · Declaraciones, flechas y scope</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="basico/leccion-8-strings-metodos.html"><span class="lc-num">8</span><span class="flex-grow-1"><span class="lc-title d-block">Strings y métodos</span><span class="lc-meta">40 min · Métodos de string y de number</span></span><span class="badge-soft-sky">Nuevo</span></a></div>
+            <div class="col"><a class="lesson-card" href="basico/leccion-9-arrays-objetos.html"><span class="lc-num">9</span><span class="flex-grow-1"><span class="lc-title d-block">Arrays y objetos</span><span class="lc-meta">45 min · Colecciones, clave:valor y mini agenda</span></span><span class="badge-soft-sky">Nuevo</span></a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- INTERMEDIO -->
+    <section class="mb-5" data-aos="fade-up">
+      <div class="card-learning">
+        <div class="card-body p-4 p-lg-5">
+          <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3 mb-4">
+            <div class="icon-badge cyan"><i class="bi bi-hdd-network"></i></div>
+            <div class="flex-grow-1">
+              <span class="badge-soft-cyan mb-1 d-inline-block"><i class="bi bi-2-circle me-1"></i>Subsección · 9 lecciones</span>
+              <h3 class="text-white fw-bold mb-1">JavaScript Intermedio</h3>
+              <p class="small mb-0" style="color:var(--text-muted);">Colecciones y web en vivo: métodos de arrays, objetos y JSON, el DOM, eventos, Fetch, almacenamiento, temporizadores, APIs del navegador y validación.</p>
+            </div>
+            <a href="intermedio/index.html" class="btn btn-gradient btn-sm flex-shrink-0"><i class="bi bi-arrow-right me-1"></i>Ver todas las lecciones</a>
+          </div>
+          <div class="row row-cols-1 row-cols-md-2 g-2">
+            <div class="col"><a class="lesson-card" href="intermedio/leccion-1-metodos-arrays.html"><span class="lc-num">1</span><span class="flex-grow-1"><span class="lc-title d-block">Métodos de arrays</span><span class="lc-meta">40 min · map, filter, reduce, find y sort</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="intermedio/leccion-2-objetos-json.html"><span class="lc-num">2</span><span class="flex-grow-1"><span class="lc-title d-block">Objetos y JSON</span><span class="lc-meta">35 min · this, JSON.parse y JSON.stringify</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="intermedio/leccion-3-dom.html"><span class="lc-num">3</span><span class="flex-grow-1"><span class="lc-title d-block">Manipulación del DOM</span><span class="lc-meta">45 min · Seleccionar, crear y modificar nodos</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="intermedio/leccion-4-eventos.html"><span class="lc-num">4</span><span class="flex-grow-1"><span class="lc-title d-block">Eventos y delegación</span><span class="lc-meta">40 min · addEventListener, preventDefault, closest</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="intermedio/leccion-5-fetch.html"><span class="lc-num">5</span><span class="flex-grow-1"><span class="lc-title d-block">Fetch API y AJAX</span><span class="lc-meta">50 min · Peticiones reales con then y catch</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="intermedio/leccion-6-almacenamiento.html"><span class="lc-num">6</span><span class="flex-grow-1"><span class="lc-title d-block">Almacenamiento local</span><span class="lc-meta">35 min · localStorage, sessionStorage y JSON</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="intermedio/leccion-7-temporizadores.html"><span class="lc-num">7</span><span class="flex-grow-1"><span class="lc-title d-block">Temporizadores</span><span class="lc-meta">35 min · setTimeout, setInterval y rAF</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="intermedio/leccion-8-apis-navegador.html"><span class="lc-num">8</span><span class="flex-grow-1"><span class="lc-title d-block">APIs del navegador</span><span class="lc-meta">40 min · Clipboard, geolocalización y online/offline</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="intermedio/leccion-9-validacion-formularios.html"><span class="lc-num">9</span><span class="flex-grow-1"><span class="lc-title d-block">Validación de formularios</span><span class="lc-meta">45 min · HTML5, setCustomValidity y feedback en vivo</span></span></a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- AVANZADO -->
+    <section class="mb-5" data-aos="fade-up">
+      <div class="card-learning">
+        <div class="card-body p-4 p-lg-5">
+          <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3 mb-4">
+            <div class="icon-badge warm"><i class="bi bi-lightning-charge-fill"></i></div>
+            <div class="flex-grow-1">
+              <span class="badge-soft-cyan mb-1 d-inline-block"><i class="bi bi-3-circle me-1"></i>Subsección · 10 lecciones</span>
+              <h3 class="text-white fw-bold mb-1">JavaScript Avanzado</h3>
+              <p class="small mb-0" style="color:var(--text-muted);">Todo al siguiente nivel: ES6+, promesas y async/await, clases, módulos, patrones, event loop, fetch avanzado, errores, this y observadores.</p>
+            </div>
+            <a href="avanzado/index.html" class="btn btn-gradient btn-sm flex-shrink-0"><i class="bi bi-arrow-right me-1"></i>Ver todas las lecciones</a>
+          </div>
+          <div class="row row-cols-1 row-cols-md-2 g-2">
+            <div class="col"><a class="lesson-card" href="avanzado/leccion-1-es6.html"><span class="lc-num">1</span><span class="flex-grow-1"><span class="lc-title d-block">ES6+: destructuring y spread</span><span class="lc-meta">35 min · Rest, alias y optional chaining</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="avanzado/leccion-2-promesas.html"><span class="lc-num">2</span><span class="flex-grow-1"><span class="lc-title d-block">Promesas y async/await</span><span class="lc-meta">40 min · Estados, then/catch/finally, Promise.all</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="avanzado/leccion-3-clases.html"><span class="lc-num">3</span><span class="flex-grow-1"><span class="lc-title d-block">Clases y herencia</span><span class="lc-meta">40 min · constructor, extends, super y campos #privados</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="avanzado/leccion-4-modulos.html"><span class="lc-num">4</span><span class="flex-grow-1"><span class="lc-title d-block">Módulos ES y closures</span><span class="lc-meta">35 min · export/import, closures y IIFE</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="avanzado/leccion-5-patrones.html"><span class="lc-num">5</span><span class="flex-grow-1"><span class="lc-title d-block">Patrones y buenas prácticas</span><span class="lc-meta">45 min · Módulo, factory, singleton, debounce</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="avanzado/leccion-6-event-loop.html"><span class="lc-num">6</span><span class="flex-grow-1"><span class="lc-title d-block">El Event Loop</span><span class="lc-meta">40 min · Call stack, microtasks y macrotasks</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="avanzado/leccion-7-fetch-avanzado.html"><span class="lc-num">7</span><span class="flex-grow-1"><span class="lc-title d-block">Fetch avanzado</span><span class="lc-meta">45 min · POST, FormData y AbortController</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="avanzado/leccion-8-manejo-errores.html"><span class="lc-num">8</span><span class="flex-grow-1"><span class="lc-title d-block">Manejo de errores</span><span class="lc-meta">35 min · throw, try/catch/finally y errores personalizados</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="avanzado/leccion-9-this-bind.html"><span class="lc-num">9</span><span class="flex-grow-1"><span class="lc-title d-block">this, call, apply y bind</span><span class="lc-meta">40 min · Contexto, this global y métodos de función</span></span></a></div>
+            <div class="col"><a class="lesson-card" href="avanzado/leccion-10-observadores.html"><span class="lc-num">10</span><span class="flex-grow-1"><span class="lc-title d-block">Observadores del navegador</span><span class="lc-meta">40 min · Intersection, ResizeObserver y MutationObserver</span></span></a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="../../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Volver al inicio</a>
+      <a href="basico/index.html" class="btn btn-gradient">Empezar por JavaScript Básico <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— Tema JavaScript</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="basico/index.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

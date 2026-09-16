@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 6 de JavaScript Intermedio: almacenamiento en el navegador. localStorage, sessionStorage, JSON, el evento storage y buenas prácticas en JavaScript.">
+  <title>Lección 6 — Almacenamiento local | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">JavaScript</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Intermedio</a></li>
+        <li class="breadcrumb-item active text-light">Lección 6</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-hdd-network text-gradient me-1"></i>JavaScript Intermedio · Lección 6</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>35 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Almacenamiento local</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Guarda datos en el navegador para que sobrevivan a recargas, cierres y visitas.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-database text-gradient me-2"></i>¿Qué es el almacenamiento web?</h2>
+      <p>
+        Cuando recargas una página o la cierras, todas las <strong>variables de JavaScript se pierden</strong>. Para recordar
+        preferencias, sesiones o borradores entre visitas, el navegador ofrece espacios de almacenamiento persistentes.
+      </p>
+      <p>Los dos más usados son:</p>
+      <div class="row g-3 my-2">
+        <div class="col-md-6">
+          <div class="demo-box h-100">
+            <i class="bi bi-save fs-2 d-block mb-2" style="color:#2563eb;"></i>
+            <strong class="text-white">localStorage</strong>
+            <p class="small mb-0" style="color:#94a3b8;">Persiste <strong>sin fecha de caducidad</strong>: sobrevive a recargas y cierres del navegador.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="demo-box h-100">
+            <i class="bi bi-window-split fs-2 d-block mb-2" style="color:#06b6d4;"></i>
+            <strong class="text-white">sessionStorage</strong>
+            <p class="small mb-0" style="color:#94a3b8;">Vive solo durante la <strong>pestaña actual</strong>: se borra al cerrarla.</p>
+          </div>
+        </div>
+      </div>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Solo se guardan <strong>texto</strong>. Para guardar objetos o arrays usamos <code>JSON</code>, como viste en la lección 2.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-key text-gradient me-2"></i>La API de localStorage</h2>
+      <p>Funciona con pares <strong>clave → valor</strong>. Cuatro métodos cubren el 99% de los casos:</p>
+      <pre class="code-block"><code><span class="token-prop">localStorage</span>.<span class="token-attr">setItem</span>(<span class="token-value">'nombre'</span>, <span class="token-value">'Ana'</span>);      <span class="token-comment">// guarda</span>
+<span class="token-prop">localStorage</span>.<span class="token-attr">getItem</span>(<span class="token-value">'nombre'</span>);      <span class="token-comment">// lee como string</span>
+<span class="token-prop">localStorage</span>.<span class="token-attr">removeItem</span>(<span class="token-value">'nombre'</span>);   <span class="token-comment">// borra una clave</span>
+<span class="token-prop">localStorage</span>.<span class="token-attr">clear</span>();               <span class="token-comment">// borra todo</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Método</th><th scope="col">Hace</th><th scope="col">Devuelve</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>setItem(clave, valor)</code></td><td>guarda (o sobreescribe)</td><td><code>undefined</code></td></tr>
+          <tr><td><code>getItem(clave)</code></td><td>lee un valor</td><td>string o <code>null</code></td></tr>
+          <tr><td><code>removeItem(clave)</code></td><td>elimina una clave</td><td><code>undefined</code></td></tr>
+          <tr><td><code>clear()</code></td><td>vacía todo</td><td><code>undefined</code></td></tr>
+        </tbody>
+      </table>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        Todo se guarda como texto. <code>localStorage.setItem('edad', 25)</code> guarda el string <code>"25"</code>,
+        no el número. No obtienes <code>null</code> con <code>getItem</code> si la clave existe; devuelve <code>null</code>
+        solo cuando NO existe.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-filetype-json text-gradient me-2"></i>Guardar objetos con JSON</h2>
+      <p>
+        Para persistir un objeto o un array usamos la misma <strong>serialización</strong> que viste con JSON en la lección 2:
+      </p>
+      <pre class="code-block"><code><span class="token-tag">const</span> usuario = { <span class="token-attr">nombre</span>: <span class="token-value">'Ana'</span>, <span class="token-attr">nivel</span>: 3 };
+
+<span class="token-comment">// Guardar: conviértelo a texto JSON</span>
+<span class="token-prop">localStorage</span>.<span class="token-attr">setItem</span>(<span class="token-value">'usuario'</span>, <span class="token-prop">JSON</span>.<span class="token-attr">stringify</span>(usuario));
+
+<span class="token-comment">// Leer: parsea el texto de vuelta a objeto</span>
+<span class="token-tag">const</span> recuperado = <span class="token-prop">JSON</span>.<span class="token-attr">parse</span>(<span class="token-prop">localStorage</span>.<span class="token-attr">getItem</span>(<span class="token-value">'usuario'</span>));
+<span class="token-prop">console</span>.log(recuperado.<span class="token-attr">nombre</span>); <span class="token-comment">// 'Ana'</span></code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Antes de hacer <code>JSON.parse</code> comprueba que la clave exista: <code>getItem</code> devuelve
+        <code>null</code> si no está, y <code>JSON.parse(null)</code> lanza error.
+        Sé tolerante: envuelve la lectura en un <code>try/catch</code>.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-arrows-angle-contract text-gradient me-2"></i>sessionStorage y el evento storage</h2>
+      <p>
+        <code>sessionStorage</code> usa la misma API exacta, pero su vida se limita a la pestaña.
+        ¿Dónde usar cada uno?
+      </p>
+      <ul>
+        <li><strong>localStorage</strong>: preferencias, tema, carrito persistente, borradores a largo plazo.</li>
+        <li><strong>sessionStorage</strong>: datos temporales de la sesión (p. ej., "estás viendo el tutorial", tokens de sesión breve).</li>
+      </ul>
+      <p>
+        Además, el evento <code>storage</code> se dispara en <strong>otras pestañas</strong> cuando una guarda o borra
+        valores. Es ideal para sincronizar tu interfaz en tiempo real:
+      </p>
+      <pre class="code-block"><code><span class="token-prop">window</span>.<span class="token-attr">addEventListener</span>(<span class="token-value">'storage'</span>, (e) =&gt; {
+  <span class="token-prop">console</span>.log(e.<span class="token-attr">key</span>);    <span class="token-comment">// clave que cambió</span>
+  <span class="token-prop">console</span>.log(e.<span class="token-attr">newValue</span>); <span class="token-comment">// nuevo valor (string o null)</span>
+});</code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        El evento <code>storage</code> <strong>no se dispara en la misma pestaña</strong> que hace el cambio:
+        solo en las demás. Para reaccionar al instante en la pestaña actual, actualiza tú mismo el DOM.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-person-gear text-gradient me-2"></i>Demo: perfil que sobrevive</h2>
+      <p>
+        Escribe un nombre y elige un nivel. La demo guarda el "perfil" en <code>localStorage</code> como JSON.
+        <strong>Recarga la página (F5)</strong>: tus datos siguen ahí.
+      </p>
+      <div class="demo-box p-4">
+        <div class="row g-3 align-items-end mb-3">
+          <div class="col-sm-6">
+            <label class="form-label small mb-1" style="color:#94a3b8;">Nombre</label>
+            <input type="text" id="demoNombre" class="form-control" placeholder="ej. Ana" style="background:#1e293b;color:#e2e8f0;border:1px solid #334155;">
+          </div>
+          <div class="col-sm-4">
+            <label class="form-label small mb-1" style="color:#94a3b8;">Nivel</label>
+            <select id="demoNivel" class="form-select" style="background:#1e293b;color:#e2e8f0;border:1px solid #334155;">
+              <option value="Intermedio">Intermedio</option>
+              <option value="Avanzado">Avanzado</option>
+            </select>
+          </div>
+          <div class="col-sm-2 d-grid">
+            <button type="button" id="demoGuardar" class="btn btn-gradient"><i class="bi bi-save me-1"></i>Guardar</button>
+          </div>
+        </div>
+        <div id="demoPerfil" class="text-center py-3 rounded-3" style="border:1px dashed #334155;">
+          <span class="small" style="color:#94a3b8;">Todavía no has guardado ningún perfil.</span>
+        </div>
+        <div class="d-flex justify-content-center mt-3">
+          <button type="button" id="demoBorrar" class="btn btn-ghost-glass btn-sm"><i class="bi bi-trash me-1"></i>Borrar perfil</button>
+        </div>
+      </div>
+      <div class="tip-box mt-4">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Abre la pestaña <strong>Application → Local Storage</strong> de DevTools y observa cómo aparece la clave
+        <code>perfil-usuario</code> al pulsar "Guardar".
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li><code>localStorage</code> persiste para siempre; <code>sessionStorage</code> muere con la pestaña.</li>
+        <li>Solo guarda texto: usa <code>JSON.stringify</code> al guardar y <code>JSON.parse</code> al leer.</li>
+        <li>Comprueba siempre <code>getItem(clave) !== null</code> antes de parsear.</li>
+        <li>El evento <code>storage</code> sincroniza <strong>otras pestañas</strong>, no la actual.</li>
+        <li>No guardes contraseñas ni datos sensibles: cualquiera puede leerlo desde consola.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <div class="d-flex gap-2">
+        <a href="../../../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Inicio</a>
+        <a href="leccion-5-fetch.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      </div>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+      </div>
+      <a href="leccion-7-temporizadores.html" class="btn btn-gradient">Siguiente: Temporizadores <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— JavaScript Intermedio · Lección 6</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-7-temporizadores.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../../assets/js/main.js"></script>
+
+<script>
+(function () {
+  const CLAVE = 'perfil-usuario';
+  const input = document.getElementById('demoNombre');
+  const select = document.getElementById('demoNivel');
+  const zona = document.getElementById('demoPerfil');
+
+  function pintar() {
+    const valor = localStorage.getItem(CLAVE);
+    if (!valor) {
+      zona.innerHTML = '<span class="small" style="color:#94a3b8;">Todavía no has guardado ningún perfil.</span>';
+      return;
+    }
+    try {
+      const perfil = JSON.parse(valor);
+      zona.innerHTML =
+        '<i class="bi bi-person-circle fs-1 d-block mb-2" style="color:#22c55e;"></i>' +
+        '<h6 class="fw-bold text-white mb-0">' + perfil.nombre + '</h6>' +
+        '<span class="badge-soft-cyan small">Nivel ' + perfil.nivel + '</span>';
+    } catch (err) {
+      zona.innerHTML = '<span class="small" style="color:#ef4444;">Perfil corrupto. Vuelve a guardarlo.</span>';
+    }
+  }
+
+  document.getElementById('demoGuardar').addEventListener('click', () => {
+    const nombre = input.value.trim();
+    if (!nombre) {
+      input.focus();
+      return;
+    }
+    localStorage.setItem(CLAVE, JSON.stringify({ nombre: nombre, nivel: select.value }));
+    pintar();
+    gsap.from(zona, { opacity: 0, y: 10, duration: 0.35 });
+  });
+
+  document.getElementById('demoBorrar').addEventListener('click', () => {
+    localStorage.removeItem(CLAVE);
+    input.value = '';
+    pintar();
+  });
+
+  pintar();
+})();
+</script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

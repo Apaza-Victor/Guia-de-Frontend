@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 1 de CSS Intermedio: Flexbox completo. Aprende display:flex, flex-direction, justify-content, align-items, flex-wrap, gap y propiedades flex con demo interactiva.">
+  <title>Lección 1 — Flexbox completo | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+  <style>
+    /* ---------- DEMO FLEXBOX ---------- */
+    .flex-demo-container {
+      background: #1e1e2e;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 16px;
+      min-height: 220px;
+      transition: all 0.35s ease;
+    }
+    .flex-demo-item {
+      background: linear-gradient(135deg, #2563eb, #06b6d4);
+      color: #fff;
+      font-weight: 600;
+      border-radius: 8px;
+      padding: 14px 20px;
+      font-size: 0.9rem;
+      text-align: center;
+      min-width: 70px;
+      user-select: none;
+      transition: all 0.3s ease;
+    }
+    .flex-demo-item:nth-child(2) { background: linear-gradient(135deg, #0ea5e9, #ea580c); }
+    .flex-demo-item:nth-child(3) { background: linear-gradient(135deg, #06b6d4, #0ea5e9); }
+    .flex-demo-item:nth-child(4) { background: linear-gradient(135deg, #f59e0b, #f97316); }
+    .flex-demo-item:nth-child(5) { background: linear-gradient(135deg, #10b981, #34d399); }
+    .flex-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .flex-toolbar .btn { font-size: 0.8rem; }
+    .flex-toolbar .btn.active-btn {
+      background: #2563eb;
+      color: #fff;
+      border-color: #2563eb;
+    }
+    #flexDemoBox {
+      display: flex;
+      gap: 10px;
+    }
+    .flex-demo-grow-item {
+      background: linear-gradient(135deg, #2563eb, #06b6d4);
+      color: #fff;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-align: center;
+    }
+    .flex-demo-grow-item:nth-child(2) { background: linear-gradient(135deg, #0ea5e9, #ea580c); }
+    .flex-demo-grow-item:nth-child(3) { background: linear-gradient(135deg, #06b6d4, #0ea5e9); }
+  </style>
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">CSS</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Intermedio</a></li>
+        <li class="breadcrumb-item active text-light">Lección 1</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-2-circle me-1"></i>CSS Intermedio · Lección 1</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>45 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Flexbox completo</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Domina el layout unidimensional: alinea, distribuye y ordena elementos con precisión.</p>
+    <div class="progress-tracker">
+      <span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <!-- ========== CONCEPTO ========== -->
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-layout-wtf text-gradient me-2"></i>¿Qué es Flexbox?</h2>
+      <p>
+        <strong>Flexbox</strong> (<em>Flexible Box Layout</em>) es un modelo de layout de CSS que distribuye espacio dentro de un contenedor
+        a lo largo de un <strong>único eje</strong>. A diferencia de los métodos tradicionales (float, inline-block), Flexbox resuelve
+        problemas clásicos como el centrado vertical, el diseño de barras de herramientas y la distribución equitativa de espacio.
+      </p>
+      <p>Se activa con una única propiedad:</p>
+      <pre class="code-block"><code><span class="token-prop">display</span>: <span class="token-value">flex</span>;</code></pre>
+      <p>El elemento contenedor se convierte en un <strong>flex container</strong> y sus hijos directos en <strong>flex items</strong>.</p>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Flexbox es ideal para layouts en <strong>una dirección</strong> (fila o columna). Para dos dimensiones, consulta la lección de CSS Grid.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ========== DIRECCIÓN Y EJES ========== -->
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-arrow-left-right text-gradient me-2"></i>Dirección y ejes</h2>
+      <p><code>flex-direction</code> define el eje principal sobre el que se distribuyen los items:</p>
+      <pre class="code-block"><code><span class="token-prop">flex-direction</span>: <span class="token-value">row</span>;            <span class="token-comment">/* → horizontal (por defecto) */</span>
+<span class="token-prop">flex-direction</span>: <span class="token-value">row-reverse</span>;     <span class="token-comment">/* ← horizontal invertido */</span>
+<span class="token-prop">flex-direction</span>: <span class="token-value">column</span>;          <span class="token-comment">/* ↓ vertical */</span>
+<span class="token-prop">flex-direction</span>: <span class="token-value">column-reverse</span>; <span class="token-comment">/* ↑ vertical invertido */</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Valor</th><th scope="col">Eje principal</th><th scope="col">Eje cruzado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>row</code></td><td>Horizontal (→)</td><td>Vertical (↓)</td></tr>
+          <tr><td><code>column</code></td><td>Vertical (↓)</td><td>Horizontal (→)</td></tr>
+          <tr><td><code>row-reverse</code></td><td>Horizontal (←)</td><td>Vertical (↓)</td></tr>
+          <tr><td><code>column-reverse</code></td><td>Vertical (↑)</td><td>Horizontal (→)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ========== JUSTIFY / ALIGN ========== -->
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-arrows-angle-expand text-gradient me-2"></i>Alineación: justify-content y align-items</h2>
+      <p>Estas dos propiedades son la columna vertebral de Flexbox:</p>
+      <ul>
+        <li><strong><code>justify-content</code></strong> — alinea los items a lo largo del <strong>eje principal</strong>.</li>
+        <li><strong><code>align-items</code></strong> — alinea los items a lo largo del <strong>eje cruzado</strong>.</li>
+      </ul>
+      <pre class="code-block"><code><span class="token-prop">justify-content</span>: <span class="token-value">flex-start</span> | <span class="token-value">flex-end</span> | <span class="token-value">center</span>
+               | <span class="token-value">space-between</span> | <span class="token-value">space-around</span> | <span class="token-value">space-evenly</span>;
+
+<span class="token-prop">align-items</span>: <span class="token-value">flex-start</span> | <span class="token-value">flex-end</span> | <span class="token-value">center</span>
+           | <span class="token-value">stretch</span> | <span class="token-value">baseline</span>;</code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Valor</th><th scope="col">Efecto</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>flex-start</code></td><td>Alinea al inicio del eje</td></tr>
+          <tr><td><code>flex-end</code></td><td>Alinea al final del eje</td></tr>
+          <tr><td><code>center</code></td><td>Centra en ambos ejes</td></tr>
+          <tr><td><code>space-between</code></td><td>Espacio igual entre items, sin espacio en extremos</td></tr>
+          <tr><td><code>space-around</code></td><td>Espacio alrededor de cada item</td></tr>
+          <tr><td><code>space-evenly</code></td><td>Espacio idéntico entre todos los items y extremos</td></tr>
+          <tr><td><code>stretch</code></td><td>Estira los items para llenar el eje cruzado</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ========== WRAP, GAP, ORDER ========== -->
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-grid-3x3-gap text-gradient me-2"></i>Wrap, gap y order</h2>
+      <pre class="code-block"><code><span class="token-comment">/* Envolver items en múltiples líneas */</span>
+<span class="token-prop">flex-wrap</span>: <span class="token-value">nowrap</span>;  <span class="token-comment">/* por defecto — todo en una línea */</span>
+<span class="token-prop">flex-wrap</span>: <span class="token-value">wrap</span>;    <span class="token-comment">/* los items pasan a la siguiente línea */</span>
+
+<span class="token-comment">/* Espacio entre items */</span>
+<span class="token-prop">gap</span>: <span class="token-value">16px</span>;
+
+<span class="token-comment">/* Reordenar sin cambiar el DOM */</span>
+<span class="token-prop">order</span>: <span class="token-value">-1</span>;  <span class="token-comment">/* mueve el item al inicio */</span>
+<span class="token-prop">order</span>: <span class="token-value">1</span>;   <span class="token-comment">/* mueve el item al final */</span>
+
+<span class="token-comment">/* Alineación individual de un item en el eje cruzado */</span>
+<span class="token-prop">align-self</span>: <span class="token-value">flex-end</span>;</code></pre>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Importante:</strong>
+        <code>gap</code> reemplaza los antiguos márgenes negativos y <code>margin</code> en el contenedor. Es la forma moderna y segura de espaciar flex items.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ========== FLEX GROW / SHRINK / BASIS ========== -->
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-arrows-fullscreen text-gradient me-2"></i>flex-grow, flex-shrink y flex-basis</h2>
+      <p>Estas propiedades controlan <strong>cómo un item crece o se contrae</strong> dentro del espacio disponible:</p>
+      <pre class="code-block"><code><span class="token-comment">/* shorthand: flex: grow shrink basis */</span>
+<span class="token-prop">flex</span>: <span class="token-value">1</span>;          <span class="token-comment">/* crece para llenar espacio */</span>
+<span class="token-prop">flex</span>: <span class="token-value">0 0 200px</span>;  <span class="token-comment">/* ancho fijo de 200px */</span>
+<span class="token-prop">flex</span>: <span class="token-value">2 1 auto</span>;  <span class="token-comment">/* crece el doble que sus hermanos */</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Propiedad</th><th scope="col">Valor por defecto</th><th scope="col">Descripción</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>flex-grow</code></td><td><code>0</code></td><td>Cuánto crece un item para llenar espacio extra (proporcional)</td></tr>
+          <tr><td><code>flex-shrink</code></td><td><code>1</code></td><td>Cuánto se contrae cuando no cabe (proporcional)</td></tr>
+          <tr><td><code>flex-basis</code></td><td><code>auto</code></td><td>Tamaño inicial del item antes de crecer o contraer</td></tr>
+        </tbody>
+      </table>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Usa <code>flex: 1</code> para que todos los items se distribuyan en partes iguales, o <code>flex: 0 0 250px</code> para un ancho fijo con flexibilidad de salto de línea.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ========== DEMO INTERACTIVA ========== -->
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-play-circle text-gradient me-2"></i>Demo interactiva: Barra de herramientas</h2>
+      <p>Usa los botones para cambiar las propiedades de Flexbox en tiempo real y observa cómo reaccionan los items:</p>
+
+      <div class="demo-box">
+        <!-- Controles -->
+        <div class="flex-toolbar" id="flexControls">
+          <button class="btn btn-sm btn-outline-light active-btn" onclick="setFlexDir('row', this)">flex-direction: row</button>
+          <button class="btn btn-sm btn-outline-light" onclick="setFlexDir('column', this)">flex-direction: column</button>
+          <button class="btn btn-sm btn-outline-light" onclick="setFlexDir('row-reverse', this)">row-reverse</button>
+
+          <button class="btn btn-sm btn-outline-light ms-3" onclick="setJustify('flex-start', this)">justify: start</button>
+          <button class="btn btn-sm btn-outline-light active-btn" onclick="setJustify('space-between', this)">justify: between</button>
+          <button class="btn btn-sm btn-outline-light" onclick="setJustify('center', this)">justify: center</button>
+          <button class="btn btn-sm btn-outline-light" onclick="setJustify('space-evenly', this)">justify: evenly</button>
+
+          <button class="btn btn-sm btn-outline-light ms-3" onclick="setAlign('stretch', this)">align: stretch</button>
+          <button class="btn btn-sm btn-outline-light active-btn" onclick="setAlign('center', this)">align: center</button>
+          <button class="btn btn-sm btn-outline-light" onclick="setAlign('flex-end', this)">align: end</button>
+
+          <button class="btn btn-sm btn-outline-light ms-3" onclick="toggleWrap(this)">toggle wrap</button>
+        </div>
+
+        <div class="flex-demo-container" id="flexDemoBox">
+          <div class="flex-demo-item"><i class="bi bi-house me-1"></i>Inicio</div>
+          <div class="flex-demo-item"><i class="bi bi-search me-1"></i>Buscar</div>
+          <div class="flex-demo-item"><i class="bi bi-gear me-1"></i>Ajustes</div>
+          <div class="flex-demo-item"><i class="bi bi-bell me-1"></i>Alertas</div>
+          <div class="flex-demo-item"><i class="bi bi-person me-1"></i>Perfil</div>
+        </div>
+
+        <div class="mt-3 text-center">
+          <small class="text-secondary" id="flexStatusLabel">
+            Display: flex | Direction: row | Justify: space-between | Align: center | Wrap: nowrap
+          </small>
+        </div>
+      </div>
+
+      <!-- DEMO FLEX-GROW -->
+      <h3 class="h5 text-white fw-bold mt-4 mb-2"><i class="bi bi-arrows-angle-expand me-2"></i>Demo: flex-grow</h3>
+      <div class="demo-box">
+        <div class="flex-demo-container" id="flexGrowBox">
+          <div class="flex-demo-grow-item" style="flex:1;">
+            flex: 1
+          </div>
+          <div class="flex-demo-grow-item" style="flex:2;">
+            flex: 2
+          </div>
+          <div class="flex-demo-grow-item" style="flex:1;">
+            flex: 1
+          </div>
+        </div>
+        <div class="mt-2 text-center">
+          <small class="text-secondary">Los items se reparten el espacio proporcionalmente: 25% — 50% — 25%</small>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ========== REPASO ========== -->
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li><code>display: flex</code> activa el layout flex en el contenedor.</li>
+        <li><code>justify-content</code> distribuye en el eje principal; <code>align-items</code> en el cruzado.</li>
+        <li><code>flex-wrap: wrap</code> permite que los items salten de línea cuando no caben.</li>
+        <li><code>gap</code> añade espacio entre items sin márgenes negativos.</li>
+        <li><code>flex-grow</code> / <code>flex-shrink</code> / <code>flex-basis</code> controlan el tamaño proporcional.</li>
+        <li><code>order</code> reordena items visualmente sin tocar el HTML.</li>
+        <li><code>align-self</code> permite alinear un item individualmente en el eje cruzado.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="../../../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Inicio</a>
+      <div class="progress-tracker">
+        <span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-2-grid.html" class="btn btn-gradient">Siguiente: CSS Grid <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— CSS Intermedio · Lección 1</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-2-grid.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../../assets/js/main.js"></script>
+<script>
+  const flexBox = document.getElementById('flexDemoBox');
+  const statusLabel = document.getElementById('flexStatusLabel');
+  let currentDir = 'row', currentJustify = 'space-between', currentAlign = 'center', currentWrap = false;
+
+  function updateFlexBox() {
+    gsap.to(flexBox, {
+      duration: 0.35,
+      ease: 'power2.inOut',
+      onStart() {
+        flexBox.style.flexDirection = currentDir;
+        flexBox.style.justifyContent = currentJustify;
+        flexBox.style.alignItems = currentAlign;
+        flexBox.style.flexWrap = currentWrap ? 'wrap' : 'nowrap';
+      }
+    });
+    const items = flexBox.querySelectorAll('.flex-demo-item');
+    gsap.from(items, { opacity: 0, y: 10, stagger: 0.06, duration: 0.3, ease: 'power2.out' });
+    statusLabel.textContent = `Display: flex | Direction: ${currentDir} | Justify: ${currentJustify} | Align: ${currentAlign} | Wrap: ${currentWrap ? 'wrap' : 'nowrap'}`;
+  }
+
+  function clearActiveGroup(btn) {
+    btn.parentElement.querySelectorAll('.btn').forEach(b => b.classList.remove('active-btn'));
+  }
+
+  function setFlexDir(val, btn) {
+    currentDir = val;
+    btn.parentElement.querySelectorAll('.btn-outline-light').forEach(b => {
+      if (b.textContent.includes('flex-direction') || b.textContent.includes('reverse')) b.classList.remove('active-btn');
+    });
+    btn.classList.add('active-btn');
+    updateFlexBox();
+  }
+
+  function setJustify(val, btn) {
+    currentJustify = val;
+    btn.parentElement.querySelectorAll('.btn-outline-light').forEach(b => {
+      if (b.textContent.includes('justify')) b.classList.remove('active-btn');
+    });
+    btn.classList.add('active-btn');
+    updateFlexBox();
+  }
+
+  function setAlign(val, btn) {
+    currentAlign = val;
+    btn.parentElement.querySelectorAll('.btn-outline-light').forEach(b => {
+      if (b.textContent.includes('align:')) b.classList.remove('active-btn');
+    });
+    btn.classList.add('active-btn');
+    updateFlexBox();
+  }
+
+  function toggleWrap(btn) {
+    currentWrap = !currentWrap;
+    btn.classList.toggle('active-btn');
+    updateFlexBox();
+  }
+</script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

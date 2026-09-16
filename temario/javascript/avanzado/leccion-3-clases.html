@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 3 de JavaScript Avanzado: clases y herencia en JavaScript. class, constructor, getters/setters, extends, super, métodos estáticos y campos privados.">
+  <title>Lección 3 — Clases y herencia | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">JavaScript</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Avanzado</a></li>
+        <li class="breadcrumb-item active text-light">Lección 3</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-lightning-charge-fill me-1"></i>JavaScript Avanzado · Lección 3</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>40 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Clases y herencia</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Organiza tu código con clases, herencia, métodos estáticos y campos privados.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-people text-gradient me-2"></i>Clases: azúcar sintáctica sobre prototipos</h2>
+      <p>
+        Las <strong>clases</strong> (ES6) son una forma clara de <em>crear objetos</em> y compartir comportamiento.
+        En el fondo, JavaScript sigue usando su sistema de <em>prototipos</em>, pero la sintaxis <code>class</code>
+        es mucho más legible y familiar.
+      </p>
+      <pre class="code-block"><code><span class="token-prop">class</span> <span class="token-tag">Usuario</span> {
+  <span class="token-prop">constructor</span>(nombre, email) {
+    <span class="token-prop">this</span>.nombre = nombre;      <span class="token-comment">// propiedad creada en el constructor</span>
+    <span class="token-prop">this</span>.email  = email;
+    <span class="token-prop">this</span>.logueado = <span class="token-prop">false</span>;
+  }
+
+  <span class="token-comment">// Método: se ejecuta en el contexto de "this"</span>
+  <span class="token-prop">saludar</span>() {
+    <span class="token-prop">return</span> `Hola, soy ${<span class="token-prop">this</span>.nombre}`;
+  }
+
+  <span class="token-prop">loguear</span>() {
+    <span class="token-prop">this</span>.logueado = <span class="token-prop">true</span>;
+  }
+}
+
+<span class="token-prop">const</span> ana = <span class="token-prop">new</span> <span class="token-tag">Usuario</span>(<span class="token-value">"Ana"</span>, <span class="token-value">"ana@mail.com"</span>);
+ana.loguear();
+<span class="token-attr">console</span>.log(ana.saludar());   <span class="token-comment">// "Hola, soy Ana"</span></code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Convendía usar <code>new</code> cuando instancie. Los nombres de las clases se escriben en <strong>UpperCamelCase</strong>
+        (<code>Usuario</code>, <code>PedidoDetalle</code>) para distinguir la "plantilla" de las variables.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-sliders text-gradient me-2"></i>Getters y setters</h2>
+      <p>
+        Los <strong>getters</strong> y <strong>setters</strong> permiten leer y modificar un valor con la sintaxis de
+        una propiedad normal, pero ejecutando lógica por debajo (validar, formatear, calcular).
+      </p>
+      <pre class="code-block"><code><span class="token-prop">class</span> <span class="token-tag">Producto</span> {
+  <span class="token-prop">constructor</span>(precio) {
+    <span class="token-prop">this</span>._precio = precio;
+  }
+
+  <span class="token-comment">// GETTER: se lee como propiedad "producto.precio"</span>
+  <span class="token-prop">get</span> <span class="token-prop">precio</span>() {
+    <span class="token-prop">return</span> `$${<span class="token-prop">this</span>._precio.toFixed(<span class="token-num">2</span>)}`;
+  }
+
+  <span class="token-comment">// SETTER: valida antes de asignar</span>
+  <span class="token-prop">set</span> <span class="token-prop">precio</span>(nuevoValor) {
+    <span class="token-prop">if</span> (nuevoValor &lt; <span class="token-num">0</span>) <span class="token-prop">throw new</span> <span class="token-attr">Error</span>(<span class="token-value">"Precio no puede ser negativo"</span>);
+    <span class="token-prop">this</span>._precio = nuevoValor;
+  }
+}
+
+<span class="token-prop">const</span> camisa = <span class="token-prop">new</span> <span class="token-tag">Producto</span>(<span class="token-num">19.5</span>);
+camisa.precio = <span class="token-num">25</span>;       <span class="token-comment">// usa el setter</span>
+<span class="token-attr">console</span>.log(camisa.precio); <span class="token-comment">// usa el getter → "$25.00"</span></code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-diagram-2 text-gradient me-2"></i>Herencia: extends y super</h2>
+      <p>
+        Con <strong><code>extends</code></strong> una clase hereda la funcionalidad de otra, y con
+        <strong><code>super</code></strong> llamas al constructor o a métodos de la clase padre.
+      </p>
+      <pre class="code-block"><code><span class="token-prop">class</span> <span class="token-tag">Administrador</span> <span class="token-prop">extends</span> <span class="token-tag">Usuario</span> {
+  <span class="token-prop">constructor</span>(nombre, email, permisos) {
+    <span class="token-prop">super</span>(nombre, email);      <span class="token-comment">// ejecuta el constructor de Usuario</span>
+    <span class="token-prop">this</span>.permisos = permisos;
+  }</code></pre>
+      <pre class="code-block mt-2"><code><span class="token-comment">// Continúa la clase…</span>
+  <span class="token-comment">// Sobre-escribe el método del padre</span>
+  <span class="token-prop">saludar</span>() {
+    <span class="token-prop">return</span> <span class="token-prop">super</span>.saludar() + <span class="token-value">" (admin)"</span>;
+  }
+
+  <span class="token-prop">banear</span>(usuario) {
+    <span class="token-attr">console</span>.log(`${usuario} fue baneado`);
+  }
+}
+
+<span class="token-prop">const</span> jefe = <span class="token-prop">new</span> <span class="token-tag">Administrador</span>(<span class="token-value">"Bruno"</span>, <span class="token-value">"b@mail.com"</span>, [<span class="token-value">"borrar"</span>, <span class="token-value">"editar"</span>]);
+jefe.saludar();   <span class="token-comment">// "Hola, soy Bruno (admin)"</span></code></pre>
+      <ul class="mt-3">
+        <li><strong>Reutilizas</strong> lógica del padre en vez de copiarla.</li>
+        <li><strong>Polimorfismo:</strong> el método del hijo gana cuando existe uno con el mismo nombre.</li>
+        <li>Siempre llama a <code>super(...)</code> ANTES de usar <code>this</code> en el constructor hijo.</li>
+      </ul>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-gear text-gradient me-2"></i>Métodos estáticos y campos privados</h2>
+      <pre class="code-block"><code><span class="token-prop">class</span> <span class="token-tag">Cuenta</span> {
+  <span class="token-comment">// Campo privado: NO accesible desde fuera (#)</span>
+  #saldo = <span class="token-num">0</span>;
+
+  <span class="token-prop">depositar</span>(monto) {
+    <span class="token-prop">this</span>.#saldo += monto;
+  }
+
+  <span class="token-prop">verSaldo</span>() {
+    <span class="token-prop">return</span> <span class="token-prop">this</span>.#saldo;
+  }
+
+  <span class="token-comment">// Método ESTÁTICO: se usa sobre la clase, no sobre la instancia</span>
+  <span class="token-prop">static</span> <span class="token-prop">formatear</span>(monto, moneda = <span class="token-value">"USD"</span>) {
+    <span class="token-prop">return</span> <span class="token-prop">new</span> <span class="token-attr">Intl</span>.NumberFormat(<span class="token-value">"es-ES"</span>, { <span class="token-prop">style</span>: <span class="token-value">"currency"</span>, <span class="token-prop">currency</span>: moneda }).format(monto);
+  }
+}
+
+<span class="token-prop">const</span> mia = <span class="token-prop">new</span> <span class="token-tag">Cuenta</span>();
+mia.depositar(<span class="token-num">100</span>);
+<span class="token-attr">console</span>.log(<span class="token-tag">Cuenta</span>.formatear(mia.verSaldo())); <span class="token-comment">// "100,00 $US"</span>
+<span class="token-attr">console</span>.log(mia.#saldo); <span class="token-comment">// SyntaxError: campo privado inaccesible</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Concepto</th><th scope="col">Sintaxis</th><th scope="col">Uso</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Método estático</td><td><code>static metodo() {}</code></td><td>Utilidades globales de la clase (<code>Math.random()</code>)</td></tr>
+          <tr><td>Campo privado</td><td><code>#dato</code></td><td>Encapsular estado interno, evitar mutaciones externas</td></tr>
+          <tr><td>Get / Set</td><td><code>get prop() {} / set prop(v) {}</code></td><td>Controlar lectura y escritura</td></tr>
+        </tbody>
+      </table>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Comparación con prototipos:</strong>
+        Antes de ES6 eso mismo se escribía con funciones constructoras y <code>Prototype.metodo = fn</code>.
+        Las clases NO añaden una herencia "de verdad"; siguen siendo prototipos por debajo, pero con una
+        sintaxis más segura (sin olvidar el <code>new</code> y con campos privados reales).
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-wallet2 text-gradient me-2"></i>Demo interactiva: mini banco</h2>
+      <p>
+        Una clase <code>CuentaBancaria</code> con saldo <em>privado</em>, depósitos y retiros validados,
+        un getter para leer el saldo y un método estático que formatea el dinero.
+      </p>
+      <div class="demo-box p-4">
+        <div class="row g-3 mb-3">
+          <div class="col-md-5">
+            <label class="form-label small text-white mb-1">Titular inicial</label>
+            <input type="text" id="lec3-titular" class="form-control form-control-sm bg-dark text-white border-secondary" value="Ana Ruiz">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label small text-white mb-1">Saldo inicial</label>
+            <input type="number" id="lec3-inicial" class="form-control form-control-sm bg-dark text-white border-secondary" value="1000" min="0">
+          </div>
+          <div class="col-md-3 d-flex align-items-end">
+            <button class="btn btn-ghost-glass w-100" id="lec3-crear"><i class="bi bi-plus-circle me-1"></i>Crear cuenta</button>
+          </div>
+        </div>
+        <div class="row g-3 mb-3 align-items-end">
+          <div class="col-md-6">
+            <label class="form-label small text-white mb-1">Monto a operar</label>
+            <input type="number" id="lec3-monto" class="form-control form-control-sm bg-dark text-white border-secondary" value="250" min="1">
+          </div>
+          <div class="col-md-6 d-flex gap-2">
+            <button class="btn btn-gradient" id="lec3-depositar"><i class="bi bi-arrow-down-circle me-1"></i>Ingresar</button>
+            <button class="btn btn-ghost-glass" id="lec3-retirar"><i class="bi bi-arrow-up-circle me-1"></i>Retirar</button>
+          </div>
+        </div>
+        <div id="lec3-saldo" class="text-center mb-3">
+          <div class="display-6 fw-bold text-gradient">$0</div>
+          <div class="small" style="color:var(--text-muted);">saldo actual</div>
+        </div>
+        <div id="lec3-msg" class="small mb-2 text-center" style="color:var(--text-muted);">Crea una cuenta para empezar.</div>
+        <ul id="lec3-historial" class="list-unstyled small" style="color:#cbd5e1 !important;"></ul>
+      </div>
+      <pre class="code-block mt-3"><code><span class="token-prop">class</span> <span class="token-tag">CuentaBancaria</span> {
+  <span class="token-prop">#saldo;</span>
+  <span class="token-prop">#historial</span> = [];
+
+  <span class="token-prop">constructor</span>(titular, saldoInicial = <span class="token-num">0</span>) {
+    <span class="token-prop">this</span>.titular = titular;
+    <span class="token-prop">this</span>.#saldo = saldoInicial;
+  }
+
+  <span class="token-prop">get</span> <span class="token-prop">saldo</span>() {
+    <span class="token-prop">return</span> <span class="token-prop">this</span>.#saldo;
+  }
+
+  <span class="token-prop">depositar</span>(monto) {
+    <span class="token-prop">if</span> (monto &lt;= <span class="token-num">0</span>) <span class="token-prop">return</span> <span class="token-prop">false</span>;
+    <span class="token-prop">this</span>.#saldo += monto;
+    <span class="token-prop">this</span>.#historial.push(`+ ${<span class="token-attr">CuentaBancaria</span>.formatear(monto)}`);
+    <span class="token-prop">return</span> <span class="token-prop">true</span>;
+  }
+
+  <span class="token-prop">retirar</span>(monto) {
+    <span class="token-prop">if</span> (monto &lt;= <span class="token-num">0</span> || monto &gt; <span class="token-prop">this</span>.#saldo) <span class="token-prop">return</span> <span class="token-prop">false</span>;
+    <span class="token-prop">this</span>.#saldo -= monto;
+    <span class="token-prop">this</span>.#historial.push(`- ${<span class="token-attr">CuentaBancaria</span>.formatear(monto)}`);
+    <span class="token-prop">return</span> <span class="token-prop">true</span>;
+  }
+
+  <span class="token-prop">static</span> <span class="token-prop">formatear</span>(monto) {
+    <span class="token-prop">return</span> <span class="token-prop">new</span> <span class="token-attr">Intl</span>.NumberFormat(<span class="token-value">"es-ES"</span>,
+      { <span class="token-prop">style</span>: <span class="token-value">"currency"</span>, <span class="token-prop">currency</span>: <span class="token-value">"EUR"</span> }).format(monto);
+  }
+}</code></pre>
+      <script>
+      (function () {
+        let cuenta = null;
+        const elSaldo = document.getElementById("lec3-saldo").querySelector(".display-6");
+        const elMsg = document.getElementById("lec3-msg");
+        const elHistorial = document.getElementById("lec3-historial");
+
+        class CuentaBancaria {
+          #saldo;
+          #historial = [];
+          constructor(titular, saldoInicial = 0) {
+            this.titular = titular;
+            this.#saldo = saldoInicial;
+            this.#historial.push(`Apertura: ${CuentaBancaria.formatear(saldoInicial)}`);
+          }
+          get saldo() { return this.#saldo; }
+          get historial() { return [...this.#historial]; }
+          depositar(monto) {
+            if (monto <= 0) return "Ingresa un monto mayor a 0";
+            this.#saldo += monto;
+            this.#historial.push(`+ ${CuentaBancaria.formatear(monto)}`);
+            return null;
+          }
+          retirar(monto) {
+            if (monto <= 0) return "Ingresa un monto mayor a 0";
+            if (monto > this.#saldo) return `Saldo insuficiente (tienes ${CuentaBancaria.formatear(this.#saldo)})`;
+            this.#saldo -= monto;
+            this.#historial.push(`- ${CuentaBancaria.formatear(monto)}`);
+            return null;
+          }
+          static formatear(monto) {
+            return new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR" }).format(monto);
+          }
+        }
+
+        function render(pexito) {
+          elSaldo.textContent = CuentaBancaria.formatear(cuenta.saldo);
+          elHistorial.innerHTML = cuenta.historial
+            .map(h => `<li class="mb-1"><i class="bi bi-arrow-return-right me-2" style="color:#2563eb;"></i>${h}</li>`)
+            .join("");
+          if (typeof gsap !== "undefined") {
+            gsap.from(elSaldo, { scale: 1.15, duration: 0.3, ease: "power2.out" });
+          }
+        }
+
+        document.getElementById("lec3-crear").addEventListener("click", () => {
+          const nombre = document.getElementById("lec3-titular").value.trim() || "Sin nombre";
+          const inicial = Math.max(0, parseInt(document.getElementById("lec3-inicial").value, 10) || 0);
+          cuenta = new CuentaBancaria(nombre, inicial);
+          elMsg.innerHTML = `<i class="bi bi-check2-circle me-1" style="color:#34d399;"></i>Cuenta de <strong class="text-white">${nombre}</strong> creada.`;
+          render();
+        });
+
+        document.getElementById("lec3-depositar").addEventListener("click", () => {
+          if (!cuenta) { elMsg.innerHTML = '<i class="bi bi-info-circle me-1"></i>Crea una cuenta primero.'; return; }
+          const m = parseInt(document.getElementById("lec3-monto").value, 10);
+          const error = cuenta.depositar(m);
+          elMsg.innerHTML = error
+            ? `<i class="bi bi-x-circle me-1" style="color:#f87171;"></i>${error}`
+            : `<i class="bi bi-check2-circle me-1" style="color:#34d399;"></i>Ingreso de ${CuentaBancaria.formatear(m)} correcto.`;
+          render();
+        });
+
+        document.getElementById("lec3-retirar").addEventListener("click", () => {
+          if (!cuenta) { elMsg.innerHTML = '<i class="bi bi-info-circle me-1"></i>Crea una cuenta primero.'; return; }
+          const m = parseInt(document.getElementById("lec3-monto").value, 10);
+          const error = cuenta.retirar(m);
+          elMsg.innerHTML = error
+            ? `<i class="bi bi-x-circle me-1" style="color:#f87171;"></i>${error}`
+            : `<i class="bi bi-check2-circle me-1" style="color:#34d399;"></i>Retiro de ${CuentaBancaria.formatear(m)} correcto.`;
+          render();
+        });
+      })();
+      </script>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li><code>class</code> + <code>constructor</code> definen la plantilla; los métodos viven en el prototipo.</li>
+        <li>Getters/setters controlan lectura y escritura; <code>static</code> vive en la clase.</li>
+        <li><code>extends</code> hereda y <code>super(...)</code> llama a la clase padre. Llama super antes de usar this.</li>
+        <li>Los campos <code>#privados</code> encapsulan el estado y evitan bugs difíciles de rastrear.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <div class="d-flex gap-2">
+        <a href="../../../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Inicio</a>
+        <a href="leccion-2-promesas.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      </div>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-4-modulos.html" class="btn btn-gradient">Siguiente: Módulos ES y closures <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— JavaScript Avanzado · Lección 3</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-4-modulos.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

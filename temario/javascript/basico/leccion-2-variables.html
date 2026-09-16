@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 2 de JavaScript Básico: Variables con let, const y var. Declaración, reasignación, scope y template literals.">
+  <title>Lección 2 — Variables: let, const y var | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">JavaScript</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Básico</a></li>
+        <li class="breadcrumb-item active text-light">Lección 2</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-filetype-js me-1"></i>JavaScript Básico · Lección 2</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>40 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Variables: let, const y var</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Almacena información en variables, entiende las diferencias entre let, const y var y domina las template literals.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-box-seam text-gradient me-2"></i>Declarando variables: let, const y var</h2>
+      <p>JavaScript ofrece tres formas de declarar variables. Las dos modernas son <code>let</code> y <code>const</code>; <code>var</code> es la forma antigua que debes evitar.</p>
+
+      <pre class="code-block"><code><span class="token-comment">// let: permite reasignar el valor</span>
+<span class="token-tag">let</span> nombre = <span class="token-value">"Ana"</span>;
+nombre = <span class="token-value">"Carlos"</span>; <span class="token-comment">// ✅ Válido</span>
+
+<span class="token-comment">// const: NO permite reasignar. Una vez asignado, es inmutable.</span>
+<span class="token-tag">const</span> PI = <span class="token-num">3.14159</span>;
+<span class="token-comment">// PI = 3; // ❌ TypeError</span>
+
+<span class="token-comment">// var: la forma antigua. Tiene scope de función, puede causar bugs.</span>
+<span class="token-tag">var</span> vieja = <span class="token-value">"no la uses"</span>;</code></pre>
+
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>¿Por qué evitar var?</strong>
+        <code>var</code> tiene scope de <em>función</em> en vez de scope de <em>bloque</em>, lo que genera bugs difíciles de rastrear.
+        Usa <code>const</code> por defecto y <code>let</code> solo cuando necesites reasignar.
+      </div>
+
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Palabra clave</th><th scope="col">Reasignable</th><th scope="col">Scope</th><th style="color:#ef4444;">Uso recomendado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>const</code></td><td>No</td><td>Bloque</td><td>Por defecto siempre</td></tr>
+          <tr><td><code>let</code></td><td>Sí</td><td>Bloque</td><td>Solo cuando cambia el valor</td></tr>
+          <tr><td><code>var</code></td><td>Sí</td><td>Función</td><td style="color:#ef4444;">❌ Nunca (en código moderno)</td></tr>
+        </tbody>
+      </table>
+
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        El operador <code>typeof</code> te permite averiguar qué tipo de valor almacena una variable. Lo estudiaremos a fondo en la <a href="leccion-3-tipos-datos.html" class="text-info">Lección 3: Tipos de datos</a>.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-braces text-gradient me-2"></i>Template literals</h2>
+      <p>Las <strong>template literals</strong> (literales de plantilla) permiten insertar expresiones dentro de un string usando <code>${...}</code>. Son más legibles y potentes que la concatenación con <code>+</code>.</p>
+
+      <pre class="code-block"><code><span class="token-tag">const</span> nombre = <span class="token-value">"Ana"</span>;
+<span class="token-tag">const</span> edad = <span class="token-num">28</span>;
+
+<span class="token-comment">// Concatenación clásica (antigua)</span>
+<span class="token-tag">let</span> saludo1 = <span class="token-value">"Hola, "</span> + nombre + <span class="token-value">" tienes "</span> + edad + <span class="token-value">" años"</span>;
+
+<span class="token-comment">// Template literal (moderna y limpia)</span>
+<span class="token-tag">let</span> saludo2 = <span class="token-value">`Hola, ${nombre} tienes ${edad} años`</span>;
+
+<span class="token-comment">// También permiten expresiones complejas</span>
+<span class="token-tag">let</span> mensaje = <span class="token-value">`En 5 años tendrás ${edad + 5} años`</span>;
+
+<span class="token-comment">// Multilínea sin \n</span>
+<span class="token-tag">let</span> multi = <span class="token-value">`
+  Esta es
+  una línea
+  multilínea
+`</span>;</code></pre>
+
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Característica</th><th scope="col">Concatenación <code>+</code></th><th scope="col">Template literal <code>` `</code></th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Lectura</td><td>Difícil con muchas variables</td><td>Clara e intuitiva</td></tr>
+          <tr><td>Multilínea</td><td>Requiere <code>\n</code></td><td>Natural con saltos de línea</td></tr>
+          <tr><td>Expresiones</td><td>Limitado</td><td>Cualquier expresión dentro de <code>${}</code></td></tr>
+          <tr><td>Rendimiento</td><td>Igual</td><td>Igual (el motor las optimiza igual)</td></tr>
+        </tbody>
+      </table>
+
+      <div class="tip-box mt-4">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        Siempre usa template literals en lugar de concatenación. Son más legibles, menos propensas a errores y soportan expresiones JavaScript directamente.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-lightbulb text-gradient me-2"></i>Demo interactiva: saludo personalizado</h2>
+      <p>Escribe tu nombre en el campo y haz clic en el botón para ver un saludo generado con template literals en tiempo real.</p>
+      <div class="demo-box p-4">
+        <div class="row g-3 align-items-end">
+          <div class="col-md-6">
+            <label for="inputNombre" class="form-label text-white fw-semibold">Escribe tu nombre:</label>
+            <input type="text" class="form-control bg-dark text-white border-secondary" id="inputNombre" placeholder="Ej: María" autocomplete="off">
+          </div>
+          <div class="col-md-3">
+            <button class="btn btn-gradient w-100" id="btnSaludar">
+              <i class="bi bi-hand-wave me-1"></i>Saludar
+            </button>
+          </div>
+        </div>
+        <div id="saludoOutput" class="mt-3 p-3 rounded text-center" style="background:rgba(37,99,235,0.1); display:none;">
+          <span id="saludoTexto" class="fs-5 text-white fw-semibold"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li>Usa <code>const</code> por defecto; <code>let</code> solo cuando reasignes. <strong>Nunca</strong> <code>var</code>.</li>
+        <li><code>const</code> y <code>let</code> tienen scope de bloque; <code>var</code> tiene scope de función (y bugs).</li>
+        <li>Las variables guardan valores de distintos tipos: number, string, boolean, null, undefined, bigint y symbol.</li>
+        <li>Las template literals <code>`Hola, ${nombre}`</code> son más limpias y poderosas que la concatenación con <code>+</code>.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-1-introduccion.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step current"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span>
+      </div>
+      <a href="leccion-3-tipos-datos.html" class="btn btn-gradient">Siguiente: Tipos de datos <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— JavaScript Básico · Lección 2</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-3-tipos-datos.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../../assets/js/main.js"></script>
+
+<script>
+(function () {
+  const input = document.getElementById('inputNombre');
+  const btn = document.getElementById('btnSaludar');
+  const output = document.getElementById('saludoOutput');
+  const texto = document.getElementById('saludoTexto');
+
+  function saludar() {
+    const nombre = input.value.trim();
+    if (nombre === '') {
+      output.style.display = 'none';
+      return;
+    }
+    const ahora = new Date();
+    const hora = ahora.getHours();
+    let saludo;
+    if (hora < 12) {
+      saludo = 'Buenos días';
+    } else if (hora < 19) {
+      saludo = 'Buenas tardes';
+    } else {
+      saludo = 'Buenas noches';
+    }
+    texto.textContent = `${saludo}, ${nombre}! Bienvenido/a a JavaScript.`;
+    output.style.display = 'block';
+  }
+
+  btn.addEventListener('click', saludar);
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') saludar();
+  });
+})();
+</script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 4 de Tailwind CSS: diseño responsive con prefijos sm:, md:, lg: y variantes hover, focus y dark.">
+  <title>Lección 4 — Responsive y variantes | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Tailwind CSS</a></li>
+        <li class="breadcrumb-item active text-light">Lección 4</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-wind me-1"></i>Tailwind · Lección 4</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>55 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Responsive y variantes</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">El superpoder de Tailwind: prefijos de breakpoint y variantes de estado escritos como parte de la clase.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-phone text-gradient me-2"></i>Breakpoints: mobile-first</h2>
+      <p>Escribe el estilo base (móvil) primero y amplíalo con prefijos <code>sm:</code>, <code>md:</code>, <code>lg:</code>, <code>xl:</code>:</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;div</span> class=<span class="token-value">"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"</span><span class="token-tag">&gt;</span>
+  <span class="token-comment">&lt;!-- 1 columna en móvil, 2 en tablet, 4 en escritorio --&gt;</span>
+  ...
+<span class="token-tag">&lt;/div&gt;</span></code></pre>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Prefijo</th><th scope="col">Breakpoint</th><th scope="col">Uso típico</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>sm:</code></td><td>640px</td><td>tablets pequeñas</td></tr>
+          <tr><td><code>md:</code></td><td>768px</td><td>tablets / móvil apaisado</td></tr>
+          <tr><td><code>lg:</code></td><td>1024px</td><td>laptops</td></tr>
+          <tr><td><code>xl:</code></td><td>1280px</td><td>escritorios grandes</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-mouse text-gradient me-2"></i>Estados: hover, focus y active</h2>
+      <p>Las variantes se anteponen con <code>:</code> y se combinan entre sí:</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;button</span>
+  class=<span class="token-value">"bg-sky-500 hover:bg-sky-600 active:scale-95 focus:ring-2 focus:ring-sky-300 transition"</span><span class="token-tag">&gt;</span>
+  Comprar
+<span class="token-tag">&lt;/button&gt;</span></code></pre>
+      <pre class="code-block"><code><span class="token-tag">&lt;a</span> class=<span class="token-value">"text-slate-500 hover:text-sky-600 hover:underline"</span><span class="token-tag">&gt;</span>Ver detalle<span class="token-tag">&lt;/a&gt;</span></code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        <code>transition</code> suaviza el cambio de estado. Sin ella, el hover "salta" abruptamente.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-moon text-gradient me-2"></i>Modo oscuro con dark:</h2>
+      <p>Con <code>dark:</code> adaptas colores cuando el sistema (o tu clase) activa el modo oscuro:</p>
+      <pre class="code-block"><code><span class="token-tag">&lt;div</span>
+  class=<span class="token-value">"bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100"</span><span class="token-tag">&gt;</span>
+  La misma carta, dos apariencias
+<span class="token-tag">&lt;/div&gt;</span></code></pre>
+      <p>En <code>tailwind.config</code> se activa con <code>darkMode: 'class'</code> y se alterna poniendo/quitando la clase <code>dark</code> en el <code>html</code>:</p>
+      <pre class="code-block"><code>document.documentElement.classList.toggle(<span class="token-value">'dark'</span>);</code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-lightbulb text-gradient me-2"></i>Demo interactiva</h2>
+      <div class="demo-box p-4">
+        <p style="color:#cbd5e1 !important;">Tu navbar ya incluía responsive y hover. Observa esta tarjeta que cambia de hover (estética aproximada, sin Tailwind cargado aquí):</p>
+        <div class="d-flex gap-2 flex-wrap">
+          <span class="btn" style="background:#0ea5e9; color:#fff; border-radius:999px; padding:10px 28px; font-weight:600; transition:transform .15s ease, background .15s ease;" onmouseover="this.style.background='#0284c7'; this.style.transform='scale(.97)'" onmouseout="this.style.background='#0ea5e9'; this.style.transform='scale(1)'">hover:bg-sky-600 active:scale-95</span>
+          <span class="btn btn-ghost-glass" style="border-radius:999px;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" onmouseleave="this.style.transform='scale(1)'">hover:scale-105</span>
+        </div>
+        <p class="small mt-3 mb-0" style="color:#94a3b8 !important;">La clase real sería: <code>bg-sky-500 hover:bg-sky-600 active:scale-95 transition</code>.</p>
+      </div>
+      <div class="tip-box mt-4">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Reto:</strong>
+        Haz un grid que sea 1 columna en móvil y 3 en <code>md:</code>, y cambia el texto a <code>text-center md:text-left</code>.
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li><code>sm:</code>/<code>md:</code>/<code>lg:</code>/<code>xl:</code> adaptan el diseño por breakpoint.</li>
+        <li><code>hover:</code>, <code>focus:</code> y <code>active:</code> manejan estados.</li>
+        <li><code>dark:</code> + <code>darkMode: 'class'</code> habilita el tema oscuro.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <a href="leccion-3-tipografia-color.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span><span class="step"></span>
+      </div>
+      <a href="leccion-5-landing.html" class="btn btn-gradient">Siguiente: Práctica: landing <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— Tailwind · Lección 4</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-5-landing.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../assets/js/main.js"></script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>

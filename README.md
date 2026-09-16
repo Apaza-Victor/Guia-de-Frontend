@@ -68,15 +68,15 @@ La guía está publicada y accesible desde cualquier dispositivo:
 
 | Tema | Lecciones | Nivel | Descripción |
 |------|:---------:|-------|-------------|
-| [**HTML**](html/index.html) | 22 | Básico → Avanzado | Estructura, semántica, SEO, formularios, multimedia, Web Components y APIs |
-| [**CSS**](css/index.html) | 21 | Básico → Avanzado | Selectores, Flexbox, Grid, animaciones, BEM y efectos |
-| [**JavaScript**](javascript/index.html) | 28 | Básico → Avanzado | Variables, DOM, eventos, fetch, promesas, error handling y ES6+ |
-| [**Bootstrap 5**](bootstrap/index.html) | 5 | Intermedio | Grid, componentes, utilidades, personalización y práctica con AOS/GSAP |
-| [**Herramientas**](herramientas/index.html) | 5 | Avanzado | Git, npm, Sass, React y Vue 3 |
-| [**Programación**](programacion/index.html) | 8 | Básico | Algoritmos, variables, tipos, condicionales, bucles, funciones y estructuras de datos |
-| [**Tailwind CSS**](tailwind/index.html) | 5 | Intermedio | Utility-first, layout, tipografía, color y responsive |
-| [**Astro**](astro/index.html) | 5 | Avanzado | Meta-framework, componentes .astro, rutas, contenido e integraciones |
-| [**TypeScript**](typescript/index.html) | 5 | Avanzado | Tipos, funciones, interfaces y clases con tipado práctico |
+| [**HTML**](temario/html/index.html) | 22 | Básico → Avanzado | Estructura, semántica, SEO, formularios, multimedia, Web Components y APIs |
+| [**CSS**](temario/css/index.html) | 21 | Básico → Avanzado | Selectores, Flexbox, Grid, animaciones, BEM y efectos |
+| [**JavaScript**](temario/javascript/index.html) | 28 | Básico → Avanzado | Variables, DOM, eventos, fetch, promesas, error handling y ES6+ |
+| [**Bootstrap 5**](temario/bootstrap/index.html) | 5 | Intermedio | Grid, componentes, utilidades, personalización y práctica con AOS/GSAP |
+| [**Herramientas**](temario/herramientas/index.html) | 5 | Avanzado | Git, npm, Sass, React y Vue 3 |
+| [**Programación**](temario/programacion/index.html) | 8 | Básico | Algoritmos, variables, tipos, condicionales, bucles, funciones y estructuras de datos |
+| [**Tailwind CSS**](temario/tailwind/index.html) | 5 | Intermedio | Utility-first, layout, tipografía, color y responsive |
+| [**Astro**](temario/astro/index.html) | 5 | Avanzado | Meta-framework, componentes .astro, rutas, contenido e integraciones |
+| [**TypeScript**](temario/typescript/index.html) | 5 | Avanzado | Tipos, funciones, interfaces y clases con tipado práctico |
 
 > ⭐ **Total: 104 lecciones** entre los 9 temas.
 
@@ -112,24 +112,25 @@ Guia-de-Frontend/
 │   ├── astro.html             # Apartado: Astro
 │   ├── typescript.html        # Apartado: TypeScript
 │   └── librerias.html         # Apartado: Otras librerías útiles
-├── html/                      # Tema HTML (22 lecciones)
-│   ├── basico/
-│   ├── intermedio/
-│   └── avanzado/
-├── css/                       # Tema CSS (21 lecciones)
-│   ├── basico/
-│   ├── intermedio/
-│   └── avanzado/
-├── javascript/                # Tema JavaScript (28 lecciones)
-│   ├── basico/
-│   ├── intermedio/
-│   └── avanzado/
-├── bootstrap/                 # Tema Bootstrap 5 (5 lecciones)
-├── herramientas/              # Git, npm, Sass, React, Vue (5 lecciones)
-├── programacion/              # Fundamentos de Programación (8 lecciones)
-├── tailwind/                  # Tailwind CSS (5 lecciones)
-├── astro/                     # Astro (5 lecciones)
-├── typescript/                # TypeScript (5 lecciones)
+├── temario/                   # Carpetas de los temas o cursos
+│   ├── html/                  # Tema HTML (22 lecciones)
+│   │   ├── basico/
+│   │   ├── intermedio/
+│   │   └── avanzado/
+│   ├── css/                   # Tema CSS (21 lecciones)
+│   │   ├── basico/
+│   │   ├── intermedio/
+│   │   └── avanzado/
+│   ├── javascript/            # Tema JavaScript (28 lecciones)
+│   │   ├── basico/
+│   │   ├── intermedio/
+│   │   └── avanzado/
+│   ├── bootstrap/             # Tema Bootstrap 5 (5 lecciones)
+│   ├── herramientas/          # Git, npm, Sass, React, Vue (5 lecciones)
+│   ├── programacion/          # Fundamentos de Programación (8 lecciones)
+│   ├── tailwind/              # Tailwind CSS (5 lecciones)
+│   ├── astro/                 # Astro (5 lecciones)
+│   └── typescript/            # TypeScript (5 lecciones)
 └── assets/
     ├── css/style.css          # Design system (temas claro/oscuro con tokens CSS)
     └── js/main.js             # Animaciones, contadores, marquee y botón "volver arriba"

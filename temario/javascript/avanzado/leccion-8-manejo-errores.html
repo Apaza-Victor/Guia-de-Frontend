@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección 8 de JavaScript Avanzado: manejo de errores profesional. throw, try/catch/finally, errores personalizados con clases, Error con causa y buenas prácticas en JavaScript.">
+  <title>Lección 8 — Manejo de errores | Frontend Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+<script>(function(){try{var t=localStorage.getItem("fp-theme");if(t){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+</head>
+<body class="pt-0">
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-guia fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="../../../index.html">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold">Frontend<span class="text-gradient">Pro</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../../../index.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="../../../paginas/temario.html"><i class="bi bi-list-check me-1"></i>Temario</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/ruta-aprendizaje.html">Ruta de aprendizaje</a></li>
+        <li class="nav-item"><a class="nav-link" href="../../../paginas/recursos.html">Recursos</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="btn btn-gradient px-4" href="../../../paginas/temario.html"><i class="bi bi-rocket-takeoff me-1"></i>Comenzar</a>
+        </li>
+      
+        <li class="nav-item"><button type="button" class="btn-theme-toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><i class="bi bi-moon-stars"></i></button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="lesson-header" style="margin-top:64px;">
+  <div class="container position-relative" style="z-index:1;">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../../index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="../index.html">JavaScript</a></li>
+        <li class="breadcrumb-item"><a href="index.html">Avanzado</a></li>
+        <li class="breadcrumb-item active text-light">Lección 8</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+      <span class="badge-soft"><i class="bi bi-lightning-charge-fill text-gradient me-1"></i>JavaScript Avanzado · Lección 8</span>
+      <span class="badge-soft-cyan"><i class="bi bi-hourglass-split me-1"></i>35 min</span>
+    </div>
+    <h1 class="display-5 fw-bold text-white mb-2">Manejo de errores</h1>
+    <p class="lead mb-3" style="color:var(--text-muted);">Lanzo, capturo y clasifico errores como un profesional.</p>
+    <div class="progress-tracker">
+      <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+    </div>
+  </div>
+</header>
+
+<main class="lesson-content">
+  <div class="container pt-4">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-exclamation-octagon text-gradient me-2"></i>throw y los tipos de error</h2>
+      <p>
+        <code>throw</code> interrumpe la ejecución y entrega un valor (normalmente un <code>Error</code>)
+        que el <code>try/catch</code> más cercano puede capturar. JavaScript trae errores nativos:
+      </p>
+      <table class="table mt-3">
+        <thead>
+          <tr><th scope="col">Tipo</th><th scope="col">Cuándo aparece</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>SyntaxError</code></td><td>código mal escrito (no compila)</td></tr>
+          <tr><td><code>TypeError</code></td><td>usas un tipo indebido (ej. <code>undefined()</code>)</td></tr>
+          <tr><td><code>ReferenceError</code></td><td>variable no declarada</td></tr>
+          <tr><td><code>RangeError</code></td><td>valor fuera de rango (<code>[].length = -1</code>)</td></tr>
+          <tr><td><code>CustomError</code> (tuyo)</td><td>reglas de negocio o validación</td></tr>
+        </tbody>
+      </table>
+      <pre class="code-block"><code><span class="token-tag">if</span> (edad &lt; <span class="token-num">18</span>) {
+  <span class="token-tag">throw</span> <span class="token-tag">new</span> <span class="token-prop">Error</span>(<span class="token-value">'Debes ser mayor de edad'</span>);
+}</code></pre>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-shield-lock text-gradient me-2"></i>try / catch / finally</h2>
+      <p>
+        La estructura completa tiene tres bloques con funciones bien distintas:
+      </p>
+      <pre class="code-block"><code><span class="token-tag">try</span> {
+  <span class="token-comment">// código que puede fallar</span>
+  iniciarConexion();
+} <span class="token-tag">catch</span> (error) {
+  <span class="token-comment">// solo corre si hubo error</span>
+  <span class="token-prop">console</span>.error(<span class="token-value">'No se pudo conectar'</span>, error);
+} <span class="token-tag">finally</span> {
+  <span class="token-comment">// SIEMPRE corre, haya o no error</span>
+  cerrarConexion();
+}</code></pre>
+      <p class="mt-3"><code>finally</code> es ideal para limpieza: cerrar sockets, resetear flags, limpiar timers. Se ejecuta incluso si haces <code>return</code> dentro de <code>try</code>.</p>
+      <div class="warning-box mt-3">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        Capturar y <strong>tragarse</strong> el error (<code>catch (e) {}</code>) dificulta el debugging.
+        Como mínimo registra el error; idealmente, decide si se puede continuar o hay que avisar al usuario.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-tags text-gradient me-2"></i>Errores personalizados</h2>
+      <p>
+        Para código grande, clasificar errores ahorra horas. Extiende <code>Error</code> con tus propias clases
+        y distíngelas con <code>instanceof</code>:
+      </p>
+      <pre class="code-block"><code><span class="token-tag">class</span> <span class="token-prop">ValidacionError</span> <span class="token-tag">extends</span> <span class="token-prop">Error</span> {
+  <span class="token-tag">constructor</span>(campos, mensaje = <span class="token-value">'Datos inválidos'</span>) {
+    <span class="token-tag">super</span>(mensaje);
+    <span class="token-tag">this</span>.<span class="token-attr">name</span> = <span class="token-value">'ValidacionError'</span>;
+    <span class="token-tag">this</span>.<span class="token-attr">campos</span> = campos;   <span class="token-comment">// ej. ['email', 'password']</span>
+  }
+}
+
+<span class="token-tag">class</span> <span class="token-prop">ApiError</span> <span class="token-tag">extends</span> <span class="token-prop">Error</span> {
+  <span class="token-tag">constructor</span>(status, mensaje = <span class="token-value">'Error del servidor'</span>) {
+    <span class="token-tag">super</span>(mensaje);
+    <span class="token-tag">this</span>.<span class="token-attr">name</span> = <span class="token-value">'ApiError'</span>;
+    <span class="token-tag">this</span>.<span class="token-attr">status</span> = status;
+  }
+}</code></pre>
+      <p class="mt-3">En un <code>catch</code> puedes separar los caminos:</p>
+      <pre class="code-block"><code>} <span class="token-tag">catch</span> (error) {
+  <span class="token-tag">if</span> (error <span class="token-tag">instanceof</span> <span class="token-prop">ValidacionError</span>) {
+    pintarErrores(error.<span class="token-attr">campos</span>);
+  } <span class="token-tag">else if</span> (error <span class="token-tag">instanceof</span> <span class="token-prop">ApiError</span>) {
+    avisar(<span class="token-value">'Servidor respondió '</span> + error.<span class="token-attr">status</span>);
+  } <span class="token-tag">else</span> {
+    <span class="token-prop">console</span>.error(<span class="token-value">'Inesperado'</span>, error);
+  }
+}</code></pre>
+      <div class="tip-box mt-3">
+        <strong class="text-white"><i class="bi bi-info-circle me-2" style="color:#06b6d4;"></i>Tip:</strong>
+        En errores anidados, encadena causa con <code>{ cause: errorOriginal }</code>
+        (<code>new ApiError(500, 'Boom', { cause: original })</code>) y llega siempre a un <code>catch</code> raíz.
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h3 text-white fw-bold mb-3"><i class="bi bi-lightbulb text-gradient me-2"></i>Demo: procesador de errores</h2>
+      <p>
+        Pulsa los botones para ver cómo el <code>try/catch</code> clasifica errores reales lanzados adrede.
+        Observa que el <code>finally</code> siempre imprime "(limpieza en finally)":
+      </p>
+      <div class="demo-box p-4">
+        <div class="d-flex gap-2 flex-wrap mb-3">
+          <button type="button" class="btn btn-gradient" data-tipo="sintaxis">Lanzar SyntaxError</button>
+          <button type="button" class="btn btn-ghost-glass" data-tipo="tipo">Lanzar TypeError</button>
+          <button type="button" class="btn btn-ghost-glass" data-tipo="custom">Lanzar ValidationError</button>
+          <button type="button" class="btn btn-ghost-glass" data-tipo="aleatorio">Cadena de causas</button>
+        </div>
+        <pre id="demoLog" class="code-block mb-0" style="max-height:240px;overflow:auto;"><code><span class="token-comment">// salida en vivo…</span></code></pre>
+      </div>
+      <div class="warning-box mt-4">
+        <strong class="text-white"><i class="bi bi-exclamation-triangle me-2" style="color:#f59e0b;"></i>Ojo:</strong>
+        En producción, un error NO capturado en una promesa o un evento dispara
+        <code>unhandledrejection</code> / <code>window.onerror</code>. Pon handlers globales que registren
+        el incidente en tu herramienta de monitoreo.
+      </div>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up">
+      <h2 class="h4 text-white fw-bold mb-3"><i class="bi bi-check2-circle text-gradient me-2"></i>Repaso rápido</h2>
+      <ul>
+        <li><code>throw</code> para detener y entregar el error; <code>try/catch/finally</code> para manejarlo.</li>
+        <li>Clasifica con <strong>errores personalizados</strong> (<code>extends Error</code>) y <code>instanceof</code>.</li>
+        <li><code>finally</code> corre siempre: úsalo para limpieza.</li>
+        <li>No tragues errores y registra siempre; añade <strong>handlers globales</strong> para lo inesperado.</li>
+      </ul>
+    </section>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-5 pt-4 border-top border-secondary-subtle">
+      <div class="d-flex gap-2">
+        <a href="../../../index.html" class="btn btn-ghost-glass"><i class="bi bi-house me-2"></i>Inicio</a>
+        <a href="leccion-7-fetch-avanzado.html" class="btn btn-ghost-glass"><i class="bi bi-arrow-left me-2"></i>Anterior</a>
+      </div>
+      <div class="progress-tracker">
+        <span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step done"></span><span class="step current"></span>
+      </div>
+      <a href="leccion-9-this-bind.html" class="btn btn-gradient">Siguiente: this, call, apply y bind <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-code-slash text-gradient fs-4"></i>
+      <span class="fw-bold text-white">Frontend<span class="text-gradient">Pro</span></span>
+      <span class="text-secondary small" style="color:#64748b !important;">— JavaScript Avanzado · Lección 8</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="../../../index.html" class="text-secondary"><i class="bi bi-house fs-5"></i></a>
+      <a href="leccion-9-this-bind.html" class="text-secondary"><i class="bi bi-arrow-right-circle fs-5"></i></a>
+    </div>
+  </div>
+  <div class="text-center small mt-3" style="color:#64748b !important;">© 2026 Apaza Victor — Frontend Pro. Todos los derechos reservados.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="../../../assets/js/main.js"></script>
+
+<script>
+(function () {
+  const log = document.getElementById('demoLog');
+
+  class ValidationError extends Error {
+    constructor(campos) {
+      super('Datos inválidos: la validación falló en ' + campos.join(', '));
+      this.name = 'ValidacionError';
+      this.campos = campos;
+    }
+  }
+
+  function escribir(texto, color) {
+    const br = document.createElement('div');
+    br.textContent = texto;
+    br.style.color = color || '#cbd5e1';
+    br.style.fontFamily = "'Fira Code', monospace";
+    br.style.fontSize = '0.85rem';
+    log.querySelector('code').appendChild(br);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  function ejecutar(fuente) {
+    log.querySelector('code').innerHTML = '';
+    escribir('● intentando ejecutar operación…', '#64748b');
+    try {
+      fuente();
+      escribir('✓ sin errores', '#22c55e');
+    } catch (error) {
+      escribir('✗ ' + error.name + ': ' + error.message, '#ef4444');
+      if (error.cause) {
+        escribir('  ↳ causa: ' + error.cause.name + ': ' + error.cause.message, '#f59e0b');
+      }
+    } finally {
+      escribir('(finally: limpieza ejecutada)', '#06b6d4');
+    }
+  }
+
+  const botones = document.querySelectorAll('[data-tipo]');
+  botones.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const tipo = btn.dataset.tipo;
+      const original = new TypeError('Causa raíz: conexión cortada');
+
+      if (tipo === 'sintaxis') {
+        ejecutar(() => { throw new SyntaxError('Código inválido: falta un ";"'); });
+      } else if (tipo === 'tipo') {
+        ejecutar(() => { throw new TypeError('noFunction is not a function'); });
+      } else if (tipo === 'custom') {
+        ejecutar(() => { throw new ValidationError(['email', 'password']); });
+      } else {
+        ejecutar(() => {
+          try { throw original; }
+          catch (e) { throw new Error('La API falló', { cause: e }); }
+        });
+      }
+    });
+  });
+})();
+</script>
+<button id="backToTop" class="btn-scroll-top" aria-label="Volver al inicio" title="Volver al inicio"><i class="bi bi-arrow-up"></i></button>
+</body>
+</html>
